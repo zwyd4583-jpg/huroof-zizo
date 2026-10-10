@@ -5,6 +5,9 @@ on:
     branches: [main]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   android:
     runs-on: ubuntu-latest
@@ -62,3 +65,15 @@ jobs:
         with:
           name: huroof-zizo-android
           path: out/
+
+      # A fixed download link for the phone:
+      # https://github.com/<owner>/<repo>/releases/download/test-build/huroof-zizo-test.apk
+      - name: Publish the test APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release delete test-build --yes --cleanup-tag || true
+          gh release create test-build out/huroof-zizo-test.apk \
+            --target "$GITHUB_SHA" --prerelease \
+            --title "نسخة تجربة - حروف زيزو" \
+            --notes "آخر نسخة تجربة من التطبيق. حمّل الملف huroof-zizo-test.apk على هاتف أندرويد وثبّته."
