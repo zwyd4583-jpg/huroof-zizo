@@ -92,9 +92,20 @@ h1 span{color:var(--orange)}
 .word .first{color:var(--c)}
 .word .blank{display:inline-block; font-family:var(--f-ui); background:var(--sun); color:var(--ink); border-radius:12px; padding-inline:.2em; margin-inline-end:.08em; line-height:1.25}
 
+/* numbers */
+.grid.nums{grid-template-columns:repeat(5,minmax(0,1fr))}
+.tile.num{font-size:2.5rem}
+#ndetail{display:grid; gap:14px}
+.countbox{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; width:100%; max-width:360px}
+.obj{position:relative; aspect-ratio:1; max-width:100%; border:0; border-radius:16px; background:var(--sky); font-size:clamp(1.6rem,8vw,2.2rem); line-height:1; display:grid; place-items:center; padding:0; transition:transform .12s, background .12s}
+.obj.done{background:var(--note); transform:scale(1.06)}
+.obj .badge{position:absolute; top:-7px; inset-inline-end:-7px; min-width:26px; height:26px; border-radius:13px; background:var(--c); color:var(--white); font-family:var(--f-letter); font-weight:700; font-size:1rem; line-height:24px; padding-inline:5px; box-shadow:0 2px 0 var(--cd)}
+.countbox.small{max-width:300px; gap:8px}
+.countbox.small .obj{font-size:clamp(1.4rem,7vw,1.9rem)}
+
 /* play */
 .chips{display:flex; gap:6px; background:var(--paper); padding:6px; border-radius:999px; box-shadow:0 4px 0 var(--sky-dark)}
-.chip{flex:1; border:0; border-radius:999px; padding:9px 8px; background:transparent; color:var(--ink-soft); font-weight:800; font-size:1.05rem}
+.chip{flex:1; min-width:0; border:0; border-radius:999px; padding:9px 6px; background:transparent; color:var(--ink-soft); font-weight:800; font-size:1rem; white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--green); color:var(--white)}
 .dots{display:flex; gap:10px; justify-content:center}
 .dot{width:16px; height:16px; border-radius:50%; background:var(--sky-dark); transition:background .2s}
@@ -126,8 +137,8 @@ h1 span{color:var(--orange)}
 #cv{display:block; background:var(--paper); border-radius:28px; box-shadow:0 6px 0 var(--sky-dark); touch-action:none; max-width:100%}
 
 /* tab bar */
-.tabs{position:fixed; left:0; right:0; bottom:0; z-index:5; background:var(--paper); box-shadow:0 -4px 0 var(--sky-dark); display:flex; justify-content:center; gap:8px; padding:8px 16px calc(10px + env(safe-area-inset-bottom,0px))}
-.tab{flex:1; max-width:170px; border:0; border-radius:18px; padding:8px 4px 6px; background:transparent; color:var(--ink-soft); font-weight:800; font-size:1.05rem; display:flex; flex-direction:column; align-items:center; gap:2px; line-height:1.2}
+.tabs{position:fixed; left:0; right:0; bottom:0; z-index:5; background:var(--paper); box-shadow:0 -4px 0 var(--sky-dark); display:flex; justify-content:center; gap:6px; padding:8px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+.tab{flex:1; min-width:0; max-width:140px; border:0; border-radius:18px; padding:8px 2px 6px; background:transparent; color:var(--ink-soft); font-weight:800; font-size:1rem; display:flex; flex-direction:column; align-items:center; gap:2px; line-height:1.2}
 .tab svg{width:28px; height:28px}
 .tab[aria-current="page"]{background:var(--tc); color:var(--white)}
 
@@ -212,10 +223,42 @@ h1 span{color:var(--orange)}
       </div>
     </section>
 
+    <section id="v-numbers" class="view" hidden>
+      <div id="ngrid" class="grid nums" aria-label="الأرقام"></div>
+      <div id="ndetail" hidden>
+        <button class="btn ghost back" id="nbackBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          كل الأرقام
+        </button>
+        <div class="card lcard">
+          <div class="bigletter" id="nDigit"></div>
+          <div class="lname" id="nName"></div>
+          <div class="countbox" id="nBox" aria-label="اضغط على كل صورة لتعدّها"></div>
+          <div class="btnrow">
+            <button class="btn" id="sayNumBtn"><span class="ico-spk"></span>اسمع الرقم</button>
+            <button class="btn" id="countWithMe" style="--b:var(--blue);--bd:var(--blue-dark)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11V5a1.5 1.5 0 0 1 3 0v6"/><path d="M12 10.5V4a1.5 1.5 0 0 1 3 0v7"/><path d="M15 9.5a1.5 1.5 0 0 1 3 0V15a6 6 0 0 1-6 6h-1a6 6 0 0 1-4.6-2.2L4 15.5a1.6 1.6 0 0 1 2.4-2l2.6 2.6V7.5a1.5 1.5 0 0 1 3 0"/></svg>
+              عُدّ معي
+            </button>
+          </div>
+        </div>
+        <div class="stepper">
+          <button class="round" id="prevN" aria-label="الرقم السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+          <span class="count" id="nCount"></span>
+          <button class="round" id="nextN" aria-label="الرقم التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        </div>
+        <button class="btn wide" id="toTraceN" style="--b:var(--pink);--bd:var(--pink-dark)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 7l3 3"/></svg>
+          ارسم هذا الرقم
+        </button>
+      </div>
+    </section>
+
     <section id="v-play" class="view" hidden>
       <div class="chips" role="group" aria-label="نوع اللعبة">
         <button class="chip" data-mode="listen" aria-pressed="true">اسمع واختر</button>
         <button class="chip" data-mode="first" aria-pressed="false">أول حرف</button>
+        <button class="chip" data-mode="count" aria-pressed="false">كم العدد؟</button>
       </div>
       <div class="dots" id="dots"></div>
       <div id="playArea">
@@ -234,6 +277,10 @@ h1 span{color:var(--orange)}
     </section>
 
     <section id="v-trace" class="view" hidden>
+      <div class="chips" role="group" aria-label="ماذا نرسم؟">
+        <button class="chip tchip" data-kind="letters" aria-pressed="true">الحروف</button>
+        <button class="chip tchip" data-kind="numbers" aria-pressed="false">الأرقام</button>
+      </div>
       <div class="stepper">
         <button class="round" id="prevT" aria-label="الحرف السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
         <button class="tlabel" id="tLabel"><span id="tLabelText"></span><span class="ico-spk"></span></button>
@@ -257,6 +304,10 @@ h1 span{color:var(--orange)}
     <button class="tab" data-v="letters" style="--tc:var(--orange)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>
       <span>الحروف</span>
+    </button>
+    <button class="tab" data-v="numbers" style="--tc:var(--purple)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="17" rx="3"/><path d="M3 9.5h18M3 14.5h18"/><circle cx="7.5" cy="9.5" r="1.7" fill="currentColor"/><circle cx="11.5" cy="9.5" r="1.7" fill="currentColor"/><circle cx="16.5" cy="14.5" r="1.7" fill="currentColor"/></svg>
+      <span>الأرقام</span>
     </button>
     <button class="tab" data-v="play" style="--tc:var(--green)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="18" cy="13.8" r="1.1" fill="currentColor" stroke="none"/></svg>
@@ -304,6 +355,20 @@ h1 span{color:var(--orange)}
     {c:'و', n:'واو', w:'وردة',  s:'وَرْدَة',  e:'🌹'},
     {c:'ي', n:'ياء', w:'يد',    s:'يَد',      e:'✋'}
   ];
+  // Numbers 1–10 in the digits Iraqi schools teach (١٢٣…), each with something to count
+  var N = [
+    {d:'١',  n:'واحد',   s:'واحِد',    e:'🐘'},
+    {d:'٢',  n:'اثنان',  s:'اِثْنان',  e:'🐥'},
+    {d:'٣',  n:'ثلاثة',  s:'ثَلاثَة',  e:'🍎'},
+    {d:'٤',  n:'أربعة',  s:'أَرْبَعَة', e:'🎈'},
+    {d:'٥',  n:'خمسة',   s:'خَمْسَة',  e:'🐞'},
+    {d:'٦',  n:'ستة',    s:'سِتَّة',   e:'🐟'},
+    {d:'٧',  n:'سبعة',   s:'سَبْعَة',  e:'🌸'},
+    {d:'٨',  n:'ثمانية', s:'ثَمانِيَة', e:'🍓'},
+    {d:'٩',  n:'تسعة',   s:'تِسْعَة',  e:'🦋'},
+    {d:'١٠', n:'عشرة',   s:'عَشَرَة',  e:'🍪'}
+  ];
+  var COUNT_PICS = ['🍎','🎈','🐟','🌸','🐥','🍓','🦋','🍪','⚽','🐞','🌟','🍌'];
   var COLORS = [['--orange','--orange-dark'],['--blue','--blue-dark'],['--green','--green-dark'],['--pink','--pink-dark'],['--purple','--purple-dark'],['--teal','--teal-dark']];
   var NONCONN = 'اأإآدذرزو';
   var PRAISE = ['أحسنت!','رائع!','ممتاز!','برافو!','شاطر!'];
@@ -495,14 +560,95 @@ h1 span{color:var(--orange)}
   $('nextL').addEventListener('click', function(){ openLetter(cur + 1); });
   $('sayLetterBtn').addEventListener('click', function(){ say(SN(cur)); });
   $('sayWordBtn').addEventListener('click', function(){ say(L[cur].s); });
-  $('toTrace').addEventListener('click', function(){ tIdx = cur; show('trace'); say(SN(cur)); });
+  $('toTrace').addEventListener('click', function(){ setTraceKind('letters', cur); show('trace'); say(SN(cur)); });
+
+  /* ---------- numbers ---------- */
+  // A box of n pictures; tapping each one counts it out loud. onDone runs when all are counted.
+  var countTimers = [];
+  function stopAutoCount(){ countTimers.forEach(clearTimeout); countTimers = []; }
+  function countBox(box, n, pic, onDone){
+    box.innerHTML = '';
+    var counted = 0;
+    var objs = [];
+    for (var k = 0; k < n; k++){
+      var b = document.createElement('button');
+      b.className = 'obj'; b.type = 'button'; b.textContent = pic;
+      b.setAttribute('aria-label', 'عُدّ');
+      (function(btn){
+        btn.addEventListener('click', function(){ tapObj(btn, false); });
+      })(b);
+      objs.push(b); box.appendChild(b);
+    }
+    function tapObj(btn, auto){
+      if (btn.classList.contains('done')) return;
+      counted++;
+      btn.classList.add('done');
+      var badge = document.createElement('span');
+      badge.className = 'badge'; badge.textContent = N[counted - 1].d;
+      btn.appendChild(badge);
+      if (counted === n && onDone && !auto) onDone(auto);
+      else say(N[counted - 1].s);
+    }
+    return {
+      reset: function(){ counted = 0; objs.forEach(function(o){ o.classList.remove('done'); var bd = o.querySelector('.badge'); if (bd) bd.remove(); }); },
+      auto: function(stepMs, then){
+        this.reset();
+        objs.forEach(function(o, k){ countTimers.push(setTimeout(function(){ tapObj(o, true); }, 400 + k*stepMs)); });
+        if (then) countTimers.push(setTimeout(then, 400 + n*stepMs + 600));
+      }
+    };
+  }
+
+  var ngrid = $('ngrid'), ndetail = $('ndetail'), ncur = 0, nBoxCtl = null;
+  N.forEach(function(x, i){
+    var b = document.createElement('button');
+    b.className = 'tile num'; b.textContent = x.d; b.style.cssText = colorVars(i);
+    b.setAttribute('aria-label', 'الرقم ' + x.n);
+    b.addEventListener('click', function(){ openNumber(i); });
+    ngrid.appendChild(b);
+  });
+  function openNumber(i){
+    stopAutoCount();
+    ncur = (i + N.length) % N.length;
+    var x = N[ncur];
+    ndetail.style.cssText = colorVars(ncur);
+    $('nDigit').textContent = x.d;
+    $('nName').textContent = 'الرقم ' + x.n;
+    $('nCount').textContent = fmt(ncur + 1) + ' من ' + fmt(N.length);
+    nBoxCtl = countBox($('nBox'), ncur + 1, x.e, function(auto){
+      if (auto) return;
+      var pr = pick(PRAISE);
+      zizo(pr + ' عددها ' + x.n, 'happy'); addStar();
+      say([x.s, pr]);
+    });
+    ngrid.hidden = true; ndetail.hidden = false;
+    window.scrollTo(0, 0);
+    zizo(ncur === 0 ? 'هذا الرقم واحد. اضغط على الصورة لتعدّها' : 'هيا نعدّ معاً! اضغط على كل صورة', 'happy');
+    say(x.s);
+  }
+  function backToNumbers(){ stopAutoCount(); ngrid.hidden = false; ndetail.hidden = true; zizo('اختر رقماً لنعدّ معاً'); }
+  $('nbackBtn').addEventListener('click', backToNumbers);
+  $('prevN').addEventListener('click', function(){ openNumber(ncur - 1); });
+  $('nextN').addEventListener('click', function(){ openNumber(ncur + 1); });
+  $('sayNumBtn').addEventListener('click', function(){ say(N[ncur].s); });
+  $('countWithMe').addEventListener('click', function(){
+    if (!nBoxCtl) return;
+    stopAutoCount();
+    zizo('اسمع وعُدّ معي');
+    nBoxCtl.auto(950, function(){
+      nBoxCtl.reset();
+      zizo('الآن دورك! اضغط على كل صورة وعُدّها');
+    });
+  });
+  $('toTraceN').addEventListener('click', function(){ setTraceKind('numbers', ncur); show('trace'); say(N[ncur].s); });
 
   /* ---------- play ---------- */
   var ROUNDS = 5, mode = 'listen', round = 0, target = 0, last = -1, locked = false, nextTimer = null;
-  document.querySelectorAll('.chip').forEach(function(c){
+  var playChips = document.querySelectorAll('#v-play .chip');
+  playChips.forEach(function(c){
     c.addEventListener('click', function(){
       mode = c.dataset.mode;
-      document.querySelectorAll('.chip').forEach(function(x){ x.setAttribute('aria-pressed', String(x === c)); });
+      playChips.forEach(function(x){ x.setAttribute('aria-pressed', String(x === c)); });
       newGame();
     });
   });
@@ -511,19 +657,28 @@ h1 span{color:var(--orange)}
     for (var k=0;k<ROUNDS;k++){ var s = document.createElement('span'); s.className = 'dot' + (k < round ? ' done' : (k === round ? ' now' : '')); d.appendChild(s); }
     d.setAttribute('aria-label', 'السؤال ' + fmt(Math.min(round + 1, ROUNDS)) + ' من ' + fmt(ROUNDS));
   }
-  function ask(){ if (mode === 'listen') say('أَيْنَ حَرْفُ ال' + SN(target) + '؟'); else say(L[target].s); }
+  function ask(){
+    if (mode === 'listen') say('أَيْنَ حَرْفُ ال' + SN(target) + '؟');
+    else if (mode === 'count') say('كَمْ عَدَدُها؟');
+    else say(L[target].s);
+  }
   function newGame(){ clearTimeout(nextTimer); round = 0; $('endArea').hidden = true; $('playArea').hidden = false; nextRound(); }
   function nextRound(){
     if (round >= ROUNDS) return finish();
     locked = false;
-    var t; do { t = Math.floor(Math.random()*L.length); } while (t === last);
+    var pool = mode === 'count' ? N : L;
+    var t; do { t = Math.floor(Math.random()*pool.length); } while (t === last);
     last = target = t;
     var opts = [t];
-    while (opts.length < 3){ var r = Math.floor(Math.random()*L.length); if (opts.indexOf(r) === -1) opts.push(r); }
+    while (opts.length < 3){ var r = Math.floor(Math.random()*pool.length); if (opts.indexOf(r) === -1) opts.push(r); }
     shuffle(opts);
     renderDots();
     var p = $('prompt'); p.style.cssText = colorVars(t);
-    if (mode === 'listen'){
+    if (mode === 'count'){
+      p.innerHTML = '<div class="countbox small" id="pBox"></div><p class="ask">كم عددها؟</p><button class="btn ghost" id="replay">' + SPK + 'اسمع السؤال</button>';
+      countBox($('pBox'), t + 1, pick(COUNT_PICS), null);
+      zizo('عُدّ الصور، ثم اختر الرقم الصحيح');
+    } else if (mode === 'listen'){
       p.innerHTML = '<button class="speak-big" id="replay" aria-label="اسمع مرة أخرى">' + SPK + '</button><p class="ask">أين حرف ال' + L[t].n + '؟</p>';
       zizo('اسمع، ثم اختر الحرف الصحيح');
     } else {
@@ -535,8 +690,9 @@ h1 span{color:var(--orange)}
     var ch = $('choices'); ch.innerHTML = '';
     opts.forEach(function(o){
       var b = document.createElement('button');
-      b.className = 'choice'; b.textContent = L[o].c;
-      b.setAttribute('aria-label', 'حرف ال' + L[o].n);
+      b.className = 'choice';
+      b.textContent = mode === 'count' ? N[o].d : L[o].c;
+      b.setAttribute('aria-label', mode === 'count' ? 'الرقم ' + N[o].n : 'حرف ال' + L[o].n);
       b.addEventListener('click', function(){ choose(o, b); });
       ch.appendChild(b);
     });
@@ -550,7 +706,7 @@ h1 span{color:var(--orange)}
       var pr = pick(PRAISE);
       zizo(pr, 'happy'); addStar();
       if (mode === 'first') wordInto($('pWord'), target, false);
-      say(mode === 'first' ? [pr, L[target].s] : pr);
+      say(mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] : pr);
       round++; renderDots();
       nextTimer = setTimeout(nextRound, 1500);
     } else {
@@ -571,6 +727,24 @@ h1 span{color:var(--orange)}
 
   /* ---------- trace ---------- */
   var cv = $('cv'), ctx = cv.getContext('2d'), S = 300, lastW = 0, strokes = [], drawing = false, tIdx = 0, traceTimer = null;
+  var tKind = 'letters', tSaved = { letters: 0, numbers: 0 };
+  function tList(){ return tKind === 'numbers' ? N : L; }
+  function tChar(i){ return tKind === 'numbers' ? N[i].d : L[i].c; }
+  function tTitle(i){ return tKind === 'numbers' ? 'الرقم ' + N[i].n : 'حرف ال' + L[i].n; }
+  function tSay(i){ say(tKind === 'numbers' ? N[i].s : SN(i)); }
+  function setTraceKind(kind, idx){
+    tSaved[tKind] = tIdx;
+    tKind = kind;
+    tIdx = (typeof idx === 'number') ? idx : tSaved[kind];
+    document.querySelectorAll('.tchip').forEach(function(x){ x.setAttribute('aria-pressed', String(x.dataset.kind === kind)); });
+  }
+  document.querySelectorAll('.tchip').forEach(function(c){
+    c.addEventListener('click', function(){
+      if (c.dataset.kind === tKind) return;
+      setTraceKind(c.dataset.kind);
+      setTrace(tIdx, true);
+    });
+  });
   function tok(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
   function sizeCanvas(){
     var w = $('cWrap').clientWidth;
@@ -585,7 +759,7 @@ h1 span{color:var(--orange)}
   }
   function drawAll(){
     ctx.clearRect(0, 0, S, S);
-    var ch = L[tIdx].c;
+    var ch = tChar(tIdx);
     ctx.save();
     ctx.font = '700 ' + Math.round(S*0.6) + 'px "Noto Naskh Arabic", "Amiri", serif';
     ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
@@ -611,19 +785,27 @@ h1 span{color:var(--orange)}
   ['pointerup','pointercancel'].forEach(function(t){ cv.addEventListener(t, function(){ drawing = false; }); });
   function setTrace(i, speak){
     clearTimeout(traceTimer);
-    tIdx = (i + L.length) % L.length; strokes = [];
-    $('tLabelText').textContent = 'حرف ال' + L[tIdx].n;
+    var len = tList().length;
+    tIdx = (i + len) % len; strokes = [];
+    $('tLabelText').textContent = tTitle(tIdx);
+    $('prevT').setAttribute('aria-label', tKind === 'numbers' ? 'الرقم السابق' : 'الحرف السابق');
+    $('nextT').setAttribute('aria-label', tKind === 'numbers' ? 'الرقم التالي' : 'الحرف التالي');
     drawAll();
-    zizo('ارسم حرف ال' + L[tIdx].n + ' بإصبعك فوق النقاط');
-    if (speak) say(SN(tIdx));
+    zizo('ارسم ' + tTitle(tIdx) + ' بإصبعك فوق النقاط');
+    if (speak) tSay(tIdx);
   }
   $('prevT').addEventListener('click', function(){ setTrace(tIdx - 1, true); });
   $('nextT').addEventListener('click', function(){ setTrace(tIdx + 1, true); });
-  $('tLabel').addEventListener('click', function(){ say(SN(tIdx)); });
+  $('tLabel').addEventListener('click', function(){ tSay(tIdx); });
   $('clearT').addEventListener('click', function(){ strokes = []; drawAll(); });
   $('doneT').addEventListener('click', function(){
     var n = strokes.reduce(function(a, s){ return a + s.length; }, 0);
-    if (n < 12){ zizo('ارسم فوق الحرف بإصبعك أولاً', 'sad'); say('ارْسُمْ فَوْقَ الحَرْف'); return; }
+    if (n < 12){
+      var isNum = tKind === 'numbers';
+      zizo(isNum ? 'ارسم فوق الرقم بإصبعك أولاً' : 'ارسم فوق الحرف بإصبعك أولاً', 'sad');
+      say(isNum ? 'ارْسُمْ فَوْقَ الرَّقْم' : 'ارْسُمْ فَوْقَ الحَرْف');
+      return;
+    }
     var pr = pick(PRAISE); addStar(); zizo(pr, 'happy'); say(pr);
     traceTimer = setTimeout(function(){ setTrace(tIdx + 1, true); }, 1300);
   });
@@ -636,11 +818,12 @@ h1 span{color:var(--orange)}
   var currentView = 'letters';
   function show(v){
     currentView = v;
-    clearTimeout(nextTimer); clearTimeout(traceTimer);
-    ['letters','play','trace'].forEach(function(k){ $('v-' + k).hidden = (k !== v); });
+    clearTimeout(nextTimer); clearTimeout(traceTimer); stopAutoCount();
+    ['letters','numbers','play','trace'].forEach(function(k){ $('v-' + k).hidden = (k !== v); });
     document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-current', t.dataset.v === v ? 'page' : 'false'); });
     window.scrollTo(0, 0);
     if (v === 'letters') backToGrid();
+    if (v === 'numbers') backToNumbers();
     if (v === 'play') newGame();
     if (v === 'trace'){ lastW = 0; sizeCanvas(); setTrace(tIdx, false); }
   }
@@ -650,6 +833,7 @@ h1 span{color:var(--orange)}
   if (AppPlugin){
     AppPlugin.addListener('backButton', function(){
       if (currentView === 'letters' && !detail.hidden){ hush(); backToGrid(); }
+      else if (currentView === 'numbers' && !ndetail.hidden){ hush(); backToNumbers(); }
       else if (currentView !== 'letters'){ hush(); show('letters'); }
       else AppPlugin.exitApp();
     });
