@@ -3,3 +3,4 @@ android/
 out/
 .DS_Store
 signing/*.jks
+www/capacitor.js

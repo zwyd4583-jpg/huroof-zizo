@@ -7,6 +7,9 @@ if [ ! -d android ]; then
   npx cap add android
 fi
 
+# Capacitor's JavaScript runtime: the page has no bundler, so it loads this file directly
+cp node_modules/@capacitor/core/dist/capacitor.js www/capacitor.js
+
 # Icons, splash screens and colors
 cp -R android-overlay/. android/
 

@@ -270,6 +270,8 @@ h1 span{color:var(--orange)}
   <div id="fx" aria-hidden="true"></div>
 </div>
 
+<!-- Capacitor's JavaScript runtime (copied in by scripts/prepare-android.sh). It provides registerPlugin, which the voice needs. -->
+<script src="capacitor.js"></script>
 <script>
 (function(){
   var L = [
@@ -324,8 +326,18 @@ h1 span{color:var(--orange)}
   // In a browser: the Web Speech API.
   var Cap = window.Capacitor;
   var isNative = !!(Cap && typeof Cap.isNativePlatform === 'function' && Cap.isNativePlatform());
-  var NTTS = (isNative && typeof Cap.registerPlugin === 'function') ? Cap.registerPlugin('TextToSpeech') : null;
-  var AppPlugin = (isNative && typeof Cap.registerPlugin === 'function') ? Cap.registerPlugin('App') : null;
+  var regPlugin = (Cap && typeof Cap.registerPlugin === 'function') ? Cap.registerPlugin.bind(Cap)
+    : (window.capacitorExports && typeof window.capacitorExports.registerPlugin === 'function') ? window.capacitorExports.registerPlugin : null;
+  var NTTS = (isNative && regPlugin) ? regPlugin('TextToSpeech') : null;
+  var AppPlugin = (isNative && regPlugin) ? regPlugin('App') : null;
+  var voiceErrorShown = false;
+  function voiceFailed(err){
+    // Only a missing Arabic voice is worth telling the parent about; an interrupted sentence is normal.
+    var msg = String((err && err.message) || err || '');
+    if (voiceErrorShown || !/not supported/i.test(msg)) return;
+    voiceErrorShown = true;
+    setNote('لم يعمل الصوت على هذا الهاتف. اضغط الزر لتثبيت الصوت العربي، وتأكد أن صوت الوسائط مرتفع.', true);
+  }
   var nativeLang = 'ar-SA';
   var hasWebTTS = !NTTS && ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window);
   var arVoice = null, voicesSeen = false;
@@ -357,16 +369,29 @@ h1 span{color:var(--orange)}
       updateWebNote();
     } catch(e){}
   }
-  function checkNativeVoice(){
+  function checkNativeVoice(tries){
+    tries = tries || 0;
     NTTS.isLanguageSupported({ lang: 'ar-SA' }).then(function(r){
       if (r && r.supported) return;
       return NTTS.isLanguageSupported({ lang: 'ar' }).then(function(r2){
         if (r2 && r2.supported) nativeLang = 'ar';
         else setNote('الصوت العربي غير مثبّت على هذا الهاتف. اضغط الزر لتثبيته، ثم ارجع إلى التطبيق.', true);
       });
-    }).catch(function(){});
+    }).catch(function(){
+      // The phone's speech engine takes a moment to start; check again.
+      if (tries < 5) setTimeout(function(){ checkNativeVoice(tries + 1); }, 800);
+    });
   }
+  document.addEventListener('visibilitychange', function(){
+    // Coming back from installing the Arabic voice: check again and hide the note if it now works.
+    if (document.visibilityState === 'visible' && NTTS){
+      NTTS.isLanguageSupported({ lang: 'ar' }).then(function(r){
+        if (r && r.supported){ $('voiceNote').hidden = true; voiceErrorShown = false; }
+      }).catch(function(){});
+    }
+  });
   if (NTTS) checkNativeVoice();
+  else if (isNative) setNote('تعذّر تشغيل الصوت في هذه النسخة من التطبيق.');
   else if (hasWebTTS){
     pickVoice();
     try { speechSynthesis.addEventListener('voiceschanged', pickVoice); } catch(e){ speechSynthesis.onvoiceschanged = pickVoice; }
@@ -376,7 +401,7 @@ h1 span{color:var(--orange)}
     parts = [].concat(parts);
     if (NTTS){
       parts.forEach(function(t, k){
-        NTTS.speak({ text: t, lang: nativeLang, rate: 0.85, pitch: 1.1, volume: 1.0, queueStrategy: k === 0 ? 0 : 1 }).catch(function(){});
+        NTTS.speak({ text: t, lang: nativeLang, rate: 0.85, pitch: 1.1, volume: 1.0, queueStrategy: k === 0 ? 0 : 1 }).catch(voiceFailed);
       });
       return;
     }
@@ -635,7 +660,7 @@ h1 span{color:var(--orange)}
   show('letters');
   zizo('أهلاً! أنا زيزو الفيل. اضغط على أي حرف لنتعلّمه معاً');
   if (hasWebTTS) setTimeout(updateWebNote, 1500);
-  else if (!NTTS) updateWebNote();
+  else if (!NTTS && !isNative) updateWebNote();
 })();
 </script>
 </body>
