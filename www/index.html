@@ -22,6 +22,10 @@
   --sun:#F7C531; --sun-dark:#CD9C10;
   --guide:#FCE6EE; --guide-line:#E9A3BE;
   --scrim:rgba(34,48,77,.5);
+  --red:#E0413A; --red-dark:#B02E28;
+  --brown:#9A6235; --brown-dark:#764A26;
+  --rose:#F590C0; --rose-dark:#D4689C;
+  --shade:rgba(0,0,0,.13); --shine:rgba(255,255,255,.3);
   --f-ui:"Baloo Bhaijaan 2","Tajawal","Segoe UI",Tahoma,sans-serif;
   --f-letter:"Noto Naskh Arabic","Amiri","Geeza Pro","Traditional Arabic",serif;
   color-scheme:light;
@@ -105,6 +109,32 @@ h1 span{color:var(--orange)}
 .obj .badge{position:absolute; top:-7px; inset-inline-end:-7px; min-width:26px; height:26px; border-radius:13px; background:var(--c); color:var(--white); font-family:var(--f-letter); font-weight:700; font-size:1rem; line-height:24px; padding-inline:5px; box-shadow:0 2px 0 var(--cd)}
 .countbox.small{max-width:300px; gap:8px}
 .countbox.small .obj{font-size:clamp(1.4rem,7vw,1.9rem)}
+
+/* discover: colors, shapes, animals */
+.dgrid{grid-template-columns:repeat(var(--cols,4),minmax(0,1fr))}
+.dtile{min-width:0; border:0; border-radius:18px; background:var(--paper); color:var(--ink); box-shadow:0 5px 0 var(--sky-dark); padding:10px 4px 8px; display:grid; justify-items:center; gap:6px; font-weight:800; font-size:.95rem; line-height:1.2; transition:transform .08s, box-shadow .08s}
+.dtile:active{transform:translateY(4px); box-shadow:0 1px 0 var(--sky-dark)}
+.vis{width:72%; max-width:100%; aspect-ratio:1; display:grid; place-items:center; line-height:1}
+.vis .emo{font-size:clamp(1.9rem,9.5vw,2.6rem)}
+.blob{display:block; width:100%; height:100%; border-radius:52% 48% 50% 46% / 48% 54% 46% 52%; background:var(--k); box-shadow:inset -6px -8px 0 var(--shade), inset 6px 6px 0 var(--shine)}
+.shape{display:block; width:100%; height:100%; overflow:visible}
+#ddetail{display:grid; gap:14px}
+.dvisual{width:150px; height:150px}
+.dvisual .emo{font-size:112px}
+.dname{font-size:2rem; font-weight:800; line-height:1.3}
+.dfact{font-size:1.25rem; font-weight:700; color:var(--ink-soft); line-height:1.6}
+
+/* games menu */
+.games{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px}
+.gamecard{min-width:0; border:0; border-radius:24px; background:var(--paper); color:var(--ink); box-shadow:0 6px 0 var(--sky-dark); padding:14px 8px 12px; display:grid; justify-items:center; gap:8px; font-weight:800; font-size:1.1rem; transition:transform .08s, box-shadow .08s}
+.gamecard:active{transform:translateY(4px); box-shadow:0 2px 0 var(--sky-dark)}
+.gicon{width:76px; height:76px; border-radius:50%; background:var(--c); color:var(--white); display:grid; place-items:center; font-family:var(--f-letter); font-weight:700; font-size:2.2rem; line-height:1; padding-bottom:6px; box-shadow:0 4px 0 var(--cd)}
+.gicon.emo{font-family:var(--f-ui); font-size:2.4rem; padding:0}
+#gameArea{display:grid; gap:14px}
+.gamebar{display:flex; align-items:center; justify-content:space-between; gap:10px}
+.gtitle{font-weight:800; font-size:1.2rem; min-width:0}
+.choice .vis{width:64%}
+.choice .vis .emo{font-size:clamp(2.6rem,13vw,3.6rem)}
 
 /* Zizo's prizes */
 .wardrobe-top{display:flex; align-items:center; gap:14px; padding:16px}
@@ -284,11 +314,47 @@ h1 span{color:var(--orange)}
       </div>
     </section>
 
+    <section id="v-discover" class="view" hidden>
+      <div class="chips" role="group" aria-label="ماذا نكتشف؟">
+        <button class="chip dchip" data-topic="colors" aria-pressed="true">الألوان</button>
+        <button class="chip dchip" data-topic="shapes" aria-pressed="false">الأشكال</button>
+        <button class="chip dchip" data-topic="animals" aria-pressed="false">الحيوانات</button>
+      </div>
+      <div id="dgrid" class="grid dgrid"></div>
+      <div id="ddetail" hidden>
+        <button class="btn ghost back" id="dbackBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          <span id="dbackText"></span>
+        </button>
+        <div class="card lcard">
+          <div class="vis dvisual" id="dVisual"></div>
+          <div class="dname" id="xName"></div>
+          <div class="dfact" id="dFact"></div>
+          <div class="btnrow">
+            <button class="btn" id="sayDBtn"><span class="ico-spk"></span>اسمع</button>
+          </div>
+        </div>
+        <div class="stepper">
+          <button class="round" id="prevD" aria-label="السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+          <span class="count" id="dCountD"></span>
+          <button class="round" id="nextD" aria-label="التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        </div>
+        <button class="btn wide" id="toGameD" style="--b:var(--green);--bd:var(--green-dark)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="18" cy="13.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          <span id="toGameText"></span>
+        </button>
+      </div>
+    </section>
+
     <section id="v-play" class="view" hidden>
-      <div class="chips" role="group" aria-label="نوع اللعبة">
-        <button class="chip" data-mode="listen" aria-pressed="true">اسمع واختر</button>
-        <button class="chip" data-mode="first" aria-pressed="false">أول حرف</button>
-        <button class="chip" data-mode="count" aria-pressed="false">كم العدد؟</button>
+      <div id="gameMenu" class="games" aria-label="الألعاب"></div>
+      <div id="gameArea" hidden>
+      <div class="gamebar">
+        <button class="btn ghost" id="gamesBack">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          كل الألعاب
+        </button>
+        <span class="gtitle" id="gTitle"></span>
       </div>
       <div class="dots" id="dots"></div>
       <div id="playArea">
@@ -310,6 +376,7 @@ h1 span{color:var(--orange)}
             جوائز زيزو
           </button>
         </div>
+      </div>
       </div>
     </section>
 
@@ -362,6 +429,10 @@ h1 span{color:var(--orange)}
     <button class="tab" data-v="numbers" style="--tc:var(--purple)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3.5" width="18" height="17" rx="3"/><path d="M3 9.5h18M3 14.5h18"/><circle cx="7.5" cy="9.5" r="1.7" fill="currentColor"/><circle cx="11.5" cy="9.5" r="1.7" fill="currentColor"/><circle cx="16.5" cy="14.5" r="1.7" fill="currentColor"/></svg>
       <span>الأرقام</span>
+    </button>
+    <button class="tab" data-v="discover" style="--tc:var(--teal)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5l5 5"/></svg>
+      <span>اكتشف</span>
     </button>
     <button class="tab" data-v="play" style="--tc:var(--green)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="18" cy="13.8" r="1.1" fill="currentColor" stroke="none"/></svg>
@@ -434,6 +505,75 @@ h1 span{color:var(--orange)}
     {d:'١٠', n:'عشرة',   s:'عَشَرَة',  e:'🍪'}
   ];
   var COUNT_PICS = ['🍎','🎈','🐟','🌸','🐥','🍓','🦋','🍪','⚽','🐞','🌟','🍌'];
+
+  // Colors, each with something of that color (adjective agrees with the noun)
+  var PAINTS = [
+    {n:'أحمر',    s:'أَحْمَر',      the:'الأَحْمَر',      k:'--red',    e:'🍎', f:'تفاحة حمراء',        fs:'تُفّاحَة حَمْراء'},
+    {n:'أزرق',    s:'أَزْرَق',      the:'الأَزْرَق',      k:'--blue',   e:'🐳', f:'حوت أزرق',           fs:'حُوت أَزْرَق'},
+    {n:'أصفر',    s:'أَصْفَر',      the:'الأَصْفَر',      k:'--sun',    e:'🍌', f:'موزة صفراء',         fs:'مَوْزَة صَفْراء'},
+    {n:'أخضر',    s:'أَخْضَر',      the:'الأَخْضَر',      k:'--green',  e:'🐸', f:'ضفدع أخضر',          fs:'ضِفْدَع أَخْضَر'},
+    {n:'برتقالي', s:'بُرْتُقالِيّ',  the:'البُرْتُقالِيّ',  k:'--orange', e:'🍊', f:'برتقالة برتقالية',   fs:'بُرْتُقالَة بُرْتُقالِيَّة'},
+    {n:'بنفسجي',  s:'بَنَفْسَجِيّ',  the:'البَنَفْسَجِيّ',  k:'--purple', e:'🍇', f:'عنب بنفسجي',         fs:'عِنَب بَنَفْسَجِيّ'},
+    {n:'وردي',    s:'وَرْدِيّ',     the:'الوَرْدِيّ',     k:'--rose',   e:'🌸', f:'زهرة وردية',         fs:'زَهْرَة وَرْدِيَّة'},
+    {n:'بني',     s:'بُنِّيّ',      the:'البُنِّيّ',      k:'--brown',  e:'🐻', f:'دب بني',             fs:'دُبّ بُنِّيّ'}
+  ];
+  // Shapes, each with one simple fact
+  var SHAPES = [
+    {id:'circle',   n:'دائرة',  s:'دائِرَة',   the:'الدّائِرَة',  k:'--red',    f:'ليس لها أضلاع',                  fs:'لَيْسَ لَها أَضْلاع'},
+    {id:'square',   n:'مربع',   s:'مُرَبَّع',   the:'المُرَبَّع',   k:'--blue',   f:'له أربعة أضلاع متساوية',        fs:'لَهُ أَرْبَعَةُ أَضْلاعٍ مُتَساوِيَة'},
+    {id:'triangle', n:'مثلث',   s:'مُثَلَّث',   the:'المُثَلَّث',   k:'--green',  f:'له ثلاثة أضلاع',                fs:'لَهُ ثَلاثَةُ أَضْلاع'},
+    {id:'rect',     n:'مستطيل', s:'مُسْتَطِيل', the:'المُسْتَطِيل', k:'--orange', f:'له ضلعان طويلان وضلعان قصيران', fs:'لَهُ ضِلْعانِ طَوِيلانِ وَضِلْعانِ قَصِيران'},
+    {id:'star',     n:'نجمة',   s:'نَجْمَة',    the:'النَّجْمَة',   k:'--sun',    f:'لها خمسة رؤوس',                 fs:'لَها خَمْسَةُ رُؤُوس'},
+    {id:'heart',    n:'قلب',    s:'قَلْب',      the:'القَلْب',      k:'--rose',  f:'شكل المحبة',                    fs:'شَكْلُ المَحَبَّة'}
+  ];
+  // Animals, each with the Arabic verb for its sound
+  var ANIMALS = [
+    {n:'أسد',   s:'أَسَد',    the:'الأَسَد',    e:'🦁', f:'الأسد يزأر',     fs:'الأَسَدُ يَزْأَر'},
+    {n:'كلب',   s:'كَلْب',    the:'الكَلْب',    e:'🐶', f:'الكلب ينبح',     fs:'الكَلْبُ يَنْبَح'},
+    {n:'قطة',   s:'قِطَّة',   the:'القِطَّة',   e:'🐱', f:'القطة تموء',     fs:'القِطَّةُ تَمُوء'},
+    {n:'حصان',  s:'حِصان',   the:'الحِصان',   e:'🐴', f:'الحصان يصهل',    fs:'الحِصانُ يَصْهَل'},
+    {n:'بقرة',  s:'بَقَرَة',  the:'البَقَرَة',  e:'🐮', f:'البقرة تخور',    fs:'البَقَرَةُ تَخُور'},
+    {n:'خروف',  s:'خَرُوف',  the:'الخَرُوف',  e:'🐑', f:'الخروف يثغو',    fs:'الخَرُوفُ يَثْغُو'},
+    {n:'ديك',   s:'دِيك',    the:'الدِّيك',    e:'🐓', f:'الديك يصيح',     fs:'الدِّيكُ يَصِيح'},
+    {n:'بطة',   s:'بَطَّة',   the:'البَطَّة',   e:'🦆', f:'البطة تبطبط',    fs:'البَطَّةُ تُبَطْبِط'},
+    {n:'عصفور', s:'عُصْفُور', the:'العُصْفُور', e:'🐦', f:'العصفور يزقزق',  fs:'العُصْفُورُ يُزَقْزِق'},
+    {n:'ضفدع',  s:'ضِفْدَع',  the:'الضِّفْدَع',  e:'🐸', f:'الضفدع ينقنق',   fs:'الضِّفْدَعُ يُنَقْنِق'},
+    {n:'ذئب',   s:'ذِئْب',    the:'الذِّئْب',    e:'🐺', f:'الذئب يعوي',     fs:'الذِّئْبُ يَعْوِي'},
+    {n:'نحلة',  s:'نَحْلَة',  the:'النَّحْلَة',  e:'🐝', f:'النحلة تطنّ',    fs:'النَّحْلَةُ تَطِنّ'}
+  ];
+  var TOPICS = {
+    colors:  { list: PAINTS,  cols: 4, back: 'كل الألوان',    game: 'color',  hello: 'هذه هي الألوان. اضغط على أي لون' },
+    shapes:  { list: SHAPES,  cols: 3, back: 'كل الأشكال',    game: 'shape',  hello: 'هذه هي الأشكال. اضغط على أي شكل' },
+    animals: { list: ANIMALS, cols: 4, back: 'كل الحيوانات', game: 'animal', hello: 'هيا نتعرّف على الحيوانات! اضغط على أي حيوان' }
+  };
+  var GAMES = [
+    { mode: 'listen', t: 'اسمع واختر',    icon: 'ب',   emo: false, c: 0 },
+    { mode: 'first',  t: 'أول حرف',      icon: '🦆',  emo: true,  c: 1 },
+    { mode: 'count',  t: 'كم العدد؟',     icon: '١٢٣', emo: false, c: 4 },
+    { mode: 'color',  t: 'أين اللون؟',    icon: '🎨',  emo: true,  c: 3 },
+    { mode: 'shape',  t: 'أين الشكل؟',    icon: '🔺',  emo: true,  c: 5 },
+    { mode: 'animal', t: 'أين الحيوان؟',  icon: '🦁',  emo: true,  c: 2 }
+  ];
+  function shapeSVG(sh){
+    var f = 'fill="var(' + sh.k + ')" stroke="var(' + sh.k + '-dark)" stroke-width="3" stroke-linejoin="round"', d;
+    switch (sh.id){
+      case 'circle':   d = '<circle cx="50" cy="50" r="40" ' + f + '/>'; break;
+      case 'square':   d = '<rect x="13" y="13" width="74" height="74" rx="6" ' + f + '/>'; break;
+      case 'triangle': d = '<path d="M50 9 L92 86 L8 86 Z" ' + f + '/>'; break;
+      case 'rect':     d = '<rect x="5" y="27" width="90" height="46" rx="6" ' + f + '/>'; break;
+      case 'star':
+        var pts = [];
+        for (var k = 0; k < 10; k++){ var a = -Math.PI/2 + k*Math.PI/5, r = (k % 2) ? 19 : 46; pts.push((50 + r*Math.cos(a)).toFixed(1) + ' ' + (54 + r*Math.sin(a)).toFixed(1)); }
+        d = '<path d="M' + pts.join(' L') + 'Z" ' + f + '/>'; break;
+      default:         d = '<path d="M50 88 C22 68 6 52 6 33 C6 18 17 9 30 9 C40 9 46 15 50 23 C54 15 60 9 70 9 C83 9 94 18 94 33 C94 52 78 68 50 88 Z" ' + f + '/>';
+    }
+    return '<svg class="shape" viewBox="0 0 100 100" aria-hidden="true">' + d + '</svg>';
+  }
+  function visualOf(topic, item){
+    if (topic === 'colors') return '<span class="blob" style="--k:var(' + item.k + ')"></span>';
+    if (topic === 'shapes') return shapeSVG(item);
+    return '<span class="emo">' + item.e + '</span>';
+  }
   var COLORS = [['--orange','--orange-dark'],['--blue','--blue-dark'],['--green','--green-dark'],['--pink','--pink-dark'],['--purple','--purple-dark'],['--teal','--teal-dark']];
   var NONCONN = 'اأإآدذرزو';
   var PRAISE = ['أحسنت!','رائع!','ممتاز!','برافو!','شاطر!'];
@@ -896,16 +1036,74 @@ h1 span{color:var(--orange)}
   });
   $('toTraceN').addEventListener('click', function(){ setTraceKind('numbers', ncur); show('trace'); say(N[ncur].s); });
 
+  /* ---------- discover: colors, shapes, animals ---------- */
+  var dTopic = 'colors', dcur = 0, dgrid = $('dgrid'), ddetail = $('ddetail');
+  function renderDGrid(){
+    var T = TOPICS[dTopic];
+    dgrid.style.setProperty('--cols', T.cols);
+    dgrid.innerHTML = '';
+    T.list.forEach(function(item, i){
+      var b = document.createElement('button');
+      b.className = 'dtile';
+      b.innerHTML = '<span class="vis">' + visualOf(dTopic, item) + '</span><span class="dlabel"></span>';
+      b.querySelector('.dlabel').textContent = item.n;
+      b.addEventListener('click', function(){ openD(i); });
+      dgrid.appendChild(b);
+    });
+    document.querySelectorAll('.dchip').forEach(function(x){ x.setAttribute('aria-pressed', String(x.dataset.topic === dTopic)); });
+  }
+  function openD(i){
+    var T = TOPICS[dTopic];
+    dcur = (i + T.list.length) % T.list.length;
+    var item = T.list[dcur];
+    $('dVisual').innerHTML = visualOf(dTopic, item);
+    $('xName').textContent = item.n;
+    $('dFact').textContent = (dTopic === 'colors' ? item.e + ' ' : '') + item.f;
+    $('dCountD').textContent = fmt(dcur + 1) + ' من ' + fmt(T.list.length);
+    $('dbackText').textContent = T.back;
+    $('toGameText').textContent = 'العب: ' + GAMES.filter(function(g){ return g.mode === T.game; })[0].t;
+    dgrid.hidden = true; ddetail.hidden = false;
+    window.scrollTo(0, 0);
+    zizo(item.f, 'happy');
+    say([item.s, item.fs]);
+  }
+  function backToD(){ ddetail.hidden = true; dgrid.hidden = false; zizo(TOPICS[dTopic].hello); }
+  document.querySelectorAll('.dchip').forEach(function(c){
+    c.addEventListener('click', function(){ dTopic = c.dataset.topic; renderDGrid(); backToD(); });
+  });
+  $('dbackBtn').addEventListener('click', backToD);
+  $('prevD').addEventListener('click', function(){ openD(dcur - 1); });
+  $('nextD').addEventListener('click', function(){ openD(dcur + 1); });
+  $('sayDBtn').addEventListener('click', function(){ var item = TOPICS[dTopic].list[dcur]; say([item.s, item.fs]); });
+  $('toGameD').addEventListener('click', function(){ show('play'); startGame(TOPICS[dTopic].game); });
+  renderDGrid();
+
   /* ---------- play ---------- */
   var ROUNDS = 5, mode = 'listen', round = 0, target = 0, last = -1, locked = false, nextTimer = null;
-  var playChips = document.querySelectorAll('#v-play .chip');
-  playChips.forEach(function(c){
-    c.addEventListener('click', function(){
-      mode = c.dataset.mode;
-      playChips.forEach(function(x){ x.setAttribute('aria-pressed', String(x === c)); });
-      newGame();
-    });
+  var POOLS = { listen: L, first: L, count: N, color: PAINTS, shape: SHAPES, animal: ANIMALS };
+  var POOL_TOPIC = { color: 'colors', shape: 'shapes', animal: 'animals' };
+  GAMES.forEach(function(g){
+    var b = document.createElement('button');
+    b.className = 'gamecard'; b.dataset.mode = g.mode; b.style.cssText = colorVars(g.c);
+    b.innerHTML = '<span class="gicon' + (g.emo ? ' emo' : '') + '" aria-hidden="true"></span><span class="gname"></span>';
+    b.querySelector('.gicon').textContent = g.icon;
+    b.querySelector('.gname').textContent = g.t;
+    b.addEventListener('click', function(){ startGame(g.mode); });
+    $('gameMenu').appendChild(b);
   });
+  function showGameMenu(){
+    clearTimeout(nextTimer); afterPrize = null;
+    $('gameMenu').hidden = false; $('gameArea').hidden = true;
+    zizo('اختر لعبة نلعبها معاً!');
+  }
+  function startGame(m){
+    mode = m; last = -1;
+    $('gameMenu').hidden = true; $('gameArea').hidden = false;
+    $('gTitle').textContent = GAMES.filter(function(g){ return g.mode === m; })[0].t;
+    window.scrollTo(0, 0);
+    newGame();
+  }
+  $('gamesBack').addEventListener('click', function(){ hush(); showGameMenu(); });
   function renderDots(){
     var d = $('dots'); d.innerHTML = '';
     for (var k=0;k<ROUNDS;k++){ var s = document.createElement('span'); s.className = 'dot' + (k < round ? ' done' : (k === round ? ' now' : '')); d.appendChild(s); }
@@ -914,13 +1112,16 @@ h1 span{color:var(--orange)}
   function ask(){
     if (mode === 'listen') say('أَيْنَ حَرْفُ ال' + SN(target) + '؟');
     else if (mode === 'count') say('كَمْ عَدَدُها؟');
+    else if (mode === 'color') say('أَيْنَ اللَّوْنُ ' + PAINTS[target].the + '؟');
+    else if (mode === 'shape') say('أَيْنَ ' + SHAPES[target].the + '؟');
+    else if (mode === 'animal') say('أَيْنَ ' + ANIMALS[target].the + '؟');
     else say(L[target].s);
   }
   function newGame(){ clearTimeout(nextTimer); round = 0; $('endArea').hidden = true; $('playArea').hidden = false; nextRound(); }
   function nextRound(){
     if (round >= ROUNDS) return finish();
     locked = false;
-    var pool = mode === 'count' ? N : L;
+    var pool = POOLS[mode];
     var t; do { t = Math.floor(Math.random()*pool.length); } while (t === last);
     last = target = t;
     var opts = [t];
@@ -932,6 +1133,12 @@ h1 span{color:var(--orange)}
       p.innerHTML = '<div class="countbox small" id="pBox"></div><p class="ask">كم عددها؟</p><button class="btn ghost" id="replay">' + SPK + 'اسمع السؤال</button>';
       countBox($('pBox'), t + 1, pick(COUNT_PICS), null);
       zizo('عُدّ الصور، ثم اختر الرقم الصحيح');
+    } else if (POOL_TOPIC[mode]){
+      // Neutral button color so it never gives away the answer
+      p.style.cssText = '--c:var(--teal);--cd:var(--teal-dark)';
+      p.innerHTML = '<button class="speak-big" id="replay" aria-label="اسمع مرة أخرى">' + SPK + '</button><p class="ask"></p>';
+      p.querySelector('.ask').textContent = mode === 'color' ? 'أين اللون ال' + pool[t].n + '؟' : 'أين ال' + pool[t].n + '؟';
+      zizo(mode === 'color' ? 'اسمع، ثم اختر اللون الصحيح' : mode === 'shape' ? 'اسمع، ثم اختر الشكل الصحيح' : 'اسمع، ثم اختر الحيوان الصحيح');
     } else if (mode === 'listen'){
       p.innerHTML = '<button class="speak-big" id="replay" aria-label="اسمع مرة أخرى">' + SPK + '</button><p class="ask">أين حرف ال' + L[t].n + '؟</p>';
       zizo('اسمع، ثم اختر الحرف الصحيح');
@@ -945,8 +1152,13 @@ h1 span{color:var(--orange)}
     opts.forEach(function(o){
       var b = document.createElement('button');
       b.className = 'choice';
-      b.textContent = mode === 'count' ? N[o].d : L[o].c;
-      b.setAttribute('aria-label', mode === 'count' ? 'الرقم ' + N[o].n : 'حرف ال' + L[o].n);
+      if (POOL_TOPIC[mode]){
+        b.innerHTML = '<span class="vis">' + visualOf(POOL_TOPIC[mode], pool[o]) + '</span>';
+        b.setAttribute('aria-label', pool[o].n);
+      } else {
+        b.textContent = mode === 'count' ? N[o].d : L[o].c;
+        b.setAttribute('aria-label', mode === 'count' ? 'الرقم ' + N[o].n : 'حرف ال' + L[o].n);
+      }
       b.addEventListener('click', function(){ choose(o, b); });
       ch.appendChild(b);
     });
@@ -960,7 +1172,9 @@ h1 span{color:var(--orange)}
       var pr = pick(PRAISE);
       zizo(pr, 'happy'); addStar();
       if (mode === 'first') wordInto($('pWord'), target, false);
-      say(mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] : pr);
+      var won = POOLS[mode][target];
+      say(mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] :
+          mode === 'animal' ? [pr, won.fs] : (mode === 'color' || mode === 'shape') ? [pr, won.s] : pr);
       round++; renderDots();
       nextTimer = setTimeout(function(){ whenNoPrize(nextRound); }, 1500);
     } else {
@@ -1076,13 +1290,14 @@ h1 span{color:var(--orange)}
     currentView = v;
     clearTimeout(nextTimer); clearTimeout(traceTimer); stopAutoCount();
     afterPrize = null;
-    ['letters','numbers','play','trace','rewards'].forEach(function(k){ $('v-' + k).hidden = (k !== v); });
+    ['letters','numbers','discover','play','trace','rewards'].forEach(function(k){ $('v-' + k).hidden = (k !== v); });
     document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-current', t.dataset.v === v ? 'page' : 'false'); });
     window.scrollTo(0, 0);
     if (v === 'letters') backToGrid();
     if (v === 'numbers') backToNumbers();
     if (v === 'rewards'){ renderRewards(); zizo('اختر ما يلبسه زيزو! كل نجمة تقرّبك من جائزة جديدة'); }
-    if (v === 'play') newGame();
+    if (v === 'discover') backToD();
+    if (v === 'play') showGameMenu();
     if (v === 'trace'){ lastW = 0; sizeCanvas(); setTrace(tIdx, false); }
   }
   document.querySelectorAll('.tab').forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.v); }); });
@@ -1093,6 +1308,8 @@ h1 span{color:var(--orange)}
       if (prizeOpen()){ closePrize(); return; }
       if (currentView === 'letters' && !detail.hidden){ hush(); backToGrid(); }
       else if (currentView === 'numbers' && !ndetail.hidden){ hush(); backToNumbers(); }
+      else if (currentView === 'discover' && !ddetail.hidden){ hush(); backToD(); }
+      else if (currentView === 'play' && !$('gameArea').hidden){ hush(); showGameMenu(); }
       else if (currentView !== 'letters'){ hush(); show('letters'); }
       else AppPlugin.exitApp();
     });
