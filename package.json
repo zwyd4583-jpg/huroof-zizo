@@ -1,0 +1,18 @@
+{
+  "name": "huroof-zizo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "حروف زيزو: تطبيق لتعليم الحروف العربية للأطفال من 4 إلى 6 سنوات",
+  "scripts": {
+    "android:prepare": "bash scripts/prepare-android.sh"
+  },
+  "dependencies": {
+    "@capacitor-community/text-to-speech": "8.0.2",
+    "@capacitor/android": "8.5.2",
+    "@capacitor/app": "8.1.1",
+    "@capacitor/core": "8.5.2"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "8.5.2"
+  }
+}

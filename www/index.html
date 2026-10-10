@@ -1,0 +1,642 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#D8EDF6">
+<title>حروف زيزو</title>
+<style>
+@font-face{font-family:"Baloo Bhaijaan 2"; src:url("fonts/BalooBhaijaan2.ttf") format("truetype"); font-weight:400 800; font-display:swap}
+@font-face{font-family:"Noto Naskh Arabic"; src:url("fonts/NotoNaskhArabic.ttf") format("truetype"); font-weight:400 700; font-display:block}
+/* Layout: one-column playroom app — Zizo greets from the top, the active section in the middle, a chunky tab bar at the bottom. Single bright "sky playroom" theme by choice. */
+:root{
+  --sky:#D8EDF6; --sky-dark:#B2D5E5; --paper:#FFFFFF; --note:#FFF3CF;
+  --ink:#22304D; --ink-soft:#56637F; --white:#FFFFFF;
+  --zizo:#B7BFCA; --zizo-dark:#949FAE; --blush:#F2A7B8;
+  --orange:#E8761A; --orange-dark:#B85A0E;
+  --green:#2FA65C; --green-dark:#21803F;
+  --pink:#E04A80; --pink-dark:#AF305F;
+  --blue:#3A8BD8; --blue-dark:#2869A8;
+  --purple:#8B5BD5; --purple-dark:#6A40AE;
+  --teal:#159C97; --teal-dark:#0E7773;
+  --sun:#F7C531; --sun-dark:#CD9C10;
+  --guide:#FCE6EE; --guide-line:#E9A3BE;
+  --f-ui:"Baloo Bhaijaan 2","Tajawal","Segoe UI",Tahoma,sans-serif;
+  --f-letter:"Noto Naskh Arabic","Amiri","Geeza Pro","Traditional Arabic",serif;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{
+  margin:0; color:var(--ink); font-family:var(--f-ui); font-size:14px;
+  -webkit-tap-highlight-color:transparent; -webkit-user-select:none; user-select:none;
+  -webkit-touch-callout:none; touch-action:manipulation; overscroll-behavior:none;
+  background:
+    radial-gradient(70px 28px at 12% 9%, rgba(255,255,255,.75) 60%, transparent 63%),
+    radial-gradient(90px 32px at 86% 22%, rgba(255,255,255,.65) 60%, transparent 63%),
+    radial-gradient(60px 22px at 70% 58%, rgba(255,255,255,.5) 60%, transparent 63%),
+    var(--sky);
+  background-attachment:fixed;
+}
+button{font-family:inherit; cursor:pointer; -webkit-user-select:none; user-select:none}
+button:focus-visible{outline:3px solid var(--blue); outline-offset:3px}
+.app{max-width:560px; margin:0 auto; padding-inline:16px; padding-block:calc(12px + env(safe-area-inset-top,0px)) 128px}
+
+/* header */
+.brand{display:flex; align-items:center; justify-content:space-between; gap:12px}
+h1{margin:0; font-size:1.6rem; font-weight:800; line-height:1.2}
+h1 span{color:var(--orange)}
+.stars{display:inline-flex; align-items:center; gap:6px; background:var(--sun); color:var(--ink); font-weight:800; font-size:1.15rem; border-radius:999px; padding:4px 14px 4px 12px; box-shadow:0 3px 0 var(--sun-dark); font-variant-numeric:tabular-nums}
+.stars svg{width:22px; height:22px; color:var(--white)}
+.stars.pop{animation:pop .45s ease}
+.host{display:flex; align-items:center; gap:12px; margin-top:8px}
+.zizo{width:84px; height:84px; flex:none; overflow:visible; transform-origin:50% 90%; animation:bob 3s ease-in-out infinite}
+.zizo.happy{animation:hop .65s ease}
+.zizo.sad{animation:tilt .6s ease}
+.zizo .ear{transform-box:fill-box; transform-origin:center; animation:flap 4.5s ease-in-out infinite}
+.bubble{position:relative; flex:1; min-width:0; margin:0; background:var(--paper); border-radius:20px; padding:10px 16px; font-weight:700; font-size:1.08rem; line-height:1.55; box-shadow:0 3px 0 var(--sky-dark)}
+.bubble::before{content:""; position:absolute; inset-inline-start:-7px; top:calc(50% - 8px); width:16px; height:16px; background:var(--paper); transform:rotate(45deg); border-radius:3px}
+
+/* shared */
+.view{display:grid; gap:14px; margin-top:16px}
+.card{background:var(--paper); border-radius:28px; box-shadow:0 6px 0 var(--sky-dark)}
+.btnrow{display:flex; gap:10px; flex-wrap:wrap; justify-content:center}
+.btn{--b:var(--orange); --bd:var(--orange-dark); border:0; border-radius:16px; padding:11px 18px; background:var(--b); color:var(--white); font-weight:800; font-size:1.12rem; box-shadow:0 4px 0 var(--bd); display:inline-flex; align-items:center; justify-content:center; gap:8px; transition:transform .08s, box-shadow .08s}
+.btn:active{transform:translateY(3px); box-shadow:0 1px 0 var(--bd)}
+.btn svg{width:22px; height:22px; flex:none}
+.btn.ghost{background:var(--paper); color:var(--ink); --bd:var(--sky-dark)}
+.btn.wide{width:100%}
+.round{width:58px; height:58px; border:0; border-radius:50%; background:var(--paper); color:var(--ink); box-shadow:0 4px 0 var(--sky-dark); display:grid; place-items:center; flex:none}
+.round:active{transform:translateY(3px); box-shadow:0 1px 0 var(--sky-dark)}
+.round svg{width:28px; height:28px}
+.stepper{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.count{font-weight:800; color:var(--ink-soft); font-size:1.1rem}
+.note{display:grid; gap:10px; justify-items:start; background:var(--note); border-radius:16px; padding:10px 14px; font-size:.95rem; line-height:1.6; margin:0}
+.note .btn{font-size:1rem; padding:8px 14px}
+
+/* letters grid */
+.grid{display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px}
+@media (min-width:520px){ .grid{grid-template-columns:repeat(7,minmax(0,1fr))} }
+.tile{aspect-ratio:1; max-width:100%; border:0; border-radius:18px; background:var(--paper); color:var(--c); font-family:var(--f-letter); font-weight:700; font-size:2.2rem; line-height:1; padding:0 0 6px; box-shadow:0 5px 0 var(--cd); display:grid; place-items:center; transition:transform .08s, box-shadow .08s}
+.tile:active{transform:translateY(4px); box-shadow:0 1px 0 var(--cd)}
+
+/* letter detail */
+#detail{display:grid; gap:14px}
+.back{justify-self:start}
+.lcard{display:grid; justify-items:center; gap:10px; padding:22px 16px; text-align:center}
+.bigletter{width:150px; height:150px; border-radius:50%; background:var(--c); color:var(--white); font-family:var(--f-letter); font-weight:700; font-size:92px; line-height:1; padding-bottom:14px; display:grid; place-items:center; box-shadow:0 6px 0 var(--cd)}
+.lname{font-size:1.2rem; font-weight:800; color:var(--ink-soft)}
+.pic{font-size:84px; line-height:1.1}
+.word{font-family:var(--f-letter); font-weight:700; font-size:2.6rem; line-height:1.5; color:var(--ink)}
+.word .first{color:var(--c)}
+.word .blank{display:inline-block; font-family:var(--f-ui); background:var(--sun); color:var(--ink); border-radius:12px; padding-inline:.2em; margin-inline-end:.08em; line-height:1.25}
+
+/* play */
+.chips{display:flex; gap:6px; background:var(--paper); padding:6px; border-radius:999px; box-shadow:0 4px 0 var(--sky-dark)}
+.chip{flex:1; border:0; border-radius:999px; padding:9px 8px; background:transparent; color:var(--ink-soft); font-weight:800; font-size:1.05rem}
+.chip[aria-pressed="true"]{background:var(--green); color:var(--white)}
+.dots{display:flex; gap:10px; justify-content:center}
+.dot{width:16px; height:16px; border-radius:50%; background:var(--sky-dark); transition:background .2s}
+.dot.now{background:var(--orange)}
+.dot.done{background:var(--green)}
+#playArea{display:grid; gap:16px}
+.prompt{display:grid; justify-items:center; gap:10px; padding:20px 16px; text-align:center}
+.speak-big{width:112px; height:112px; border:0; border-radius:50%; background:var(--c); color:var(--white); box-shadow:0 6px 0 var(--cd); display:grid; place-items:center; animation:pulse 2.2s ease-in-out infinite}
+.speak-big svg{width:54px; height:54px}
+.ask{margin:0; font-size:1.3rem; font-weight:800}
+.choices{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+.choice{aspect-ratio:1; max-width:100%; border:0; border-radius:26px; background:var(--paper); color:var(--ink); font-family:var(--f-letter); font-weight:700; font-size:clamp(2.6rem,12vw,3.6rem); line-height:1; padding:0 0 8px; box-shadow:0 6px 0 var(--sky-dark); display:grid; place-items:center; transition:transform .08s}
+.choice:active{transform:translateY(4px)}
+.choice.right{background:var(--green); color:var(--white); box-shadow:0 6px 0 var(--green-dark); animation:pop .45s ease}
+.choice.wrong{opacity:.4; animation:shake .45s ease}
+.end{display:grid; justify-items:center; gap:8px; padding:26px 16px; text-align:center}
+.end h2{margin:0; font-size:1.8rem; font-weight:800}
+.end p{margin:0 0 8px; font-size:1.15rem; color:var(--ink-soft); font-weight:700}
+.endstars{display:flex; gap:6px; color:var(--sun)}
+.endstars svg{width:42px; height:42px; filter:drop-shadow(0 3px 0 var(--sun-dark))}
+.endstars span{animation:pop .5s ease backwards}
+.endstars span:nth-child(2){animation-delay:.12s} .endstars span:nth-child(3){animation-delay:.24s}
+.endstars span:nth-child(4){animation-delay:.36s} .endstars span:nth-child(5){animation-delay:.48s}
+
+/* trace */
+.tlabel{border:0; background:var(--paper); color:var(--ink); border-radius:999px; padding:10px 18px; font-weight:800; font-size:1.15rem; display:inline-flex; align-items:center; gap:8px; box-shadow:0 4px 0 var(--sky-dark); min-width:0}
+.tlabel svg{width:22px; height:22px; color:var(--pink); flex:none}
+.canvas-wrap{display:flex; justify-content:center}
+#cv{display:block; background:var(--paper); border-radius:28px; box-shadow:0 6px 0 var(--sky-dark); touch-action:none; max-width:100%}
+
+/* tab bar */
+.tabs{position:fixed; left:0; right:0; bottom:0; z-index:5; background:var(--paper); box-shadow:0 -4px 0 var(--sky-dark); display:flex; justify-content:center; gap:8px; padding:8px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+.tab{flex:1; max-width:170px; border:0; border-radius:18px; padding:8px 4px 6px; background:transparent; color:var(--ink-soft); font-weight:800; font-size:1.05rem; display:flex; flex-direction:column; align-items:center; gap:2px; line-height:1.2}
+.tab svg{width:28px; height:28px}
+.tab[aria-current="page"]{background:var(--tc); color:var(--white)}
+
+/* effects */
+#fx{position:fixed; left:50%; top:42%; width:0; height:0; pointer-events:none; z-index:10}
+.spark{position:absolute; width:30px; height:30px; margin:-15px; animation:spark .9s ease-out forwards}
+.spark svg{width:100%; height:100%}
+
+@keyframes bob{50%{transform:translateY(-3px)}}
+@keyframes hop{0%{transform:none}30%{transform:translateY(-14px) rotate(-5deg)}60%{transform:translateY(0) rotate(4deg)}100%{transform:none}}
+@keyframes tilt{25%{transform:rotate(-7deg)}75%{transform:rotate(5deg)}}
+@keyframes flap{0%,84%,100%{transform:rotate(0)}89%{transform:rotate(-9deg)}94%{transform:rotate(7deg)}}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+@keyframes pulse{50%{transform:scale(1.06)}}
+@keyframes spark{from{transform:translate(0,0) scale(.3); opacity:1} to{transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(45deg); opacity:0}}
+@media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important; transition:none!important} }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <div class="brand">
+      <h1>حروف <span>زيزو</span></h1>
+      <div class="stars" id="starPill" aria-label="عدد النجوم">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>
+        <span id="starCount">٠</span>
+      </div>
+    </div>
+    <div class="host">
+      <svg class="zizo" viewBox="0 0 120 120" aria-hidden="true">
+        <g class="ear"><ellipse cx="95" cy="60" rx="22" ry="27" fill="var(--zizo-dark)"/><ellipse cx="96" cy="61" rx="13" ry="17" fill="var(--blush)"/></g>
+        <g class="ear"><ellipse cx="25" cy="60" rx="22" ry="27" fill="var(--zizo-dark)"/><ellipse cx="24" cy="61" rx="13" ry="17" fill="var(--blush)"/></g>
+        <circle cx="60" cy="60" r="33" fill="var(--zizo)"/>
+        <rect x="31" y="86" width="58" height="13" rx="6.5" fill="var(--orange)"/>
+        <path d="M37 89v7M43 89v7M49 89v7M71 89v7M77 89v7M83 89v7" stroke="var(--orange-dark)" stroke-width="2" stroke-linecap="round"/>
+        <rect x="68" y="93" width="12" height="22" rx="4" fill="var(--orange)" transform="rotate(-14 74 104)"/>
+        <path d="M70 110h10" stroke="var(--orange-dark)" stroke-width="2" stroke-linecap="round" transform="rotate(-14 74 104)"/>
+        <path d="M60 66 C59 84 62 95 74 97" fill="none" stroke="var(--zizo)" stroke-width="13" stroke-linecap="round"/>
+        <path d="M55 79h9M56 86h8" stroke="var(--zizo-dark)" stroke-width="2" stroke-linecap="round"/>
+        <ellipse cx="40" cy="69" rx="6" ry="3.5" fill="var(--blush)"/>
+        <ellipse cx="80" cy="69" rx="6" ry="3.5" fill="var(--blush)"/>
+        <circle cx="47" cy="57" r="5.5" fill="var(--ink)"/><circle cx="73" cy="57" r="5.5" fill="var(--ink)"/>
+        <circle cx="49" cy="55" r="1.8" fill="var(--white)"/><circle cx="75" cy="55" r="1.8" fill="var(--white)"/>
+        <path d="M45 74q5 5 10 1" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M36 41C37 19 83 19 84 41Z" fill="var(--orange)"/>
+        <rect x="33" y="36" width="54" height="9" rx="4.5" fill="var(--orange-dark)"/>
+        <circle cx="60" cy="20" r="6.5" fill="var(--orange-dark)"/>
+      </svg>
+      <p class="bubble" id="bubble" aria-live="polite">أهلاً! أنا زيزو الفيل. اضغط على أي حرف لنتعلّمه معاً</p>
+    </div>
+  </header>
+
+  <main>
+    <section id="v-letters" class="view">
+      <div id="voiceNote" class="note" hidden></div>
+      <div id="grid" class="grid" aria-label="الحروف العربية"></div>
+      <div id="detail" hidden>
+        <button class="btn ghost back" id="backBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          كل الحروف
+        </button>
+        <div class="card lcard">
+          <div class="bigletter" id="dLetter"></div>
+          <div class="lname" id="dName"></div>
+          <div class="pic" id="dPic" aria-hidden="true"></div>
+          <div class="word" id="dWord"></div>
+          <div class="btnrow">
+            <button class="btn" id="sayLetterBtn"><span class="ico-spk"></span>اسمع الحرف</button>
+            <button class="btn" id="sayWordBtn" style="--b:var(--blue);--bd:var(--blue-dark)"><span class="ico-spk"></span>اسمع الكلمة</button>
+          </div>
+        </div>
+        <div class="stepper">
+          <button class="round" id="prevL" aria-label="الحرف السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+          <span class="count" id="dCount"></span>
+          <button class="round" id="nextL" aria-label="الحرف التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        </div>
+        <button class="btn wide" id="toTrace" style="--b:var(--pink);--bd:var(--pink-dark)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 7l3 3"/></svg>
+          ارسم هذا الحرف
+        </button>
+      </div>
+    </section>
+
+    <section id="v-play" class="view" hidden>
+      <div class="chips" role="group" aria-label="نوع اللعبة">
+        <button class="chip" data-mode="listen" aria-pressed="true">اسمع واختر</button>
+        <button class="chip" data-mode="first" aria-pressed="false">أول حرف</button>
+      </div>
+      <div class="dots" id="dots"></div>
+      <div id="playArea">
+        <div class="card prompt" id="prompt"></div>
+        <div class="choices" id="choices"></div>
+      </div>
+      <div class="card end" id="endArea" hidden>
+        <div class="endstars" id="endStars"></div>
+        <h2>أحسنت يا بطل!</h2>
+        <p>جمعت خمس نجوم جديدة</p>
+        <button class="btn" id="again" style="--b:var(--green);--bd:var(--green-dark)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg>
+          العب مرة أخرى
+        </button>
+      </div>
+    </section>
+
+    <section id="v-trace" class="view" hidden>
+      <div class="stepper">
+        <button class="round" id="prevT" aria-label="الحرف السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+        <button class="tlabel" id="tLabel"><span id="tLabelText"></span><span class="ico-spk"></span></button>
+        <button class="round" id="nextT" aria-label="الحرف التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      </div>
+      <div class="canvas-wrap" id="cWrap"><canvas id="cv" aria-label="لوحة الرسم: ارسم فوق الحرف بإصبعك"></canvas></div>
+      <div class="btnrow">
+        <button class="btn ghost" id="clearT">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h16"/><path d="M14.5 4.5l5 5-8.5 8.5H6l-2.5-2.5z"/></svg>
+          امسح
+        </button>
+        <button class="btn" id="doneT" style="--b:var(--green);--bd:var(--green-dark)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>
+          انتهيت
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs" aria-label="الأقسام">
+    <button class="tab" data-v="letters" style="--tc:var(--orange)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>
+      <span>الحروف</span>
+    </button>
+    <button class="tab" data-v="play" style="--tc:var(--green)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="7" width="19" height="11" rx="5.5"/><path d="M7.5 10.5v4M5.5 12.5h4"/><circle cx="15.5" cy="11.5" r="1.1" fill="currentColor" stroke="none"/><circle cx="18" cy="13.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+      <span>العب</span>
+    </button>
+    <button class="tab" data-v="trace" style="--tc:var(--pink)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 7l3 3"/></svg>
+      <span>ارسم</span>
+    </button>
+  </nav>
+  <div id="fx" aria-hidden="true"></div>
+</div>
+
+<script>
+(function(){
+  var L = [
+    {c:'ا', n:'ألف', w:'أرنب',  s:'أَرْنَب',  e:'🐰'},
+    {c:'ب', n:'باء', w:'بطة',   s:'بَطَّة',   e:'🦆'},
+    {c:'ت', n:'تاء', w:'تفاحة', s:'تُفَّاحَة', e:'🍎'},
+    {c:'ث', n:'ثاء', w:'ثعلب',  s:'ثَعْلَب',  e:'🦊'},
+    {c:'ج', n:'جيم', w:'جمل',   s:'جَمَل',    e:'🐫'},
+    {c:'ح', n:'حاء', w:'حصان',  s:'حِصَان',   e:'🐴'},
+    {c:'خ', n:'خاء', w:'خروف',  s:'خَرُوف',   e:'🐑'},
+    {c:'د', n:'دال', w:'دب',    s:'دُبّ',     e:'🐻'},
+    {c:'ذ', n:'ذال', w:'ذرة',   s:'ذُرَة',    e:'🌽'},
+    {c:'ر', n:'راء', w:'رسالة', s:'رِسَالَة', e:'✉️'},
+    {c:'ز', n:'زاي', w:'زرافة', s:'زَرَافَة', e:'🦒'},
+    {c:'س', n:'سين', w:'سمكة',  s:'سَمَكَة',  e:'🐟'},
+    {c:'ش', n:'شين', w:'شمس',   s:'شَمْس',    e:'☀️'},
+    {c:'ص', n:'صاد', w:'صاروخ', s:'صَارُوخ',  e:'🚀'},
+    {c:'ض', n:'ضاد', w:'ضفدع',  s:'ضِفْدَع',  e:'🐸'},
+    {c:'ط', n:'طاء', w:'طائرة', s:'طَائِرَة', e:'✈️'},
+    {c:'ظ', n:'ظاء', w:'ظبي',   s:'ظَبْي',    e:'🦌'},
+    {c:'ع', n:'عين', w:'عنب',   s:'عِنَب',    e:'🍇'},
+    {c:'غ', n:'غين', w:'غيمة',  s:'غَيْمَة',  e:'☁️'},
+    {c:'ف', n:'فاء', w:'فيل',   s:'فِيل',     e:'🐘'},
+    {c:'ق', n:'قاف', w:'قطة',   s:'قِطَّة',   e:'🐱'},
+    {c:'ك', n:'كاف', w:'كرة',   s:'كُرَة',    e:'⚽'},
+    {c:'ل', n:'لام', w:'ليمون', s:'لَيْمُون', e:'🍋'},
+    {c:'م', n:'ميم', w:'موز',   s:'مَوْز',    e:'🍌'},
+    {c:'ن', n:'نون', w:'نحلة',  s:'نَحْلَة',  e:'🐝'},
+    {c:'ه', n:'هاء', w:'هدية',  s:'هَدِيَّة', e:'🎁'},
+    {c:'و', n:'واو', w:'وردة',  s:'وَرْدَة',  e:'🌹'},
+    {c:'ي', n:'ياء', w:'يد',    s:'يَد',      e:'✋'}
+  ];
+  var COLORS = [['--orange','--orange-dark'],['--blue','--blue-dark'],['--green','--green-dark'],['--pink','--pink-dark'],['--purple','--purple-dark'],['--teal','--teal-dark']];
+  var NONCONN = 'اأإآدذرزو';
+  var PRAISE = ['أحسنت!','رائع!','ممتاز!','برافو!','شاطر!'];
+  var RETRY = ['حاول مرة أخرى','قريب! جرّب مرة ثانية'];
+  var SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
+  var STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
+
+  function $(id){ return document.getElementById(id); }
+  function fmt(n){ try { return n.toLocaleString('ar-IQ'); } catch(e){ return String(n); } }
+  function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
+  function shuffle(a){ for (var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
+  function colorVars(i){ var c = COLORS[i % COLORS.length]; return '--c:var(' + c[0] + ');--cd:var(' + c[1] + ')'; }
+  function SN(i){ return i === 0 ? 'أَلِف' : L[i].n; }
+  var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+  document.querySelectorAll('.ico-spk').forEach(function(s){ s.outerHTML = SPK; });
+
+  /* ---------- voice ---------- */
+  // Inside the Android/iPhone app: the phone's own speech engine through the TextToSpeech plugin.
+  // In a browser: the Web Speech API.
+  var Cap = window.Capacitor;
+  var isNative = !!(Cap && typeof Cap.isNativePlatform === 'function' && Cap.isNativePlatform());
+  var NTTS = (isNative && typeof Cap.registerPlugin === 'function') ? Cap.registerPlugin('TextToSpeech') : null;
+  var AppPlugin = (isNative && typeof Cap.registerPlugin === 'function') ? Cap.registerPlugin('App') : null;
+  var nativeLang = 'ar-SA';
+  var hasWebTTS = !NTTS && ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window);
+  var arVoice = null, voicesSeen = false;
+
+  function setNote(text, withInstall){
+    var n = $('voiceNote');
+    n.innerHTML = '';
+    var p = document.createElement('span'); p.textContent = text; n.appendChild(p);
+    if (withInstall){
+      var b = document.createElement('button');
+      b.className = 'btn'; b.textContent = 'تثبيت الصوت العربي';
+      b.addEventListener('click', function(){ NTTS.openInstall().catch(function(){}); });
+      n.appendChild(b);
+    }
+    n.hidden = false;
+  }
+  function updateWebNote(){
+    var n = $('voiceNote');
+    if (!hasWebTTS){ setNote('القراءة بالصوت غير متاحة في هذا المتصفح. جرّب كروم أو سفاري.'); return; }
+    if (voicesSeen && !arVoice) setNote('لم نجد صوتاً عربياً على هذا الجهاز، لذلك قد يكون النطق غير واضح. أضف اللغة العربية من إعدادات تحويل النص إلى كلام في الجهاز.');
+    else n.hidden = true;
+  }
+  function pickVoice(){
+    try {
+      var vs = speechSynthesis.getVoices() || [];
+      if (vs.length) voicesSeen = true;
+      arVoice = null;
+      for (var i=0;i<vs.length;i++){ if (/^ar([-_]|$)/i.test(vs[i].lang)){ arVoice = vs[i]; break; } }
+      updateWebNote();
+    } catch(e){}
+  }
+  function checkNativeVoice(){
+    NTTS.isLanguageSupported({ lang: 'ar-SA' }).then(function(r){
+      if (r && r.supported) return;
+      return NTTS.isLanguageSupported({ lang: 'ar' }).then(function(r2){
+        if (r2 && r2.supported) nativeLang = 'ar';
+        else setNote('الصوت العربي غير مثبّت على هذا الهاتف. اضغط الزر لتثبيته، ثم ارجع إلى التطبيق.', true);
+      });
+    }).catch(function(){});
+  }
+  if (NTTS) checkNativeVoice();
+  else if (hasWebTTS){
+    pickVoice();
+    try { speechSynthesis.addEventListener('voiceschanged', pickVoice); } catch(e){ speechSynthesis.onvoiceschanged = pickVoice; }
+  }
+
+  function say(parts){
+    parts = [].concat(parts);
+    if (NTTS){
+      parts.forEach(function(t, k){
+        NTTS.speak({ text: t, lang: nativeLang, rate: 0.85, pitch: 1.1, volume: 1.0, queueStrategy: k === 0 ? 0 : 1 }).catch(function(){});
+      });
+      return;
+    }
+    if (!hasWebTTS) return;
+    try {
+      speechSynthesis.cancel();
+      parts.forEach(function(t){
+        var u = new SpeechSynthesisUtterance(t);
+        u.lang = arVoice ? arVoice.lang : 'ar-SA';
+        if (arVoice) u.voice = arVoice;
+        u.rate = 0.82; u.pitch = 1.15;
+        speechSynthesis.speak(u);
+      });
+    } catch(e){}
+  }
+  function hush(){
+    if (NTTS) NTTS.stop().catch(function(){});
+    else if (hasWebTTS) try { speechSynthesis.cancel(); } catch(e){}
+  }
+
+  /* ---------- Zizo & stars ---------- */
+  var zEl = document.querySelector('.zizo'), bub = $('bubble');
+  zEl.addEventListener('animationend', function(e){ if (e.animationName === 'hop' || e.animationName === 'tilt') zEl.classList.remove('happy','sad'); });
+  function zizo(text, mood){
+    bub.textContent = text;
+    if (mood && !reduce){ zEl.classList.remove('happy','sad'); zEl.getBoundingClientRect(); zEl.classList.add(mood); }
+  }
+
+  var stars = 0;
+  try { stars = parseInt(localStorage.getItem('zizo-stars') || '0', 10) || 0; } catch(e){}
+  function renderStars(){ $('starCount').textContent = fmt(stars); }
+  function burst(){
+    if (reduce) return;
+    var fx = $('fx'), cols = ['var(--sun)','var(--orange)','var(--pink)','var(--green)','var(--blue)'];
+    for (var k=0;k<10;k++){
+      var s = document.createElement('span'); s.className = 'spark'; s.innerHTML = STAR;
+      var a = (Math.PI*2*k)/10 + Math.random()*0.4, d = 70 + Math.random()*60;
+      s.style.setProperty('--dx', (Math.cos(a)*d).toFixed(1) + 'px');
+      s.style.setProperty('--dy', (Math.sin(a)*d).toFixed(1) + 'px');
+      s.style.color = pick(cols);
+      fx.appendChild(s);
+      (function(el){ setTimeout(function(){ el.remove(); }, 950); })(s);
+    }
+  }
+  function addStar(){
+    stars++;
+    try { localStorage.setItem('zizo-stars', String(stars)); } catch(e){}
+    renderStars();
+    var p = $('starPill'); p.classList.remove('pop'); void p.offsetWidth; p.classList.add('pop');
+    burst();
+  }
+
+  /* ---------- words ---------- */
+  function wordInto(el, i, blank){
+    var w = L[i].w, f = w.charAt(0), rest = w.slice(1), joins = NONCONN.indexOf(f) === -1;
+    el.innerHTML = '';
+    var a = document.createElement('span');
+    a.className = blank ? 'blank' : 'first';
+    a.textContent = blank ? '؟' : f + (joins ? '‍' : '');
+    var b = document.createElement('span');
+    b.textContent = (joins ? '‍' : '') + rest;
+    el.appendChild(a); el.appendChild(b);
+  }
+
+  /* ---------- letters ---------- */
+  var grid = $('grid'), detail = $('detail'), cur = 0;
+  L.forEach(function(l, i){
+    var b = document.createElement('button');
+    b.className = 'tile'; b.textContent = l.c; b.style.cssText = colorVars(i);
+    b.setAttribute('aria-label', 'حرف ال' + l.n);
+    b.addEventListener('click', function(){ openLetter(i); });
+    grid.appendChild(b);
+  });
+  function openLetter(i, quiet){
+    cur = (i + L.length) % L.length;
+    var l = L[cur];
+    detail.style.cssText = colorVars(cur);
+    $('dLetter').textContent = l.c;
+    $('dName').textContent = 'حرف ال' + l.n;
+    $('dPic').textContent = l.e;
+    wordInto($('dWord'), cur, false);
+    $('dCount').textContent = fmt(cur + 1) + ' من ' + fmt(L.length);
+    grid.hidden = true; detail.hidden = false;
+    window.scrollTo(0, 0);
+    zizo(l.w + ' تبدأ بحرف ال' + l.n, 'happy');
+    if (!quiet) say([SN(cur), l.s]);
+  }
+  function backToGrid(){ grid.hidden = false; detail.hidden = true; zizo('اختر حرفاً لنتعلّمه معاً'); }
+  $('backBtn').addEventListener('click', backToGrid);
+  $('prevL').addEventListener('click', function(){ openLetter(cur - 1); });
+  $('nextL').addEventListener('click', function(){ openLetter(cur + 1); });
+  $('sayLetterBtn').addEventListener('click', function(){ say(SN(cur)); });
+  $('sayWordBtn').addEventListener('click', function(){ say(L[cur].s); });
+  $('toTrace').addEventListener('click', function(){ tIdx = cur; show('trace'); say(SN(cur)); });
+
+  /* ---------- play ---------- */
+  var ROUNDS = 5, mode = 'listen', round = 0, target = 0, last = -1, locked = false, nextTimer = null;
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.addEventListener('click', function(){
+      mode = c.dataset.mode;
+      document.querySelectorAll('.chip').forEach(function(x){ x.setAttribute('aria-pressed', String(x === c)); });
+      newGame();
+    });
+  });
+  function renderDots(){
+    var d = $('dots'); d.innerHTML = '';
+    for (var k=0;k<ROUNDS;k++){ var s = document.createElement('span'); s.className = 'dot' + (k < round ? ' done' : (k === round ? ' now' : '')); d.appendChild(s); }
+    d.setAttribute('aria-label', 'السؤال ' + fmt(Math.min(round + 1, ROUNDS)) + ' من ' + fmt(ROUNDS));
+  }
+  function ask(){ if (mode === 'listen') say('أَيْنَ حَرْفُ ال' + SN(target) + '؟'); else say(L[target].s); }
+  function newGame(){ clearTimeout(nextTimer); round = 0; $('endArea').hidden = true; $('playArea').hidden = false; nextRound(); }
+  function nextRound(){
+    if (round >= ROUNDS) return finish();
+    locked = false;
+    var t; do { t = Math.floor(Math.random()*L.length); } while (t === last);
+    last = target = t;
+    var opts = [t];
+    while (opts.length < 3){ var r = Math.floor(Math.random()*L.length); if (opts.indexOf(r) === -1) opts.push(r); }
+    shuffle(opts);
+    renderDots();
+    var p = $('prompt'); p.style.cssText = colorVars(t);
+    if (mode === 'listen'){
+      p.innerHTML = '<button class="speak-big" id="replay" aria-label="اسمع مرة أخرى">' + SPK + '</button><p class="ask">أين حرف ال' + L[t].n + '؟</p>';
+      zizo('اسمع، ثم اختر الحرف الصحيح');
+    } else {
+      p.innerHTML = '<div class="pic" aria-hidden="true">' + L[t].e + '</div><div class="word" id="pWord"></div><button class="btn ghost" id="replay">' + SPK + 'اسمع الكلمة</button>';
+      wordInto($('pWord'), t, true);
+      zizo('بأي حرف تبدأ هذه الكلمة؟');
+    }
+    $('replay').addEventListener('click', ask);
+    var ch = $('choices'); ch.innerHTML = '';
+    opts.forEach(function(o){
+      var b = document.createElement('button');
+      b.className = 'choice'; b.textContent = L[o].c;
+      b.setAttribute('aria-label', 'حرف ال' + L[o].n);
+      b.addEventListener('click', function(){ choose(o, b); });
+      ch.appendChild(b);
+    });
+    ask();
+  }
+  function choose(o, b){
+    if (locked) return;
+    if (o === target){
+      locked = true;
+      b.classList.add('right');
+      var pr = pick(PRAISE);
+      zizo(pr, 'happy'); addStar();
+      if (mode === 'first') wordInto($('pWord'), target, false);
+      say(mode === 'first' ? [pr, L[target].s] : pr);
+      round++; renderDots();
+      nextTimer = setTimeout(nextRound, 1500);
+    } else {
+      b.classList.add('wrong'); b.disabled = true;
+      var r = pick(RETRY); zizo(r, 'sad'); say(r);
+    }
+  }
+  function finish(){
+    $('playArea').hidden = true; $('endArea').hidden = false;
+    var h = ''; for (var k=0;k<ROUNDS;k++) h += '<span>' + STAR + '</span>';
+    $('endStars').innerHTML = h;
+    renderDots();
+    zizo('أحسنت يا بطل! جمعت خمس نجوم', 'happy');
+    say('أَحْسَنْتَ يَا بَطَل');
+    burst();
+  }
+  $('again').addEventListener('click', newGame);
+
+  /* ---------- trace ---------- */
+  var cv = $('cv'), ctx = cv.getContext('2d'), S = 300, lastW = 0, strokes = [], drawing = false, tIdx = 0, traceTimer = null;
+  function tok(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  function sizeCanvas(){
+    var w = $('cWrap').clientWidth;
+    if (!w || w === lastW) return;
+    lastW = w;
+    S = Math.min(w, 380);
+    var dpr = window.devicePixelRatio || 1;
+    cv.style.width = S + 'px'; cv.style.height = S + 'px';
+    cv.width = Math.round(S*dpr); cv.height = Math.round(S*dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    drawAll();
+  }
+  function drawAll(){
+    ctx.clearRect(0, 0, S, S);
+    var ch = L[tIdx].c;
+    ctx.save();
+    ctx.font = '700 ' + Math.round(S*0.6) + 'px "Noto Naskh Arabic", "Amiri", serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+    var m = ctx.measureText(ch);
+    var asc = m.actualBoundingBoxAscent || S*0.3, desc = m.actualBoundingBoxDescent || 0;
+    var left = m.actualBoundingBoxLeft || 0, right = m.actualBoundingBoxRight || 0;
+    var x = S/2 + (left - right)/2, y = S/2 + (asc - desc)/2;
+    ctx.fillStyle = tok('--guide'); ctx.fillText(ch, x, y);
+    ctx.setLineDash([7, 7]); ctx.lineWidth = 2.5; ctx.strokeStyle = tok('--guide-line'); ctx.strokeText(ch, x, y);
+    ctx.restore();
+    ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.lineWidth = Math.max(10, S*0.05); ctx.strokeStyle = tok('--orange');
+    strokes.forEach(function(s){
+      ctx.beginPath();
+      s.forEach(function(p, k){ if (k === 0) ctx.moveTo(p[0]*S, p[1]*S); else ctx.lineTo(p[0]*S, p[1]*S); });
+      if (s.length === 1) ctx.lineTo(s[0][0]*S + 0.1, s[0][1]*S);
+      ctx.stroke();
+    });
+  }
+  function pt(e){ var r = cv.getBoundingClientRect(); return [(e.clientX - r.left)/r.width, (e.clientY - r.top)/r.height]; }
+  cv.addEventListener('pointerdown', function(e){ e.preventDefault(); try { cv.setPointerCapture(e.pointerId); } catch(_){} drawing = true; strokes.push([pt(e)]); drawAll(); });
+  cv.addEventListener('pointermove', function(e){ if (!drawing) return; strokes[strokes.length-1].push(pt(e)); drawAll(); });
+  ['pointerup','pointercancel'].forEach(function(t){ cv.addEventListener(t, function(){ drawing = false; }); });
+  function setTrace(i, speak){
+    clearTimeout(traceTimer);
+    tIdx = (i + L.length) % L.length; strokes = [];
+    $('tLabelText').textContent = 'حرف ال' + L[tIdx].n;
+    drawAll();
+    zizo('ارسم حرف ال' + L[tIdx].n + ' بإصبعك فوق النقاط');
+    if (speak) say(SN(tIdx));
+  }
+  $('prevT').addEventListener('click', function(){ setTrace(tIdx - 1, true); });
+  $('nextT').addEventListener('click', function(){ setTrace(tIdx + 1, true); });
+  $('tLabel').addEventListener('click', function(){ say(SN(tIdx)); });
+  $('clearT').addEventListener('click', function(){ strokes = []; drawAll(); });
+  $('doneT').addEventListener('click', function(){
+    var n = strokes.reduce(function(a, s){ return a + s.length; }, 0);
+    if (n < 12){ zizo('ارسم فوق الحرف بإصبعك أولاً', 'sad'); say('ارْسُمْ فَوْقَ الحَرْف'); return; }
+    var pr = pick(PRAISE); addStar(); zizo(pr, 'happy'); say(pr);
+    traceTimer = setTimeout(function(){ setTrace(tIdx + 1, true); }, 1300);
+  });
+  if (window.ResizeObserver) new ResizeObserver(function(){ if (!$('v-trace').hidden) sizeCanvas(); }).observe($('cWrap'));
+  if (document.fonts && document.fonts.load){
+    document.fonts.load('700 100px "Noto Naskh Arabic"', 'بت').then(function(){ if (!$('v-trace').hidden) drawAll(); }).catch(function(){});
+  }
+
+  /* ---------- navigation ---------- */
+  var currentView = 'letters';
+  function show(v){
+    currentView = v;
+    clearTimeout(nextTimer); clearTimeout(traceTimer);
+    ['letters','play','trace'].forEach(function(k){ $('v-' + k).hidden = (k !== v); });
+    document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-current', t.dataset.v === v ? 'page' : 'false'); });
+    window.scrollTo(0, 0);
+    if (v === 'letters') backToGrid();
+    if (v === 'play') newGame();
+    if (v === 'trace'){ lastW = 0; sizeCanvas(); setTrace(tIdx, false); }
+  }
+  document.querySelectorAll('.tab').forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.v); }); });
+
+  // Android back button: close the letter card, then go back to the letters, then leave the app.
+  if (AppPlugin){
+    AppPlugin.addListener('backButton', function(){
+      if (currentView === 'letters' && !detail.hidden){ hush(); backToGrid(); }
+      else if (currentView !== 'letters'){ hush(); show('letters'); }
+      else AppPlugin.exitApp();
+    });
+    AppPlugin.addListener('pause', hush);
+  }
+
+  renderStars();
+  show('letters');
+  zizo('أهلاً! أنا زيزو الفيل. اضغط على أي حرف لنتعلّمه معاً');
+  if (hasWebTTS) setTimeout(updateWebNote, 1500);
+  else if (!NTTS) updateWebNote();
+})();
+</script>
+</body>
+</html>

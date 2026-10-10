@@ -1,0 +1,5 @@
+node_modules/
+android/
+out/
+.DS_Store
+signing/*.jks

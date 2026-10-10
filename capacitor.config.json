@@ -1,0 +1,14 @@
+{
+  "appId": "com.huroofzizo.app",
+  "appName": "حروف زيزو",
+  "webDir": "www",
+  "android": {
+    "backgroundColor": "#D8EDF6"
+  },
+  "plugins": {
+    "SystemBars": {
+      "insetsHandling": "native",
+      "style": "LIGHT"
+    }
+  }
+}
