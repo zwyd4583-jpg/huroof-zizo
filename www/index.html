@@ -21,6 +21,7 @@
   --teal:#159C97; --teal-dark:#0E7773;
   --sun:#F7C531; --sun-dark:#CD9C10;
   --guide:#FCE6EE; --guide-line:#E9A3BE;
+  --scrim:rgba(34,48,77,.5);
   --f-ui:"Baloo Bhaijaan 2","Tajawal","Segoe UI",Tahoma,sans-serif;
   --f-letter:"Noto Naskh Arabic","Amiri","Geeza Pro","Traditional Arabic",serif;
   color-scheme:light;
@@ -47,8 +48,10 @@ button:focus-visible{outline:3px solid var(--blue); outline-offset:3px}
 .brand{display:flex; align-items:center; justify-content:space-between; gap:12px}
 h1{margin:0; font-size:1.6rem; font-weight:800; line-height:1.2}
 h1 span{color:var(--orange)}
-.stars{display:inline-flex; align-items:center; gap:6px; background:var(--sun); color:var(--ink); font-weight:800; font-size:1.15rem; border-radius:999px; padding:4px 14px 4px 12px; box-shadow:0 3px 0 var(--sun-dark); font-variant-numeric:tabular-nums}
+.stars{display:inline-flex; align-items:center; gap:6px; border:0; font-family:inherit; background:var(--sun); color:var(--ink); font-weight:800; font-size:1.15rem; border-radius:999px; padding:4px 12px; box-shadow:0 3px 0 var(--sun-dark); font-variant-numeric:tabular-nums}
+.stars:active{transform:translateY(2px); box-shadow:0 1px 0 var(--sun-dark)}
 .stars svg{width:22px; height:22px; color:var(--white)}
+.stars svg.gift{width:20px; height:20px; color:var(--ink)}
 .stars.pop{animation:pop .45s ease}
 .host{display:flex; align-items:center; gap:12px; margin-top:8px}
 .zizo{width:84px; height:84px; flex:none; overflow:visible; transform-origin:50% 90%; animation:bob 3s ease-in-out infinite}
@@ -103,6 +106,32 @@ h1 span{color:var(--orange)}
 .countbox.small{max-width:300px; gap:8px}
 .countbox.small .obj{font-size:clamp(1.4rem,7vw,1.9rem)}
 
+/* Zizo's prizes */
+.wardrobe-top{display:flex; align-items:center; gap:14px; padding:16px}
+.zizo-big{width:128px; height:132px; flex:none; overflow:visible}
+.prog{flex:1; min-width:0; display:grid; gap:8px}
+.prog-title{margin:0; font-weight:800; font-size:1.2rem; line-height:1.4}
+.prog-next{margin:0; color:var(--ink-soft); font-weight:700; line-height:1.5}
+.bar{height:16px; border-radius:8px; background:var(--sky); overflow:hidden}
+.bar span{display:block; height:100%; width:0; background:var(--sun); border-radius:8px; transition:width .4s}
+.shelf-h{margin:6px 0 0; font-size:1.2rem; font-weight:800}
+.shelf{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
+.prize{position:relative; min-width:0; border:0; border-radius:20px; background:var(--paper); color:var(--ink); box-shadow:0 5px 0 var(--sky-dark); padding:10px 6px 10px; display:grid; justify-items:center; gap:4px; font-weight:800; font-size:.95rem; line-height:1.3}
+.prize:active{transform:translateY(3px); box-shadow:0 2px 0 var(--sky-dark)}
+.prize .mini{width:100%; max-width:84px; height:auto; aspect-ratio:120/124; overflow:visible}
+.prize[aria-pressed="true"]{box-shadow:0 0 0 4px var(--green), 0 5px 0 var(--green-dark)}
+.prize.locked .mini{filter:grayscale(1) opacity(.4)}
+.prize.locked .pname{color:var(--ink-soft)}
+.prize .lock{position:absolute; top:6px; inset-inline-start:6px; display:inline-flex; align-items:center; gap:3px; background:var(--sun); border-radius:999px; padding:1px 8px; font-size:.9rem; box-shadow:0 2px 0 var(--sun-dark); font-variant-numeric:tabular-nums}
+.prize .lock svg{width:13px; height:13px; color:var(--white)}
+.prize .tick{position:absolute; top:6px; inset-inline-end:6px; width:24px; height:24px; border-radius:50%; background:var(--green); color:var(--white); display:grid; place-items:center}
+.prize .tick svg{width:16px; height:16px}
+.endnext{margin:0 0 4px; color:var(--ink-soft); font-weight:700}
+.modal{position:fixed; inset:0; z-index:20; background:var(--scrim); display:grid; place-items:center; padding:16px}
+.modal-card{width:100%; max-width:340px; padding:22px 16px; display:grid; justify-items:center; gap:8px; text-align:center; animation:pop .45s ease}
+.modal-kicker{margin:0; color:var(--orange); font-weight:800; font-size:1.35rem}
+.modal-card h2{margin:0 0 6px; font-size:1.5rem; font-weight:800}
+
 /* play */
 .chips{display:flex; gap:6px; background:var(--paper); padding:6px; border-radius:999px; box-shadow:0 4px 0 var(--sky-dark)}
 .chip{flex:1; min-width:0; border:0; border-radius:999px; padding:9px 6px; background:transparent; color:var(--ink-soft); font-weight:800; font-size:1rem; white-space:nowrap}
@@ -143,7 +172,7 @@ h1 span{color:var(--orange)}
 .tab[aria-current="page"]{background:var(--tc); color:var(--white)}
 
 /* effects */
-#fx{position:fixed; left:50%; top:42%; width:0; height:0; pointer-events:none; z-index:10}
+#fx{position:fixed; left:50%; top:42%; width:0; height:0; pointer-events:none; z-index:30}
 .spark{position:absolute; width:30px; height:30px; margin:-15px; animation:spark .9s ease-out forwards}
 .spark svg{width:100%; height:100%}
 
@@ -163,10 +192,11 @@ h1 span{color:var(--orange)}
   <header>
     <div class="brand">
       <h1>حروف <span>زيزو</span></h1>
-      <div class="stars" id="starPill" aria-label="عدد النجوم">
+      <button class="stars" id="starPill" aria-label="جوائز زيزو">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>
         <span id="starCount">٠</span>
-      </div>
+        <svg class="gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="9" width="17" height="11.5" rx="2"/><path d="M3.5 13.5h17M12 9v11.5"/><path d="M12 9C10.5 5.5 6 5 6 7.5S10 9 12 9ZM12 9c1.5-3.5 6-4 6-1.5S14 9 12 9Z"/></svg>
+      </button>
     </div>
     <div class="host">
       <svg class="zizo" viewBox="0 0 120 120" aria-hidden="true">
@@ -269,11 +299,35 @@ h1 span{color:var(--orange)}
         <div class="endstars" id="endStars"></div>
         <h2>أحسنت يا بطل!</h2>
         <p>جمعت خمس نجوم جديدة</p>
-        <button class="btn" id="again" style="--b:var(--green);--bd:var(--green-dark)">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg>
-          العب مرة أخرى
-        </button>
+        <p class="endnext" id="endNext"></p>
+        <div class="btnrow">
+          <button class="btn" id="again" style="--b:var(--green);--bd:var(--green-dark)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.6"/><path d="M20 4v5h-5"/></svg>
+            العب مرة أخرى
+          </button>
+          <button class="btn" id="toRewards" style="--b:var(--sun);--bd:var(--sun-dark);color:var(--ink)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="9" width="17" height="11.5" rx="2"/><path d="M3.5 13.5h17M12 9v11.5"/><path d="M12 9C10.5 5.5 6 5 6 7.5S10 9 12 9ZM12 9c1.5-3.5 6-4 6-1.5S14 9 12 9Z"/></svg>
+            جوائز زيزو
+          </button>
+        </div>
       </div>
+    </section>
+
+    <section id="v-rewards" class="view" hidden>
+      <div class="card wardrobe-top">
+        <svg class="zizo-big" id="bigZizo" viewBox="0 -4 120 124" aria-hidden="true"></svg>
+        <div class="prog">
+          <p class="prog-title" id="progTitle"></p>
+          <div class="bar" aria-hidden="true"><span id="progBar"></span></div>
+          <p class="prog-next" id="progNext"></p>
+        </div>
+      </div>
+      <h2 class="shelf-h">القبعات</h2>
+      <div class="shelf" id="shelf-hat"></div>
+      <h2 class="shelf-h">الأوشحة</h2>
+      <div class="shelf" id="shelf-scarf"></div>
+      <h2 class="shelf-h">الإضافات</h2>
+      <div class="shelf" id="shelf-extra"></div>
     </section>
 
     <section id="v-trace" class="view" hidden>
@@ -319,6 +373,17 @@ h1 span{color:var(--orange)}
     </button>
   </nav>
   <div id="fx" aria-hidden="true"></div>
+  <div class="modal" id="prizeModal" role="dialog" aria-modal="true" aria-labelledby="prizeTitle" hidden>
+    <div class="card modal-card">
+      <p class="modal-kicker">جائزة جديدة!</p>
+      <svg class="zizo-big" id="prizeZizo" viewBox="0 -4 120 124" aria-hidden="true"></svg>
+      <h2 id="prizeTitle"></h2>
+      <div class="btnrow">
+        <button class="btn" id="wearPrize" style="--b:var(--green);--bd:var(--green-dark)">جرّبها على زيزو</button>
+        <button class="btn ghost" id="laterPrize">لاحقاً</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- Capacitor's JavaScript runtime (copied in by scripts/prepare-android.sh). It provides registerPlugin, which the voice needs. -->
@@ -517,7 +582,196 @@ h1 span{color:var(--orange)}
     renderStars();
     var p = $('starPill'); p.classList.remove('pop'); void p.offsetWidth; p.classList.add('pop');
     burst();
+    for (var k = 0; k < PRIZES.length; k++){
+      if (PRIZES[k].at === stars){ var won = PRIZES[k]; setTimeout(function(){ showPrize(won); }, 700); break; }
+    }
   }
+
+  /* ---------- Zizo's prizes ---------- */
+  // Every star counts toward the next prize. Prizes stay won; the child chooses what Zizo wears.
+  var PRIZES = [
+    {id:'cap',     slot:'hat',   name:'القبعة الصوفية',     at:0},
+    {id:'orange',  slot:'scarf', name:'الوشاح البرتقالي',   at:0},
+    {id:'none',    slot:'extra', name:'بدون إضافة',         at:0},
+    {id:'crown',   slot:'hat',   name:'التاج الذهبي',       at:3},
+    {id:'blue',    slot:'scarf', name:'الوشاح الأزرق',      at:6},
+    {id:'party',   slot:'hat',   name:'قبعة الحفلة',        at:10},
+    {id:'glasses', slot:'extra', name:'النظارة',            at:15},
+    {id:'green',   slot:'scarf', name:'الوشاح الأخضر',      at:20},
+    {id:'grad',    slot:'hat',   name:'قبعة التخرج',        at:25},
+    {id:'flower',  slot:'extra', name:'الوردة',             at:30},
+    {id:'pink',    slot:'scarf', name:'الوشاح الوردي',      at:40},
+    {id:'sparkle', slot:'extra', name:'النجوم اللامعة',     at:45},
+    {id:'chef',    slot:'hat',   name:'قبعة الطبّاخ',       at:50},
+    {id:'medal',   slot:'extra', name:'الميدالية الذهبية',  at:60},
+    {id:'purple',  slot:'scarf', name:'الوشاح البنفسجي',    at:75},
+    {id:'teal',    slot:'scarf', name:'الوشاح الفيروزي',    at:85},
+    {id:'wizard',  slot:'hat',   name:'قبعة الساحر',        at:90},
+    {id:'shades',  slot:'extra', name:'النظارة الشمسية',    at:100}
+  ];
+  var SCARF = { orange:['--orange','--orange-dark'], blue:['--blue','--blue-dark'], green:['--green','--green-dark'],
+                pink:['--pink','--pink-dark'], purple:['--purple','--purple-dark'], teal:['--teal','--teal-dark'] };
+  function prizeById(id){ for (var k = 0; k < PRIZES.length; k++) if (PRIZES[k].id === id) return PRIZES[k]; return null; }
+  function isWon(p){ return stars >= p.at; }
+
+  var outfit = { hat:'cap', scarf:'orange', extra:'none' };
+  try {
+    var savedOutfit = JSON.parse(localStorage.getItem('zizo-outfit') || 'null');
+    if (savedOutfit) ['hat','scarf','extra'].forEach(function(s){ var p = prizeById(savedOutfit[s]); if (p && p.slot === s) outfit[s] = p.id; });
+  } catch(e){}
+  function saveOutfit(){ try { localStorage.setItem('zizo-outfit', JSON.stringify(outfit)); } catch(e){} }
+
+  function starShape(cx, cy, r){
+    var pts = [];
+    for (var k = 0; k < 10; k++){
+      var a = -Math.PI/2 + k*Math.PI/5, rr = (k % 2) ? r*0.45 : r;
+      pts.push((cx + rr*Math.cos(a)).toFixed(1) + ' ' + (cy + rr*Math.sin(a)).toFixed(1));
+    }
+    return '<path d="M' + pts.join(' L') + 'Z" fill="var(--sun)" stroke="var(--sun-dark)" stroke-width="1" stroke-linejoin="round"/>';
+  }
+  // Zizo's drawing (viewBox 0 0 120 120) wearing outfit o
+  function zizoMarkup(o){
+    var sc = SCARF[o.scarf] || SCARF.orange, s1 = 'var(' + sc[0] + ')', s2 = 'var(' + sc[1] + ')';
+    var h = '';
+    if (o.extra === 'sparkle') h += starShape(13, 22, 7) + starShape(107, 17, 6) + starShape(111, 98, 5);
+    h += '<g class="ear"><ellipse cx="95" cy="60" rx="22" ry="27" fill="var(--zizo-dark)"/><ellipse cx="96" cy="61" rx="13" ry="17" fill="var(--blush)"/></g>' +
+         '<g class="ear"><ellipse cx="25" cy="60" rx="22" ry="27" fill="var(--zizo-dark)"/><ellipse cx="24" cy="61" rx="13" ry="17" fill="var(--blush)"/></g>' +
+         '<circle cx="60" cy="60" r="33" fill="var(--zizo)"/>' +
+         '<rect x="31" y="86" width="58" height="13" rx="6.5" fill="' + s1 + '"/>' +
+         '<path d="M37 89v7M43 89v7M49 89v7M71 89v7M77 89v7M83 89v7" fill="none" stroke="' + s2 + '" stroke-width="2" stroke-linecap="round"/>' +
+         '<rect x="68" y="93" width="12" height="22" rx="4" fill="' + s1 + '" transform="rotate(-14 74 104)"/>' +
+         '<path d="M70 110h10" fill="none" stroke="' + s2 + '" stroke-width="2" stroke-linecap="round" transform="rotate(-14 74 104)"/>' +
+         '<path d="M60 66 C59 84 62 95 74 97" fill="none" stroke="var(--zizo)" stroke-width="13" stroke-linecap="round"/>' +
+         '<path d="M55 79h9M56 86h8" fill="none" stroke="var(--zizo-dark)" stroke-width="2" stroke-linecap="round"/>' +
+         '<ellipse cx="40" cy="69" rx="6" ry="3.5" fill="var(--blush)"/><ellipse cx="80" cy="69" rx="6" ry="3.5" fill="var(--blush)"/>' +
+         '<circle cx="47" cy="57" r="5.5" fill="var(--ink)"/><circle cx="73" cy="57" r="5.5" fill="var(--ink)"/>' +
+         '<circle cx="49" cy="55" r="1.8" fill="var(--white)"/><circle cx="75" cy="55" r="1.8" fill="var(--white)"/>' +
+         '<path d="M45 74q5 5 10 1" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/>';
+    if (o.extra === 'medal') h +=
+         '<path d="M43 97 L48 106 L53 97 Z" fill="var(--blue)"/>' +
+         '<circle cx="48" cy="108" r="7.5" fill="var(--sun)" stroke="var(--sun-dark)" stroke-width="2"/>' + starShape(48, 108, 3.6).replace('var(--sun)', 'var(--white)');
+    if (o.extra === 'glasses') h +=
+         '<circle cx="47" cy="57" r="9" fill="none" stroke="var(--ink)" stroke-width="2.4"/><circle cx="73" cy="57" r="9" fill="none" stroke="var(--ink)" stroke-width="2.4"/>' +
+         '<path d="M56 56 Q60 53 64 56" fill="none" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round"/>';
+    if (o.extra === 'shades') h +=
+         '<rect x="36" y="50" width="21" height="14" rx="6" fill="var(--ink)"/><rect x="63" y="50" width="21" height="14" rx="6" fill="var(--ink)"/>' +
+         '<path d="M57 55 H63" fill="none" stroke="var(--ink)" stroke-width="2.6"/>' +
+         '<path d="M40 54 l6 0 M67 54 l6 0" fill="none" stroke="var(--white)" stroke-width="2" stroke-linecap="round" opacity=".7"/>';
+    if (o.extra === 'flower') h +=
+         '<circle cx="21" cy="34" r="4.6" fill="var(--pink)"/><circle cx="26.7" cy="38.1" r="4.6" fill="var(--pink)"/><circle cx="24.5" cy="44.8" r="4.6" fill="var(--pink)"/>' +
+         '<circle cx="17.5" cy="44.8" r="4.6" fill="var(--pink)"/><circle cx="15.3" cy="38.1" r="4.6" fill="var(--pink)"/><circle cx="21" cy="40" r="3.4" fill="var(--sun)"/>';
+    switch (o.hat){
+      case 'crown': h +=
+         '<path d="M38 39 L39 17 L50 28 L60 12 L70 28 L81 17 L82 39 Z" fill="var(--sun)" stroke="var(--sun-dark)" stroke-width="2" stroke-linejoin="round"/>' +
+         '<rect x="36" y="35" width="48" height="7" rx="3.5" fill="var(--sun-dark)"/>' +
+         '<circle cx="60" cy="25" r="3.2" fill="var(--pink)"/><circle cx="47" cy="30" r="2.4" fill="var(--blue)"/><circle cx="73" cy="30" r="2.4" fill="var(--green)"/>';
+        break;
+      case 'party': h +=
+         '<path d="M60 4 L75 38 L45 38 Z" fill="var(--pink)"/>' +
+         '<path d="M55 16 H65 M50.5 27 H69.5" fill="none" stroke="var(--sun)" stroke-width="3.2" stroke-linecap="round"/>' +
+         '<ellipse cx="60" cy="38" rx="17" ry="3.8" fill="var(--pink-dark)"/><circle cx="60" cy="5" r="5" fill="var(--sun)"/>';
+        break;
+      case 'grad': h +=
+         '<path d="M44 29 H76 V38 Q60 44 44 38 Z" fill="var(--ink)"/>' +
+         '<path d="M60 13 L93 25 L60 37 L27 25 Z" fill="var(--ink)"/>' +
+         '<path d="M60 25 L85 29 L85 41" fill="none" stroke="var(--sun)" stroke-width="2.2" stroke-linecap="round"/>' +
+         '<circle cx="60" cy="25" r="2.6" fill="var(--sun)"/><circle cx="85" cy="43.5" r="3.4" fill="var(--sun)"/>';
+        break;
+      case 'chef': h +=
+         '<circle cx="47" cy="22" r="10" fill="var(--white)" stroke="var(--zizo-dark)" stroke-width="1.5"/>' +
+         '<circle cx="73" cy="22" r="10" fill="var(--white)" stroke="var(--zizo-dark)" stroke-width="1.5"/>' +
+         '<circle cx="60" cy="15" r="12" fill="var(--white)" stroke="var(--zizo-dark)" stroke-width="1.5"/>' +
+         '<rect x="41" y="24" width="38" height="16" rx="3" fill="var(--white)" stroke="var(--zizo-dark)" stroke-width="1.5"/>' +
+         '<path d="M50 28v8M60 28v8M70 28v8" fill="none" stroke="var(--sky-dark)" stroke-width="1.6" stroke-linecap="round"/>';
+        break;
+      case 'wizard': h +=
+         '<path d="M60 -2 C64 11 72 25 79 38 L41 38 C48 25 56 11 60 -2 Z" fill="var(--purple)"/>' +
+         '<ellipse cx="60" cy="38" rx="25" ry="5" fill="var(--purple-dark)"/>' +
+         starShape(57, 20, 4.5) + starShape(66, 30, 3.5);
+        break;
+      default: h +=
+         '<path d="M36 41C37 19 83 19 84 41Z" fill="' + s1 + '"/>' +
+         '<rect x="33" y="36" width="54" height="9" rx="4.5" fill="' + s2 + '"/>' +
+         '<circle cx="60" cy="20" r="6.5" fill="' + s2 + '"/>';
+    }
+    return h;
+  }
+  function renderZizo(){ zEl.innerHTML = zizoMarkup(outfit); }
+
+  function starsText(n){
+    if (n === 1) return 'نجمة واحدة';
+    if (n === 2) return 'نجمتان';
+    if (n <= 10) return fmt(n) + ' نجوم';
+    return fmt(n) + ' نجمة';
+  }
+  function nextPrize(){ for (var k = 0; k < PRIZES.length; k++) if (PRIZES[k].at > stars) return PRIZES[k]; return null; }
+  function nextPrizeText(){
+    var np = nextPrize();
+    return np ? 'باقي ' + starsText(np.at - stars) + ' لتربح ' + np.name : 'ربحت كل الجوائز! أنت بطل';
+  }
+
+  var LOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
+  var TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
+  function renderRewards(){
+    $('bigZizo').innerHTML = zizoMarkup(outfit);
+    $('progTitle').textContent = stars ? 'معك ' + starsText(stars) : 'اجمع النجوم لتربح جوائز لزيزو';
+    var np = nextPrize(), prevAt = 0;
+    PRIZES.forEach(function(p){ if (p.at <= stars && p.at > prevAt) prevAt = p.at; });
+    $('progBar').style.width = np ? Math.round(100 * (stars - prevAt) / (np.at - prevAt)) + '%' : '100%';
+    $('progNext').textContent = nextPrizeText();
+    ['hat','scarf','extra'].forEach(function(slot){
+      var shelf = $('shelf-' + slot); shelf.innerHTML = '';
+      PRIZES.forEach(function(p){
+        if (p.slot !== slot) return;
+        var won = isWon(p), worn = outfit[slot] === p.id;
+        var look = { hat: outfit.hat, scarf: outfit.scarf, extra: outfit.extra }; look[slot] = p.id;
+        var b = document.createElement('button');
+        b.className = 'prize' + (won ? '' : ' locked');
+        b.setAttribute('aria-pressed', String(worn));
+        b.setAttribute('aria-label', p.name + (won ? '' : '، تفتح عند ' + starsText(p.at)));
+        b.innerHTML = '<svg class="mini" viewBox="0 -4 120 124" aria-hidden="true">' + zizoMarkup(look) + '</svg>' +
+          '<span class="pname"></span>' +
+          (won ? (worn ? '<span class="tick">' + TICK + '</span>' : '') : '<span class="lock">' + LOCK + fmt(p.at) + '</span>');
+        b.querySelector('.pname').textContent = p.name;
+        b.addEventListener('click', function(){ wear(p); });
+        shelf.appendChild(b);
+      });
+    });
+  }
+  function wear(p){
+    if (!isWon(p)){
+      zizo('اجمع ' + starsText(p.at) + ' لتفتح ' + p.name + '. ' + nextPrizeText(), 'sad');
+      say('اِجْمَعْ نُجُوماً أَكْثَر');
+      return;
+    }
+    outfit[p.slot] = p.id; saveOutfit(); renderZizo();
+    if (!$('v-rewards').hidden) renderRewards();
+    zizo('شكراً! أعجبني ' + p.name, 'happy');
+    say('شُكْراً!');
+  }
+
+  // New prize popup. Games wait for it to close before moving on.
+  var shownPrize = null, afterPrize = null;
+  function prizeOpen(){ return !$('prizeModal').hidden; }
+  function whenNoPrize(fn){ if (prizeOpen()) afterPrize = fn; else fn(); }
+  function showPrize(p){
+    shownPrize = p;
+    var look = { hat: outfit.hat, scarf: outfit.scarf, extra: outfit.extra }; look[p.slot] = p.id;
+    $('prizeZizo').innerHTML = zizoMarkup(look);
+    $('prizeTitle').textContent = p.name;
+    $('prizeModal').hidden = false;
+    $('wearPrize').focus();
+    burst();
+    say('مَبْرُوك! رَبِحْتَ جائِزَةً جَدِيدَة');
+  }
+  function closePrize(){
+    $('prizeModal').hidden = true;
+    var fn = afterPrize; afterPrize = null;
+    if (fn) setTimeout(fn, 300);
+  }
+  $('wearPrize').addEventListener('click', function(){ var p = shownPrize; closePrize(); if (p) wear(p); });
+  $('laterPrize').addEventListener('click', closePrize);
+  $('starPill').addEventListener('click', function(){ show('rewards'); });
 
   /* ---------- words ---------- */
   function wordInto(el, i, blank){
@@ -708,7 +962,7 @@ h1 span{color:var(--orange)}
       if (mode === 'first') wordInto($('pWord'), target, false);
       say(mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] : pr);
       round++; renderDots();
-      nextTimer = setTimeout(nextRound, 1500);
+      nextTimer = setTimeout(function(){ whenNoPrize(nextRound); }, 1500);
     } else {
       b.classList.add('wrong'); b.disabled = true;
       var r = pick(RETRY); zizo(r, 'sad'); say(r);
@@ -718,12 +972,14 @@ h1 span{color:var(--orange)}
     $('playArea').hidden = true; $('endArea').hidden = false;
     var h = ''; for (var k=0;k<ROUNDS;k++) h += '<span>' + STAR + '</span>';
     $('endStars').innerHTML = h;
+    $('endNext').textContent = nextPrizeText();
     renderDots();
     zizo('أحسنت يا بطل! جمعت خمس نجوم', 'happy');
     say('أَحْسَنْتَ يَا بَطَل');
     burst();
   }
   $('again').addEventListener('click', newGame);
+  $('toRewards').addEventListener('click', function(){ show('rewards'); });
 
   /* ---------- trace ---------- */
   var cv = $('cv'), ctx = cv.getContext('2d'), S = 300, lastW = 0, strokes = [], drawing = false, tIdx = 0, traceTimer = null;
@@ -807,7 +1063,7 @@ h1 span{color:var(--orange)}
       return;
     }
     var pr = pick(PRAISE); addStar(); zizo(pr, 'happy'); say(pr);
-    traceTimer = setTimeout(function(){ setTrace(tIdx + 1, true); }, 1300);
+    traceTimer = setTimeout(function(){ whenNoPrize(function(){ setTrace(tIdx + 1, true); }); }, 1300);
   });
   if (window.ResizeObserver) new ResizeObserver(function(){ if (!$('v-trace').hidden) sizeCanvas(); }).observe($('cWrap'));
   if (document.fonts && document.fonts.load){
@@ -819,11 +1075,13 @@ h1 span{color:var(--orange)}
   function show(v){
     currentView = v;
     clearTimeout(nextTimer); clearTimeout(traceTimer); stopAutoCount();
-    ['letters','numbers','play','trace'].forEach(function(k){ $('v-' + k).hidden = (k !== v); });
+    afterPrize = null;
+    ['letters','numbers','play','trace','rewards'].forEach(function(k){ $('v-' + k).hidden = (k !== v); });
     document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-current', t.dataset.v === v ? 'page' : 'false'); });
     window.scrollTo(0, 0);
     if (v === 'letters') backToGrid();
     if (v === 'numbers') backToNumbers();
+    if (v === 'rewards'){ renderRewards(); zizo('اختر ما يلبسه زيزو! كل نجمة تقرّبك من جائزة جديدة'); }
     if (v === 'play') newGame();
     if (v === 'trace'){ lastW = 0; sizeCanvas(); setTrace(tIdx, false); }
   }
@@ -832,6 +1090,7 @@ h1 span{color:var(--orange)}
   // Android back button: close the letter card, then go back to the letters, then leave the app.
   if (AppPlugin){
     AppPlugin.addListener('backButton', function(){
+      if (prizeOpen()){ closePrize(); return; }
       if (currentView === 'letters' && !detail.hidden){ hush(); backToGrid(); }
       else if (currentView === 'numbers' && !ndetail.hidden){ hush(); backToNumbers(); }
       else if (currentView !== 'letters'){ hush(); show('letters'); }
@@ -841,6 +1100,7 @@ h1 span{color:var(--orange)}
   }
 
   renderStars();
+  renderZizo();
   show('letters');
   zizo('أهلاً! أنا زيزو الفيل. اضغط على أي حرف لنتعلّمه معاً');
   if (hasWebTTS) setTimeout(updateWebNote, 1500);
