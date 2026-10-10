@@ -1308,18 +1308,70 @@ h1 span{color:var(--orange)}
     }
     return img;
   }
-  function traceScore(){
-    var glyph = centreLine(glyphCells(0)), glyphNear = glyphCells(S*0.07);
-    var ink = inkCells(inkWidth()), inkNear = inkCells(inkWidth() + S*0.07);
-    var gAll = 0, gHit = 0, iAll = 0, iIn = 0;
-    for (var i = 0; i < glyph.length; i++){
-      if (glyph[i]){ gAll++; if (inkNear[i]) gHit++; }
-      if (ink[i]){ iAll++; if (glyphNear[i]) iIn++; }
+  function cellList(arr){ var out = []; for (var i = 0; i < arr.length; i++) if (arr[i]) out.push([i % GRID, (i / GRID) | 0]); return out; }
+  // Distance (in grid cells) from every cell of the grid to the nearest of the given points
+  function distMap(points){
+    var d = new Float32Array(GRID * GRID);
+    for (var y = 0; y < GRID; y++) for (var x = 0; x < GRID; x++){
+      var best = 1e9;
+      for (var k = 0; k < points.length; k++){ var dx = points[k][0] - x, dy = points[k][1] - y, v = dx*dx + dy*dy; if (v < best) best = v; }
+      d[y*GRID + x] = Math.sqrt(best);
     }
-    return { cover: gAll ? gHit / gAll : 0, inside: iAll ? iIn / iAll : 0 };
+    return d;
   }
-  var TRACE_COVER = 0.8, TRACE_INSIDE = 0.7;
-  function pt(e){ var r = cv.getBoundingClientRect(); return [(e.clientX - r.left)/r.width, (e.clientY - r.top)/r.height]; }
+  function distAt(map, x, y){ x = Math.round(x); y = Math.round(y); return (x < 0 || y < 0 || x >= GRID || y >= GRID) ? 1e9 : map[y*GRID + x]; }
+  // The letter's dots (and kaf's small mark): pieces much smaller than the main body
+  function dotPieces(fill){
+    var seen = new Uint8Array(GRID * GRID), pieces = [];
+    for (var i = 0; i < fill.length; i++){
+      if (!fill[i] || seen[i]) continue;
+      var stack = [i], cells = []; seen[i] = 1;
+      while (stack.length){
+        var c = stack.pop(), cx = c % GRID, cy = (c / GRID) | 0; cells.push([cx, cy]);
+        for (var oy = -1; oy <= 1; oy++) for (var ox = -1; ox <= 1; ox++){
+          var nx = cx + ox, ny = cy + oy;
+          if (nx < 0 || ny < 0 || nx >= GRID || ny >= GRID) continue;
+          var j = ny*GRID + nx; if (fill[j] && !seen[j]){ seen[j] = 1; stack.push(j); }
+        }
+      }
+      pieces.push(cells);
+    }
+    var big = 0; pieces.forEach(function(p){ big = Math.max(big, p.length); });
+    return pieces.filter(function(p){ return p.length < 0.35 * big; });
+  }
+  // How well the drawing follows the letter. The drawing may sit up to 2 cells off the dots;
+  // after lining it up, 90% of the letter's centre line needs a line near it, 90% of what was
+  // drawn must lie near the centre line, and each dot needs its own small tap or stroke.
+  var TRACE_R_COVER = 2.2, TRACE_R_INSIDE = 2.4, TRACE_COVER = 0.9, TRACE_INSIDE = 0.9, TRACE_DOT_R = 2.5;
+  var SHIFTS = [];
+  for (var sdx = -2; sdx <= 2; sdx++) for (var sdy = -2; sdy <= 2; sdy++) if (sdx*sdx + sdy*sdy <= 5) SHIFTS.push([sdx, sdy]);
+  function traceScore(){
+    var fill = glyphCells(0), line = cellList(centreLine(fill)), ink = cellList(inkCells(inkWidth()));
+    var dots = dotPieces(fill);
+    if (!line.length || !ink.length) return { cover: 0, inside: 0, dots: !dots.length };
+    var dLine = distMap(line), dInk = distMap(ink);
+    var dDots = dots.map(distMap);
+    // The body is judged on its own; the dots have their own rule below
+    var bodyLine = line.filter(function(p){ return dDots.every(function(dm){ return distAt(dm, p[0], p[1]) > 1.5; }); });
+    if (bodyLine.length) line = bodyLine;
+    var taps = strokes.map(function(s){ return s.map(function(p){ return [p[0]*GRID, p[1]*GRID]; }); }).filter(function(s){
+      var xs = s.map(function(p){ return p[0]; }), ys = s.map(function(p){ return p[1]; });
+      return Math.max.apply(null, xs) - Math.min.apply(null, xs) <= 7 && Math.max.apply(null, ys) - Math.min.apply(null, ys) <= 7;
+    });
+    var best = null;
+    SHIFTS.forEach(function(sh){
+      var inn = 0, hit = 0;
+      ink.forEach(function(p){ if (distAt(dLine, p[0] + sh[0], p[1] + sh[1]) <= TRACE_R_INSIDE) inn++; });
+      line.forEach(function(p){ if (distAt(dInk, p[0] - sh[0], p[1] - sh[1]) <= TRACE_R_COVER) hit++; });
+      var r = { cover: hit / line.length, inside: inn / ink.length };
+      r.dots = dDots.every(function(dm){
+        return taps.some(function(s){ return s.some(function(p){ return distAt(dm, p[0] + sh[0], p[1] + sh[1]) <= TRACE_DOT_R; }); });
+      });
+      r.rank = Math.min(r.cover / TRACE_COVER, r.inside / TRACE_INSIDE, 1) + (r.dots ? 0.001 : 0);
+      if (!best || r.rank > best.rank) best = r;
+    });
+    return best;
+  }  function pt(e){ var r = cv.getBoundingClientRect(); return [(e.clientX - r.left)/r.width, (e.clientY - r.top)/r.height]; }
   cv.addEventListener('pointerdown', function(e){
     e.preventDefault();
     if (traceDone) return;
@@ -1353,17 +1405,30 @@ h1 span{color:var(--orange)}
       return;
     }
     var sc = traceScore();
+    var what = isNum ? 'الرقم' : 'الحرف';
     if (sc.inside < TRACE_INSIDE){
-      // Too much drawing away from the letter: start again on the dots
+      // Drawing that doesn't follow the letter's shape: clear it and try again on the dots
       strokes = []; drawAll();
-      zizo(isNum ? 'خرجت بعيداً عن الرقم. ارسم فوق النقاط فقط' : 'خرجت بعيداً عن الحرف. ارسم فوق النقاط فقط', 'sad');
-      say('ارْسُمْ فَوْقَ النِّقاطِ فَقَط');
+      if (sc.inside < 0.6){
+        zizo('خرجت بعيداً عن ' + what + '. ارسم فوق النقاط فقط', 'sad');
+        say('ارْسُمْ فَوْقَ النِّقاطِ فَقَط');
+      } else {
+        zizo('قريب! هذا ليس شكل ' + what + '. ارسم بهدوء فوق النقاط', 'sad');
+        say('ارْسُمْ بِهُدُوءٍ فَوْقَ النِّقاط');
+      }
       return;
     }
     if (sc.cover < TRACE_COVER){
       // On the letter but not finished: keep what they drew and let them complete it
-      zizo(isNum ? 'أحسنت البداية! أكمل رسم الرقم كله' : 'أحسنت البداية! أكمل رسم الحرف كله', 'sad');
+      zizo('أحسنت البداية! أكمل رسم ' + what + ' كله', 'sad');
       say(isNum ? 'أَكْمِلْ رَسْمَ الرَّقْمِ كُلِّه' : 'أَكْمِلْ رَسْمَ الحَرْفِ كُلِّه');
+      return;
+    }
+    if (!sc.dots){
+      // Dots tell letters apart (ب ت ث), so they count
+      var many = !isNum && 'تثشقي'.indexOf(L[tIdx].c) !== -1, kaf = !isNum && L[tIdx].c === 'ك';
+      zizo(kaf ? 'رائع! لا تنسَ الرسمة الصغيرة داخل الكاف' : many ? 'رائع! لا تنسَ النقاط' : 'رائع! لا تنسَ النقطة', 'sad');
+      say(kaf ? 'لا تَنْسَ الرَّسْمَةَ الصَّغِيرَة' : many ? 'لا تَنْسَ النِّقاط' : 'لا تَنْسَ النُّقْطَة');
       return;
     }
     traceDone = true; drawAll();
