@@ -1227,36 +1227,111 @@ h1 span{color:var(--orange)}
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     drawAll();
   }
+  // Where the guide letter sits, in canvas units (S x S). Shared by the drawing and by the check.
+  function placeGlyph(c, ch){
+    c.font = '700 ' + Math.round(S*0.6) + 'px "Noto Naskh Arabic", "Amiri", serif';
+    c.textAlign = 'center'; c.textBaseline = 'alphabetic';
+    var m = c.measureText(ch);
+    var asc = m.actualBoundingBoxAscent || S*0.3, desc = m.actualBoundingBoxDescent || 0;
+    var left = m.actualBoundingBoxLeft || 0, right = m.actualBoundingBoxRight || 0;
+    return { x: S/2 + (left - right)/2, y: S/2 + (asc - desc)/2 };
+  }
+  function inkWidth(){ return Math.max(10, S*0.05); }
+  function strokePaths(c){
+    strokes.forEach(function(s){
+      c.beginPath();
+      s.forEach(function(p, k){ if (k === 0) c.moveTo(p[0]*S, p[1]*S); else c.lineTo(p[0]*S, p[1]*S); });
+      if (s.length === 1) c.lineTo(s[0][0]*S + 0.1, s[0][1]*S);
+      c.stroke();
+    });
+  }
+  var traceDone = false;
   function drawAll(){
     ctx.clearRect(0, 0, S, S);
     var ch = tChar(tIdx);
     ctx.save();
-    ctx.font = '700 ' + Math.round(S*0.6) + 'px "Noto Naskh Arabic", "Amiri", serif';
-    ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-    var m = ctx.measureText(ch);
-    var asc = m.actualBoundingBoxAscent || S*0.3, desc = m.actualBoundingBoxDescent || 0;
-    var left = m.actualBoundingBoxLeft || 0, right = m.actualBoundingBoxRight || 0;
-    var x = S/2 + (left - right)/2, y = S/2 + (asc - desc)/2;
-    ctx.fillStyle = tok('--guide'); ctx.fillText(ch, x, y);
-    ctx.setLineDash([7, 7]); ctx.lineWidth = 2.5; ctx.strokeStyle = tok('--guide-line'); ctx.strokeText(ch, x, y);
+    var g = placeGlyph(ctx, ch);
+    ctx.fillStyle = tok(traceDone ? '--green' : '--guide');
+    if (traceDone) ctx.globalAlpha = 0.35;
+    ctx.fillText(ch, g.x, g.y);
+    ctx.globalAlpha = 1;
+    ctx.setLineDash([7, 7]); ctx.lineWidth = 2.5; ctx.strokeStyle = tok(traceDone ? '--green' : '--guide-line'); ctx.strokeText(ch, g.x, g.y);
     ctx.restore();
     ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    ctx.lineWidth = Math.max(10, S*0.05); ctx.strokeStyle = tok('--orange');
-    strokes.forEach(function(s){
-      ctx.beginPath();
-      s.forEach(function(p, k){ if (k === 0) ctx.moveTo(p[0]*S, p[1]*S); else ctx.lineTo(p[0]*S, p[1]*S); });
-      if (s.length === 1) ctx.lineTo(s[0][0]*S + 0.1, s[0][1]*S);
-      ctx.stroke();
+    ctx.lineWidth = inkWidth(); ctx.strokeStyle = tok(traceDone ? '--green' : '--orange');
+    strokePaths(ctx);
+  }
+
+  // Did the child trace the letter? Both the letter and the child's lines are drawn onto a small
+  // 48x48 grid. "cover" is how much of the letter has a line near it; "inside" is how much of what
+  // the child drew lies on or near the letter. A scribble over the whole board fails "inside";
+  // a small mark on the letter fails "cover".
+  var GRID = 48;
+  function gridCells(paint){
+    var c = document.createElement('canvas'); c.width = c.height = GRID;
+    var g = c.getContext('2d');
+    g.scale(GRID / S, GRID / S);
+    g.fillStyle = '#000'; g.strokeStyle = '#000'; g.lineCap = 'round'; g.lineJoin = 'round';
+    paint(g);
+    var d = g.getImageData(0, 0, GRID, GRID).data, out = new Uint8Array(GRID * GRID);
+    for (var i = 0; i < out.length; i++) out[i] = d[i*4 + 3] > 60 ? 1 : 0;
+    return out;
+  }
+  function glyphCells(grow){
+    var ch = tChar(tIdx);
+    return gridCells(function(g){
+      var p = placeGlyph(g, ch);
+      g.fillText(ch, p.x, p.y);
+      if (grow){ g.lineWidth = grow * 2; g.strokeText(ch, p.x, p.y); }
     });
   }
+  function inkCells(width){ return gridCells(function(g){ g.lineWidth = width; strokePaths(g); }); }
+  // Thin the letter down to its centre line (Zhang-Suen), so a line drawn a little to one side still counts
+  function centreLine(cells){
+    var W = GRID, img = new Uint8Array(cells), changed = true;
+    function at(x, y){ return (x < 0 || y < 0 || x >= W || y >= W) ? 0 : img[y*W + x]; }
+    while (changed){
+      changed = false;
+      for (var step = 0; step < 2; step++){
+        var kill = [];
+        for (var y = 0; y < W; y++) for (var x = 0; x < W; x++){
+          if (!img[y*W + x]) continue;
+          var P = [at(x, y-1), at(x+1, y-1), at(x+1, y), at(x+1, y+1), at(x, y+1), at(x-1, y+1), at(x-1, y), at(x-1, y-1)];
+          var B = 0, A = 0;
+          for (var k = 0; k < 8; k++){ B += P[k]; if (!P[k] && P[(k+1) % 8]) A++; }
+          if (B < 2 || B > 6 || A !== 1) continue;
+          if (step === 0 ? (P[0]*P[2]*P[4] === 0 && P[2]*P[4]*P[6] === 0) : (P[0]*P[2]*P[6] === 0 && P[0]*P[4]*P[6] === 0)) kill.push(y*W + x);
+        }
+        kill.forEach(function(i){ img[i] = 0; });
+        if (kill.length) changed = true;
+      }
+    }
+    return img;
+  }
+  function traceScore(){
+    var glyph = centreLine(glyphCells(0)), glyphNear = glyphCells(S*0.07);
+    var ink = inkCells(inkWidth()), inkNear = inkCells(inkWidth() + S*0.07);
+    var gAll = 0, gHit = 0, iAll = 0, iIn = 0;
+    for (var i = 0; i < glyph.length; i++){
+      if (glyph[i]){ gAll++; if (inkNear[i]) gHit++; }
+      if (ink[i]){ iAll++; if (glyphNear[i]) iIn++; }
+    }
+    return { cover: gAll ? gHit / gAll : 0, inside: iAll ? iIn / iAll : 0 };
+  }
+  var TRACE_COVER = 0.8, TRACE_INSIDE = 0.7;
   function pt(e){ var r = cv.getBoundingClientRect(); return [(e.clientX - r.left)/r.width, (e.clientY - r.top)/r.height]; }
-  cv.addEventListener('pointerdown', function(e){ e.preventDefault(); try { cv.setPointerCapture(e.pointerId); } catch(_){} drawing = true; strokes.push([pt(e)]); drawAll(); });
+  cv.addEventListener('pointerdown', function(e){
+    e.preventDefault();
+    if (traceDone) return;
+    try { cv.setPointerCapture(e.pointerId); } catch(_){}
+    drawing = true; strokes.push([pt(e)]); drawAll();
+  });
   cv.addEventListener('pointermove', function(e){ if (!drawing) return; strokes[strokes.length-1].push(pt(e)); drawAll(); });
   ['pointerup','pointercancel'].forEach(function(t){ cv.addEventListener(t, function(){ drawing = false; }); });
   function setTrace(i, speak){
     clearTimeout(traceTimer);
     var len = tList().length;
-    tIdx = (i + len) % len; strokes = [];
+    tIdx = (i + len) % len; strokes = []; traceDone = false;
     $('tLabelText').textContent = tTitle(tIdx);
     $('prevT').setAttribute('aria-label', tKind === 'numbers' ? 'الرقم السابق' : 'الحرف السابق');
     $('nextT').setAttribute('aria-label', tKind === 'numbers' ? 'الرقم التالي' : 'الحرف التالي');
@@ -1267,17 +1342,33 @@ h1 span{color:var(--orange)}
   $('prevT').addEventListener('click', function(){ setTrace(tIdx - 1, true); });
   $('nextT').addEventListener('click', function(){ setTrace(tIdx + 1, true); });
   $('tLabel').addEventListener('click', function(){ tSay(tIdx); });
-  $('clearT').addEventListener('click', function(){ strokes = []; drawAll(); });
+  $('clearT').addEventListener('click', function(){ if (traceDone) return; strokes = []; drawAll(); });
   $('doneT').addEventListener('click', function(){
+    if (traceDone) return;
+    var isNum = tKind === 'numbers';
     var n = strokes.reduce(function(a, s){ return a + s.length; }, 0);
     if (n < 12){
-      var isNum = tKind === 'numbers';
       zizo(isNum ? 'ارسم فوق الرقم بإصبعك أولاً' : 'ارسم فوق الحرف بإصبعك أولاً', 'sad');
       say(isNum ? 'ارْسُمْ فَوْقَ الرَّقْم' : 'ارْسُمْ فَوْقَ الحَرْف');
       return;
     }
+    var sc = traceScore();
+    if (sc.inside < TRACE_INSIDE){
+      // Too much drawing away from the letter: start again on the dots
+      strokes = []; drawAll();
+      zizo(isNum ? 'خرجت بعيداً عن الرقم. ارسم فوق النقاط فقط' : 'خرجت بعيداً عن الحرف. ارسم فوق النقاط فقط', 'sad');
+      say('ارْسُمْ فَوْقَ النِّقاطِ فَقَط');
+      return;
+    }
+    if (sc.cover < TRACE_COVER){
+      // On the letter but not finished: keep what they drew and let them complete it
+      zizo(isNum ? 'أحسنت البداية! أكمل رسم الرقم كله' : 'أحسنت البداية! أكمل رسم الحرف كله', 'sad');
+      say(isNum ? 'أَكْمِلْ رَسْمَ الرَّقْمِ كُلِّه' : 'أَكْمِلْ رَسْمَ الحَرْفِ كُلِّه');
+      return;
+    }
+    traceDone = true; drawAll();
     var pr = pick(PRAISE); addStar(); zizo(pr, 'happy'); say(pr);
-    traceTimer = setTimeout(function(){ whenNoPrize(function(){ setTrace(tIdx + 1, true); }); }, 1300);
+    traceTimer = setTimeout(function(){ whenNoPrize(function(){ setTrace(tIdx + 1, true); }); }, 1600);
   });
   if (window.ResizeObserver) new ResizeObserver(function(){ if (!$('v-trace').hidden) sizeCanvas(); }).observe($('cWrap'));
   if (document.fonts && document.fonts.load){
