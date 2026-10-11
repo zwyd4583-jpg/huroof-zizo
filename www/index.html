@@ -99,6 +99,12 @@ h1 span{color:var(--orange)}
 .pic{font-size:84px; line-height:1.1}
 .word{font-family:var(--f-letter); font-weight:700; font-size:2.6rem; line-height:1.5; color:var(--ink)}
 .word .first{color:var(--c)}
+.tile.en, .bigletter.en, .word.en, .choice.en, .obj .badge.en{font-family:var(--f-ui); font-weight:800}
+.tile.en{font-size:2.3rem; padding:0}
+.bigletter.en{font-size:76px; padding:0 0 4px; letter-spacing:.02em}
+.word.en{font-size:2.4rem; direction:ltr}
+.choice.en{padding:0}
+.lname.en{direction:ltr}
 .word .blank{display:inline-block; font-family:var(--f-ui); background:var(--sun); color:var(--ink); border-radius:12px; padding-inline:.2em; margin-inline-end:.08em; line-height:1.25}
 
 /* numbers */
@@ -132,6 +138,9 @@ h1 span{color:var(--orange)}
 .gamecard:active{transform:translateY(4px); box-shadow:0 2px 0 var(--sky-dark)}
 .gicon{width:76px; height:76px; border-radius:50%; background:var(--c); color:var(--white); display:grid; place-items:center; font-family:var(--f-letter); font-weight:700; font-size:2.2rem; line-height:1; padding-bottom:6px; box-shadow:0 4px 0 var(--cd)}
 .gicon.emo{font-family:var(--f-ui); font-size:2.4rem; padding:0}
+.games-head{grid-column:1/-1; margin:10px 4px 0; display:flex; align-items:baseline; justify-content:space-between; gap:10px; font-size:1.3rem; font-weight:800}
+.games-head .en{font-size:1rem; color:var(--ink-soft)}
+.ask.en{font-size:2rem; line-height:1.2}
 #gameArea{display:grid; gap:14px}
 .gamebar{display:flex; align-items:center; justify-content:space-between; gap:10px}
 .gtitle{font-weight:800; font-size:1.2rem; min-width:0}
@@ -205,18 +214,25 @@ h1 span{color:var(--orange)}
 .prog{flex:1; min-width:0; display:grid; gap:8px}
 .prog-title{margin:0; font-weight:800; font-size:1.2rem; line-height:1.4}
 .prog-next{margin:0; color:var(--ink-soft); font-weight:700; line-height:1.5}
-.bar{height:16px; border-radius:8px; background:var(--sky); overflow:hidden}
-.bar span{display:block; height:100%; width:0; background:var(--sun); border-radius:8px; transition:width .4s}
+.wallet{justify-self:start; margin:0; display:inline-flex; align-items:center; gap:6px; background:var(--sun); color:var(--ink); border-radius:999px; padding:3px 16px; font-weight:800; font-size:1.5rem; line-height:1.4; box-shadow:0 3px 0 var(--sun-dark); font-variant-numeric:tabular-nums}
+.wallet svg{width:26px; height:26px; color:var(--white)}
+.modal-card .wallet{justify-self:center}
+.modal-note{margin:0 0 6px; color:var(--ink-soft); font-weight:700; font-size:1.1rem}
 .shelf-h{margin:6px 0 0; font-size:1.2rem; font-weight:800}
 .shelf{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:12px}
 .prize{position:relative; min-width:0; border:0; border-radius:20px; background:var(--paper); color:var(--ink); box-shadow:0 5px 0 var(--sky-dark); padding:10px 6px 10px; display:grid; justify-items:center; gap:4px; font-weight:800; font-size:.95rem; line-height:1.3}
 .prize:active{transform:translateY(3px); box-shadow:0 2px 0 var(--sky-dark)}
 .prize .mini{width:100%; max-width:84px; height:auto; aspect-ratio:120/124; overflow:visible}
 .prize[aria-pressed="true"]{box-shadow:0 0 0 4px var(--green), 0 5px 0 var(--green-dark)}
-.prize.locked .mini{filter:grayscale(1) opacity(.4)}
-.prize.locked .pname{color:var(--ink-soft)}
-.prize .lock{position:absolute; top:6px; inset-inline-start:6px; display:inline-flex; align-items:center; gap:3px; background:var(--sun); border-radius:999px; padding:1px 8px; font-size:.9rem; box-shadow:0 2px 0 var(--sun-dark); font-variant-numeric:tabular-nums}
-.prize .lock svg{width:13px; height:13px; color:var(--white)}
+.prize.cant .mini{filter:grayscale(1) opacity(.4)}
+.prize.cant .pname{color:var(--ink-soft)}
+.prize .price{position:absolute; top:6px; inset-inline-start:6px; display:inline-flex; align-items:center; gap:3px; background:var(--sun); border-radius:999px; padding:1px 8px; font-size:.95rem; box-shadow:0 2px 0 var(--sun-dark); font-variant-numeric:tabular-nums}
+.prize .price svg{width:13px; height:13px; color:var(--white)}
+.prize.cant .price{background:var(--sky); box-shadow:0 2px 0 var(--sky-dark)}
+.prize.cant .price svg{color:var(--sky-dark)}
+.prize.can{box-shadow:0 0 0 3px var(--sun), 0 5px 0 var(--sun-dark)}
+.stars{position:relative}
+.stars.can-buy::after{content:""; position:absolute; top:-4px; inset-inline-end:-4px; width:14px; height:14px; border-radius:50%; background:var(--pink); box-shadow:0 0 0 2.5px var(--paper); animation:pulse 1.8s ease-in-out infinite}
 .prize .tick{position:absolute; top:6px; inset-inline-end:6px; width:24px; height:24px; border-radius:50%; background:var(--green); color:var(--white); display:grid; place-items:center}
 .prize .tick svg{width:16px; height:16px}
 .endnext{margin:0 0 4px; color:var(--ink-soft); font-weight:700}
@@ -285,10 +301,10 @@ h1 span{color:var(--orange)}
   <header>
     <div class="brand">
       <h1>حروف <span>زيزو</span></h1>
-      <button class="stars" id="starPill" aria-label="جوائز زيزو">
+      <button class="stars" id="starPill" aria-label="متجر زيزو">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>
         <span id="starCount">٠</span>
-        <svg class="gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="9" width="17" height="11.5" rx="2"/><path d="M3.5 13.5h17M12 9v11.5"/><path d="M12 9C10.5 5.5 6 5 6 7.5S10 9 12 9ZM12 9c1.5-3.5 6-4 6-1.5S14 9 12 9Z"/></svg>
+        <svg class="gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8.5h14l-1.3 12H6.3z"/><path d="M9 11V7a3 3 0 0 1 6 0v4"/></svg>
       </button>
     </div>
     <div class="host">
@@ -318,7 +334,11 @@ h1 span{color:var(--orange)}
   <main>
     <section id="v-letters" class="view">
       <div id="voiceNote" class="note" hidden></div>
-      <div id="grid" class="grid" aria-label="الحروف العربية"></div>
+      <div class="chips" role="group" aria-label="اللغة">
+        <button class="chip lchip" data-lang="ar" aria-pressed="true">العربية</button>
+        <button class="chip lchip" data-lang="en" aria-pressed="false">English</button>
+      </div>
+      <div id="grid" class="grid" aria-label="الحروف"></div>
       <div id="detail" hidden>
         <button class="btn ghost back" id="backBtn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -347,6 +367,10 @@ h1 span{color:var(--orange)}
     </section>
 
     <section id="v-numbers" class="view" hidden>
+      <div class="chips" role="group" aria-label="اللغة">
+        <button class="chip nchip" data-lang="ar" aria-pressed="true">العربية</button>
+        <button class="chip nchip" data-lang="en" aria-pressed="false">English</button>
+      </div>
       <div id="ngrid" class="grid nums" aria-label="الأرقام"></div>
       <div id="ndetail" hidden>
         <button class="btn ghost back" id="nbackBtn">
@@ -445,8 +469,8 @@ h1 span{color:var(--orange)}
             العب مرة أخرى
           </button>
           <button class="btn" id="toRewards" style="--b:var(--sun);--bd:var(--sun-dark);color:var(--ink)">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="9" width="17" height="11.5" rx="2"/><path d="M3.5 13.5h17M12 9v11.5"/><path d="M12 9C10.5 5.5 6 5 6 7.5S10 9 12 9ZM12 9c1.5-3.5 6-4 6-1.5S14 9 12 9Z"/></svg>
-            جوائز زيزو
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8.5h14l-1.3 12H6.3z"/><path d="M9 11V7a3 3 0 0 1 6 0v4"/></svg>
+            متجر زيزو
           </button>
         </div>
       </div>
@@ -467,8 +491,8 @@ h1 span{color:var(--orange)}
       <div class="card wardrobe-top">
         <svg class="zizo-big" id="bigZizo" viewBox="0 -4 120 124" aria-hidden="true"></svg>
         <div class="prog">
-          <p class="prog-title" id="progTitle"></p>
-          <div class="bar" aria-hidden="true"><span id="progBar"></span></div>
+          <p class="prog-title">متجر زيزو</p>
+          <p class="wallet" id="wallet"></p>
           <p class="prog-next" id="progNext"></p>
         </div>
       </div>
@@ -484,6 +508,8 @@ h1 span{color:var(--orange)}
       <div class="chips" role="group" aria-label="ماذا نرسم؟">
         <button class="chip tchip" data-kind="letters" aria-pressed="true">الحروف</button>
         <button class="chip tchip" data-kind="numbers" aria-pressed="false">الأرقام</button>
+        <button class="chip tchip" data-kind="en" aria-pressed="false">ABC</button>
+        <button class="chip tchip" data-kind="enNum" aria-pressed="false">123</button>
       </div>
       <div class="stepper">
         <button class="round" id="prevT" aria-label="الحرف السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
@@ -544,7 +570,7 @@ h1 span{color:var(--orange)}
           </button>
           <button class="btn big" id="goLearn" style="--b:var(--blue);--bd:var(--blue-dark)">
             <span class="bigrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>تعلّم والعب</span>
-            <small>الحروف والأرقام والألوان والحيوانات</small>
+            <small>بالعربي والإنجليزي: حروف وأرقام وألوان وحيوانات</small>
           </button>
         </div>
         <button class="linkbtn" id="editName">تغيير الاسم</button>
@@ -564,12 +590,14 @@ h1 span{color:var(--orange)}
   </div>
   <div class="modal" id="prizeModal" role="dialog" aria-modal="true" aria-labelledby="prizeTitle" hidden>
     <div class="card modal-card">
-      <p class="modal-kicker">جائزة جديدة!</p>
+      <p class="modal-kicker">متجر زيزو</p>
       <svg class="zizo-big" id="prizeZizo" viewBox="0 -4 120 124" aria-hidden="true"></svg>
       <h2 id="prizeTitle"></h2>
+      <p class="wallet" id="prizePrice"></p>
+      <p class="modal-note" id="prizeNote"></p>
       <div class="btnrow">
-        <button class="btn" id="wearPrize" style="--b:var(--green);--bd:var(--green-dark)">جرّبها على زيزو</button>
-        <button class="btn ghost" id="laterPrize">لاحقاً</button>
+        <button class="btn" id="buyPrize" style="--b:var(--green);--bd:var(--green-dark)"></button>
+        <button class="btn ghost" id="laterPrize">رجوع</button>
       </div>
     </div>
   </div>
@@ -624,6 +652,21 @@ h1 span{color:var(--orange)}
   ];
   var COUNT_PICS = ['🍎','🎈','🐟','🌸','🐥','🍓','🦋','🍪','⚽','🐞','🌟','🍌'];
 
+  // English letters, each with a word that starts with it (X ends the word: few child words start with X)
+  var EN = [
+    {c:'A', w:'Apple', e:'🍎'}, {c:'B', w:'Ball', e:'⚽'}, {c:'C', w:'Cat', e:'🐱'}, {c:'D', w:'Dog', e:'🐶'},
+    {c:'E', w:'Egg', e:'🥚'}, {c:'F', w:'Fish', e:'🐟'}, {c:'G', w:'Grapes', e:'🍇'}, {c:'H', w:'Hat', e:'🎩'},
+    {c:'I', w:'Ice cream', e:'🍦'}, {c:'J', w:'Jet', e:'✈️'}, {c:'K', w:'Key', e:'🔑'}, {c:'L', w:'Lion', e:'🦁'},
+    {c:'M', w:'Moon', e:'🌙'}, {c:'N', w:'Nose', e:'👃'}, {c:'O', w:'Orange', e:'🍊'}, {c:'P', w:'Pig', e:'🐷'},
+    {c:'Q', w:'Queen', e:'👑'}, {c:'R', w:'Rabbit', e:'🐰'}, {c:'S', w:'Sun', e:'☀️'}, {c:'T', w:'Tree', e:'🌳'},
+    {c:'U', w:'Umbrella', e:'☂️'}, {c:'V', w:'Van', e:'🚐'}, {c:'W', w:'Watch', e:'⌚'}, {c:'X', w:'Fox', e:'🦊', end:true},
+    {c:'Y', w:'Yellow', e:'💛'}, {c:'Z', w:'Zebra', e:'🦓'}
+  ];
+  // English numbers 1–10 (the pictures to count are the same as the Arabic numbers)
+  var ENN = ['one','two','three','four','five','six','seven','eight','nine','ten'].map(function(w, i){
+    return { d: String(i + 1), w: w, e: N[i].e };
+  });
+
   // Colors, each with something of that color (adjective agrees with the noun)
   var PAINTS = [
     {n:'أحمر',    s:'أَحْمَر',      the:'الأَحْمَر',      k:'--red',    e:'🍎', f:'تفاحة حمراء',        fs:'تُفّاحَة حَمْراء'},
@@ -670,7 +713,11 @@ h1 span{color:var(--orange)}
     { mode: 'count',  t: 'كم العدد؟',     icon: '١٢٣', emo: false, c: 4 },
     { mode: 'color',  t: 'أين اللون؟',    icon: '🎨',  emo: true,  c: 3 },
     { mode: 'shape',  t: 'أين الشكل؟',    icon: '🔺',  emo: true,  c: 5 },
-    { mode: 'animal', t: 'أين الحيوان؟',  icon: '🦁',  emo: true,  c: 2 }
+    { mode: 'animal', t: 'أين الحيوان؟',  icon: '🦁',  emo: true,  c: 2 },
+    // English games, shown under their own heading
+    { mode: 'enListen', t: 'اسمع الحرف',  icon: 'Aa',  emo: true,  c: 1, en: true },
+    { mode: 'enWord',   t: 'أين الصورة؟', icon: '🐱',  emo: true,  c: 3, en: true },
+    { mode: 'enCount',  t: 'عُدّ بالإنجليزي', icon: '123', emo: true, c: 2, en: true }
   ];
   function shapeSVG(sh){
     var f = 'fill="var(' + sh.k + ')" stroke="var(' + sh.k + '-dark)" stroke-width="3" stroke-linejoin="round"', d;
@@ -744,7 +791,7 @@ h1 span{color:var(--orange)}
   }
   var nativeLang = 'ar-SA';
   var hasWebTTS = !NTTS && ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window);
-  var arVoice = null, voicesSeen = false;
+  var arVoice = null, enVoice = null, voicesSeen = false;
 
   function setNote(text, withInstall){
     var n = $('voiceNote');
@@ -768,8 +815,10 @@ h1 span{color:var(--orange)}
     try {
       var vs = speechSynthesis.getVoices() || [];
       if (vs.length) voicesSeen = true;
-      arVoice = null;
+      arVoice = null; enVoice = null;
       for (var i=0;i<vs.length;i++){ if (/^ar([-_]|$)/i.test(vs[i].lang)){ arVoice = vs[i]; break; } }
+      for (var j=0;j<vs.length;j++){ if (/^en[-_]US/i.test(vs[j].lang)){ enVoice = vs[j]; break; } }
+      if (!enVoice) for (var k=0;k<vs.length;k++){ if (/^en([-_]|$)/i.test(vs[k].lang)){ enVoice = vs[k]; break; } }
       updateWebNote();
     } catch(e){}
   }
@@ -801,11 +850,14 @@ h1 span{color:var(--orange)}
     try { speechSynthesis.addEventListener('voiceschanged', pickVoice); } catch(e){ speechSynthesis.onvoiceschanged = pickVoice; }
   }
 
+  // Each part is Arabic text, or { en: 'text' } to be read in English
   function say(parts){
     parts = [].concat(parts);
     if (NTTS){
       parts.forEach(function(t, k){
-        NTTS.speak({ text: t, lang: nativeLang, rate: 0.85, pitch: 1.1, volume: 1.0, queueStrategy: k === 0 ? 0 : 1 }).catch(voiceFailed);
+        var en = t && typeof t === 'object';
+        NTTS.speak({ text: en ? t.en : t, lang: en ? 'en-US' : nativeLang, rate: en ? 0.8 : 0.85, pitch: 1.1, volume: 1.0, queueStrategy: k === 0 ? 0 : 1 })
+          .catch(en ? function(){} : voiceFailed);
       });
       return;
     }
@@ -813,14 +865,17 @@ h1 span{color:var(--orange)}
     try {
       speechSynthesis.cancel();
       parts.forEach(function(t){
-        var u = new SpeechSynthesisUtterance(t);
-        u.lang = arVoice ? arVoice.lang : 'ar-SA';
-        if (arVoice) u.voice = arVoice;
-        u.rate = 0.82; u.pitch = 1.15;
+        var en = t && typeof t === 'object';
+        var u = new SpeechSynthesisUtterance(en ? t.en : t);
+        var v = en ? enVoice : arVoice;
+        u.lang = v ? v.lang : (en ? 'en-US' : 'ar-SA');
+        if (v) u.voice = v;
+        u.rate = en ? 0.8 : 0.82; u.pitch = 1.15;
         speechSynthesis.speak(u);
       });
     } catch(e){}
   }
+  function sayEn(t){ say({ en: t }); }
   function hush(){
     if (NTTS) NTTS.stop().catch(function(){});
     else if (hasWebTTS) try { speechSynthesis.cancel(); } catch(e){}
@@ -836,7 +891,9 @@ h1 span{color:var(--orange)}
 
   var stars = 0;
   try { stars = parseInt(localStorage.getItem('zizo-stars') || '0', 10) || 0; } catch(e){}
-  function renderStars(){ $('starCount').textContent = fmt(stars); }
+  function saveStars(){ try { localStorage.setItem('zizo-stars', String(stars)); } catch(e){} }
+  // The pink dot on the star pill: there is something new the child can buy
+  function renderStars(){ $('starCount').textContent = fmt(stars); $('starPill').classList.toggle('can-buy', canBuy()); }
   function burst(){
     if (reduce) return;
     var fx = $('fx'), cols = ['var(--sun)','var(--orange)','var(--pink)','var(--green)','var(--blue)'];
@@ -852,46 +909,60 @@ h1 span{color:var(--orange)}
   }
   function addStar(){
     stars++;
-    try { localStorage.setItem('zizo-stars', String(stars)); } catch(e){}
+    saveStars();
     renderStars();
     var p = $('starPill'); p.classList.remove('pop'); void p.offsetWidth; p.classList.add('pop');
     burst();
-    for (var k = 0; k < PRIZES.length; k++){
-      if (PRIZES[k].at === stars){ var won = PRIZES[k]; setTimeout(function(){ showPrize(won); }, 700); break; }
-    }
   }
 
-  /* ---------- Zizo's prizes ---------- */
-  // Every star counts toward the next prize. Prizes stay won; the child chooses what Zizo wears.
+  /* ---------- Zizo's shop ---------- */
+  // Stars are spent here: the child chooses what to buy for Zizo. What is bought stays theirs.
   var PRIZES = [
-    {id:'cap',     slot:'hat',   name:'القبعة الصوفية',     at:0},
-    {id:'orange',  slot:'scarf', name:'الوشاح البرتقالي',   at:0},
-    {id:'none',    slot:'extra', name:'بدون إضافة',         at:0},
-    {id:'crown',   slot:'hat',   name:'التاج الذهبي',       at:3},
-    {id:'blue',    slot:'scarf', name:'الوشاح الأزرق',      at:6},
-    {id:'party',   slot:'hat',   name:'قبعة الحفلة',        at:10},
-    {id:'glasses', slot:'extra', name:'النظارة',            at:15},
-    {id:'green',   slot:'scarf', name:'الوشاح الأخضر',      at:20},
-    {id:'grad',    slot:'hat',   name:'قبعة التخرج',        at:25},
-    {id:'flower',  slot:'extra', name:'الوردة',             at:30},
-    {id:'pink',    slot:'scarf', name:'الوشاح الوردي',      at:40},
-    {id:'sparkle', slot:'extra', name:'النجوم اللامعة',     at:45},
-    {id:'chef',    slot:'hat',   name:'قبعة الطبّاخ',       at:50},
-    {id:'medal',   slot:'extra', name:'الميدالية الذهبية',  at:60},
-    {id:'purple',  slot:'scarf', name:'الوشاح البنفسجي',    at:75},
-    {id:'teal',    slot:'scarf', name:'الوشاح الفيروزي',    at:85},
-    {id:'wizard',  slot:'hat',   name:'قبعة الساحر',        at:90},
-    {id:'shades',  slot:'extra', name:'النظارة الشمسية',    at:100}
+    {id:'cap',     slot:'hat',   name:'القبعة الصوفية',     price:0},
+    {id:'orange',  slot:'scarf', name:'الوشاح البرتقالي',   price:0},
+    {id:'none',    slot:'extra', name:'بدون إضافة',         price:0},
+    {id:'crown',   slot:'hat',   name:'التاج الذهبي',       price:5},
+    {id:'party',   slot:'hat',   name:'قبعة الحفلة',        price:6},
+    {id:'grad',    slot:'hat',   name:'قبعة التخرج',        price:8},
+    {id:'chef',    slot:'hat',   name:'قبعة الطبّاخ',       price:8},
+    {id:'wizard',  slot:'hat',   name:'قبعة الساحر',        price:15},
+    {id:'blue',    slot:'scarf', name:'الوشاح الأزرق',      price:4},
+    {id:'green',   slot:'scarf', name:'الوشاح الأخضر',      price:4},
+    {id:'pink',    slot:'scarf', name:'الوشاح الوردي',      price:4},
+    {id:'purple',  slot:'scarf', name:'الوشاح البنفسجي',    price:5},
+    {id:'teal',    slot:'scarf', name:'الوشاح الفيروزي',    price:5},
+    {id:'flower',  slot:'extra', name:'الوردة',             price:5},
+    {id:'glasses', slot:'extra', name:'النظارة',            price:6},
+    {id:'sparkle', slot:'extra', name:'النجوم اللامعة',     price:10},
+    {id:'medal',   slot:'extra', name:'الميدالية الذهبية',  price:12},
+    {id:'shades',  slot:'extra', name:'النظارة الشمسية',    price:12}
   ];
   var SCARF = { orange:['--orange','--orange-dark'], blue:['--blue','--blue-dark'], green:['--green','--green-dark'],
                 pink:['--pink','--pink-dark'], purple:['--purple','--purple-dark'], teal:['--teal','--teal-dark'] };
   function prizeById(id){ for (var k = 0; k < PRIZES.length; k++) if (PRIZES[k].id === id) return PRIZES[k]; return null; }
-  function isWon(p){ return stars >= p.at; }
+
+  var owned = {};
+  (function(){
+    var list = null;
+    try { list = JSON.parse(localStorage.getItem('zizo-owned') || 'null'); } catch(e){}
+    if (!Array.isArray(list)){
+      // First time with the shop: keep every prize already won in the older version (won at N stars)
+      var OLD_AT = { crown:3, blue:6, party:10, glasses:15, green:20, grad:25, flower:30, pink:40, sparkle:45, chef:50, medal:60, purple:75, teal:85, wizard:90, shades:100 };
+      list = Object.keys(OLD_AT).filter(function(id){ return OLD_AT[id] <= stars; });
+    }
+    list.forEach(function(id){ if (prizeById(id)) owned[id] = true; });
+    PRIZES.forEach(function(p){ if (!p.price) owned[p.id] = true; });
+    saveOwned();
+  })();
+  function saveOwned(){ try { localStorage.setItem('zizo-owned', JSON.stringify(Object.keys(owned))); } catch(e){} }
+  function isOwned(p){ return !!owned[p.id]; }
+  function canBuy(){ return PRIZES.some(function(p){ return !isOwned(p) && p.price <= stars; }); }
+  function cheapestNew(){ var best = null; PRIZES.forEach(function(p){ if (!isOwned(p) && (!best || p.price < best.price)) best = p; }); return best; }
 
   var outfit = { hat:'cap', scarf:'orange', extra:'none' };
   try {
     var savedOutfit = JSON.parse(localStorage.getItem('zizo-outfit') || 'null');
-    if (savedOutfit) ['hat','scarf','extra'].forEach(function(s){ var p = prizeById(savedOutfit[s]); if (p && p.slot === s) outfit[s] = p.id; });
+    if (savedOutfit) ['hat','scarf','extra'].forEach(function(s){ var p = prizeById(savedOutfit[s]); if (p && p.slot === s && isOwned(p)) outfit[s] = p.id; });
   } catch(e){}
   function saveOutfit(){ try { localStorage.setItem('zizo-outfit', JSON.stringify(outfit)); } catch(e){} }
 
@@ -978,34 +1049,34 @@ h1 span{color:var(--orange)}
     if (n <= 10) return fmt(n) + ' نجوم';
     return fmt(n) + ' نجمة';
   }
-  function nextPrize(){ for (var k = 0; k < PRIZES.length; k++) if (PRIZES[k].at > stars) return PRIZES[k]; return null; }
-  function nextPrizeText(){
-    var np = nextPrize();
-    return np ? 'باقي ' + starsText(np.at - stars) + ' لتربح ' + np.name : gx('ربحت كل الجوائز! أنت بطل', 'ربحتِ كل الجوائز! أنتِ بطلة');
+  // One line about the shop, for the shop screen and the end of a game
+  function shopText(){
+    if (canBuy()) return 'معك نجوم تكفي لشراء شيء جديد لزيزو!';
+    var c = cheapestNew();
+    if (!c) return gx('اشتريت كل ما في المتجر! أنت بطل', 'اشتريتِ كل ما في المتجر! أنتِ بطلة');
+    return 'باقي ' + starsText(c.price - stars) + ' لتشتري ' + c.name;
   }
 
-  var LOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
+  var PRICE_STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
   var TICK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
   function renderRewards(){
     $('bigZizo').innerHTML = zizoMarkup(outfit);
-    $('progTitle').textContent = stars ? 'معك ' + starsText(stars) : 'اجمع النجوم لتربح جوائز لزيزو';
-    var np = nextPrize(), prevAt = 0;
-    PRIZES.forEach(function(p){ if (p.at <= stars && p.at > prevAt) prevAt = p.at; });
-    $('progBar').style.width = np ? Math.round(100 * (stars - prevAt) / (np.at - prevAt)) + '%' : '100%';
-    $('progNext').textContent = nextPrizeText();
+    $('wallet').innerHTML = PRICE_STAR + '<span>' + fmt(stars) + '</span>';
+    $('wallet').setAttribute('aria-label', 'معك ' + (stars ? starsText(stars) : 'صفر نجوم'));
+    $('progNext').textContent = shopText();
     ['hat','scarf','extra'].forEach(function(slot){
       var shelf = $('shelf-' + slot); shelf.innerHTML = '';
       PRIZES.forEach(function(p){
         if (p.slot !== slot) return;
-        var won = isWon(p), worn = outfit[slot] === p.id;
+        var own = isOwned(p), worn = outfit[slot] === p.id, can = !own && p.price <= stars;
         var look = { hat: outfit.hat, scarf: outfit.scarf, extra: outfit.extra }; look[slot] = p.id;
         var b = document.createElement('button');
-        b.className = 'prize' + (won ? '' : ' locked');
+        b.className = 'prize' + (own ? '' : can ? ' can' : ' cant');
         b.setAttribute('aria-pressed', String(worn));
-        b.setAttribute('aria-label', p.name + (won ? '' : '، تفتح عند ' + starsText(p.at)));
+        b.setAttribute('aria-label', p.name + (own ? '' : '، بـ' + starsText(p.price)));
         b.innerHTML = '<svg class="mini" viewBox="0 -4 120 124" aria-hidden="true">' + zizoMarkup(look) + '</svg>' +
           '<span class="pname"></span>' +
-          (won ? (worn ? '<span class="tick">' + TICK + '</span>' : '') : '<span class="lock">' + LOCK + fmt(p.at) + '</span>');
+          (own ? (worn ? '<span class="tick">' + TICK + '</span>' : '') : '<span class="price">' + PRICE_STAR + fmt(p.price) + '</span>');
         b.querySelector('.pname').textContent = p.name;
         b.addEventListener('click', function(){ wear(p); });
         shelf.appendChild(b);
@@ -1013,38 +1084,55 @@ h1 span{color:var(--orange)}
     });
   }
   function wear(p){
-    if (!isWon(p)){
-      zizo('اجمع ' + starsText(p.at) + ' لتفتح ' + p.name + '. ' + nextPrizeText(), 'sad');
-      say('اِجْمَعْ نُجُوماً أَكْثَر');
-      return;
-    }
+    if (!isOwned(p)) return offer(p);
     outfit[p.slot] = p.id; saveOutfit(); renderZizo();
     if (!$('v-rewards').hidden) renderRewards();
     zizo('شكراً! أعجبني ' + p.name, 'happy');
     say('شُكْراً!');
   }
+  function buy(p){
+    if (isOwned(p) || p.price > stars) return;
+    stars -= p.price; saveStars();
+    owned[p.id] = true; saveOwned();
+    outfit[p.slot] = p.id; saveOutfit();
+    renderZizo(); renderStars();
+    if (!$('v-rewards').hidden) renderRewards();
+    burst();
+    zizo('شكراً يا ' + hero() + '! هدية رائعة', 'happy');
+    say('شُكْراً! هَدِيَّةٌ رائِعَة');
+  }
 
-  // New prize popup. Games wait for it to close before moving on.
-  var shownPrize = null, afterPrize = null;
+  // The buy dialog: Zizo tries the item on, with its price. Games wait for it to close before moving on.
+  var offered = null, afterPrize = null;
   function prizeOpen(){ return !$('prizeModal').hidden; }
   function whenNoPrize(fn){ if (prizeOpen()) afterPrize = fn; else fn(); }
-  function showPrize(p){
-    shownPrize = p;
+  function offer(p){
+    offered = p;
+    var can = p.price <= stars;
     var look = { hat: outfit.hat, scarf: outfit.scarf, extra: outfit.extra }; look[p.slot] = p.id;
     $('prizeZizo').innerHTML = zizoMarkup(look);
     $('prizeTitle').textContent = p.name;
+    $('prizePrice').innerHTML = PRICE_STAR + '<span>' + fmt(p.price) + '</span>';
+    $('prizePrice').setAttribute('aria-label', 'السعر ' + starsText(p.price));
+    $('prizeNote').textContent = can ? 'معك ' + starsText(stars) : 'ينقصك ' + starsText(p.price - stars);
+    $('buyPrize').textContent = can ? gx('اشترِ لزيزو', 'اشتري لزيزو') : gx('العب واجمع النجوم', 'العبي واجمعي النجوم');
     $('prizeModal').hidden = false;
-    $('wearPrize').focus();
-    burst();
-    say(gx('مَبْرُوك! رَبِحْتَ جائِزَةً جَدِيدَة', 'مَبْرُوك! رَبِحْتِ جائِزَةً جَدِيدَة'));
+    $('buyPrize').focus();
+    zizo(can ? gx('هل تشتري لي ', 'هل تشترين لي ') + p.name + '؟'
+             : 'ينقصك ' + starsText(p.price - stars) + ' لتشتري ' + p.name + '. ' + gx('العب واجمع النجوم!', 'العبي واجمعي النجوم!'), can ? 'happy' : 'sad');
+    say(can ? p.name : gx('اِجْمَعْ نُجُوماً أَكْثَر', 'اِجْمَعِي نُجُوماً أَكْثَر'));
   }
   function closePrize(){
     $('prizeModal').hidden = true;
     var fn = afterPrize; afterPrize = null;
     if (fn) setTimeout(fn, 300);
   }
-  $('wearPrize').addEventListener('click', function(){ var p = shownPrize; closePrize(); if (p) wear(p); });
-  $('laterPrize').addEventListener('click', closePrize);
+  $('buyPrize').addEventListener('click', function(){
+    var p = offered; closePrize();
+    if (!p) return;
+    if (p.price <= stars) buy(p); else show('play');
+  });
+  $('laterPrize').addEventListener('click', function(){ closePrize(); if (!$('v-rewards').hidden) zizo(shopText()); });
   $('starPill').addEventListener('click', function(){ show('rewards'); });
 
   /* ---------- words ---------- */
@@ -1059,42 +1147,78 @@ h1 span{color:var(--orange)}
     el.appendChild(a); el.appendChild(b);
   }
 
+  // An English word with its letter coloured (the first letter, or the last for X)
+  function enWordInto(el, item){
+    el.innerHTML = '';
+    var at = item.end ? item.w.length - 1 : 0;
+    var a = document.createElement('span'); a.textContent = item.w.slice(0, at);
+    var b = document.createElement('span'); b.className = 'first'; b.textContent = item.w.charAt(at);
+    var c = document.createElement('span'); c.textContent = item.w.slice(at + 1);
+    el.appendChild(a); el.appendChild(b); el.appendChild(c);
+  }
+
   /* ---------- letters ---------- */
-  var grid = $('grid'), detail = $('detail'), cur = 0;
-  L.forEach(function(l, i){
-    var b = document.createElement('button');
-    b.className = 'tile'; b.textContent = l.c; b.style.cssText = colorVars(i);
-    b.setAttribute('aria-label', 'حرف ال' + l.n);
-    b.addEventListener('click', function(){ openLetter(i); });
-    grid.appendChild(b);
+  var grid = $('grid'), detail = $('detail'), cur = 0, lLang = 'ar';
+  function renderLetterGrid(){
+    var en = lLang === 'en', list = en ? EN : L;
+    grid.innerHTML = '';
+    grid.dir = en ? 'ltr' : 'rtl'; // A B C reads left to right
+    list.forEach(function(l, i){
+      var b = document.createElement('button');
+      b.className = 'tile' + (en ? ' en' : ''); b.textContent = l.c; b.style.cssText = colorVars(i);
+      b.setAttribute('aria-label', en ? 'حرف ' + l.c : 'حرف ال' + l.n);
+      b.addEventListener('click', function(){ openLetter(i); });
+      grid.appendChild(b);
+    });
+    document.querySelectorAll('.lchip').forEach(function(x){ x.setAttribute('aria-pressed', String(x.dataset.lang === lLang)); });
+  }
+  document.querySelectorAll('.lchip').forEach(function(c){
+    c.addEventListener('click', function(){ lLang = c.dataset.lang; cur = 0; renderLetterGrid(); backToGrid(); });
   });
+  renderLetterGrid();
   function openLetter(i, quiet){
-    cur = (i + L.length) % L.length;
-    var l = L[cur];
+    var en = lLang === 'en', list = en ? EN : L;
+    cur = (i + list.length) % list.length;
+    var l = list[cur];
     detail.style.cssText = colorVars(cur);
-    $('dLetter').textContent = l.c;
-    $('dName').textContent = 'حرف ال' + l.n;
+    $('dLetter').className = 'bigletter' + (en ? ' en' : '');
+    $('dLetter').textContent = en ? l.c + l.c.toLowerCase() : l.c;
+    $('dName').textContent = en ? 'حرف ' + l.c : 'حرف ال' + l.n;
     $('dPic').textContent = l.e;
-    wordInto($('dWord'), cur, false);
-    $('dCount').textContent = fmt(cur + 1) + ' من ' + fmt(L.length);
+    $('dWord').className = 'word' + (en ? ' en' : '');
+    if (en) enWordInto($('dWord'), l); else wordInto($('dWord'), cur, false);
+    $('dCount').textContent = fmt(cur + 1) + ' من ' + fmt(list.length);
     grid.hidden = true; detail.hidden = false;
     window.scrollTo(0, 0);
-    zizo(l.w + ' تبدأ بحرف ال' + l.n, 'happy');
-    if (!quiet) say([SN(cur), l.s]);
+    if (en){
+      zizo(l.end ? l.w + ' تنتهي بحرف ' + l.c : l.w + ' تبدأ بحرف ' + l.c, 'happy');
+      if (!quiet) say([{ en: l.c }, { en: l.w }]);
+    } else {
+      zizo(l.w + ' تبدأ بحرف ال' + l.n, 'happy');
+      if (!quiet) say([SN(cur), l.s]);
+    }
   }
-  function backToGrid(){ grid.hidden = false; detail.hidden = true; zizo('اختر حرفاً لنتعلّمه معاً'); }
+  function backToGrid(){
+    grid.hidden = false; detail.hidden = true;
+    zizo(lLang === 'en' ? 'هذه حروف اللغة الإنجليزية. اختر حرفاً لنتعلّمه' : 'اختر حرفاً لنتعلّمه معاً');
+  }
   $('backBtn').addEventListener('click', backToGrid);
   $('prevL').addEventListener('click', function(){ openLetter(cur - 1); });
   $('nextL').addEventListener('click', function(){ openLetter(cur + 1); });
-  $('sayLetterBtn').addEventListener('click', function(){ say(SN(cur)); });
-  $('sayWordBtn').addEventListener('click', function(){ say(L[cur].s); });
-  $('toTrace').addEventListener('click', function(){ setTraceKind('letters', cur); show('trace'); say(SN(cur)); });
+  $('sayLetterBtn').addEventListener('click', function(){ if (lLang === 'en') sayEn(EN[cur].c); else say(SN(cur)); });
+  $('sayWordBtn').addEventListener('click', function(){ if (lLang === 'en') sayEn(EN[cur].w); else say(L[cur].s); });
+  $('toTrace').addEventListener('click', function(){
+    var en = lLang === 'en';
+    setTraceKind(en ? 'en' : 'letters', cur); show('trace');
+    if (en) sayEn(EN[cur].c); else say(SN(cur));
+  });
 
   /* ---------- numbers ---------- */
   // A box of n pictures; tapping each one counts it out loud. onDone runs when all are counted.
   var countTimers = [];
   function stopAutoCount(){ countTimers.forEach(clearTimeout); countTimers = []; }
-  function countBox(box, n, pic, onDone){
+  function countBox(box, n, pic, onDone, en){
+    var names = en ? ENN : N;
     box.innerHTML = '';
     var counted = 0;
     var objs = [];
@@ -1112,10 +1236,11 @@ h1 span{color:var(--orange)}
       counted++;
       btn.classList.add('done');
       var badge = document.createElement('span');
-      badge.className = 'badge'; badge.textContent = N[counted - 1].d;
+      badge.className = 'badge' + (en ? ' en' : ''); badge.textContent = names[counted - 1].d;
       btn.appendChild(badge);
       if (counted === n && onDone && !auto) onDone(auto);
-      else say(N[counted - 1].s);
+      else if (en) sayEn(names[counted - 1].w);
+      else say(names[counted - 1].s);
     }
     return {
       reset: function(){ counted = 0; objs.forEach(function(o){ o.classList.remove('done'); var bd = o.querySelector('.badge'); if (bd) bd.remove(); }); },
@@ -1127,38 +1252,56 @@ h1 span{color:var(--orange)}
     };
   }
 
-  var ngrid = $('ngrid'), ndetail = $('ndetail'), ncur = 0, nBoxCtl = null;
-  N.forEach(function(x, i){
-    var b = document.createElement('button');
-    b.className = 'tile num'; b.textContent = x.d; b.style.cssText = colorVars(i);
-    b.setAttribute('aria-label', 'الرقم ' + x.n);
-    b.addEventListener('click', function(){ openNumber(i); });
-    ngrid.appendChild(b);
+  var ngrid = $('ngrid'), ndetail = $('ndetail'), ncur = 0, nBoxCtl = null, nLang = 'ar';
+  function renderNumberGrid(){
+    var en = nLang === 'en';
+    ngrid.innerHTML = '';
+    ngrid.dir = en ? 'ltr' : 'rtl';
+    (en ? ENN : N).forEach(function(x, i){
+      var b = document.createElement('button');
+      b.className = 'tile num' + (en ? ' en' : ''); b.textContent = x.d; b.style.cssText = colorVars(i);
+      b.setAttribute('aria-label', en ? x.w : 'الرقم ' + x.n);
+      b.addEventListener('click', function(){ openNumber(i); });
+      ngrid.appendChild(b);
+    });
+    document.querySelectorAll('.nchip').forEach(function(x){ x.setAttribute('aria-pressed', String(x.dataset.lang === nLang)); });
+  }
+  document.querySelectorAll('.nchip').forEach(function(c){
+    c.addEventListener('click', function(){ nLang = c.dataset.lang; ncur = 0; renderNumberGrid(); backToNumbers(); });
   });
+  renderNumberGrid();
+  function sayNum(i){ if (nLang === 'en') sayEn(ENN[i].w); else say(N[i].s); }
   function openNumber(i){
     stopAutoCount();
+    var en = nLang === 'en';
     ncur = (i + N.length) % N.length;
-    var x = N[ncur];
+    var x = en ? ENN[ncur] : N[ncur];
     ndetail.style.cssText = colorVars(ncur);
+    $('nDigit').className = 'bigletter' + (en ? ' en' : '');
     $('nDigit').textContent = x.d;
-    $('nName').textContent = 'الرقم ' + x.n;
+    $('nName').className = 'lname' + (en ? ' en' : '');
+    $('nName').textContent = en ? x.d + ' — ' + x.w : 'الرقم ' + x.n;
     $('nCount').textContent = fmt(ncur + 1) + ' من ' + fmt(N.length);
     nBoxCtl = countBox($('nBox'), ncur + 1, x.e, function(auto){
       if (auto) return;
       var pr = praise();
-      zizo(pr + ' عددها ' + x.n, 'happy'); addStar();
-      say([x.s, pr]);
-    });
+      zizo(en ? pr + ' ' + x.w + '!' : pr + ' عددها ' + x.n, 'happy'); addStar();
+      say(en ? [{ en: x.w }, pr] : [x.s, pr]);
+    }, en);
     ngrid.hidden = true; ndetail.hidden = false;
     window.scrollTo(0, 0);
-    zizo(ncur === 0 ? 'هذا الرقم واحد. اضغط على الصورة لتعدّها' : 'هيا نعدّ معاً! اضغط على كل صورة', 'happy');
-    say(x.s);
+    zizo(ncur === 0 ? (en ? 'هذا الرقم one. اضغط على الصورة لتعدّها' : 'هذا الرقم واحد. اضغط على الصورة لتعدّها')
+                    : (en ? 'هيا نعدّ بالإنجليزي! اضغط على كل صورة' : 'هيا نعدّ معاً! اضغط على كل صورة'), 'happy');
+    sayNum(ncur);
   }
-  function backToNumbers(){ stopAutoCount(); ngrid.hidden = false; ndetail.hidden = true; zizo('اختر رقماً لنعدّ معاً'); }
+  function backToNumbers(){
+    stopAutoCount(); ngrid.hidden = false; ndetail.hidden = true;
+    zizo(nLang === 'en' ? 'هذه الأرقام بالإنجليزي. اختر رقماً لنعدّ معاً' : 'اختر رقماً لنعدّ معاً');
+  }
   $('nbackBtn').addEventListener('click', backToNumbers);
   $('prevN').addEventListener('click', function(){ openNumber(ncur - 1); });
   $('nextN').addEventListener('click', function(){ openNumber(ncur + 1); });
-  $('sayNumBtn').addEventListener('click', function(){ say(N[ncur].s); });
+  $('sayNumBtn').addEventListener('click', function(){ sayNum(ncur); });
   $('countWithMe').addEventListener('click', function(){
     if (!nBoxCtl) return;
     stopAutoCount();
@@ -1168,7 +1311,7 @@ h1 span{color:var(--orange)}
       zizo('الآن دورك! اضغط على كل صورة وعُدّها');
     });
   });
-  $('toTraceN').addEventListener('click', function(){ setTraceKind('numbers', ncur); show('trace'); say(N[ncur].s); });
+  $('toTraceN').addEventListener('click', function(){ setTraceKind(nLang === 'en' ? 'enNum' : 'numbers', ncur); show('trace'); sayNum(ncur); });
 
   /* ---------- discover: colors, shapes, animals ---------- */
   var dTopic = 'colors', dcur = 0, dgrid = $('dgrid'), ddetail = $('ddetail');
@@ -1214,7 +1357,7 @@ h1 span{color:var(--orange)}
 
   /* ---------- play ---------- */
   var ROUNDS = 5, mode = 'listen', round = 0, target = 0, last = -1, locked = false, nextTimer = null;
-  var POOLS = { listen: L, first: L, count: N, color: PAINTS, shape: SHAPES, animal: ANIMALS };
+  var POOLS = { listen: L, first: L, count: N, color: PAINTS, shape: SHAPES, animal: ANIMALS, enListen: EN, enWord: EN, enCount: ENN };
   var POOL_TOPIC = { color: 'colors', shape: 'shapes', animal: 'animals' };
 
   /* ---------- Zizo's journey: 20 stages on a map ---------- */
@@ -1376,7 +1519,13 @@ h1 span{color:var(--orange)}
     jCard.querySelector('.jbar i').style.width = Math.round(100 * done / STAGES.length) + '%';
   }
 
-  GAMES.forEach(function(g){
+  GAMES.forEach(function(g, k){
+    if (g.en && !GAMES[k - 1].en){
+      var hd = document.createElement('h3');
+      hd.className = 'games-head';
+      hd.innerHTML = '<span>ألعاب بالإنجليزي</span><span class="en" lang="en" dir="ltr">English</span>';
+      $('gameMenu').appendChild(hd);
+    }
     var b = document.createElement('button');
     b.className = 'gamecard'; b.dataset.mode = g.mode; b.style.cssText = colorVars(g.c);
     b.innerHTML = '<span class="gicon' + (g.emo ? ' emo' : '') + '" aria-hidden="true"></span><span class="gname"></span>';
@@ -1406,7 +1555,10 @@ h1 span{color:var(--orange)}
     d.setAttribute('aria-label', 'السؤال ' + fmt(Math.min(round + 1, ROUNDS)) + ' من ' + fmt(ROUNDS));
   }
   function ask(){
-    if (mode === 'listen') say('أَيْنَ حَرْفُ ال' + SN(target) + '؟');
+    if (mode === 'enListen') say(['أَيْنَ حَرْف', { en: EN[target].c }]);
+    else if (mode === 'enWord') say(['أَيْنَ', { en: EN[target].w }]);
+    else if (mode === 'enCount') say({ en: 'How many?' });
+    else if (mode === 'listen') say('أَيْنَ حَرْفُ ال' + SN(target) + '؟');
     else if (mode === 'count') say('كَمْ عَدَدُها؟');
     else if (mode === 'color') say('أَيْنَ اللَّوْنُ ' + PAINTS[target].the + '؟');
     else if (mode === 'shape') say('أَيْنَ ' + SHAPES[target].the + '؟');
@@ -1427,7 +1579,19 @@ h1 span{color:var(--orange)}
     $('choices').classList.toggle('four', opts.length === 4);
     renderDots();
     var p = $('prompt'); p.style.cssText = colorVars(t);
-    if (mode === 'count'){
+    if (mode === 'enCount'){
+      p.innerHTML = '<div class="countbox small" id="pBox"></div><p class="ask">كم عددها بالإنجليزي؟</p><button class="btn ghost" id="replay">' + SPK + 'اسمع السؤال</button>';
+      countBox($('pBox'), t + 1, pick(COUNT_PICS), null, true);
+      zizo('عُدّ الصور بالإنجليزي، ثم اختر الرقم');
+    } else if (mode === 'enListen'){
+      p.innerHTML = '<button class="speak-big" id="replay" aria-label="اسمع مرة أخرى">' + SPK + '</button><p class="ask">أي حرف تسمع؟</p>';
+      zizo('اسمع الحرف الإنجليزي، ثم اختره');
+    } else if (mode === 'enWord'){
+      p.style.cssText = '--c:var(--teal);--cd:var(--teal-dark)';
+      p.innerHTML = '<button class="speak-big" id="replay" aria-label="اسمع مرة أخرى">' + SPK + '</button><p class="ask en" lang="en" dir="ltr"></p>';
+      p.querySelector('.ask').textContent = EN[t].w;
+      zizo('اسمع الكلمة الإنجليزية، ثم اختر صورتها');
+    } else if (mode === 'count'){
       p.innerHTML = '<div class="countbox small" id="pBox"></div><p class="ask">كم عددها؟</p><button class="btn ghost" id="replay">' + SPK + 'اسمع السؤال</button>';
       countBox($('pBox'), t + 1, pick(COUNT_PICS), null);
       zizo('عُدّ الصور، ثم اختر الرقم الصحيح');
@@ -1453,6 +1617,13 @@ h1 span{color:var(--orange)}
       if (POOL_TOPIC[mode]){
         b.innerHTML = '<span class="vis">' + visualOf(POOL_TOPIC[mode], pool[o]) + '</span>';
         b.setAttribute('aria-label', pool[o].n);
+      } else if (mode === 'enWord'){
+        b.innerHTML = '<span class="vis"><span class="emo">' + EN[o].e + '</span></span>';
+        b.setAttribute('aria-label', EN[o].w);
+      } else if (mode === 'enListen' || mode === 'enCount'){
+        b.className = 'choice en';
+        b.textContent = mode === 'enCount' ? ENN[o].d : EN[o].c;
+        b.setAttribute('aria-label', mode === 'enCount' ? ENN[o].w : 'حرف ' + EN[o].c);
       } else {
         b.textContent = mode === 'count' ? N[o].d : L[o].c;
         b.setAttribute('aria-label', mode === 'count' ? 'الرقم ' + N[o].n : 'حرف ال' + L[o].n);
@@ -1471,7 +1642,9 @@ h1 span{color:var(--orange)}
       zizo(pr, 'happy'); addStar();
       if (mode === 'first') wordInto($('pWord'), target, false);
       var won = POOLS[mode][target];
-      say(mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] :
+      say(mode === 'enListen' ? [pr, { en: won.c + ', ' + won.w }] : mode === 'enWord' ? [pr, { en: won.w }] :
+          mode === 'enCount' ? [{ en: won.w }, pr] :
+          mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] :
           mode === 'animal' ? [pr, won.fs] : (mode === 'color' || mode === 'shape') ? [pr, won.s] : pr);
       round++; renderDots();
       nextTimer = setTimeout(function(){ whenNoPrize(nextRound); }, 1500);
@@ -1486,7 +1659,7 @@ h1 span{color:var(--orange)}
     var h = ''; for (var k=0;k<ROUNDS;k++) h += '<span>' + STAR + '</span>';
     $('endStars').innerHTML = h;
     $('endTitle').textContent = gx('أحسنت يا ', 'أحسنتِ يا ') + hero() + '!';
-    $('endNext').textContent = nextPrizeText();
+    $('endNext').textContent = shopText();
     renderDots();
     zizo(gx('أحسنت يا ', 'أحسنتِ يا ') + hero() + '! ' + gx('جمعت', 'جمعتِ') + ' خمس نجوم', 'happy');
     say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + (kid.name || gx('بَطَل', 'بَطَلَة')));
@@ -1497,11 +1670,27 @@ h1 span{color:var(--orange)}
 
   /* ---------- trace ---------- */
   var cv = $('cv'), ctx = cv.getContext('2d'), S = 300, lastW = 0, strokes = [], drawing = false, tIdx = 0, traceTimer = null;
-  var tKind = 'letters', tSaved = { letters: 0, numbers: 0 };
-  function tList(){ return tKind === 'numbers' ? N : L; }
-  function tChar(i){ return tKind === 'numbers' ? N[i].d : L[i].c; }
-  function tTitle(i){ return tKind === 'numbers' ? 'الرقم ' + N[i].n : 'حرف ال' + L[i].n; }
-  function tSay(i){ say(tKind === 'numbers' ? N[i].s : SN(i)); }
+  // Four things to trace: Arabic letters, Arabic numbers, English letters (en), English numbers (enNum)
+  var tKind = 'letters', tSaved = { letters: 0, numbers: 0, en: 0, enNum: 0 };
+  function tEn(){ return tKind === 'en' || tKind === 'enNum'; }
+  // Weight and height (share of the board) of English letters to trace. Checked on all 36 against
+  // a circle scribble and against a similar letter drawn instead (E/F, O/Q, 6/9, 3/8, 1/7...).
+  var EN_TRACE_W = '500', EN_TRACE_H = 0.6;
+  function tIsNum(){ return tKind === 'numbers' || tKind === 'enNum'; }
+  function tList(){ return { letters: L, numbers: N, en: EN, enNum: ENN }[tKind]; }
+  function tChar(i){ return { letters: function(){ return L[i].c; }, numbers: function(){ return N[i].d; }, en: function(){ return EN[i].c; }, enNum: function(){ return ENN[i].d; } }[tKind](); }
+  function tTitle(i){
+    if (tKind === 'numbers') return 'الرقم ' + N[i].n;
+    if (tKind === 'en') return 'حرف ' + EN[i].c;
+    if (tKind === 'enNum') return 'الرقم ' + ENN[i].d;
+    return 'حرف ال' + L[i].n;
+  }
+  function tSay(i){
+    if (tKind === 'numbers') say(N[i].s);
+    else if (tKind === 'en') sayEn(EN[i].c);
+    else if (tKind === 'enNum') sayEn(ENN[i].w);
+    else say(SN(i));
+  }
   function setTraceKind(kind, idx){
     tSaved[tKind] = tIdx;
     tKind = kind;
@@ -1529,13 +1718,25 @@ h1 span{color:var(--orange)}
   }
   // Where the guide letter sits, in canvas units (S x S). Shared by the drawing and by the check.
   function placeGlyph(c, ch){
-    c.font = '700 ' + Math.round(S*0.6) + 'px "Noto Naskh Arabic", "Amiri", serif';
     c.textAlign = 'center'; c.textBaseline = 'alphabetic';
+    if (tEn()){
+      // English: a lighter weight (in bold the gaps inside E, B, 8 close up), and every letter or
+      // number sized to the same height so the shape fills the board like the Arabic letters do
+      var base = Math.round(S*0.6), fam = 'px "Baloo Bhaijaan 2", sans-serif';
+      c.font = EN_TRACE_W + ' ' + base + fam;
+      var m0 = c.measureText(ch);
+      var h0 = (m0.actualBoundingBoxAscent || base*0.7) + (m0.actualBoundingBoxDescent || 0);
+      var w0 = (m0.actualBoundingBoxLeft || 0) + (m0.actualBoundingBoxRight || base*0.6);
+      c.font = EN_TRACE_W + ' ' + Math.round(base * Math.min(EN_TRACE_H*S / h0, 0.8*S / w0)) + fam;
+    } else {
+      c.font = '700 ' + Math.round(S*0.6) + 'px "Noto Naskh Arabic", "Amiri", serif';
+    }
     var m = c.measureText(ch);
     var asc = m.actualBoundingBoxAscent || S*0.3, desc = m.actualBoundingBoxDescent || 0;
     var left = m.actualBoundingBoxLeft || 0, right = m.actualBoundingBoxRight || 0;
     return { x: S/2 + (left - right)/2, y: S/2 + (asc - desc)/2 };
   }
+  if (window.__zizoTest) window.__zizoTest.placeGlyph = placeGlyph; // used by the phone simulation only
   function inkWidth(){ return Math.max(10, S*0.05); }
   function strokePaths(c){
     strokes.forEach(function(s){
@@ -1647,7 +1848,8 @@ h1 span{color:var(--orange)}
   for (var sdx = -2; sdx <= 2; sdx++) for (var sdy = -2; sdy <= 2; sdy++) if (sdx*sdx + sdy*sdy <= 5) SHIFTS.push([sdx, sdy]);
   function traceScore(){
     var fill = glyphCells(0), line = cellList(centreLine(fill)), ink = cellList(inkCells(inkWidth()));
-    var dots = dotPieces(fill);
+    // Only Arabic has dots; in "10" the 1 is a whole part of the number, not a dot
+    var dots = tEn() ? [] : dotPieces(fill);
     if (!line.length || !ink.length) return { cover: 0, inside: 0, dots: !dots.length };
     var dLine = distMap(line), dInk = distMap(ink);
     var dDots = dots.map(distMap);
@@ -1685,8 +1887,8 @@ h1 span{color:var(--orange)}
     var len = tList().length;
     tIdx = (i + len) % len; strokes = []; traceDone = false;
     $('tLabelText').textContent = tTitle(tIdx);
-    $('prevT').setAttribute('aria-label', tKind === 'numbers' ? 'الرقم السابق' : 'الحرف السابق');
-    $('nextT').setAttribute('aria-label', tKind === 'numbers' ? 'الرقم التالي' : 'الحرف التالي');
+    $('prevT').setAttribute('aria-label', tIsNum() ? 'الرقم السابق' : 'الحرف السابق');
+    $('nextT').setAttribute('aria-label', tIsNum() ? 'الرقم التالي' : 'الحرف التالي');
     drawAll();
     zizo('ارسم ' + tTitle(tIdx) + ' بإصبعك فوق النقاط');
     if (speak) tSay(tIdx);
@@ -1697,7 +1899,7 @@ h1 span{color:var(--orange)}
   $('clearT').addEventListener('click', function(){ if (traceDone) return; strokes = []; drawAll(); });
   $('doneT').addEventListener('click', function(){
     if (traceDone) return;
-    var isNum = tKind === 'numbers';
+    var isNum = tIsNum();
     var n = strokes.reduce(function(a, s){ return a + s.length; }, 0);
     if (n < 12){
       zizo(isNum ? 'ارسم فوق الرقم بإصبعك أولاً' : 'ارسم فوق الحرف بإصبعك أولاً', 'sad');
@@ -1726,7 +1928,8 @@ h1 span{color:var(--orange)}
     }
     if (!sc.dots){
       // Dots tell letters apart (ب ت ث), so they count
-      var many = !isNum && 'تثشقي'.indexOf(L[tIdx].c) !== -1, kaf = !isNum && L[tIdx].c === 'ك';
+      var ar = tKind === 'letters';
+      var many = ar && 'تثشقي'.indexOf(L[tIdx].c) !== -1, kaf = ar && L[tIdx].c === 'ك';
       var dont = gx('لا تنسَ', 'لا تنسَي');
       zizo(kaf ? 'رائع! ' + dont + ' الرسمة الصغيرة داخل الكاف' : many ? 'رائع! ' + dont + ' النقاط' : 'رائع! ' + dont + ' النقطة', 'sad');
       var dontS = gx('لا تَنْسَ', 'لا تَنْسَيْ');
@@ -1739,7 +1942,10 @@ h1 span{color:var(--orange)}
   });
   if (window.ResizeObserver) new ResizeObserver(function(){ if (!$('v-trace').hidden) sizeCanvas(); }).observe($('cWrap'));
   if (document.fonts && document.fonts.load){
-    document.fonts.load('700 100px "Noto Naskh Arabic"', 'بت').then(function(){ if (!$('v-trace').hidden) drawAll(); }).catch(function(){});
+    Promise.all([
+      document.fonts.load('700 100px "Noto Naskh Arabic"', 'بت'),
+      document.fonts.load('700 100px "Baloo Bhaijaan 2"', 'AB12')
+    ]).then(function(){ if (!$('v-trace').hidden) drawAll(); }).catch(function(){});
   }
 
   /* ---------- navigation ---------- */
@@ -1753,7 +1959,7 @@ h1 span{color:var(--orange)}
     window.scrollTo(0, 0);
     if (v === 'letters') backToGrid();
     if (v === 'numbers') backToNumbers();
-    if (v === 'rewards'){ renderRewards(); zizo('اختر ما يلبسه زيزو! كل نجمة تقرّبك من جائزة جديدة'); }
+    if (v === 'rewards'){ renderRewards(); zizo(gx('هذا متجري! اختر ما تشتريه لي بنجومك', 'هذا متجري! اختاري ما تشترينه لي بنجومك')); }
     if (v === 'discover') backToD();
     if (v === 'play') showGameMenu();
     if (v === 'trace'){ lastW = 0; sizeCanvas(); setTrace(tIdx, false); }
