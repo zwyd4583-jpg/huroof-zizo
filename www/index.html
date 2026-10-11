@@ -26,6 +26,8 @@
   --brown:#9A6235; --brown-dark:#764A26;
   --rose:#F590C0; --rose-dark:#D4689C;
   --shade:rgba(0,0,0,.13); --shine:rgba(255,255,255,.3);
+  --r1:#D3EECB; --r2:#C9E6F8; --r3:#F7E3B8; --r4:#DCD3F3;
+  --lock:#C3CCD8; --lock-dark:#9FAABA;
   --f-ui:"Baloo Bhaijaan 2","Tajawal","Segoe UI",Tahoma,sans-serif;
   --f-letter:"Noto Naskh Arabic","Amiri","Geeza Pro","Traditional Arabic",serif;
   color-scheme:light;
@@ -135,6 +137,67 @@ h1 span{color:var(--orange)}
 .gtitle{font-weight:800; font-size:1.2rem; min-width:0}
 .choice .vis{width:64%}
 .choice .vis .emo{font-size:clamp(2.6rem,13vw,3.6rem)}
+
+/* welcome */
+.welcome{position:fixed; inset:0; z-index:15; overflow-y:auto; display:grid; place-items:center;
+  padding-inline:16px; padding-block:calc(16px + env(safe-area-inset-top,0px)) calc(24px + env(safe-area-inset-bottom,0px));
+  background:
+    radial-gradient(90px 34px at 14% 12%, rgba(255,255,255,.8) 60%, transparent 63%),
+    radial-gradient(110px 38px at 84% 26%, rgba(255,255,255,.7) 60%, transparent 63%),
+    radial-gradient(80px 28px at 22% 78%, rgba(255,255,255,.55) 60%, transparent 63%),
+    var(--sky)}
+.wl-inner{width:100%; max-width:420px; display:grid; justify-items:center; gap:12px; text-align:center}
+.wl-title{font-size:2.5rem}
+.zizo-hero{width:180px; height:186px; overflow:visible; transform-origin:50% 90%; animation:enter .9s cubic-bezier(.3,1.4,.5,1) both, sway 2.6s 1s ease-in-out infinite}
+.zizo-hero .ear{transform-box:fill-box; transform-origin:center; animation:flap 2.2s ease-in-out infinite}
+.wl-hello{margin:0; font-size:1.8rem; font-weight:800; line-height:1.35; text-wrap:balance}
+.wl-stars{display:inline-flex; align-items:center; gap:6px; background:var(--sun); border-radius:999px; padding:4px 16px; font-weight:800; font-size:1.2rem; box-shadow:0 3px 0 var(--sun-dark); font-variant-numeric:tabular-nums}
+.wl-stars svg{width:22px; height:22px; color:var(--white)}
+#wlMain{width:100%; display:grid; justify-items:center; gap:14px}
+.wl-actions{width:100%; display:grid; gap:14px}
+.btn.big{width:100%; flex-direction:column; gap:2px; font-size:1.45rem; padding:14px 18px 12px; border-radius:22px; box-shadow:0 6px 0 var(--bd)}
+.btn.big small{font-size:1rem; font-weight:700; opacity:.92}
+.btn.big .bigrow{display:flex; align-items:center; gap:10px}
+.btn.big svg{width:30px; height:30px}
+.linkbtn{border:0; background:none; color:var(--ink-soft); font-family:inherit; font-weight:700; font-size:1rem; text-decoration:underline; padding:8px}
+.setup{width:100%; padding:20px 16px; display:grid; gap:12px; animation:pop .4s ease}
+.setup label{font-weight:800; font-size:1.35rem}
+.setup input{width:100%; box-sizing:border-box; font-family:var(--f-ui); font-size:1.5rem; font-weight:700; text-align:center; color:var(--ink); background:var(--paper); border:3px solid var(--sky-dark); border-radius:16px; padding:10px 14px; -webkit-user-select:text; user-select:text}
+.setup input:focus{outline:none; border-color:var(--blue)}
+.seg{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+.seg button{border:0; border-radius:16px; padding:12px 8px; font-weight:800; font-size:1.2rem; background:var(--sky); color:var(--ink); box-shadow:0 4px 0 var(--sky-dark)}
+.seg button[aria-pressed="true"]{background:var(--green); color:var(--white); box-shadow:0 4px 0 var(--green-dark)}
+.setup-note{margin:0; color:var(--ink-soft); font-size:.9rem}
+@keyframes enter{from{transform:translateY(70px) scale(.6); opacity:0} to{transform:none; opacity:1}}
+@keyframes sway{0%,100%{transform:rotate(0)} 25%{transform:rotate(-4deg)} 75%{transform:rotate(4deg)}}
+
+/* Zizo's journey (stage map) */
+.journey-card{grid-column:1/-1; min-width:0; border:0; border-radius:24px; background:var(--orange); color:var(--white); box-shadow:0 6px 0 var(--orange-dark); padding:14px 16px; display:flex; align-items:center; gap:14px; text-align:start; font-family:inherit}
+.journey-card:active{transform:translateY(4px); box-shadow:0 2px 0 var(--orange-dark)}
+.journey-card .jicon{font-size:3rem; line-height:1; flex:none}
+.journey-card .jtext{display:grid; gap:4px; min-width:0; flex:1}
+.journey-card b{font-size:1.4rem; font-weight:800}
+.journey-card span{font-weight:700; font-size:1rem}
+.jbar{height:10px; border-radius:5px; background:rgba(255,255,255,.35); overflow:hidden}
+.jbar i{display:block; height:100%; background:var(--white); border-radius:5px}
+.map{position:relative; overflow:hidden; border-radius:28px; box-shadow:0 6px 0 var(--sky-dark)}
+.region{position:absolute; left:0; right:0}
+.region-name{position:absolute; top:12px; inset-inline-start:12px; z-index:2; background:var(--paper); color:var(--ink); border-radius:999px; padding:3px 14px; font-weight:800; font-size:1rem; box-shadow:0 3px 0 var(--shade)}
+.deco{position:absolute; font-size:2.1rem; line-height:1; pointer-events:none}
+.road{position:absolute; inset:0; width:100%; height:100%; pointer-events:none}
+.node{position:absolute; z-index:3; width:64px; height:64px; margin-left:-32px; margin-bottom:-32px; border:0; border-radius:50%; background:var(--c); color:var(--white); box-shadow:0 5px 0 var(--cd); font-family:var(--f-letter); font-weight:700; font-size:1.8rem; line-height:1; padding-bottom:6px; display:grid; place-items:center}
+.node:active{margin-bottom:-36px; box-shadow:0 1px 0 var(--cd)}
+.node.locked{--c:var(--lock); --cd:var(--lock-dark)}
+.node.locked svg{width:24px; height:24px}
+.node.current{width:80px; height:80px; margin-left:-40px; margin-bottom:-40px; font-size:2.2rem; --c:var(--pink); --cd:var(--pink-dark); animation:pulse 1.8s ease-in-out infinite}
+.node.current:active{margin-bottom:-44px}
+.nstars{position:absolute; bottom:-20px; left:50%; transform:translateX(-50%); display:flex; gap:1px; color:var(--sun)}
+.nstars svg{width:17px; height:17px; filter:drop-shadow(0 1px 0 var(--sun-dark))}
+.nstars .off{color:var(--paper); filter:none; opacity:.85}
+.map-zizo{position:absolute; z-index:4; width:58px; height:60px; margin-left:-29px; overflow:visible; pointer-events:none; animation:bob 2s ease-in-out infinite}
+.choices.four{grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px}
+.choices.four .choice{font-size:clamp(2rem,9vw,2.8rem); border-radius:20px}
+.endstars .off{color:var(--sky-dark); filter:none}
 
 /* Zizo's prizes */
 .wardrobe-top{display:flex; align-items:center; gap:14px; padding:16px}
@@ -348,11 +411,21 @@ h1 span{color:var(--orange)}
 
     <section id="v-play" class="view" hidden>
       <div id="gameMenu" class="games" aria-label="الألعاب"></div>
+      <div id="mapArea" class="view" hidden>
+        <div class="gamebar">
+          <button class="btn ghost" id="mapBack">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+            كل الألعاب
+          </button>
+          <span class="gtitle">رحلة زيزو</span>
+        </div>
+        <div class="map" id="map" aria-label="خريطة المراحل"></div>
+      </div>
       <div id="gameArea" hidden>
       <div class="gamebar">
         <button class="btn ghost" id="gamesBack">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          كل الألعاب
+          <span id="gamesBackText">كل الألعاب</span>
         </button>
         <span class="gtitle" id="gTitle"></span>
       </div>
@@ -363,7 +436,7 @@ h1 span{color:var(--orange)}
       </div>
       <div class="card end" id="endArea" hidden>
         <div class="endstars" id="endStars"></div>
-        <h2>أحسنت يا بطل!</h2>
+        <h2 id="endTitle">أحسنت يا بطل!</h2>
         <p>جمعت خمس نجوم جديدة</p>
         <p class="endnext" id="endNext"></p>
         <div class="btnrow">
@@ -375,6 +448,16 @@ h1 span{color:var(--orange)}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="9" width="17" height="11.5" rx="2"/><path d="M3.5 13.5h17M12 9v11.5"/><path d="M12 9C10.5 5.5 6 5 6 7.5S10 9 12 9ZM12 9c1.5-3.5 6-4 6-1.5S14 9 12 9Z"/></svg>
             جوائز زيزو
           </button>
+        </div>
+      </div>
+      <div class="card end" id="stageEnd" hidden>
+        <div class="endstars" id="stageStars"></div>
+        <h2 id="stageTitle"></h2>
+        <p id="stageSub"></p>
+        <div class="btnrow">
+          <button class="btn" id="stageNext" style="--b:var(--green);--bd:var(--green-dark)">المرحلة التالية</button>
+          <button class="btn ghost" id="stageRetry">أعد المرحلة</button>
+          <button class="btn ghost" id="stageMap">الخريطة</button>
         </div>
       </div>
       </div>
@@ -444,6 +527,41 @@ h1 span{color:var(--orange)}
     </button>
   </nav>
   <div id="fx" aria-hidden="true"></div>
+  <div class="welcome" id="welcome" role="dialog" aria-modal="true" aria-label="أهلاً">
+    <div class="wl-inner">
+      <h1 class="wl-title">حروف <span>زيزو</span></h1>
+      <svg class="zizo-hero" id="heroZizo" viewBox="0 -4 120 124" aria-hidden="true"></svg>
+      <p class="wl-hello" id="wlHello" aria-live="polite"></p>
+      <div id="wlMain">
+        <div class="wl-stars">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>
+          <span id="wlStars"></span>
+        </div>
+        <div class="wl-actions">
+          <button class="btn big" id="goJourney">
+            <span class="bigrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6.5l6-2.5 6 2.5 6-2.5v13.5l-6 2.5-6-2.5-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></svg>رحلة زيزو</span>
+            <small id="wlStage"></small>
+          </button>
+          <button class="btn big" id="goLearn" style="--b:var(--blue);--bd:var(--blue-dark)">
+            <span class="bigrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>تعلّم والعب</span>
+            <small>الحروف والأرقام والألوان والحيوانات</small>
+          </button>
+        </div>
+        <button class="linkbtn" id="editName">تغيير الاسم</button>
+      </div>
+      <form class="card setup" id="setup" hidden>
+        <label for="kidName">ما اسم البطل الصغير؟</label>
+        <input id="kidName" maxlength="20" autocomplete="off" enterkeyhint="done" placeholder="اكتب الاسم هنا">
+        <div class="seg" role="group" aria-label="ولد أو بنت">
+          <button type="button" data-g="m" aria-pressed="true">ولد</button>
+          <button type="button" data-g="f" aria-pressed="false">بنت</button>
+        </div>
+        <button class="btn" type="submit" id="saveName" style="--b:var(--green);--bd:var(--green-dark)">هيا نبدأ!</button>
+        <button class="linkbtn" type="button" id="skipName">تخطَّ</button>
+        <p class="setup-note">يكتب الاسمَ أحدُ الوالدين، ويبقى على هذا الهاتف فقط</p>
+      </form>
+    </div>
+  </div>
   <div class="modal" id="prizeModal" role="dialog" aria-modal="true" aria-labelledby="prizeTitle" hidden>
     <div class="card modal-card">
       <p class="modal-kicker">جائزة جديدة!</p>
@@ -576,8 +694,24 @@ h1 span{color:var(--orange)}
   }
   var COLORS = [['--orange','--orange-dark'],['--blue','--blue-dark'],['--green','--green-dark'],['--pink','--pink-dark'],['--purple','--purple-dark'],['--teal','--teal-dark']];
   var NONCONN = 'اأإآدذرزو';
-  var PRAISE = ['أحسنت!','رائع!','ممتاز!','برافو!','شاطر!'];
-  var RETRY = ['حاول مرة أخرى','قريب! جرّب مرة ثانية'];
+  // The child, as a parent entered them on the welcome screen. Kept on this phone only.
+  var kid = { name: '', g: 'm', set: false };
+  try {
+    var savedKid = JSON.parse(localStorage.getItem('zizo-kid') || 'null');
+    if (savedKid && typeof savedKid === 'object'){
+      kid.name = String(savedKid.name || '').slice(0, 20); kid.g = savedKid.g === 'f' ? 'f' : 'm'; kid.set = true;
+    }
+  } catch(e){}
+  function saveKid(){ try { localStorage.setItem('zizo-kid', JSON.stringify({ name: kid.name, g: kid.g })); } catch(e){} }
+  // Pick the boy or girl form of a phrase
+  function gx(m, f){ return kid.g === 'f' ? f : m; }
+  function praise(){
+    var p = pick(gx(['أحسنت!','رائع!','ممتاز!','برافو!','شاطر!'], ['أحسنتِ!','رائعة!','ممتازة!','برافو!','شاطرة!']));
+    if (kid.name && Math.random() < 0.4) p = p.replace('!', ' يا ' + kid.name + '!');
+    return p;
+  }
+  function retry(){ return pick(gx(['حاول مرة أخرى','قريب! جرّب مرة ثانية'], ['حاولي مرة أخرى','قريب! جرّبي مرة ثانية'])); }
+  function hero(){ return kid.name || gx('بطل', 'بطلة'); }
   var SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
   var STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
 
@@ -847,7 +981,7 @@ h1 span{color:var(--orange)}
   function nextPrize(){ for (var k = 0; k < PRIZES.length; k++) if (PRIZES[k].at > stars) return PRIZES[k]; return null; }
   function nextPrizeText(){
     var np = nextPrize();
-    return np ? 'باقي ' + starsText(np.at - stars) + ' لتربح ' + np.name : 'ربحت كل الجوائز! أنت بطل';
+    return np ? 'باقي ' + starsText(np.at - stars) + ' لتربح ' + np.name : gx('ربحت كل الجوائز! أنت بطل', 'ربحتِ كل الجوائز! أنتِ بطلة');
   }
 
   var LOCK = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
@@ -902,7 +1036,7 @@ h1 span{color:var(--orange)}
     $('prizeModal').hidden = false;
     $('wearPrize').focus();
     burst();
-    say('مَبْرُوك! رَبِحْتَ جائِزَةً جَدِيدَة');
+    say(gx('مَبْرُوك! رَبِحْتَ جائِزَةً جَدِيدَة', 'مَبْرُوك! رَبِحْتِ جائِزَةً جَدِيدَة'));
   }
   function closePrize(){
     $('prizeModal').hidden = true;
@@ -1011,7 +1145,7 @@ h1 span{color:var(--orange)}
     $('nCount').textContent = fmt(ncur + 1) + ' من ' + fmt(N.length);
     nBoxCtl = countBox($('nBox'), ncur + 1, x.e, function(auto){
       if (auto) return;
-      var pr = pick(PRAISE);
+      var pr = praise();
       zizo(pr + ' عددها ' + x.n, 'happy'); addStar();
       say([x.s, pr]);
     });
@@ -1082,6 +1216,166 @@ h1 span{color:var(--orange)}
   var ROUNDS = 5, mode = 'listen', round = 0, target = 0, last = -1, locked = false, nextTimer = null;
   var POOLS = { listen: L, first: L, count: N, color: PAINTS, shape: SHAPES, animal: ANIMALS };
   var POOL_TOPIC = { color: 'colors', shape: 'shapes', animal: 'animals' };
+
+  /* ---------- Zizo's journey: 20 stages on a map ---------- */
+  // m: question types mixed in the stage; r: which items each type uses ([from, to) by list);
+  // ch: answers to choose from; n: questions. Stages get longer and offer 4 answers later on.
+  var STAGES = [
+    { m:['listen'], r:{ L:[0,7] },  ch:3, n:5 },
+    { m:['count'],  r:{ N:[0,5] },  ch:3, n:5 },
+    { m:['color'],  r:{ P:[0,4] },  ch:3, n:5 },
+    { m:['listen'], r:{ L:[7,14] }, ch:3, n:5 },
+    { m:['animal','listen'], r:{ A:[0,6], L:[0,14] }, ch:3, n:6 },
+    { m:['first'],  r:{ L:[0,14] }, ch:3, n:5 },
+    { m:['count'],  r:{}, ch:3, n:5 },
+    { m:['shape'],  r:{}, ch:3, n:5 },
+    { m:['listen'], r:{ L:[14,21] }, ch:3, n:5 },
+    { m:['color','count','listen'], r:{ L:[0,21] }, ch:3, n:6 },
+    { m:['listen'], r:{ L:[21,28] }, ch:3, n:5 },
+    { m:['animal'], r:{}, ch:4, n:6 },
+    { m:['first'],  r:{}, ch:3, n:6 },
+    { m:['count'],  r:{}, ch:4, n:6 },
+    { m:['listen','shape','animal'], r:{}, ch:4, n:6 },
+    { m:['listen'], r:{}, ch:4, n:7 },
+    { m:['first'],  r:{}, ch:4, n:7 },
+    { m:['color','shape','animal'], r:{}, ch:4, n:7 },
+    { m:['count','listen','first'], r:{}, ch:4, n:7 },
+    { m:['listen','first','count','color','shape','animal'], r:{}, ch:4, n:8 }
+  ];
+  var REGIONS = [
+    { name:'الغابة',   k:'--r1', c:2, deco:['🌳','🍄','🌲','🦋'] },
+    { name:'البحر',    k:'--r2', c:1, deco:['🐠','🐚','🐙','🐬'] },
+    { name:'الصحراء',  k:'--r3', c:0, deco:['🌵','🐪','☀️','🏜️'] },
+    { name:'الفضاء',   k:'--r4', c:4, deco:['🚀','🪐','🌙','⭐'] }
+  ];
+  var POOL_KEY = { listen:'L', first:'L', count:'N', color:'P', shape:'S', animal:'A' };
+  var stage = null, nch = 3, mistakes = 0;
+  var jStars = STAGES.map(function(){ return 0; });
+  try { var savedJ = JSON.parse(localStorage.getItem('zizo-journey') || '[]'); STAGES.forEach(function(_, i){ jStars[i] = Math.max(0, Math.min(3, savedJ[i] | 0)); }); } catch(e){}
+  function saveJourney(){ try { localStorage.setItem('zizo-journey', JSON.stringify(jStars)); } catch(e){} }
+  function currentStage(){ for (var i = 0; i < STAGES.length; i++) if (!jStars[i]) return i; return STAGES.length; }
+  function allowed(m){
+    var pool = POOLS[m], r = stage !== null ? STAGES[stage].r[POOL_KEY[m]] : null, out = [];
+    for (var i = r ? r[0] : 0; i < (r ? r[1] : pool.length); i++) out.push(i);
+    return out;
+  }
+  function stageText(){
+    var cur = currentStage();
+    if (cur < STAGES.length) return 'المرحلة ' + fmt(cur + 1) + ' من ' + fmt(STAGES.length);
+    var sum = jStars.reduce(function(a, s){ return a + s; }, 0);
+    return 'كل المراحل تمّت! ' + fmt(sum) + ' من ' + fmt(STAGES.length * 3) + ' نجمة';
+  }
+  var LOCK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2.5" fill="currentColor"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  var STEP = 100, PAD = 70;
+  function renderMap(){
+    var map = $('map'), H = PAD * 2 + (STAGES.length - 1) * STEP, cur = currentStage();
+    map.style.height = H + 'px';
+    var h = '';
+    REGIONS.forEach(function(rg, k){
+      var bottom = k === 0 ? 0 : PAD + (k * 5 - 0.5) * STEP;
+      var top = k === REGIONS.length - 1 ? H : PAD + (k * 5 + 4.5) * STEP;
+      h += '<div class="region" style="bottom:' + bottom + 'px;height:' + (top - bottom) + 'px;background:var(' + rg.k + ')">' +
+           '<span class="region-name">' + rg.name + '</span>';
+      rg.deco.forEach(function(e, j){
+        h += '<span class="deco" aria-hidden="true" style="' + (j % 2 ? 'right' : 'left') + ':' + (4 + (j > 1 ? 8 : 0)) + '%;bottom:' + (22 + j * 16) + '%">' + e + '</span>';
+      });
+      h += '</div>';
+    });
+    var pts = STAGES.map(function(_, i){ return [50 + 30 * Math.sin(i * 1.15 + 0.4), H - (PAD + i * STEP)]; });
+    var d = 'M' + pts[0][0] + ' ' + pts[0][1];
+    for (var i = 1; i < pts.length; i++){
+      var a = pts[i-1], b = pts[i], my = (a[1] + b[1]) / 2;
+      d += ' C' + a[0] + ' ' + my + ' ' + b[0] + ' ' + my + ' ' + b[0] + ' ' + b[1];
+    }
+    h += '<svg class="road" viewBox="0 0 100 ' + H + '" preserveAspectRatio="none" aria-hidden="true">' +
+         '<path d="' + d + '" fill="none" stroke="var(--paper)" stroke-width="22" stroke-linecap="round" vector-effect="non-scaling-stroke" opacity=".85"/>' +
+         '<path d="' + d + '" fill="none" stroke="var(--sun)" stroke-width="4" stroke-dasharray="3 12" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>';
+    STAGES.forEach(function(_, i){
+      var state = jStars[i] ? 'done' : i === cur ? 'current' : 'locked';
+      var rc = COLORS[REGIONS[Math.floor(i / 5)].c];
+      var tint = state === 'done' ? ';--c:var(' + rc[0] + ');--cd:var(' + rc[1] + ')' : '';
+      h += '<button class="node ' + state + '" data-i="' + i + '" style="left:' + pts[i][0] + '%;bottom:' + (PAD + i * STEP) + 'px' + tint + '" aria-label="المرحلة ' + fmt(i + 1) + (state === 'locked' ? '، مقفلة' : state === 'done' ? '، ' + fmt(jStars[i]) + ' نجوم' : '، ابدأ هنا') + '">' +
+           (state === 'locked' ? LOCK_ICON : fmt(i + 1));
+      if (state === 'done'){
+        h += '<span class="nstars">';
+        for (var s = 0; s < 3; s++) h += '<span class="' + (s < jStars[i] ? '' : 'off') + '">' + STAR + '</span>';
+        h += '</span>';
+      }
+      h += '</button>';
+    });
+    if (cur < STAGES.length){
+      h += '<svg class="map-zizo" viewBox="0 -4 120 124" aria-hidden="true" style="left:calc(' + pts[cur][0] + '% ' + (pts[cur][0] > 50 ? '- 66px' : '+ 66px') + ');bottom:' + (PAD + cur * STEP - 26) + 'px">' + zizoMarkup(outfit) + '</svg>';
+    }
+    map.innerHTML = h;
+    map.querySelectorAll('.node').forEach(function(nb){
+      nb.addEventListener('click', function(){
+        var i = +nb.dataset.i;
+        if (i > currentStage()){
+          zizo(gx('أكمل', 'أكملي') + ' المرحلة ' + fmt(currentStage() + 1) + ' أولاً لتفتح هذه المرحلة', 'sad');
+          say(gx('أَكْمِلِ المَرْحَلَةَ السّابِقَةَ أَوَّلاً', 'أَكْمِلي المَرْحَلَةَ السّابِقَةَ أَوَّلاً'));
+          return;
+        }
+        startStage(i);
+      });
+    });
+  }
+  function showMap(){
+    clearTimeout(nextTimer); afterPrize = null; stage = null;
+    $('gameMenu').hidden = true; $('gameArea').hidden = true; $('mapArea').hidden = false;
+    renderMap();
+    var cur = currentStage();
+    zizo(cur >= STAGES.length ? gx('أنهيت', 'أنهيتِ') + ' رحلتي كلها! يمكنك إعادة أي مرحلة لتجمع ٣ نجوم'
+         : cur === 0 ? 'هيا نبدأ رحلتي! اضغط على المرحلة الأولى' : 'اضغط على المرحلة ' + fmt(cur + 1) + ' لنكمل الرحلة');
+    var node = $('map').querySelector('.node.current') || $('map').querySelector('.node[data-i="' + (STAGES.length - 1) + '"]');
+    if (node && node.scrollIntoView) node.scrollIntoView({ block: 'center' });
+  }
+  function startStage(i){
+    stage = i; mistakes = 0; last = -1;
+    ROUNDS = STAGES[i].n; nch = STAGES[i].ch;
+    $('gameMenu').hidden = true; $('mapArea').hidden = true; $('gameArea').hidden = false;
+    $('gTitle').textContent = 'المرحلة ' + fmt(i + 1);
+    $('gamesBackText').textContent = 'الخريطة';
+    window.scrollTo(0, 0);
+    newGame();
+  }
+  function stageFinish(){
+    var i = stage, got = mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1;
+    var first = !jStars[i];
+    jStars[i] = Math.max(jStars[i], got); saveJourney();
+    $('playArea').hidden = true; $('stageEnd').hidden = false;
+    var h = ''; for (var k = 0; k < 3; k++) h += '<span class="' + (k < got ? '' : 'off') + '">' + STAR + '</span>';
+    $('stageStars').innerHTML = h;
+    $('stageTitle').textContent = gx('أحسنت يا ', 'أحسنتِ يا ') + hero() + '!';
+    var sub = gx('أنهيت', 'أنهيتِ') + ' المرحلة ' + fmt(i + 1);
+    var last20 = i === STAGES.length - 1;
+    if (first && (i + 1) % 5 === 0 && !last20) sub += '، و' + gx('وصلت', 'وصلتِ') + ' إلى ' + REGIONS[(i + 1) / 5].name + '!';
+    if (first && last20) sub = gx('أنهيت', 'أنهيتِ') + ' رحلة زيزو كلها!';
+    if (got < 3) sub += ' — ' + gx('أعدها', 'أعيديها') + ' بدون أخطاء لتربح ٣ نجوم';
+    $('stageSub').textContent = sub;
+    $('stageNext').hidden = last20;
+    renderDots();
+    zizo(sub, 'happy');
+    say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + hero());
+    burst();
+    stage = i; // keep for the buttons below
+  }
+  $('stageNext').addEventListener('click', function(){ if (stage !== null && stage + 1 < STAGES.length) startStage(stage + 1); });
+  $('stageRetry').addEventListener('click', function(){ if (stage !== null) startStage(stage); });
+  $('stageMap').addEventListener('click', function(){ hush(); showMap(); });
+  $('mapBack').addEventListener('click', function(){ hush(); showGameMenu(); });
+
+  // Big journey card at the top of the games menu
+  var jCard = document.createElement('button');
+  jCard.className = 'journey-card';
+  jCard.innerHTML = '<span class="jicon" aria-hidden="true">🗺️</span><span class="jtext"><b>رحلة زيزو</b><span class="jsub"></span><span class="jbar" aria-hidden="true"><i></i></span></span>';
+  jCard.addEventListener('click', showMap);
+  $('gameMenu').appendChild(jCard);
+  function renderJourneyCard(){
+    var done = jStars.filter(function(s){ return s > 0; }).length;
+    jCard.querySelector('.jsub').textContent = stageText();
+    jCard.querySelector('.jbar i').style.width = Math.round(100 * done / STAGES.length) + '%';
+  }
+
   GAMES.forEach(function(g){
     var b = document.createElement('button');
     b.className = 'gamecard'; b.dataset.mode = g.mode; b.style.cssText = colorVars(g.c);
@@ -1092,18 +1386,20 @@ h1 span{color:var(--orange)}
     $('gameMenu').appendChild(b);
   });
   function showGameMenu(){
-    clearTimeout(nextTimer); afterPrize = null;
-    $('gameMenu').hidden = false; $('gameArea').hidden = true;
+    clearTimeout(nextTimer); afterPrize = null; stage = null;
+    $('gameMenu').hidden = false; $('gameArea').hidden = true; $('mapArea').hidden = true;
+    renderJourneyCard();
     zizo('اختر لعبة نلعبها معاً!');
   }
   function startGame(m){
-    mode = m; last = -1;
-    $('gameMenu').hidden = true; $('gameArea').hidden = false;
+    stage = null; mode = m; last = -1; ROUNDS = 5; nch = 3;
+    $('gameMenu').hidden = true; $('mapArea').hidden = true; $('gameArea').hidden = false;
     $('gTitle').textContent = GAMES.filter(function(g){ return g.mode === m; })[0].t;
+    $('gamesBackText').textContent = 'كل الألعاب';
     window.scrollTo(0, 0);
     newGame();
   }
-  $('gamesBack').addEventListener('click', function(){ hush(); showGameMenu(); });
+  $('gamesBack').addEventListener('click', function(){ hush(); if (stage !== null) showMap(); else showGameMenu(); });
   function renderDots(){
     var d = $('dots'); d.innerHTML = '';
     for (var k=0;k<ROUNDS;k++){ var s = document.createElement('span'); s.className = 'dot' + (k < round ? ' done' : (k === round ? ' now' : '')); d.appendChild(s); }
@@ -1117,16 +1413,18 @@ h1 span{color:var(--orange)}
     else if (mode === 'animal') say('أَيْنَ ' + ANIMALS[target].the + '؟');
     else say(L[target].s);
   }
-  function newGame(){ clearTimeout(nextTimer); round = 0; $('endArea').hidden = true; $('playArea').hidden = false; nextRound(); }
+  function newGame(){ clearTimeout(nextTimer); round = 0; mistakes = 0; $('endArea').hidden = true; $('stageEnd').hidden = true; $('playArea').hidden = false; nextRound(); }
   function nextRound(){
     if (round >= ROUNDS) return finish();
     locked = false;
-    var pool = POOLS[mode];
-    var t; do { t = Math.floor(Math.random()*pool.length); } while (t === last);
+    if (stage !== null) mode = pick(STAGES[stage].m);
+    var pool = POOLS[mode], idx = allowed(mode);
+    var t; do { t = pick(idx); } while (t === last && idx.length > 1);
     last = target = t;
     var opts = [t];
-    while (opts.length < 3){ var r = Math.floor(Math.random()*pool.length); if (opts.indexOf(r) === -1) opts.push(r); }
+    while (opts.length < Math.min(nch, idx.length)){ var r = pick(idx); if (opts.indexOf(r) === -1) opts.push(r); }
     shuffle(opts);
+    $('choices').classList.toggle('four', opts.length === 4);
     renderDots();
     var p = $('prompt'); p.style.cssText = colorVars(t);
     if (mode === 'count'){
@@ -1169,7 +1467,7 @@ h1 span{color:var(--orange)}
     if (o === target){
       locked = true;
       b.classList.add('right');
-      var pr = pick(PRAISE);
+      var pr = praise();
       zizo(pr, 'happy'); addStar();
       if (mode === 'first') wordInto($('pWord'), target, false);
       var won = POOLS[mode][target];
@@ -1178,18 +1476,20 @@ h1 span{color:var(--orange)}
       round++; renderDots();
       nextTimer = setTimeout(function(){ whenNoPrize(nextRound); }, 1500);
     } else {
-      b.classList.add('wrong'); b.disabled = true;
-      var r = pick(RETRY); zizo(r, 'sad'); say(r);
+      b.classList.add('wrong'); b.disabled = true; mistakes++;
+      var r = retry(); zizo(r, 'sad'); say(r);
     }
   }
   function finish(){
+    if (stage !== null) return stageFinish();
     $('playArea').hidden = true; $('endArea').hidden = false;
     var h = ''; for (var k=0;k<ROUNDS;k++) h += '<span>' + STAR + '</span>';
     $('endStars').innerHTML = h;
+    $('endTitle').textContent = gx('أحسنت يا ', 'أحسنتِ يا ') + hero() + '!';
     $('endNext').textContent = nextPrizeText();
     renderDots();
-    zizo('أحسنت يا بطل! جمعت خمس نجوم', 'happy');
-    say('أَحْسَنْتَ يَا بَطَل');
+    zizo(gx('أحسنت يا ', 'أحسنتِ يا ') + hero() + '! ' + gx('جمعت', 'جمعتِ') + ' خمس نجوم', 'happy');
+    say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + (kid.name || gx('بَطَل', 'بَطَلَة')));
     burst();
   }
   $('again').addEventListener('click', newGame);
@@ -1427,12 +1727,14 @@ h1 span{color:var(--orange)}
     if (!sc.dots){
       // Dots tell letters apart (ب ت ث), so they count
       var many = !isNum && 'تثشقي'.indexOf(L[tIdx].c) !== -1, kaf = !isNum && L[tIdx].c === 'ك';
-      zizo(kaf ? 'رائع! لا تنسَ الرسمة الصغيرة داخل الكاف' : many ? 'رائع! لا تنسَ النقاط' : 'رائع! لا تنسَ النقطة', 'sad');
-      say(kaf ? 'لا تَنْسَ الرَّسْمَةَ الصَّغِيرَة' : many ? 'لا تَنْسَ النِّقاط' : 'لا تَنْسَ النُّقْطَة');
+      var dont = gx('لا تنسَ', 'لا تنسَي');
+      zizo(kaf ? 'رائع! ' + dont + ' الرسمة الصغيرة داخل الكاف' : many ? 'رائع! ' + dont + ' النقاط' : 'رائع! ' + dont + ' النقطة', 'sad');
+      var dontS = gx('لا تَنْسَ', 'لا تَنْسَيْ');
+      say(kaf ? dontS + ' الرَّسْمَةَ الصَّغِيرَة' : many ? dontS + ' النِّقاط' : dontS + ' النُّقْطَة');
       return;
     }
     traceDone = true; drawAll();
-    var pr = pick(PRAISE); addStar(); zizo(pr, 'happy'); say(pr);
+    var pr = praise(); addStar(); zizo(pr, 'happy'); say(pr);
     traceTimer = setTimeout(function(){ whenNoPrize(function(){ setTrace(tIdx + 1, true); }); }, 1600);
   });
   if (window.ResizeObserver) new ResizeObserver(function(){ if (!$('v-trace').hidden) sizeCanvas(); }).observe($('cWrap'));
@@ -1458,16 +1760,64 @@ h1 span{color:var(--orange)}
   }
   document.querySelectorAll('.tab').forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.v); }); });
 
-  // Android back button: close the letter card, then go back to the letters, then leave the app.
+  /* ---------- welcome ---------- */
+  var welcome = $('welcome'), pickedG = kid.g;
+  function setG(g){
+    pickedG = g;
+    document.querySelectorAll('.seg button').forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.g === g)); });
+  }
+  document.querySelectorAll('.seg button').forEach(function(b){ b.addEventListener('click', function(){ setG(b.dataset.g); }); });
+  function showWelcome(){
+    hush();
+    $('heroZizo').innerHTML = zizoMarkup(outfit);
+    $('wlStars').textContent = fmt(stars);
+    $('wlStage').textContent = stageText();
+    welcome.hidden = false; welcome.scrollTop = 0;
+    if (!kid.set){ openSetup(true); return; }
+    $('setup').hidden = true; $('wlMain').hidden = false;
+    $('wlHello').textContent = 'أهلاً يا ' + hero() + '!';
+    say(kid.name ? 'أَهْلاً يا ' + kid.name + '! هَيّا نَلْعَب' : gx('أَهْلاً يا بَطَل! هَيّا نَلْعَب', 'أَهْلاً يا بَطَلَة! هَيّا نَلْعَب'));
+  }
+  function openSetup(firstTime){
+    $('wlMain').hidden = true; $('setup').hidden = false;
+    $('kidName').value = kid.name; setG(kid.g);
+    $('wlHello').textContent = firstTime ? 'أهلاً! أنا زيزو الفيل' : 'تغيير الاسم';
+    if (firstTime) say('أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟');
+  }
+  function leaveWelcome(){ welcome.hidden = true; }
+  $('setup').addEventListener('submit', function(e){
+    e.preventDefault();
+    kid.name = $('kidName').value.replace(/\s+/g, ' ').trim().slice(0, 20);
+    kid.g = pickedG; kid.set = true; saveKid();
+    try { $('kidName').blur(); } catch(_){}
+    showWelcome();
+  });
+  $('skipName').addEventListener('click', function(){
+    if (!kid.set){ kid.set = true; kid.g = pickedG; saveKid(); }
+    showWelcome();
+  });
+  $('editName').addEventListener('click', function(){ openSetup(false); });
+  $('goJourney').addEventListener('click', function(){ leaveWelcome(); show('play'); showMap(); });
+  $('goLearn').addEventListener('click', function(){
+    leaveWelcome(); show('letters');
+    zizo('أهلاً يا ' + hero() + '! اضغط على أي حرف لنتعلّمه معاً');
+  });
+
+  // Android back button: close what's open, then go back to the welcome screen, then leave the app.
   if (AppPlugin){
     AppPlugin.addListener('backButton', function(){
       if (prizeOpen()){ closePrize(); return; }
+      if (!welcome.hidden){
+        if (!$('setup').hidden && kid.set) showWelcome();
+        else AppPlugin.exitApp();
+        return;
+      }
       if (currentView === 'letters' && !detail.hidden){ hush(); backToGrid(); }
       else if (currentView === 'numbers' && !ndetail.hidden){ hush(); backToNumbers(); }
       else if (currentView === 'discover' && !ddetail.hidden){ hush(); backToD(); }
-      else if (currentView === 'play' && !$('gameArea').hidden){ hush(); showGameMenu(); }
-      else if (currentView !== 'letters'){ hush(); show('letters'); }
-      else AppPlugin.exitApp();
+      else if (currentView === 'play' && !$('gameArea').hidden){ hush(); if (stage !== null) showMap(); else showGameMenu(); }
+      else if (currentView === 'play' && !$('mapArea').hidden){ hush(); showGameMenu(); }
+      else showWelcome();
     });
     AppPlugin.addListener('pause', hush);
   }
@@ -1475,7 +1825,7 @@ h1 span{color:var(--orange)}
   renderStars();
   renderZizo();
   show('letters');
-  zizo('أهلاً! أنا زيزو الفيل. اضغط على أي حرف لنتعلّمه معاً');
+  showWelcome();
   if (hasWebTTS) setTimeout(updateWebNote, 1500);
   else if (!NTTS && !isNative) updateWebNote();
 })();
