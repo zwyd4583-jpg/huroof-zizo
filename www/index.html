@@ -141,6 +141,17 @@ h1 span{color:var(--orange)}
 .games-head{grid-column:1/-1; margin:10px 4px 0; display:flex; align-items:baseline; justify-content:space-between; gap:10px; font-size:1.3rem; font-weight:800}
 .games-head .en{font-size:1rem; color:var(--ink-soft)}
 .ask.en{font-size:2rem; line-height:1.2}
+/* add and take away */
+.mathpics{display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:10px}
+.grp{display:grid; grid-template-columns:repeat(var(--n),auto); gap:4px; background:var(--sky); border-radius:16px; padding:8px 10px; font-size:clamp(1.4rem,7vw,1.9rem); line-height:1.1}
+.grp .it{position:relative; display:grid; place-items:center}
+.grp .it i{font-style:normal}
+.grp .it.gone i{opacity:.35; filter:grayscale(1)}
+.grp .it.gone::after{content:""; position:absolute; left:-3px; right:-3px; top:50%; height:4px; margin-top:-2px; border-radius:2px; background:var(--red); transform:rotate(-35deg)}
+.mathpics .op, .eqn .op{font-family:var(--f-ui); font-weight:800; font-size:2rem; line-height:1; color:var(--ink-soft)}
+.eqn{margin:0; display:flex; align-items:center; justify-content:center; gap:12px; font-family:var(--f-letter); font-weight:700; font-size:2.6rem; line-height:1.3}
+.eqn .qm{min-width:1.3em; text-align:center; background:var(--sun); color:var(--ink); border-radius:14px; padding:0 .15em; transition:background .2s}
+.eqn .qm.ok{background:var(--green); color:var(--white); animation:pop .45s ease}
 #gameArea{display:grid; gap:14px}
 .gamebar{display:flex; align-items:center; justify-content:space-between; gap:10px}
 .gtitle{font-weight:800; font-size:1.2rem; min-width:0}
@@ -187,6 +198,13 @@ h1 span{color:var(--orange)}
 .journey-card .jtext{display:grid; gap:4px; min-width:0; flex:1}
 .journey-card b{font-size:1.4rem; font-weight:800}
 .journey-card span{font-weight:700; font-size:1rem}
+.daily-card{background:var(--sun); color:var(--ink); box-shadow:0 6px 0 var(--sun-dark)}
+.daily-card:active{box-shadow:0 2px 0 var(--sun-dark)}
+.daily-card.done{background:var(--paper); box-shadow:0 6px 0 var(--sky-dark)}
+.journey-card .streak, .daily-wl .streak{flex:none; background:var(--paper); color:var(--ink); border-radius:999px; padding:2px 12px; font-weight:800; font-size:1.15rem; box-shadow:0 2px 0 var(--sun-dark)}
+.daily-card.done .streak{background:var(--sun)}
+.streak:empty{display:none}
+.btn.daily-wl{width:100%; gap:10px; font-size:1.25rem; padding:12px 16px; border-radius:20px}
 .jbar{height:10px; border-radius:5px; background:rgba(255,255,255,.35); overflow:hidden}
 .jbar i{display:block; height:100%; background:var(--white); border-radius:5px}
 .map{position:relative; overflow:hidden; border-radius:28px; box-shadow:0 6px 0 var(--sky-dark)}
@@ -245,6 +263,7 @@ h1 span{color:var(--orange)}
 .chips{display:flex; gap:6px; background:var(--paper); padding:6px; border-radius:999px; box-shadow:0 4px 0 var(--sky-dark)}
 .chip{flex:1; min-width:0; border:0; border-radius:999px; padding:9px 6px; background:transparent; color:var(--ink-soft); font-weight:800; font-size:1rem; white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--green); color:var(--white)}
+.chips.grid3{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); border-radius:26px}
 .dots{display:flex; gap:10px; justify-content:center}
 .dot{width:16px; height:16px; border-radius:50%; background:var(--sky-dark); transition:background .2s}
 .dot.now{background:var(--orange)}
@@ -402,10 +421,13 @@ h1 span{color:var(--orange)}
     </section>
 
     <section id="v-discover" class="view" hidden>
-      <div class="chips" role="group" aria-label="ماذا نكتشف؟">
+      <div class="chips grid3" role="group" aria-label="ماذا نكتشف؟">
         <button class="chip dchip" data-topic="colors" aria-pressed="true">الألوان</button>
         <button class="chip dchip" data-topic="shapes" aria-pressed="false">الأشكال</button>
         <button class="chip dchip" data-topic="animals" aria-pressed="false">الحيوانات</button>
+        <button class="chip dchip" data-topic="foods" aria-pressed="false">فواكه وخضار</button>
+        <button class="chip dchip" data-topic="body" aria-pressed="false">جسمي</button>
+        <button class="chip dchip" data-topic="jobs" aria-pressed="false">المهن</button>
       </div>
       <div id="dgrid" class="grid dgrid"></div>
       <div id="ddetail" hidden>
@@ -461,7 +483,7 @@ h1 span{color:var(--orange)}
       <div class="card end" id="endArea" hidden>
         <div class="endstars" id="endStars"></div>
         <h2 id="endTitle">أحسنت يا بطل!</h2>
-        <p>جمعت خمس نجوم جديدة</p>
+        <p id="endSub"></p>
         <p class="endnext" id="endNext"></p>
         <div class="btnrow">
           <button class="btn" id="again" style="--b:var(--green);--bd:var(--green-dark)">
@@ -571,6 +593,9 @@ h1 span{color:var(--orange)}
           <button class="btn big" id="goLearn" style="--b:var(--blue);--bd:var(--blue-dark)">
             <span class="bigrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/></svg>تعلّم والعب</span>
             <small>بالعربي والإنجليزي: حروف وأرقام وألوان وحيوانات</small>
+          </button>
+          <button class="btn daily-wl" id="goDaily" style="--b:var(--sun);--bd:var(--sun-dark);color:var(--ink)">
+            <span aria-hidden="true">🎯</span><span id="wlDaily">تحدّي اليوم</span><span class="streak" id="wlStreak"></span>
           </button>
         </div>
         <button class="linkbtn" id="editName">تغيير الاسم</button>
@@ -702,23 +727,76 @@ h1 span{color:var(--orange)}
     {n:'ذئب',   s:'ذِئْب',    the:'الذِّئْب',    e:'🐺', f:'الذئب يعوي',     fs:'الذِّئْبُ يَعْوِي'},
     {n:'نحلة',  s:'نَحْلَة',  the:'النَّحْلَة',  e:'🐝', f:'النحلة تطنّ',    fs:'النَّحْلَةُ تَطِنّ'}
   ];
+  // Fruits and vegetables, each with one simple fact
+  var FOODS = [
+    {n:'تفاحة',   s:'تُفّاحَة',   the:'التُّفّاحَة',   e:'🍎', f:'التفاحة فاكهة حلوة ومقرمشة',      fs:'التُّفّاحَةُ فاكِهَةٌ حُلْوَةٌ وَمُقَرْمِشَة'},
+    {n:'موزة',    s:'مَوْزَة',    the:'المَوْزَة',    e:'🍌', f:'نقشّر الموزة قبل أن نأكلها',       fs:'نُقَشِّرُ المَوْزَةَ قَبْلَ أَنْ نَأْكُلَها'},
+    {n:'عنب',     s:'عِنَب',     the:'العِنَب',     e:'🍇', f:'العنب حبّات صغيرة في عنقود',       fs:'العِنَبُ حَبّاتٌ صَغِيرَةٌ في عُنْقُود'},
+    {n:'برتقالة', s:'بُرْتُقالَة', the:'البُرْتُقالَة', e:'🍊', f:'من البرتقال نصنع العصير',          fs:'مِنَ البُرْتُقالِ نَصْنَعُ العَصِير'},
+    {n:'فراولة',  s:'فَراوِلَة',  the:'الفَراوِلَة',  e:'🍓', f:'الفراولة حمراء وعليها بذور صغيرة',  fs:'الفَراوِلَةُ حَمْراءُ وَعَلَيْها بُذُورٌ صَغِيرَة'},
+    {n:'بطيخة',   s:'بِطِّيخَة',  the:'البِطِّيخَة',  e:'🍉', f:'البطيخة كبيرة وحمراء من الداخل',   fs:'البِطِّيخَةُ كَبِيرَةٌ وَحَمْراءُ مِنَ الدّاخِل'},
+    {n:'أناناس',  s:'أَناناس',   the:'الأَناناس',   e:'🍍', f:'للأناناس تاج من الأوراق',          fs:'لِلأَناناسِ تاجٌ مِنَ الأَوْراق'},
+    {n:'كرز',     s:'كَرَز',     the:'الكَرَز',     e:'🍒', f:'حبّات الكرز صغيرة وحمراء',         fs:'حَبّاتُ الكَرَزِ صَغِيرَةٌ وَحَمْراء'},
+    {n:'جزرة',    s:'جَزَرَة',    the:'الجَزَرَة',    e:'🥕', f:'الجزرة تنمو تحت التراب',           fs:'الجَزَرَةُ تَنْمُو تَحْتَ التُّراب'},
+    {n:'طماطم',   s:'طَماطِم',   the:'الطَّماطِم',   e:'🍅', f:'نضع الطماطم في السلطة',            fs:'نَضَعُ الطَّماطِمَ في السَّلَطَة'},
+    {n:'خيار',    s:'خِيار',     the:'الخِيار',     e:'🥒', f:'الخيار أخضر وطري',                fs:'الخِيارُ أَخْضَرُ وَطَرِيّ'},
+    {n:'ذرة',     s:'ذُرَة',     the:'الذُّرَة',     e:'🌽', f:'حبّات الذرة صفراء',                fs:'حَبّاتُ الذُّرَةِ صَفْراء'}
+  ];
+  // My body: what we do with each part
+  var BODY = [
+    {n:'عين',   s:'عَيْن',   the:'العَيْن',   e:'👁️', f:'بالعين نرى',               fs:'بِالعَيْنِ نَرَى'},
+    {n:'أذن',   s:'أُذُن',   the:'الأُذُن',   e:'👂', f:'بالأذن نسمع',              fs:'بِالأُذُنِ نَسْمَع'},
+    {n:'أنف',   s:'أَنْف',   the:'الأَنْف',   e:'👃', f:'بالأنف نشمّ',              fs:'بِالأَنْفِ نَشُمّ'},
+    {n:'فم',    s:'فَم',     the:'الفَم',     e:'👄', f:'بالفم نأكل ونتكلم',        fs:'بِالفَمِ نَأْكُلُ وَنَتَكَلَّم'},
+    {n:'لسان',  s:'لِسان',   the:'اللِّسان',   e:'👅', f:'باللسان نتذوّق الطعام',     fs:'بِاللِّسانِ نَتَذَوَّقُ الطَّعام'},
+    {n:'يد',    s:'يَد',     the:'اليَد',     e:'✋', f:'باليد نمسك الأشياء',        fs:'بِاليَدِ نُمْسِكُ الأَشْياء'},
+    {n:'إصبع',  s:'إِصْبَع',  the:'الإِصْبَع',  e:'☝️', f:'في كل يد خمسة أصابع',       fs:'في كُلِّ يَدٍ خَمْسَةُ أَصابِع'},
+    {n:'قدم',   s:'قَدَم',   the:'القَدَم',   e:'🦶', f:'بالقدم نمشي ونركض',         fs:'بِالقَدَمِ نَمْشي وَنَرْكُض'}
+  ];
+  // Jobs: what each person does (td: the name with "the" when it isn't just ال + name)
+  var JOBS = [
+    {n:'طبيب',     s:'طَبِيب',      the:'الطَّبِيب',      e:'👨‍⚕️', f:'الطبيب يعالج المرضى',          fs:'الطَّبِيبُ يُعالِجُ المَرْضَى'},
+    {n:'معلّمة',    s:'مُعَلِّمَة',    the:'المُعَلِّمَة',    e:'👩‍🏫', f:'المعلّمة تعلّمنا القراءة',       fs:'المُعَلِّمَةُ تُعَلِّمُنا القِراءَة'},
+    {n:'طبّاخ',     s:'طَبّاخ',      the:'الطَّبّاخ',      e:'👨‍🍳', f:'الطبّاخ يطبخ طعاماً لذيذاً',     fs:'الطَّبّاخُ يَطْبُخُ طَعاماً لَذِيذاً'},
+    {n:'إطفائي',   s:'إِطْفائِيّ',   the:'الإِطْفائِيّ',   e:'👨‍🚒', f:'الإطفائي يطفئ النار',          fs:'الإِطْفائِيُّ يُطْفِئُ النّار'},
+    {n:'شرطي',     s:'شُرْطِيّ',     the:'الشُّرْطِيّ',     e:'👮', f:'الشرطي يحمينا',                fs:'الشُّرْطِيُّ يَحْمِينا'},
+    {n:'فلّاح',     s:'فَلّاح',      the:'الفَلّاح',      e:'👨‍🌾', f:'الفلّاح يزرع الخضار',          fs:'الفَلّاحُ يَزْرَعُ الخُضار'},
+    {n:'طيّار',     s:'طَيّار',      the:'الطَّيّار',      e:'👨‍✈️', f:'الطيّار يقود الطائرة',          fs:'الطَّيّارُ يَقُودُ الطّائِرَة'},
+    {n:'بنّاء',     s:'بَنّاء',      the:'البَنّاء',      e:'👷', f:'البنّاء يبني البيوت',          fs:'البَنّاءُ يَبْنِي البُيُوت'},
+    {n:'رسّامة',    s:'رَسّامَة',     the:'الرَّسّامَة',     e:'👩‍🎨', f:'الرسّامة ترسم لوحات جميلة',     fs:'الرَّسّامَةُ تَرْسُمُ لَوْحاتٍ جَمِيلَة'},
+    {n:'ميكانيكي', s:'مِيكانِيكِيّ',  the:'المِيكانِيكِيّ',  e:'👨‍🔧', f:'الميكانيكي يصلح السيارات',     fs:'المِيكانِيكِيُّ يُصْلِحُ السَّيّارات'},
+    {n:'رائد فضاء', td:'رائد الفضاء', s:'رائِدُ فَضاء', the:'رائِدُ الفَضاء', e:'👨‍🚀', f:'رائد الفضاء يسافر إلى القمر', fs:'رائِدُ الفَضاءِ يُسافِرُ إِلى القَمَر'},
+    {n:'عالِمة',    s:'عالِمَة',     the:'العالِمَة',     e:'👩‍🔬', f:'العالِمة تقوم بالتجارب',        fs:'العالِمَةُ تَقُومُ بِالتَّجارِب'}
+  ];
   var TOPICS = {
     colors:  { list: PAINTS,  cols: 4, back: 'كل الألوان',    game: 'color',  hello: 'هذه هي الألوان. اضغط على أي لون' },
     shapes:  { list: SHAPES,  cols: 3, back: 'كل الأشكال',    game: 'shape',  hello: 'هذه هي الأشكال. اضغط على أي شكل' },
-    animals: { list: ANIMALS, cols: 4, back: 'كل الحيوانات', game: 'animal', hello: 'هيا نتعرّف على الحيوانات! اضغط على أي حيوان' }
+    animals: { list: ANIMALS, cols: 4, back: 'كل الحيوانات', game: 'animal', hello: 'هيا نتعرّف على الحيوانات! اضغط على أي حيوان' },
+    foods:   { list: FOODS,   cols: 4, back: 'كل الفواكه والخضار', game: 'food', hello: 'فواكه وخضار لذيذة! اضغط على أي واحدة' },
+    body:    { list: BODY,    cols: 4, back: 'كل أعضاء الجسم', game: 'body', hello: 'هذا جسمي! اضغط لتعرف ماذا نفعل بكل عضو' },
+    jobs:    { list: JOBS,    cols: 4, back: 'كل المهن',      game: 'job',    hello: 'هذه مهن الناس. اضغط على أي مهنة لتعرف ماذا تعمل' }
   };
+  // The games menu, in sections (sec): letters and numbers, discover, English
   var GAMES = [
-    { mode: 'listen', t: 'اسمع واختر',    icon: 'ب',   emo: false, c: 0 },
-    { mode: 'first',  t: 'أول حرف',      icon: '🦆',  emo: true,  c: 1 },
-    { mode: 'count',  t: 'كم العدد؟',     icon: '١٢٣', emo: false, c: 4 },
-    { mode: 'color',  t: 'أين اللون؟',    icon: '🎨',  emo: true,  c: 3 },
-    { mode: 'shape',  t: 'أين الشكل؟',    icon: '🔺',  emo: true,  c: 5 },
-    { mode: 'animal', t: 'أين الحيوان؟',  icon: '🦁',  emo: true,  c: 2 },
-    // English games, shown under their own heading
-    { mode: 'enListen', t: 'اسمع الحرف',  icon: 'Aa',  emo: true,  c: 1, en: true },
-    { mode: 'enWord',   t: 'أين الصورة؟', icon: '🐱',  emo: true,  c: 3, en: true },
-    { mode: 'enCount',  t: 'عُدّ بالإنجليزي', icon: '123', emo: true, c: 2, en: true }
+    { mode: 'listen', t: 'اسمع واختر',    icon: 'ب',   emo: false, c: 0, sec: 'ar' },
+    { mode: 'first',  t: 'أول حرف',      icon: '🦆',  emo: true,  c: 1, sec: 'ar' },
+    { mode: 'count',  t: 'كم العدد؟',     icon: '١٢٣', emo: false, c: 4, sec: 'ar' },
+    { mode: 'math',   t: 'اجمع واطرح',   icon: '+−',  emo: true,  c: 2, sec: 'ar' },
+    { mode: 'color',  t: 'أين اللون؟',    icon: '🎨',  emo: true,  c: 3, sec: 'disc' },
+    { mode: 'shape',  t: 'أين الشكل؟',    icon: '🔺',  emo: true,  c: 5, sec: 'disc' },
+    { mode: 'animal', t: 'أين الحيوان؟',  icon: '🦁',  emo: true,  c: 2, sec: 'disc' },
+    { mode: 'food',   t: 'فواكه وخضار',  icon: '🍓',  emo: true,  c: 0, sec: 'disc' },
+    { mode: 'body',   t: 'جسمي',         icon: '👂',  emo: true,  c: 1, sec: 'disc' },
+    { mode: 'job',    t: 'المهن',        icon: '👨‍🚒', emo: true,  c: 4, sec: 'disc' },
+    { mode: 'enListen', t: 'اسمع الحرف',  icon: 'Aa',  emo: true,  c: 1, sec: 'en' },
+    { mode: 'enWord',   t: 'أين الصورة؟', icon: '🐱',  emo: true,  c: 3, sec: 'en' },
+    { mode: 'enCount',  t: 'عُدّ بالإنجليزي', icon: '123', emo: true, c: 2, sec: 'en' }
   ];
+  var GAME_SECS = {
+    ar:   '<span>حروف وأرقام</span>',
+    disc: '<span>اكتشف</span>',
+    en:   '<span>ألعاب بالإنجليزي</span><span class="en" lang="en" dir="ltr">English</span>'
+  };
   function shapeSVG(sh){
     var f = 'fill="var(' + sh.k + ')" stroke="var(' + sh.k + '-dark)" stroke-width="3" stroke-linejoin="round"', d;
     switch (sh.id){
@@ -1357,8 +1435,12 @@ h1 span{color:var(--orange)}
 
   /* ---------- play ---------- */
   var ROUNDS = 5, mode = 'listen', round = 0, target = 0, last = -1, locked = false, nextTimer = null;
-  var POOLS = { listen: L, first: L, count: N, color: PAINTS, shape: SHAPES, animal: ANIMALS, enListen: EN, enWord: EN, enCount: ENN };
-  var POOL_TOPIC = { color: 'colors', shape: 'shapes', animal: 'animals' };
+  var daily = false, dailyModes = [];
+  var POOLS = { listen: L, first: L, count: N, math: N, color: PAINTS, shape: SHAPES, animal: ANIMALS,
+                food: FOODS, body: BODY, job: JOBS, enListen: EN, enWord: EN, enCount: ENN };
+  var POOL_TOPIC = { color: 'colors', shape: 'shapes', animal: 'animals', food: 'foods', body: 'body', job: 'jobs' };
+  var TOPIC_HINT = { color: 'اختر اللون الصحيح', shape: 'اختر الشكل الصحيح', animal: 'اختر الحيوان الصحيح',
+                     food: 'اختر الصورة الصحيحة', body: 'اختر الصورة الصحيحة', job: 'اختر صاحب المهنة' };
 
   /* ---------- Zizo's journey: 20 stages on a map ---------- */
   // m: question types mixed in the stage; r: which items each type uses ([from, to) by list);
@@ -1463,7 +1545,7 @@ h1 span{color:var(--orange)}
     });
   }
   function showMap(){
-    clearTimeout(nextTimer); afterPrize = null; stage = null;
+    clearTimeout(nextTimer); afterPrize = null; stage = null; daily = false;
     $('gameMenu').hidden = true; $('gameArea').hidden = true; $('mapArea').hidden = false;
     renderMap();
     var cur = currentStage();
@@ -1473,7 +1555,7 @@ h1 span{color:var(--orange)}
     if (node && node.scrollIntoView) node.scrollIntoView({ block: 'center' });
   }
   function startStage(i){
-    stage = i; mistakes = 0; last = -1;
+    stage = i; daily = false; mistakes = 0; last = -1;
     ROUNDS = STAGES[i].n; nch = STAGES[i].ch;
     $('gameMenu').hidden = true; $('mapArea').hidden = true; $('gameArea').hidden = false;
     $('gTitle').textContent = 'المرحلة ' + fmt(i + 1);
@@ -1520,28 +1602,29 @@ h1 span{color:var(--orange)}
   }
 
   GAMES.forEach(function(g, k){
-    if (g.en && !GAMES[k - 1].en){
+    if (!k || GAMES[k - 1].sec !== g.sec){
       var hd = document.createElement('h3');
       hd.className = 'games-head';
-      hd.innerHTML = '<span>ألعاب بالإنجليزي</span><span class="en" lang="en" dir="ltr">English</span>';
+      hd.innerHTML = GAME_SECS[g.sec];
       $('gameMenu').appendChild(hd);
     }
     var b = document.createElement('button');
     b.className = 'gamecard'; b.dataset.mode = g.mode; b.style.cssText = colorVars(g.c);
     b.innerHTML = '<span class="gicon' + (g.emo ? ' emo' : '') + '" aria-hidden="true"></span><span class="gname"></span>';
     b.querySelector('.gicon').textContent = g.icon;
+    if (g.emo) b.querySelector('.gicon').dir = 'ltr'; // keeps "+−" and "Aa" in their order
     b.querySelector('.gname').textContent = g.t;
     b.addEventListener('click', function(){ startGame(g.mode); });
     $('gameMenu').appendChild(b);
   });
   function showGameMenu(){
-    clearTimeout(nextTimer); afterPrize = null; stage = null;
+    clearTimeout(nextTimer); afterPrize = null; stage = null; daily = false;
     $('gameMenu').hidden = false; $('gameArea').hidden = true; $('mapArea').hidden = true;
-    renderJourneyCard();
+    renderJourneyCard(); renderDailyCard();
     zizo('اختر لعبة نلعبها معاً!');
   }
   function startGame(m){
-    stage = null; mode = m; last = -1; ROUNDS = 5; nch = 3;
+    stage = null; daily = false; mode = m; last = -1; ROUNDS = 5; nch = 3;
     $('gameMenu').hidden = true; $('mapArea').hidden = true; $('gameArea').hidden = false;
     $('gTitle').textContent = GAMES.filter(function(g){ return g.mode === m; })[0].t;
     $('gamesBackText').textContent = 'كل الألعاب';
@@ -1549,6 +1632,65 @@ h1 span{color:var(--orange)}
     newGame();
   }
   $('gamesBack').addEventListener('click', function(){ hush(); if (stage !== null) showMap(); else showGameMenu(); });
+
+  /* ---------- today's challenge: 5 mixed questions, 5 extra stars once a day, days in a row ---------- */
+  var DAILY_POOL = ['listen','first','count','math','color','shape','animal','food','body','job','enListen','enWord','enCount'];
+  function dayKey(d){ d = d || new Date(); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); }
+  function yesterdayKey(){ var d = new Date(); d.setDate(d.getDate() - 1); return dayKey(d); }
+  var dailyState = { last: '', streak: 0 };
+  try {
+    var ds = JSON.parse(localStorage.getItem('zizo-daily') || 'null');
+    if (ds && typeof ds.last === 'string') dailyState = { last: ds.last, streak: Math.max(0, ds.streak | 0) };
+  } catch(e){}
+  function saveDaily(){ try { localStorage.setItem('zizo-daily', JSON.stringify(dailyState)); } catch(e){} }
+  function dailyDone(){ return dailyState.last === dayKey(); }
+  // Days in a row: kept until the end of the day after the last challenge
+  function streakNow(){ return (dailyState.last === dayKey() || dailyState.last === yesterdayKey()) ? dailyState.streak : 0; }
+  function daysText(n){
+    if (n === 1) return 'يوم واحد';
+    if (n === 2) return 'يومان متتاليان';
+    if (n <= 10) return fmt(n) + ' أيام متتالية';
+    return fmt(n) + ' يوماً متتالياً';
+  }
+  // The same five kinds of question all day long, different from one day to the next
+  function todaysModes(){
+    var seed = 7, k = dayKey();
+    for (var i = 0; i < k.length; i++) seed = (seed * 31 + k.charCodeAt(i)) >>> 0;
+    function rnd(){ seed = (seed * 1664525 + 1013904223) >>> 0; return seed / 4294967296; }
+    var a = DAILY_POOL.slice();
+    for (var j = a.length - 1; j > 0; j--){ var r = Math.floor(rnd() * (j + 1)), tmp = a[j]; a[j] = a[r]; a[r] = tmp; }
+    return a.slice(0, 5);
+  }
+  function dailyText(){ return dailyDone() ? 'تمّ اليوم ✓ تحدٍّ جديد غداً' : '٥ أسئلة منوّعة و٥ نجوم إضافية'; }
+  function startDaily(){
+    stage = null; daily = true; dailyModes = todaysModes(); last = -1; ROUNDS = 5; nch = 3;
+    $('gameMenu').hidden = true; $('mapArea').hidden = true; $('gameArea').hidden = false;
+    $('gTitle').textContent = 'تحدّي اليوم';
+    $('gamesBackText').textContent = 'كل الألعاب';
+    window.scrollTo(0, 0);
+    newGame();
+  }
+  // Mark today done (the first time) and give the extra stars; true if this was the first time today
+  function dailyComplete(){
+    if (dailyDone()) return false;
+    dailyState.streak = dailyState.last === yesterdayKey() ? dailyState.streak + 1 : 1;
+    dailyState.last = dayKey(); saveDaily();
+    stars += 5; saveStars(); renderStars();
+    return true;
+  }
+
+  var dCard = document.createElement('button');
+  dCard.className = 'journey-card daily-card';
+  dCard.innerHTML = '<span class="jicon" aria-hidden="true">🎯</span><span class="jtext"><b>تحدّي اليوم</b><span class="jsub"></span></span><span class="streak" aria-hidden="true"></span>';
+  dCard.addEventListener('click', startDaily);
+  $('gameMenu').insertBefore(dCard, jCard.nextSibling);
+  function renderDailyCard(){
+    var st = streakNow();
+    dCard.querySelector('.jsub').textContent = dailyText();
+    dCard.querySelector('.streak').textContent = st ? '🔥 ' + fmt(st) : '';
+    dCard.classList.toggle('done', dailyDone());
+    dCard.setAttribute('aria-label', 'تحدّي اليوم، ' + dailyText() + (st ? '، ' + daysText(st) : ''));
+  }
   function renderDots(){
     var d = $('dots'); d.innerHTML = '';
     for (var k=0;k<ROUNDS;k++){ var s = document.createElement('span'); s.className = 'dot' + (k < round ? ' done' : (k === round ? ' now' : '')); d.appendChild(s); }
@@ -1562,19 +1704,49 @@ h1 span{color:var(--orange)}
     else if (mode === 'count') say('كَمْ عَدَدُها؟');
     else if (mode === 'color') say('أَيْنَ اللَّوْنُ ' + PAINTS[target].the + '؟');
     else if (mode === 'shape') say('أَيْنَ ' + SHAPES[target].the + '؟');
-    else if (mode === 'animal') say('أَيْنَ ' + ANIMALS[target].the + '؟');
+    else if (mode === 'math') say(mathSpoken() + '، كَمْ يُساوي؟');
+    else if (POOL_TOPIC[mode]) say('أَيْنَ ' + POOLS[mode][target].the + '؟');
     else say(L[target].s);
   }
-  function newGame(){ clearTimeout(nextTimer); round = 0; mistakes = 0; $('endArea').hidden = true; $('stageEnd').hidden = true; $('playArea').hidden = false; nextRound(); }
+
+  /* add and take away, with pictures. Answers stay between 1 and 10. */
+  var mq = null;
+  function mathQuestion(){
+    var add = Math.random() < 0.55, a, b, ans;
+    if (add){ ans = 2 + Math.floor(Math.random() * 9); a = 1 + Math.floor(Math.random() * (ans - 1)); b = ans - a; }
+    else { a = 2 + Math.floor(Math.random() * 9); b = 1 + Math.floor(Math.random() * (a - 1)); ans = a - b; }
+    return { add: add, a: a, b: b, ans: ans };
+  }
+  function mathSpoken(){ return N[mq.a - 1].s + (mq.add ? ' زائِدُ ' : ' ناقِصُ ') + N[mq.b - 1].s; }
+  // A group of n pictures; the last `gone` of them are crossed out (taken away)
+  function picGroup(n, pic, gone){
+    var h = '<span class="grp" style="--n:' + Math.min(5, n <= 3 ? n : Math.ceil(n / 2)) + '">';
+    for (var k = 0; k < n; k++) h += '<span class="it' + (k >= n - gone ? ' gone' : '') + '"><i>' + pic + '</i></span>';
+    return h + '</span>';
+  }
+  var mathSeen = {};
+  function newGame(){ clearTimeout(nextTimer); round = 0; mistakes = 0; mathSeen = {}; $('endArea').hidden = true; $('stageEnd').hidden = true; $('playArea').hidden = false; nextRound(); }
   function nextRound(){
     if (round >= ROUNDS) return finish();
     locked = false;
     if (stage !== null) mode = pick(STAGES[stage].m);
-    var pool = POOLS[mode], idx = allowed(mode);
-    var t; do { t = pick(idx); } while (t === last && idx.length > 1);
-    last = target = t;
-    var opts = [t];
-    while (opts.length < Math.min(nch, idx.length)){ var r = pick(idx); if (opts.indexOf(r) === -1) opts.push(r); }
+    else if (daily) mode = dailyModes[round];
+    var pool = POOLS[mode], idx = allowed(mode), t, opts;
+    if (mode === 'math'){
+      // The answer and numbers close to it
+      // A new sum every round, and not the same answer twice in a row
+      var tries = 0;
+      do { mq = mathQuestion(); tries++; } while (tries < 50 && (mq.ans - 1 === last || mathSeen[mq.a + (mq.add ? '+' : '-') + mq.b]));
+      mathSeen[mq.a + (mq.add ? '+' : '-') + mq.b] = true;
+      last = target = t = mq.ans - 1;
+      var near = [t - 1, t + 1, t - 2, t + 2, t - 3, t + 3].filter(function(x){ return x >= 0 && x < 10; });
+      opts = [t].concat(shuffle(near.slice(0, 4)).slice(0, nch - 1));
+    } else {
+      do { t = pick(idx); } while (t === last && idx.length > 1);
+      last = target = t;
+      opts = [t];
+      while (opts.length < Math.min(nch, idx.length)){ var r = pick(idx); if (opts.indexOf(r) === -1) opts.push(r); }
+    }
     shuffle(opts);
     $('choices').classList.toggle('four', opts.length === 4);
     renderDots();
@@ -1595,12 +1767,22 @@ h1 span{color:var(--orange)}
       p.innerHTML = '<div class="countbox small" id="pBox"></div><p class="ask">كم عددها؟</p><button class="btn ghost" id="replay">' + SPK + 'اسمع السؤال</button>';
       countBox($('pBox'), t + 1, pick(COUNT_PICS), null);
       zizo('عُدّ الصور، ثم اختر الرقم الصحيح');
+    } else if (mode === 'math'){
+      var pic = pick(COUNT_PICS);
+      p.style.cssText = '--c:var(--teal);--cd:var(--teal-dark)';
+      p.innerHTML = '<div class="mathpics" aria-hidden="true">' +
+        (mq.add ? picGroup(mq.a, pic, 0) + '<span class="op">+</span>' + picGroup(mq.b, pic, 0) : picGroup(mq.a, pic, mq.b)) + '</div>' +
+        '<p class="eqn" id="pEq"><span>' + N[mq.a - 1].d + '</span><span class="op">' + (mq.add ? '+' : '−') + '</span><span>' + N[mq.b - 1].d +
+        '</span><span class="op">=</span><span class="qm">؟</span></p>' +
+        '<button class="btn ghost" id="replay">' + SPK + 'اسمع السؤال</button>';
+      p.querySelector('.eqn').setAttribute('aria-label', N[mq.a - 1].n + (mq.add ? ' زائد ' : ' ناقص ') + N[mq.b - 1].n + ' يساوي كم؟');
+      zizo(mq.add ? 'اجمع الصور كلها: كم صارت؟' : 'بعض الصور ذهبت! عُدّ الباقي');
     } else if (POOL_TOPIC[mode]){
       // Neutral button color so it never gives away the answer
       p.style.cssText = '--c:var(--teal);--cd:var(--teal-dark)';
       p.innerHTML = '<button class="speak-big" id="replay" aria-label="اسمع مرة أخرى">' + SPK + '</button><p class="ask"></p>';
-      p.querySelector('.ask').textContent = mode === 'color' ? 'أين اللون ال' + pool[t].n + '؟' : 'أين ال' + pool[t].n + '؟';
-      zizo(mode === 'color' ? 'اسمع، ثم اختر اللون الصحيح' : mode === 'shape' ? 'اسمع، ثم اختر الشكل الصحيح' : 'اسمع، ثم اختر الحيوان الصحيح');
+      p.querySelector('.ask').textContent = mode === 'color' ? 'أين اللون ال' + pool[t].n + '؟' : 'أين ' + (pool[t].td || 'ال' + pool[t].n) + '؟';
+      zizo('اسمع، ثم ' + TOPIC_HINT[mode]);
     } else if (mode === 'listen'){
       p.innerHTML = '<button class="speak-big" id="replay" aria-label="اسمع مرة أخرى">' + SPK + '</button><p class="ask">أين حرف ال' + L[t].n + '؟</p>';
       zizo('اسمع، ثم اختر الحرف الصحيح');
@@ -1625,9 +1807,11 @@ h1 span{color:var(--orange)}
         b.textContent = mode === 'enCount' ? ENN[o].d : EN[o].c;
         b.setAttribute('aria-label', mode === 'enCount' ? ENN[o].w : 'حرف ' + EN[o].c);
       } else {
-        b.textContent = mode === 'count' ? N[o].d : L[o].c;
-        b.setAttribute('aria-label', mode === 'count' ? 'الرقم ' + N[o].n : 'حرف ال' + L[o].n);
+        var num = mode === 'count' || mode === 'math';
+        b.textContent = num ? N[o].d : L[o].c;
+        b.setAttribute('aria-label', num ? 'الرقم ' + N[o].n : 'حرف ال' + L[o].n);
       }
+      b.dataset.o = o;
       b.addEventListener('click', function(){ choose(o, b); });
       ch.appendChild(b);
     });
@@ -1641,11 +1825,13 @@ h1 span{color:var(--orange)}
       var pr = praise();
       zizo(pr, 'happy'); addStar();
       if (mode === 'first') wordInto($('pWord'), target, false);
+      if (mode === 'math'){ var qm = $('pEq').querySelector('.qm'); qm.textContent = N[target].d; qm.classList.add('ok'); }
       var won = POOLS[mode][target];
       say(mode === 'enListen' ? [pr, { en: won.c + ', ' + won.w }] : mode === 'enWord' ? [pr, { en: won.w }] :
           mode === 'enCount' ? [{ en: won.w }, pr] :
+          mode === 'math' ? [pr, mathSpoken() + ' يُساوي ' + N[target].s] :
           mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] :
-          mode === 'animal' ? [pr, won.fs] : (mode === 'color' || mode === 'shape') ? [pr, won.s] : pr);
+          mode === 'animal' ? [pr, won.fs] : POOL_TOPIC[mode] ? [pr, won.s] : pr);
       round++; renderDots();
       nextTimer = setTimeout(function(){ whenNoPrize(nextRound); }, 1500);
     } else {
@@ -1659,10 +1845,21 @@ h1 span{color:var(--orange)}
     var h = ''; for (var k=0;k<ROUNDS;k++) h += '<span>' + STAR + '</span>';
     $('endStars').innerHTML = h;
     $('endTitle').textContent = gx('أحسنت يا ', 'أحسنتِ يا ') + hero() + '!';
-    $('endNext').textContent = shopText();
+    $('again').hidden = daily;
+    if (daily){
+      var first = dailyComplete(), st = streakNow();
+      $('endSub').textContent = first ? gx('أنهيت', 'أنهيتِ') + ' تحدّي اليوم، و' + gx('ربحت', 'ربحتِ') + ' ٥ نجوم إضافية!'
+                                      : gx('أعدت', 'أعدتِ') + ' تحدّي اليوم. التحدّي القادم غداً';
+      $('endNext').textContent = (st > 1 ? '🔥 ' + daysText(st) + '! ' : '') + gx('عُد', 'عودي') + ' غداً لتحدٍّ جديد';
+      zizo(first ? 'رائع! ٥ نجوم إضافية لك' + (st > 1 ? '، و' + daysText(st) + '!' : '!') : gx('أحسنت! عُد غداً لتحدٍّ جديد', 'أحسنتِ! عودي غداً لتحدٍّ جديد'), 'happy');
+      say(first ? gx('أَحْسَنْتَ! رَبِحْتَ خَمْسَ نُجُومٍ إِضافِيَّة', 'أَحْسَنْتِ! رَبِحْتِ خَمْسَ نُجُومٍ إِضافِيَّة') : gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + (kid.name || gx('بَطَل', 'بَطَلَة')));
+    } else {
+      $('endSub').textContent = gx('جمعت', 'جمعتِ') + ' خمس نجوم جديدة';
+      $('endNext').textContent = shopText();
+      zizo(gx('أحسنت يا ', 'أحسنتِ يا ') + hero() + '! ' + gx('جمعت', 'جمعتِ') + ' خمس نجوم', 'happy');
+      say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + (kid.name || gx('بَطَل', 'بَطَلَة')));
+    }
     renderDots();
-    zizo(gx('أحسنت يا ', 'أحسنتِ يا ') + hero() + '! ' + gx('جمعت', 'جمعتِ') + ' خمس نجوم', 'happy');
-    say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + (kid.name || gx('بَطَل', 'بَطَلَة')));
     burst();
   }
   $('again').addEventListener('click', newGame);
@@ -1736,7 +1933,8 @@ h1 span{color:var(--orange)}
     var left = m.actualBoundingBoxLeft || 0, right = m.actualBoundingBoxRight || 0;
     return { x: S/2 + (left - right)/2, y: S/2 + (asc - desc)/2 };
   }
-  if (window.__zizoTest) window.__zizoTest.placeGlyph = placeGlyph; // used by the phone simulation only
+  // used by the phone simulation only
+  if (window.__zizoTest){ window.__zizoTest.placeGlyph = placeGlyph; window.__zizoTest.target = function(){ return { target: target, mode: mode }; }; }
   function inkWidth(){ return Math.max(10, S*0.05); }
   function strokePaths(c){
     strokes.forEach(function(s){
@@ -1978,6 +2176,10 @@ h1 span{color:var(--orange)}
     $('heroZizo').innerHTML = zizoMarkup(outfit);
     $('wlStars').textContent = fmt(stars);
     $('wlStage').textContent = stageText();
+    var st = streakNow();
+    $('wlDaily').textContent = dailyDone() ? 'تحدّي اليوم ✓' : 'تحدّي اليوم: ٥ نجوم إضافية';
+    $('wlStreak').textContent = st ? '🔥 ' + fmt(st) : '';
+    $('goDaily').setAttribute('aria-label', 'تحدّي اليوم' + (dailyDone() ? '، تمّ اليوم' : '') + (st ? '، ' + daysText(st) : ''));
     welcome.hidden = false; welcome.scrollTop = 0;
     if (!kid.set){ openSetup(true); return; }
     $('setup').hidden = true; $('wlMain').hidden = false;
@@ -2004,6 +2206,7 @@ h1 span{color:var(--orange)}
   });
   $('editName').addEventListener('click', function(){ openSetup(false); });
   $('goJourney').addEventListener('click', function(){ leaveWelcome(); show('play'); showMap(); });
+  $('goDaily').addEventListener('click', function(){ leaveWelcome(); show('play'); startDaily(); });
   $('goLearn').addEventListener('click', function(){
     leaveWelcome(); show('letters');
     zizo('أهلاً يا ' + hero() + '! اضغط على أي حرف لنتعلّمه معاً');
