@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Builds the native Android project from www/ and applies Huroof Zizo's icons, splash and settings.
+# Builds the native Android project from www/ and applies Zizo World's icons, splash and settings.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 

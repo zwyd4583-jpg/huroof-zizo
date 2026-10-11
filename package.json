@@ -2,7 +2,7 @@
   "name": "huroof-zizo",
   "version": "1.0.0",
   "private": true,
-  "description": "حروف زيزو: تطبيق لتعليم الحروف العربية للأطفال من 4 إلى 6 سنوات",
+  "description": "Zizo World (عالم زيزو): حروف وأرقام بالعربي والإنجليزي للأطفال من 4 إلى 6 سنوات",
   "scripts": {
     "android:prepare": "bash scripts/prepare-android.sh"
   },

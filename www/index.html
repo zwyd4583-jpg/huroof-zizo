@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#D8EDF6">
-<title>حروف زيزو</title>
+<title>Zizo World</title>
 <style>
 @font-face{font-family:"Baloo Bhaijaan 2"; src:url("fonts/BalooBhaijaan2.ttf") format("truetype"); font-weight:400 800; font-display:swap}
 @font-face{font-family:"Noto Naskh Arabic"; src:url("fonts/NotoNaskhArabic.ttf") format("truetype"); font-weight:400 700; font-display:block}
@@ -167,7 +167,8 @@ h1 span{color:var(--orange)}
     radial-gradient(80px 28px at 22% 78%, rgba(255,255,255,.55) 60%, transparent 63%),
     var(--sky)}
 .wl-inner{width:100%; max-width:420px; display:grid; justify-items:center; gap:12px; text-align:center}
-.wl-title{font-size:2.5rem}
+.wl-title{font-size:2.6rem; letter-spacing:-.01em}
+.wl-ar{margin:-12px 0 0; font-size:1.2rem; font-weight:700; color:var(--ink-soft)}
 .zizo-hero{width:180px; height:186px; overflow:visible; transform-origin:50% 90%; animation:enter .9s cubic-bezier(.3,1.4,.5,1) both, sway 2.6s 1s ease-in-out infinite}
 .zizo-hero .ear{transform-box:fill-box; transform-origin:center; animation:flap 2.2s ease-in-out infinite}
 .wl-hello{margin:0; font-size:1.8rem; font-weight:800; line-height:1.35; text-wrap:balance}
@@ -319,7 +320,7 @@ h1 span{color:var(--orange)}
 <div class="app">
   <header>
     <div class="brand">
-      <h1>حروف <span>زيزو</span></h1>
+      <h1 dir="ltr" lang="en"><span>Zizo</span> World</h1>
       <button class="stars" id="starPill" aria-label="متجر زيزو">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>
         <span id="starCount">٠</span>
@@ -577,7 +578,8 @@ h1 span{color:var(--orange)}
   <div id="fx" aria-hidden="true"></div>
   <div class="welcome" id="welcome" role="dialog" aria-modal="true" aria-label="أهلاً">
     <div class="wl-inner">
-      <h1 class="wl-title">حروف <span>زيزو</span></h1>
+      <h1 class="wl-title" dir="ltr" lang="en"><span>Zizo</span> World</h1>
+      <p class="wl-ar">عالم زيزو</p>
       <svg class="zizo-hero" id="heroZizo" viewBox="0 -4 120 124" aria-hidden="true"></svg>
       <p class="wl-hello" id="wlHello" aria-live="polite"></p>
       <div id="wlMain">

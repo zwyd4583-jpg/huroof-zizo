@@ -52,28 +52,28 @@ jobs:
       - name: Collect files
         run: |
           mkdir -p out
-          cp android/app/build/outputs/apk/debug/app-debug.apk out/huroof-zizo-test.apk
+          cp android/app/build/outputs/apk/debug/app-debug.apk out/zizo-world-test.apk
           if [ -f android/app/build/outputs/bundle/release/app-release.aab ]; then
-            cp android/app/build/outputs/bundle/release/app-release.aab out/huroof-zizo-v${VERSION_CODE}.aab
+            cp android/app/build/outputs/bundle/release/app-release.aab out/zizo-world-v${VERSION_CODE}.aab
           fi
           if [ -f android/app/build/outputs/apk/release/app-release.apk ]; then
-            cp android/app/build/outputs/apk/release/app-release.apk out/huroof-zizo-v${VERSION_CODE}.apk
+            cp android/app/build/outputs/apk/release/app-release.apk out/zizo-world-v${VERSION_CODE}.apk
           fi
           ls -la out
 
       - uses: actions/upload-artifact@v4
         with:
-          name: huroof-zizo-android
+          name: zizo-world-android
           path: out/
 
       # A fixed download link for the phone:
-      # https://github.com/<owner>/<repo>/releases/download/test-build/huroof-zizo-test.apk
+      # https://github.com/<owner>/<repo>/releases/download/test-build/zizo-world-test.apk
       - name: Publish the test APK
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release delete test-build --yes --cleanup-tag || true
-          gh release create test-build out/huroof-zizo-test.apk \
+          gh release create test-build out/zizo-world-test.apk \
             --target "$GITHUB_SHA" --prerelease \
-            --title "نسخة تجربة - حروف زيزو" \
-            --notes "آخر نسخة تجربة من التطبيق. حمّل الملف huroof-zizo-test.apk على هاتف أندرويد وثبّته."
+            --title "نسخة تجربة - Zizo World" \
+            --notes "آخر نسخة تجربة من التطبيق. حمّل الملف zizo-world-test.apk على هاتف أندرويد وثبّته."
