@@ -1,0 +1,21 @@
+{
+  "voices": {"ar": "ar_JO-kareem-medium", "en": "en_US-ryan-high"},
+  "styles": {
+    "1-normal": {"pitch": 1.0, "length": 1.1},
+    "2-zizo":   {"pitch": 1.2, "length": 1.08},
+    "3-zizo-high": {"pitch": 1.35, "length": 1.05}
+  },
+  "reels": true,
+  "items": [
+    {"id": "hello",   "lang": "ar", "text": "أَهْلاً! أَنا زِيزُو الفِيل. هَيّا نَلْعَب!"},
+    {"id": "baa",     "lang": "ar", "text": "حَرْفُ الباء. بَطَّة."},
+    {"id": "where",   "lang": "ar", "text": "أَيْنَ حَرْفُ التّاء؟"},
+    {"id": "praise",  "lang": "ar", "text": "أَحْسَنْتَ! رائِع!"},
+    {"id": "retry",   "lang": "ar", "text": "حاوِلْ مَرَّةً أُخْرَى."},
+    {"id": "math",    "lang": "ar", "text": "ثَلاثَةٌ زائِدُ اثْنَيْنِ يُساوي خَمْسَة."},
+    {"id": "lion",    "lang": "ar", "text": "الأَسَدُ يَزْأَر."},
+    {"id": "en-a",    "lang": "en", "text": "A. Apple."},
+    {"id": "en-b",    "lang": "en", "text": "B. Ball."},
+    {"id": "en-count","lang": "en", "text": "One, two, three, four, five."}
+  ]
+}
