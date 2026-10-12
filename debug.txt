@@ -1,0 +1,26 @@
+chunk attrs: audio_float_array, audio_int16_array, audio_int16_bytes, phoneme_alignments, phoneme_id_samples, phoneme_ids, phonemes, sample_channels, sample_rate, sample_width
+  audio_float_array = array([ 1.3186797e-04,  6.2597037e-04,  2.6614073e-04, ...,
+       -8.7001640e-04, -4.1000816e-04, -2.6267078e-05],
+      shape=(24576,), dtype=float32)
+  audio_int16_array = array([  4,  20,   8, ..., -28, -13,   0], shape=(24576,), dtype=int16)
+  audio_int16_bytes = b'\x04\x00\x14\x00\x08\x00\x10\x00\x16\x00\x02\x00\x11\x00\x02\x00\x08\x00\n\x00\x04\x00\x04\x00\x00\x00\n\x00\x06\x00\x03\x00\x07\x00\x05\x00\xff\xff\xfd\xff\xf9\xff\xf5\xff\xee\xff\xf2\xff\xeb\xff\xeb\xff\xe6\xff\xe4\xff\xe5\xff\xe4\xff\xda\xff\xe0\xff\xdf\xff\xe0\xff\xdc\xff\xe2\xff\xdc\xff\xe4\x
+  phoneme_alignments = None
+  phoneme_id_samples = None
+  phoneme_ids = [1, 0, 20, 0, 120, 0, 14, 0, 41, 0, 14, 0, 122, 0, 3, 0, 19, 0, 21, 0, 122, 0, 24, 0, 10, 0, 2]
+  phonemes = ['h', 'ˈ', 'a', 'ð', 'a', 'ː', ' ', 'f', 'i', 'ː', 'l', '.']
+  sample_channels = 1
+  sample_rate = 22050
+  sample_width = 2
+chunk attrs: audio_float_array, audio_int16_array, audio_int16_bytes, phoneme_alignments, phoneme_id_samples, phoneme_ids, phonemes, sample_channels, sample_rate, sample_width
+  audio_float_array = array([-0.00657138, -0.00906555, -0.01044036, ..., -0.0004576 ,
+       -0.00040172, -0.00051682], shape=(33280,), dtype=float32)
+  audio_int16_array = array([-215, -297, -342, ...,  -14,  -13,  -16],
+      shape=(33280,), dtype=int16)
+  audio_int16_bytes = b')\xff\xd7\xfe\xaa\xfe\r\xff\x9a\xffA\x00\x98\x00\xd0\x00\xa2\x00\xc7\x00)\x01[\x01&\x01{\x00\xf1\xff\x7f\xff\xab\xff\xb6\xff\xa6\xff\xb4\xff\x11\x00\x83\x00\x04\x01\x8f\x01\xaf\x01V\x01\x88\x00\xd2\xffm\xffh\xff:\xff\x9b\xfe\x11\xfe\xaa\xfd\xa6\xfd\xec\xfd\x85\xfeJ\xff\x91\xff\x8e\xff+\xff\xe3\xfe
+  phoneme_alignments = None
+  phoneme_id_samples = None
+  phoneme_ids = [1, 0, 20, 0, 120, 0, 14, 0, 41, 0, 14, 0, 122, 0, 3, 0, 15, 0, 14, 0, 32, 0, 142, 0, 122, 0, 121, 0, 14, 0, 10, 0, 32, 0, 33, 0, 26, 0, 10, 0, 2]
+  phonemes = ['h', 'ˈ', 'a', 'ð', 'a', 'ː', ' ', 'b', 'a', 't', '̪', 'ː', 'ˌ', 'a', '.', 't', 'u', 'n', '.']
+  sample_channels = 1
+  sample_rate = 22050
+  sample_width = 2
