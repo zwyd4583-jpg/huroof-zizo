@@ -1,21 +1,96 @@
 {
-  "engine": "chatterbox",
-  "chatterbox": {"exaggeration": 0.6, "cfg_weight": 0.5},
-  "styles": {
-    "4-natural": {"pitch": 1.0, "tempo": 0.95},
-    "5-zizo":    {"pitch": 1.18, "tempo": 0.95}
+ "engine": "chatterbox",
+ "chatterbox": {
+  "exaggeration": 0.6,
+  "cfg_weight": 0.5
+ },
+ "styles": {
+  "4-natural": {
+   "pitch": 1.0,
+   "tempo": 0.95
   },
-  "reels": true,
-  "items": [
-    {"id": "hello",   "lang": "ar", "text": "أَهْلاً! أَنا زِيزُو الفِيل. هَيّا نَلْعَب!"},
-    {"id": "baa",     "lang": "ar", "text": "حَرْفُ الباء. بَطَّة."},
-    {"id": "where",   "lang": "ar", "text": "أَيْنَ حَرْفُ التّاء؟"},
-    {"id": "praise",  "lang": "ar", "text": "أَحْسَنْتَ! رائِع!"},
-    {"id": "retry",   "lang": "ar", "text": "حاوِلْ مَرَّةً أُخْرَى."},
-    {"id": "math",    "lang": "ar", "text": "ثَلاثَةٌ زائِدُ اثْنَيْنِ يُساوي خَمْسَة."},
-    {"id": "lion",    "lang": "ar", "text": "الأَسَدُ يَزْأَر."},
-    {"id": "en-a",    "lang": "en", "text": "A, apple."},
-    {"id": "en-b",    "lang": "en", "text": "B, ball."},
-    {"id": "en-count","lang": "en", "text": "One, two, three, four, five."}
-  ]
+  "5-zizo": {
+   "pitch": 1.18,
+   "tempo": 0.95
+  }
+ },
+ "reels": true,
+ "items": [
+  {
+   "id": "hello",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. هَيّا نَلْعَب!"
+  },
+  {
+   "id": "baa",
+   "lang": "ar",
+   "text": "حَرْفُ الباء. بَطَّة."
+  },
+  {
+   "id": "where",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ التّاء؟"
+  },
+  {
+   "id": "praise",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ! رائِع!"
+  },
+  {
+   "id": "retry",
+   "lang": "ar",
+   "text": "حاوِلْ مَرَّةً أُخْرَى."
+  },
+  {
+   "id": "math",
+   "lang": "ar",
+   "text": "ثَلاثَةٌ زائِدُ اثْنَيْنِ يُساوي خَمْسَة."
+  },
+  {
+   "id": "lion",
+   "lang": "ar",
+   "text": "الأَسَدُ يَزْأَر."
+  },
+  {
+   "id": "en-a",
+   "lang": "en",
+   "text": "A, apple."
+  },
+  {
+   "id": "en-b",
+   "lang": "en",
+   "text": "B, ball."
+  },
+  {
+   "id": "en-count",
+   "lang": "en",
+   "text": "One, two, three, four, five."
+  },
+  {
+   "id": "en-letter-a",
+   "lang": "en",
+   "text": "Ay."
+  },
+  {
+   "id": "en-word-apple",
+   "lang": "en",
+   "text": "Apple."
+  },
+  {
+   "id": "ar-cat",
+   "lang": "ar",
+   "text": "قِطَّة."
+  },
+  {
+   "id": "ar-five",
+   "lang": "ar",
+   "text": "خَمْسَة."
+  },
+  {
+   "id": "ar-plain",
+   "lang": "ar",
+   "text": "أين حرف الجيم؟"
+  }
+ ],
+ "qa": true
 }

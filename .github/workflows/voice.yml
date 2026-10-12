@@ -52,6 +52,7 @@ jobs:
           else
             pip install piper-tts onnxruntime
           fi
+          if grep -q '"qa": *true' "${{ inputs.list }}"; then pip install openai-whisper; fi
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
 
       - name: Record the phrases
@@ -75,6 +76,7 @@ jobs:
           mkdir out
           for d in parts/*/; do cp -r "$d"/. out/; done
           cat out/report-*.tsv > out/report.tsv 2>/dev/null || true
+          cat out/qa-*.tsv > out/qa.tsv 2>/dev/null || true
           cd out
           git init -q
           git checkout -q -b voice-out
