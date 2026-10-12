@@ -1,0 +1,162 @@
+{
+ "engine": "gemini",
+ "gemini": {
+  "models": [
+   "gemini-3.8-flash-tts",
+   "gemini-3.1-flash-tts-preview",
+   "gemini-2.5-flash-preview-tts"
+  ],
+  "voice": "Puck",
+  "rpm": 8,
+  "style": {
+   "ar": "Say this in Modern Standard Arabic, warmly and cheerfully, clearly and a little slowly, like a kindergarten teacher talking to a five-year-old. Pronounce every letter and every vowel mark exactly as written:",
+   "en": "Say this in clear American English, warmly and cheerfully, a little slowly, like a kindergarten teacher talking to a five-year-old:"
+  }
+ },
+ "items": [
+  {
+   "id": "puck-00",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟",
+   "voice": "Puck"
+  },
+  {
+   "id": "puck-01",
+   "lang": "ar",
+   "text": "حَرْفُ الضاد.",
+   "voice": "Puck"
+  },
+  {
+   "id": "puck-02",
+   "lang": "ar",
+   "text": "ضِفْدَع",
+   "voice": "Puck"
+  },
+  {
+   "id": "puck-03",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الثاء؟",
+   "voice": "Puck"
+  },
+  {
+   "id": "puck-04",
+   "lang": "ar",
+   "text": "ثَلاثَة زائِدُ اِثْنان يُساوي خَمْسَة.",
+   "voice": "Puck"
+  },
+  {
+   "id": "puck-05",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ!",
+   "voice": "Puck"
+  },
+  {
+   "id": "leda-00",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟",
+   "voice": "Leda"
+  },
+  {
+   "id": "leda-01",
+   "lang": "ar",
+   "text": "حَرْفُ الضاد.",
+   "voice": "Leda"
+  },
+  {
+   "id": "leda-02",
+   "lang": "ar",
+   "text": "ضِفْدَع",
+   "voice": "Leda"
+  },
+  {
+   "id": "leda-03",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الثاء؟",
+   "voice": "Leda"
+  },
+  {
+   "id": "leda-04",
+   "lang": "ar",
+   "text": "ثَلاثَة زائِدُ اِثْنان يُساوي خَمْسَة.",
+   "voice": "Leda"
+  },
+  {
+   "id": "leda-05",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ!",
+   "voice": "Leda"
+  },
+  {
+   "id": "fenrir-00",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟",
+   "voice": "Fenrir"
+  },
+  {
+   "id": "fenrir-01",
+   "lang": "ar",
+   "text": "حَرْفُ الضاد.",
+   "voice": "Fenrir"
+  },
+  {
+   "id": "fenrir-02",
+   "lang": "ar",
+   "text": "ضِفْدَع",
+   "voice": "Fenrir"
+  },
+  {
+   "id": "fenrir-03",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الثاء؟",
+   "voice": "Fenrir"
+  },
+  {
+   "id": "fenrir-04",
+   "lang": "ar",
+   "text": "ثَلاثَة زائِدُ اِثْنان يُساوي خَمْسَة.",
+   "voice": "Fenrir"
+  },
+  {
+   "id": "fenrir-05",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ!",
+   "voice": "Fenrir"
+  },
+  {
+   "id": "sulafat-00",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟",
+   "voice": "Sulafat"
+  },
+  {
+   "id": "sulafat-01",
+   "lang": "ar",
+   "text": "حَرْفُ الضاد.",
+   "voice": "Sulafat"
+  },
+  {
+   "id": "sulafat-02",
+   "lang": "ar",
+   "text": "ضِفْدَع",
+   "voice": "Sulafat"
+  },
+  {
+   "id": "sulafat-03",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الثاء؟",
+   "voice": "Sulafat"
+  },
+  {
+   "id": "sulafat-04",
+   "lang": "ar",
+   "text": "ثَلاثَة زائِدُ اِثْنان يُساوي خَمْسَة.",
+   "voice": "Sulafat"
+  },
+  {
+   "id": "sulafat-05",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ!",
+   "voice": "Sulafat"
+  }
+ ]
+}
