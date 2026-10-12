@@ -168,6 +168,9 @@ h1 span{color:var(--orange)}
     var(--sky)}
 .wl-inner{width:100%; max-width:420px; display:grid; justify-items:center; gap:12px; text-align:center}
 .wl-title{font-size:2.6rem; letter-spacing:-.01em}
+.wl-links{display:flex; flex-wrap:wrap; justify-content:center; gap:4px 18px}
+.sfx-toggle{display:inline-flex; align-items:center; gap:6px}
+.sfx-toggle svg{width:20px; height:20px}
 .wl-ar{margin:-12px 0 0; font-size:1.2rem; font-weight:700; color:var(--ink-soft)}
 .zizo-hero{width:180px; height:186px; overflow:visible; transform-origin:50% 90%; animation:enter .9s cubic-bezier(.3,1.4,.5,1) both, sway 2.6s 1s ease-in-out infinite}
 .zizo-hero .ear{transform-box:fill-box; transform-origin:center; animation:flap 2.2s ease-in-out infinite}
@@ -600,7 +603,10 @@ h1 span{color:var(--orange)}
             <span aria-hidden="true">🎯</span><span id="wlDaily">تحدّي اليوم</span><span class="streak" id="wlStreak"></span>
           </button>
         </div>
-        <button class="linkbtn" id="editName">تغيير الاسم</button>
+        <div class="wl-links">
+          <button class="linkbtn" id="editName">تغيير الاسم</button>
+          <button class="linkbtn sfx-toggle" id="sfxToggle" aria-pressed="true"></button>
+        </div>
       </div>
       <form class="card setup" id="setup" hidden>
         <label for="kidName">ما اسم البطل الصغير؟</label>
@@ -974,6 +980,66 @@ h1 span{color:var(--orange)}
   function saveStars(){ try { localStorage.setItem('zizo-stars', String(stars)); } catch(e){} }
   // The pink dot on the star pill: there is something new the child can buy
   function renderStars(){ $('starCount').textContent = fmt(stars); $('starPill').classList.toggle('can-buy', canBuy()); }
+  /* ---------- fun sounds: made in code, no sound files, work without internet ---------- */
+  var sfxOn = true;
+  try { sfxOn = localStorage.getItem('zizo-sfx') !== 'off'; } catch(e){}
+  var AC = window.AudioContext || window.webkitAudioContext, actx = null, master = null, noiseBuf = null;
+  function audio(){
+    if (!AC) return null;
+    if (!actx){
+      try { actx = new AC(); master = actx.createGain(); master.gain.value = 1.0; master.connect(actx.destination); }
+      catch(e){ actx = null; return null; }
+    }
+    if (actx.state === 'suspended' && actx.resume) actx.resume().catch(function(){});
+    return actx;
+  }
+  // Phones keep sound off until the first touch: wake it then
+  document.addEventListener('pointerdown', function wake(){ if (audio()) document.removeEventListener('pointerdown', wake, true); }, true);
+  function tone(freq, start, dur, o){
+    var c = audio(); if (!c) return;
+    o = o || {};
+    var t0 = c.currentTime + start, osc = c.createOscillator(), g = c.createGain(), v = o.vol || 0.3;
+    osc.type = o.type || 'sine';
+    osc.frequency.setValueAtTime(freq, t0);
+    if (o.to) osc.frequency.exponentialRampToValueAtTime(o.to, t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.exponentialRampToValueAtTime(v, t0 + (o.attack || 0.012));
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    osc.connect(g); g.connect(master);
+    osc.start(t0); osc.stop(t0 + dur + 0.05);
+  }
+  // One clap: a short burst of filtered noise
+  function clap(start, o){
+    var c = audio(); if (!c) return;
+    if (!noiseBuf){
+      noiseBuf = c.createBuffer(1, c.sampleRate, c.sampleRate);
+      var d = noiseBuf.getChannelData(0);
+      for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+    }
+    var t0 = c.currentTime + start, s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain(), dur = o.dur;
+    s.buffer = noiseBuf; f.type = 'bandpass'; f.frequency.value = o.freq; f.Q.value = 1.1;
+    g.gain.setValueAtTime(o.vol, t0); g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    s.connect(f); f.connect(g); g.connect(master);
+    s.start(t0, Math.random() * 0.8, dur + 0.05);
+  }
+  var SFX = {
+    // a bright two-note chime with a little sparkle
+    correct: function(){ tone(880, 0, 0.2, { type: 'triangle', vol: 0.26 }); tone(1318.5, 0.09, 0.38, { type: 'triangle', vol: 0.26 }); tone(2637, 0.1, 0.28, { vol: 0.05 }); },
+    // a soft, friendly "boing" down: never scary
+    wrong: function(){ tone(330, 0, 0.3, { vol: 0.22, to: 190 }); tone(165, 0, 0.3, { vol: 0.08, to: 110 }); },
+    // a bubble pop for counting
+    pop: function(){ tone(620 + Math.random() * 220, 0, 0.09, { vol: 0.2, to: 240, attack: 0.004 }); },
+    // coins for the shop
+    coin: function(){ tone(987.8, 0, 0.09, { type: 'square', vol: 0.1 }); tone(1318.5, 0.08, 0.34, { type: 'square', vol: 0.1 }); tone(2637, 0.08, 0.2, { vol: 0.05 }); },
+    // a little fanfare, then clapping
+    win: function(){
+      [523.25, 659.25, 783.99].forEach(function(f, k){ tone(f, k * 0.12, 0.26, { type: 'triangle', vol: 0.24 }); });
+      tone(1046.5, 0.36, 0.7, { type: 'triangle', vol: 0.24 }); tone(1318.5, 0.36, 0.7, { vol: 0.1 });
+      for (var k = 0; k < 28; k++) clap(0.4 + Math.random() * 1.4, { dur: 0.05 + Math.random() * 0.05, freq: 1100 + Math.random() * 1500, vol: 0.22 + Math.random() * 0.22 });
+    }
+  };
+  function sfx(name){ if (sfxOn) try { SFX[name](); } catch(e){} }
+
   function burst(){
     if (reduce) return;
     var fx = $('fx'), cols = ['var(--sun)','var(--orange)','var(--pink)','var(--green)','var(--blue)'];
@@ -988,6 +1054,7 @@ h1 span{color:var(--orange)}
     }
   }
   function addStar(){
+    sfx('correct');
     stars++;
     saveStars();
     renderStars();
@@ -1172,6 +1239,7 @@ h1 span{color:var(--orange)}
   }
   function buy(p){
     if (isOwned(p) || p.price > stars) return;
+    sfx('coin');
     stars -= p.price; saveStars();
     owned[p.id] = true; saveOwned();
     outfit[p.slot] = p.id; saveOutfit();
@@ -1315,6 +1383,7 @@ h1 span{color:var(--orange)}
       if (btn.classList.contains('done')) return;
       counted++;
       btn.classList.add('done');
+      sfx('pop');
       var badge = document.createElement('span');
       badge.className = 'badge' + (en ? ' en' : ''); badge.textContent = names[counted - 1].d;
       btn.appendChild(badge);
@@ -1538,6 +1607,7 @@ h1 span{color:var(--orange)}
       nb.addEventListener('click', function(){
         var i = +nb.dataset.i;
         if (i > currentStage()){
+          sfx('wrong');
           zizo(gx('أكمل', 'أكملي') + ' المرحلة ' + fmt(currentStage() + 1) + ' أولاً لتفتح هذه المرحلة', 'sad');
           say(gx('أَكْمِلِ المَرْحَلَةَ السّابِقَةَ أَوَّلاً', 'أَكْمِلي المَرْحَلَةَ السّابِقَةَ أَوَّلاً'));
           return;
@@ -1566,6 +1636,7 @@ h1 span{color:var(--orange)}
     newGame();
   }
   function stageFinish(){
+    sfx('win');
     var i = stage, got = mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1;
     var first = !jStars[i];
     jStars[i] = Math.max(jStars[i], got); saveJourney();
@@ -1837,12 +1908,13 @@ h1 span{color:var(--orange)}
       round++; renderDots();
       nextTimer = setTimeout(function(){ whenNoPrize(nextRound); }, 1500);
     } else {
-      b.classList.add('wrong'); b.disabled = true; mistakes++;
+      b.classList.add('wrong'); b.disabled = true; mistakes++; sfx('wrong');
       var r = retry(); zizo(r, 'sad'); say(r);
     }
   }
   function finish(){
     if (stage !== null) return stageFinish();
+    sfx('win');
     $('playArea').hidden = true; $('endArea').hidden = false;
     var h = ''; for (var k=0;k<ROUNDS;k++) h += '<span>' + STAR + '</span>';
     $('endStars').innerHTML = h;
@@ -2110,7 +2182,7 @@ h1 span{color:var(--orange)}
     var what = isNum ? 'الرقم' : 'الحرف';
     if (sc.inside < TRACE_INSIDE){
       // Drawing that doesn't follow the letter's shape: clear it and try again on the dots
-      strokes = []; drawAll();
+      strokes = []; drawAll(); sfx('wrong');
       if (sc.inside < 0.6){
         zizo('خرجت بعيداً عن ' + what + '. ارسم فوق النقاط فقط', 'sad');
         say('ارْسُمْ فَوْقَ النِّقاطِ فَقَط');
@@ -2207,6 +2279,21 @@ h1 span{color:var(--orange)}
     showWelcome();
   });
   $('editName').addEventListener('click', function(){ openSetup(false); });
+  // Fun sounds on or off (the voice that reads stays on either way)
+  var NOTE_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>';
+  var NOTE_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/><path d="M3 3l18 18"/></svg>';
+  function renderSfxToggle(){
+    var b = $('sfxToggle');
+    b.innerHTML = (sfxOn ? NOTE_ICON : NOTE_OFF) + '<span>' + (sfxOn ? 'أصوات المرح: تعمل' : 'أصوات المرح: متوقفة') + '</span>';
+    b.setAttribute('aria-pressed', String(sfxOn));
+  }
+  $('sfxToggle').addEventListener('click', function(){
+    sfxOn = !sfxOn;
+    try { localStorage.setItem('zizo-sfx', sfxOn ? 'on' : 'off'); } catch(e){}
+    renderSfxToggle();
+    sfx('correct');
+  });
+  renderSfxToggle();
   $('goJourney').addEventListener('click', function(){ leaveWelcome(); show('play'); showMap(); });
   $('goDaily').addEventListener('click', function(){ leaveWelcome(); show('play'); startDaily(); });
   $('goLearn').addEventListener('click', function(){
