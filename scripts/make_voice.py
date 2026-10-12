@@ -64,27 +64,40 @@ def sentences(text):
 
 
 def piper_engine(spec, work):
+    """Piper voices by name; "<voice>@<speaker>" picks a speaker of a many-speaker voice.
+    An item may name its own "voice"; otherwise the list's voice for its language is used."""
     from piper import PiperVoice
     cache = work / "models"
     cache.mkdir(parents=True, exist_ok=True)
-    voices = {}
-    for lang, name in spec["voices"].items():
+    loaded = {}
+
+    def get(full):
+        if full in loaded:
+            return loaded[full]
+        name, _, speaker = full.partition("@")
         # "ar_JO-kareem-medium" -> ar/ar_JO/kareem/medium/ar_JO-kareem-medium.onnx (+ .onnx.json)
-        loc, speaker, quality = name.split("-")
-        base = f"{HF}/{loc.split('_')[0]}/{loc}/{speaker}/{quality}"
+        loc, spk, quality = name.split("-")
+        base = f"{HF}/{loc.split('_')[0]}/{loc}/{spk}/{quality}"
         for f in [f"{name}.onnx", f"{name}.onnx.json"]:
             if not (cache / f).exists():
                 urllib.request.urlretrieve(f"{base}/{f}", cache / f)
-        voices[lang] = PiperVoice.load(str(cache / f"{name}.onnx"))
+        v = PiperVoice.load(str(cache / f"{name}.onnx"))
+        sid = None
+        if speaker:
+            ids = json.loads((cache / f"{name}.onnx.json").read_text(encoding="utf-8")).get("speaker_id_map", {})
+            sid = ids[speaker] if speaker in ids else int(speaker)
+        loaded[full] = (v, sid)
+        return loaded[full]
 
-    def say(lang, text, st, path):
+    def say(lang, text, st, path, voice=None):
+        v, sid = get(voice or spec["voices"][lang])
         raw = path.with_suffix(".piper.wav")
         with wave.open(str(raw), "wb") as wf:
             try:
                 from piper import SynthesisConfig
-                voices[lang].synthesize_wav(text, wf, syn_config=SynthesisConfig(length_scale=st.get("length", 1.0)))
+                v.synthesize_wav(text, wf, syn_config=SynthesisConfig(length_scale=st.get("length", 1.0), speaker_id=sid))
             except ImportError:
-                voices[lang].synthesize(text, wf, length_scale=st.get("length", 1.0))
+                v.synthesize(text, wf, length_scale=st.get("length", 1.0), speaker_id=sid)
         to_pcm(raw, path)
     return say
 
@@ -113,7 +126,7 @@ def chatterbox_engine(spec, work):
         cache[(lang, text)] = a
         return a
 
-    def say(lang, text, st, path):
+    def say(lang, text, st, path, voice=None):
         # Each sentence on its own (short texts are where extra sounds creep in), joined with a short pause
         out = array.array("h")
         for k, s in enumerate(sentences(text)):
@@ -168,7 +181,7 @@ def main(list_path, out_dir, shard=0, shards=1):
         for it in items:
             raw, clean = work / f"{style}-{it['id']}-raw.wav", work / f"{style}-{it['id']}.wav"
             try:
-                say(it["lang"], it["text"], st, raw)
+                say(it["lang"], it["text"], dict(st, **it.get("style", {})), raw, it.get("voice"))
                 post(raw, clean, st.get("pitch", 1.0), st.get("tempo", 1.0))
             except Exception as e:  # keep going; the report says which ones failed
                 report.append(f"{style}\t{it['id']}\tFAILED {type(e).__name__}: {e}\t{it['text']}")
