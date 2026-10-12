@@ -291,8 +291,8 @@ def main(list_path, out_dir, shard=0, shards=1):
         for c in range(n):
             raw = work / f"{it['id']}-c{c}.wav"
             text, rep = it["text"], it.get("repeat", 0)
-            if it["lang"] == "ar":
-                text = pausal(text)
+            if it["lang"] == "ar" and spec.get("engine") != "chatterbox":
+                text = pausal(text)  # Piper adds "-tun" to a final ة; Chatterbox says it right by itself
             if rep:
                 word, end = text.rstrip(".!؟?"), text[len(text.rstrip(".!؟?")):] or "."
                 text = it.get("sep", "، " if it["lang"] == "ar" else ", ").join([word] * rep) + end
