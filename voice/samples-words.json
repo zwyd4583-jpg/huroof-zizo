@@ -1,0 +1,206 @@
+{
+ "engine": "piper",
+ "voices": {
+  "ar": "ar_JO-kareem-medium",
+  "en": "en_US-arctic-medium@bdl"
+ },
+ "length": 1.1,
+ "styles": {
+  "normal": {
+   "pitch": 1.0
+  }
+ },
+ "qa": true,
+ "qa_model": "medium",
+ "reels": true,
+ "items": [
+  {
+   "id": "fil-1.4",
+   "lang": "ar",
+   "text": "فِيل.",
+   "style": {
+    "length": 1.4
+   },
+   "candidates": 3
+  },
+  {
+   "id": "fam-1.4",
+   "lang": "ar",
+   "text": "فَم.",
+   "style": {
+    "length": 1.4
+   },
+   "candidates": 3
+  },
+  {
+   "id": "asfur-1.4",
+   "lang": "ar",
+   "text": "عُصْفُور.",
+   "style": {
+    "length": 1.4
+   },
+   "candidates": 3
+  },
+  {
+   "id": "kura-1.4",
+   "lang": "ar",
+   "text": "كُرَة.",
+   "style": {
+    "length": 1.4
+   },
+   "candidates": 3
+  },
+  {
+   "id": "dheeb-1.4",
+   "lang": "ar",
+   "text": "ذِئْب.",
+   "style": {
+    "length": 1.4
+   },
+   "candidates": 3
+  },
+  {
+   "id": "batta-1.4",
+   "lang": "ar",
+   "text": "بَطَّة.",
+   "style": {
+    "length": 1.4
+   },
+   "candidates": 3
+  },
+  {
+   "id": "fil-1.8",
+   "lang": "ar",
+   "text": "فِيل.",
+   "style": {
+    "length": 1.8
+   },
+   "candidates": 3
+  },
+  {
+   "id": "fam-1.8",
+   "lang": "ar",
+   "text": "فَم.",
+   "style": {
+    "length": 1.8
+   },
+   "candidates": 3
+  },
+  {
+   "id": "asfur-1.8",
+   "lang": "ar",
+   "text": "عُصْفُور.",
+   "style": {
+    "length": 1.8
+   },
+   "candidates": 3
+  },
+  {
+   "id": "kura-1.8",
+   "lang": "ar",
+   "text": "كُرَة.",
+   "style": {
+    "length": 1.8
+   },
+   "candidates": 3
+  },
+  {
+   "id": "dheeb-1.8",
+   "lang": "ar",
+   "text": "ذِئْب.",
+   "style": {
+    "length": 1.8
+   },
+   "candidates": 3
+  },
+  {
+   "id": "batta-1.8",
+   "lang": "ar",
+   "text": "بَطَّة.",
+   "style": {
+    "length": 1.8
+   },
+   "candidates": 3
+  },
+  {
+   "id": "fil-2.2",
+   "lang": "ar",
+   "text": "فِيل.",
+   "style": {
+    "length": 2.2
+   },
+   "candidates": 3
+  },
+  {
+   "id": "fam-2.2",
+   "lang": "ar",
+   "text": "فَم.",
+   "style": {
+    "length": 2.2
+   },
+   "candidates": 3
+  },
+  {
+   "id": "asfur-2.2",
+   "lang": "ar",
+   "text": "عُصْفُور.",
+   "style": {
+    "length": 2.2
+   },
+   "candidates": 3
+  },
+  {
+   "id": "kura-2.2",
+   "lang": "ar",
+   "text": "كُرَة.",
+   "style": {
+    "length": 2.2
+   },
+   "candidates": 3
+  },
+  {
+   "id": "dheeb-2.2",
+   "lang": "ar",
+   "text": "ذِئْب.",
+   "style": {
+    "length": 2.2
+   },
+   "candidates": 3
+  },
+  {
+   "id": "batta-2.2",
+   "lang": "ar",
+   "text": "بَطَّة.",
+   "style": {
+    "length": 2.2
+   },
+   "candidates": 3
+  },
+  {
+   "id": "en-B-1.4",
+   "lang": "en",
+   "text": "B.",
+   "style": {
+    "length": 1.4
+   },
+   "accept": [
+    "B",
+    "bee"
+   ],
+   "candidates": 3
+  },
+  {
+   "id": "en-B-1.8",
+   "lang": "en",
+   "text": "B.",
+   "style": {
+    "length": 1.8
+   },
+   "accept": [
+    "B",
+    "bee"
+   ],
+   "candidates": 3
+  }
+ ]
+}

@@ -142,8 +142,9 @@ def post(src, dst, pitch, tempo):
     f = []
     if abs(pitch - 1.0) > 1e-3 or abs(tempo - 1.0) > 1e-3:
         f.append(f"asetrate={int(RATE * pitch)},aresample={RATE},atempo={tempo / pitch:.5f}")
-    f.append("silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.03")
-    f.append("areverse,silenceremove=start_periods=1:start_threshold=-45dB:start_silence=0.05,areverse")
+    # trim only real silence (soft sounds like ف and س start quietly), and leave a little air at both ends
+    f.append("silenceremove=start_periods=1:start_threshold=-58dB:start_silence=0.06")
+    f.append("areverse,silenceremove=start_periods=1:start_threshold=-58dB:start_silence=0.08,areverse")
     f.append(f"loudnorm=I=-16:TP=-1.5:LRA=11,aresample={RATE}")
     subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-i", str(src), "-af", ",".join(f), "-ac", "1", "-ar", str(RATE), "-sample_fmt", "s16", str(dst)], check=True)
 

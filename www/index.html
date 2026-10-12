@@ -948,12 +948,17 @@ h1 span{color:var(--orange)}
      Every sentence the app says is recorded in voice/<id>.mp3; voice/index.json maps the sentence to
      its file. Names aren't recorded, so " يا <name>" is left out of what is heard (it stays on screen).
      A sentence without a recording falls back to the phone's voice. */
-  var VOICE = null, voiceGen = 0, voiceSrc = null, voiceOut = null, voiceBufs = {}, voiceOrder = [];
+  var VOICE = null, voiceLoading = true, voiceWaiting = null, voiceGen = 0, voiceSrc = null, voiceOut = null, voiceBufs = {}, voiceOrder = [];
+  function voiceLoaded(j){
+    voiceLoading = false;
+    if (j && j.clips){ VOICE = j.clips; $('voiceNote').hidden = true; }
+    // something was said while the list was still loading (the greeting at start): say it now
+    var w = voiceWaiting; voiceWaiting = null;
+    if (w) say(w);
+  }
   try {
-    fetch('voice/index.json').then(function(r){ return r.ok ? r.json() : null; }).then(function(j){
-      if (j && j.clips){ VOICE = j.clips; $('voiceNote').hidden = true; }
-    }).catch(function(){});
-  } catch(e){}
+    fetch('voice/index.json').then(function(r){ return r.ok ? r.json() : null; }).then(voiceLoaded).catch(function(){ voiceLoaded(null); });
+  } catch(e){ voiceLoading = false; }
   function vkey(part){
     if (part && typeof part === 'object') return 'en:' + part.en;
     var t = String(part);
@@ -979,6 +984,7 @@ h1 span{color:var(--orange)}
     var c = audio(); if (!c) return false;
     if (!voiceOut){ voiceOut = c.createGain(); voiceOut.gain.value = 1.0; voiceOut.connect(c.destination); }
     stopClips();
+    if (window.__zizoTest) (window.__zizoTest.played = window.__zizoTest.played || []).push(ids.join('+'));
     var gen = voiceGen;
     (function next(k){
       if (gen !== voiceGen || k >= ids.length) return;
@@ -1007,6 +1013,7 @@ h1 span{color:var(--orange)}
   // Each part is Arabic text, or { en: 'text' } to be read in English
   function say(parts){
     parts = [].concat(parts);
+    if (voiceLoading){ voiceWaiting = parts; return; }
     var ids = clipsFor(parts);
     if (ids && playClips(ids)){ ttsStop(); return; }
     stopClips();
