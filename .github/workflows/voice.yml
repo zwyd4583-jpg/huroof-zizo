@@ -1,7 +1,7 @@
 name: Make Zizo's voice
 
 # Run by hand (Actions > Make Zizo's voice > Run workflow) with the list of phrases to record.
-# The MP3 files are pushed to the branch "voice-out".
+# The work is split over several machines; the MP3 files are pushed to the branch "voice-out".
 on:
   workflow_dispatch:
     inputs:
@@ -9,14 +9,33 @@ on:
         description: "Phrase list (JSON) in the repository"
         default: "voice/samples.json"
         required: true
+      shards:
+        description: "How many machines share the work (1-20)"
+        default: "1"
+        required: true
 
 permissions:
   contents: write
 
 jobs:
-  voice:
+  plan:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    outputs:
+      shards: ${{ steps.p.outputs.shards }}
+    steps:
+      - id: p
+        run: |
+          n=${{ inputs.shards }}
+          python3 -c "import json; print('shards=' + json.dumps(list(range(int('$n')))))" >> "$GITHUB_OUTPUT"
+
+  voice:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJson(needs.plan.outputs.shards) }}
     steps:
       - uses: actions/checkout@v4
 
@@ -24,17 +43,38 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install Piper (offline speech engine)
+      - name: Install the speech engine
         run: |
           python -m pip install --upgrade pip
-          pip install piper-tts onnxruntime
+          if grep -q '"engine": *"chatterbox"' "${{ inputs.list }}"; then
+            pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
+            pip install chatterbox-tts
+          else
+            pip install piper-tts onnxruntime
+          fi
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
 
       - name: Record the phrases
-        run: python scripts/make_voice.py "${{ inputs.list }}" out
+        run: python scripts/make_voice.py "${{ inputs.list }}" out ${{ matrix.shard }} ${{ inputs.shards }}
 
-      - name: Save to the voice-out branch
+      - uses: actions/upload-artifact@v4
+        with:
+          name: voice-${{ matrix.shard }}
+          path: out/
+
+  save:
+    needs: voice
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: Join the parts and push them to the voice-out branch
         run: |
+          mkdir out
+          for d in parts/*/; do cp -r "$d"/. out/; done
+          cat out/report-*.tsv > out/report.tsv 2>/dev/null || true
           cd out
           git init -q
           git checkout -q -b voice-out
