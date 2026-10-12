@@ -46,17 +46,19 @@ jobs:
       - name: Install the speech engine
         run: |
           python -m pip install --upgrade pip
-          if grep -q '"engine": *"chatterbox"' "${{ inputs.list }}"; then
+          if [ -f "${{ inputs.list }}" ] && grep -q '"engine": *"chatterbox"' "${{ inputs.list }}"; then
             pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
             pip install chatterbox-tts
           else
             pip install piper-tts onnxruntime
           fi
-          if grep -q '"qa": *true' "${{ inputs.list }}"; then pip install openai-whisper; fi
+          if [ -f "${{ inputs.list }}" ] && grep -q '"qa": *true' "${{ inputs.list }}"; then pip install openai-whisper; fi
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
 
       - name: Record the phrases
-        run: python scripts/make_voice.py "${{ inputs.list }}" out ${{ matrix.shard }} ${{ inputs.shards }}
+        run: |
+          if [ "${{ inputs.list }}" = "debug" ]; then python scripts/voice_debug.py out; else
+          python scripts/make_voice.py "${{ inputs.list }}" out ${{ matrix.shard }} ${{ inputs.shards }}; fi
 
       - uses: actions/upload-artifact@v4
         with:
