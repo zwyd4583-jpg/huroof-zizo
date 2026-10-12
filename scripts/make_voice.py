@@ -80,11 +80,19 @@ def speech_parts(a, gap_s=0.12, floor=0.06):
     return [(s * fr, (e + 1) * fr) for s, e in parts]
 
 
+DEBUG = []
+
+
 def middle_take(path, n):
     """The word was said n times in a row ("فِيل، فِيل، فِيل"): keep the middle one, which is spoken
     at a natural pace (a word said alone comes out rushed and clipped). False if the parts aren't clear."""
     a = read_pcm(path)
-    parts = speech_parts(a)
+    parts = []
+    for gap in (0.12, 0.09, 0.06, 0.04):
+        parts = speech_parts(a, gap_s=gap)
+        if len(parts) == n:
+            break
+    DEBUG.append(f"{path.name}\t{len(a) / RATE:.2f}s\t" + " ".join(f"{s / RATE:.2f}-{e / RATE:.2f}" for s, e in speech_parts(a, gap_s=0.04)))
     if len(parts) != n:
         return False
     s, e = parts[n // 2]
@@ -236,7 +244,7 @@ def main(list_path, out_dir, shard=0, shards=1):
             text, rep = it["text"], it.get("repeat", 0)
             if rep:
                 word, end = text.rstrip(".!؟?"), text[len(text.rstrip(".!؟?")):] or "."
-                text = ("، " if it["lang"] == "ar" else ", ").join([word] * rep) + end
+                text = it.get("sep", "، " if it["lang"] == "ar" else ", ").join([word] * rep) + end
             try:
                 say(it["lang"], text, dict(base, **it.get("style", {})), raw, it.get("voice"))
                 if rep and not middle_take(raw, rep):
@@ -279,6 +287,8 @@ def main(list_path, out_dir, shard=0, shards=1):
     (out / f"report-{shard}.tsv").write_text("\n".join(report) + "\n", encoding="utf-8")
     if qa:
         (out / f"qa-{shard}.tsv").write_text("\n".join(qa) + "\n", encoding="utf-8")
+    if DEBUG:
+        (out / f"parts-{shard}.tsv").write_text("\n".join(DEBUG) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":
