@@ -1,0 +1,72 @@
+name: Check Zizo's voice
+
+# Run by hand with the name of a branch that holds clips/<id>.mp3.
+# Whisper listens to every clip; the scores are pushed back to that branch as qa.tsv.
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: "Branch with the clips"
+        required: true
+      shards:
+        description: "How many machines share the work"
+        default: "6"
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      shards: ${{ steps.p.outputs.shards }}
+    steps:
+      - id: p
+        run: python3 -c "import json; print('shards=' + json.dumps(list(range(int('${{ inputs.shards }}')))))" >> "$GITHUB_OUTPUT"
+
+  listen:
+    needs: plan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJson(needs.plan.outputs.shards) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+          path: qa
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install Whisper
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install openai-whisper
+      - name: Listen
+        run: python scripts/voice_qa.py qa/clips qa-${{ matrix.shard }}.tsv voice/phrases-gemini.json --shard=${{ matrix.shard }}/${{ inputs.shards }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: qa-${{ matrix.shard }}
+          path: qa-${{ matrix.shard }}.tsv
+
+  save:
+    needs: listen
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch }}
+      - uses: actions/download-artifact@v4
+        with:
+          path: parts
+      - name: Push the scores
+        run: |
+          cat parts/*/*.tsv | sort -t$'\t' -k2,2n > qa.tsv
+          git add qa.tsv
+          git -c user.name="zizo-voice" -c user.email="zizo-voice@users.noreply.github.com" commit -qm "Voice check"
+          git push -q origin HEAD:${{ inputs.branch }}
