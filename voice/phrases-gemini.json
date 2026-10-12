@@ -9,8 +9,8 @@
   "voice": "Puck",
   "rpm": 8,
   "style": {
-   "ar": "Say this in Modern Standard Arabic, warmly and cheerfully, clearly and a little slowly, like a kindergarten teacher talking to a five-year-old. Pronounce every letter and every vowel mark exactly as written:",
-   "en": "Say this in clear American English, warmly and cheerfully, a little slowly, like a kindergarten teacher talking to a five-year-old:"
+   "ar": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow, every letter and vowel mark pronounced exactly as written",
+   "en": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear American English, a little slow"
   }
  },
  "items": [
@@ -3031,7 +3031,7 @@
    "lang": "en",
    "text": "A.",
    "key": "en:A",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-2d8c6a8c",
@@ -3044,7 +3044,7 @@
    "lang": "en",
    "text": "B.",
    "key": "en:B",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-68c94a48",
@@ -3057,7 +3057,7 @@
    "lang": "en",
    "text": "C.",
    "key": "en:C",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-093d32f9",
@@ -3070,7 +3070,7 @@
    "lang": "en",
    "text": "D.",
    "key": "en:D",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-164f482c",
@@ -3083,7 +3083,7 @@
    "lang": "en",
    "text": "E.",
    "key": "en:E",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-df54a813",
@@ -3096,7 +3096,7 @@
    "lang": "en",
    "text": "F.",
    "key": "en:F",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-238f4620",
@@ -3109,7 +3109,7 @@
    "lang": "en",
    "text": "G.",
    "key": "en:G",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-ae2d56f9",
@@ -3122,7 +3122,7 @@
    "lang": "en",
    "text": "H.",
    "key": "en:H",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-0568dd18",
@@ -3135,7 +3135,7 @@
    "lang": "en",
    "text": "I.",
    "key": "en:I",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-5a7d2d8a",
@@ -3148,7 +3148,7 @@
    "lang": "en",
    "text": "J.",
    "key": "en:J",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-6280cc72",
@@ -3161,7 +3161,7 @@
    "lang": "en",
    "text": "K.",
    "key": "en:K",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-1df3daf8",
@@ -3174,7 +3174,7 @@
    "lang": "en",
    "text": "L.",
    "key": "en:L",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-43265e2c",
@@ -3187,7 +3187,7 @@
    "lang": "en",
    "text": "M.",
    "key": "en:M",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-ff1745fb",
@@ -3200,7 +3200,7 @@
    "lang": "en",
    "text": "N.",
    "key": "en:N",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-9c076ec0",
@@ -3213,7 +3213,7 @@
    "lang": "en",
    "text": "O.",
    "key": "en:O",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-92248d3d",
@@ -3226,7 +3226,7 @@
    "lang": "en",
    "text": "P.",
    "key": "en:P",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-5b3ae406",
@@ -3239,7 +3239,7 @@
    "lang": "en",
    "text": "Q.",
    "key": "en:Q",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-264f0e66",
@@ -3252,7 +3252,7 @@
    "lang": "en",
    "text": "R.",
    "key": "en:R",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-e5b02adc",
@@ -3265,7 +3265,7 @@
    "lang": "en",
    "text": "S.",
    "key": "en:S",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-c6d7bfa6",
@@ -3278,7 +3278,7 @@
    "lang": "en",
    "text": "T.",
    "key": "en:T",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-abc55ccf",
@@ -3291,7 +3291,7 @@
    "lang": "en",
    "text": "U.",
    "key": "en:U",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-b1747870",
@@ -3304,7 +3304,7 @@
    "lang": "en",
    "text": "V.",
    "key": "en:V",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-4bc72fa6",
@@ -3329,7 +3329,7 @@
    "lang": "en",
    "text": "X.",
    "key": "en:X",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-98c391b7",
@@ -3342,7 +3342,7 @@
    "lang": "en",
    "text": "Y.",
    "key": "en:Y",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-5fe5d0da",
@@ -3355,7 +3355,7 @@
    "lang": "en",
    "text": "Z.",
    "key": "en:Z",
-   "style": "Say the name of this letter of the English alphabet, clearly and cheerfully, like a kindergarten teacher talking to a five-year-old:"
+   "style": "naming a letter of the English alphabet; warm, cheerful kindergarten teacher, clear and a little slow"
   },
   {
    "id": "en-91f5e76a",

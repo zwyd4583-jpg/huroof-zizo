@@ -9,9 +9,11 @@ Only the Python standard library is used. Each sentence becomes out/<voice>/<id>
 The run can be repeated: sentences already recorded are skipped, so after a daily-quota stop
 it carries on from where it stopped.
 """
-import base64, json, os, pathlib, subprocess, sys, time, urllib.error, urllib.request, wave, zipfile
+import base64, io, json, os, pathlib, subprocess, sys, time, urllib.error, urllib.request, wave, zipfile
 
 API = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+# Gemini 3.8 TTS uses the Interactions API: the text is read verbatim and the delivery goes in "style"
+INTERACTIONS = "https://generativelanguage.googleapis.com/v1beta/interactions"
 
 
 def sh(*cmd):
@@ -62,8 +64,8 @@ class Auth:
         return bool(self.key)
 
 
-def call(auth, model, body):
-    req = urllib.request.Request(API.format(model=model), data=json.dumps(body).encode(), headers=auth.headers())
+def call(auth, url, body):
+    req = urllib.request.Request(url, data=json.dumps(body).encode(), headers=auth.headers())
     try:
         with urllib.request.urlopen(req, timeout=180) as r:
             return 200, json.load(r)
@@ -92,23 +94,56 @@ def per_day(err):
     return False
 
 
-def synth(auth, models, voice, text):
-    """Returns 16-bit PCM bytes at 24 kHz, trying the models in order."""
-    body = {
-        "contents": [{"parts": [{"text": text}]}],
+def new_api(model):
+    return model.startswith("gemini-3.8") or model.startswith("gemini-4")
+
+
+def request(model, voice, text, style):
+    if new_api(model):
+        part = {"type": "text", "text": text}
+        if style:
+            part["annotations"] = [{"type": "speech_metadata", "style": style}]
+        return INTERACTIONS, {
+            "model": model,
+            "input": [{"type": "user_input", "content": [part]}],
+            "response_format": {"type": "audio"},
+            "generation_config": {"speech_config": [{"voice": voice}]},
+        }
+    # older TTS models read the direction from the text itself
+    return API.format(model=model), {
+        "contents": [{"parts": [{"text": f"{style}:\n{text}" if style else text}]}],
         "generationConfig": {
             "responseModalities": ["AUDIO"],
             "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": voice}}},
         },
     }
+
+
+def pcm_of(model, res):
+    if new_api(model):
+        audio = [c for st in res.get("steps", []) if st.get("type") == "model_output"
+                 for c in st.get("content", []) if c.get("type") == "audio"]
+        data = base64.b64decode(audio[-1]["data"])
+    else:
+        data = base64.b64decode(res["candidates"][0]["content"]["parts"][0]["inlineData"]["data"])
+    if data[:4] == b"RIFF":
+        with wave.open(io.BytesIO(data)) as w:
+            if w.getframerate() != 24000 or w.getnchannels() != 1 or w.getsampwidth() != 2:
+                raise RuntimeError(f"unexpected audio format {w.getparams()}")
+            data = w.readframes(w.getnframes())
+    return data
+
+
+def synth(auth, models, voice, text, style):
+    """Returns 16-bit PCM bytes at 24 kHz, trying the models in order."""
     fails = 0
     while True:
         model = models[0]
-        code, res = call(auth, model, body)
+        url, body = request(model, voice, text, style)
+        code, res = call(auth, url, body)
         if code == 200:
             try:
-                part = res["candidates"][0]["content"]["parts"][0]["inlineData"]
-                return base64.b64decode(part["data"]), model
+                return pcm_of(model, res), model
             except (KeyError, IndexError):
                 fails += 1
                 if fails > 4:
@@ -158,11 +193,10 @@ def main(list_path, out):
             done += 1
             continue
         style = it.get("style") or g.get("style", {}).get(it["lang"], "")
-        text = f"{style}\n{it['text']}" if style else it["text"]
         time.sleep(max(0.0, gap - (time.time() - last)))
         last = time.time()
         try:
-            pcm, model = synth(auth, models, voice, text)
+            pcm, model = synth(auth, models, voice, it["text"], style)
         except DailyQuota as e:
             print(f"\nDaily quota reached after {done} of {len(items)} ({e}). Run the same command again tomorrow.")
             stopped = 1
