@@ -4036,9 +4036,12 @@
   {
    "id": "en-ec39114a",
    "lang": "en",
-   "text": "Six.",
+   "text": "Sihks.",
    "key": "en:six",
-   "candidates": 6
+   "candidates": 6,
+   "accept": [
+    "six"
+   ]
   },
   {
    "id": "en-d33738b4",
