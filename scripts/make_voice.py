@@ -163,7 +163,21 @@ def norm(t, lang):
     return re.sub(r"[^\w]|_", "", t)
 
 
+NUM_WORDS = {"1": "one", "2": "two", "3": "three", "4": "four", "5": "five", "6": "six", "7": "seven", "8": "eight", "9": "nine", "10": "ten"}
+
+
+def score(it, heard):
+    """How well the listener (Whisper) understood the recording: 1.0 is a perfect match.
+    "accept" lists other ways to write a right answer (a letter "W" for "Double you", "3" for "Three")."""
+    lang = it["lang"]
+    h = norm(" ".join(NUM_WORDS.get(w.strip(".,!?"), w) for w in heard.split()), lang)
+    want = [norm(it["text"], lang)] + [norm(a, lang) for a in it.get("accept", [])]
+    return max(difflib.SequenceMatcher(None, w, h).ratio() for w in want)
+
+
 def main(list_path, out_dir, shard=0, shards=1):
+    """Each item is recorded a few times ("candidates"); Whisper listens and the clearest one is kept.
+    The kept recording then gets every style (pitch/tempo) as its own MP3."""
     spec = json.loads(pathlib.Path(list_path).read_text(encoding="utf-8"))
     out = pathlib.Path(out_dir); out.mkdir(parents=True, exist_ok=True)
     work = pathlib.Path("/tmp/zizo-voice"); work.mkdir(parents=True, exist_ok=True)
@@ -173,38 +187,52 @@ def main(list_path, out_dir, shard=0, shards=1):
         import whisper
         asr = whisper.load_model(spec.get("qa_model", "small"), device="cpu")
     items = spec["items"][shard::shards]
-    report, qa = [], []
     styles = list(spec["styles"].items())
-    for si, (style, st) in enumerate(styles):
+    for style, _ in styles:
         (out / style).mkdir(exist_ok=True)
-        reel = []
-        for it in items:
-            raw, clean = work / f"{style}-{it['id']}-raw.wav", work / f"{style}-{it['id']}.wav"
+    report, qa, reels = [], [], {style: [] for style, _ in styles}
+    base = {"length": spec.get("length", 1.0)}
+    for it in items:
+        n = it.get("candidates", spec.get("candidates", 1)) if asr else 1
+        best = None
+        for c in range(n):
+            raw = work / f"{it['id']}-c{c}.wav"
             try:
-                say(it["lang"], it["text"], dict(st, **it.get("style", {})), raw, it.get("voice"))
-                post(raw, clean, st.get("pitch", 1.0), st.get("tempo", 1.0))
+                say(it["lang"], it["text"], dict(base, **it.get("style", {})), raw, it.get("voice"))
             except Exception as e:  # keep going; the report says which ones failed
-                report.append(f"{style}\t{it['id']}\tFAILED {type(e).__name__}: {e}\t{it['text']}")
-                print(report[-1], flush=True)
+                print(f"FAILED {it['id']} try {c}: {type(e).__name__}: {e}", flush=True)
                 continue
+            sc, heard = 1.0, ""
+            if asr:
+                heard = asr.transcribe(str(raw), language=it["lang"], fp16=False, temperature=0)["text"].strip()
+                sc = score(it, heard)
+            if best is None or sc > best[0]:
+                best = (sc, raw, heard)
+            if sc >= 0.99:
+                break
+        if best is None:
+            report.append(f"-\t{it['id']}\tFAILED\t{it['text']}")
+            continue
+        if asr:
+            qa.append(f"{it['id']}\t{best[0]:.2f}\t{it['text']}\t{best[2]}")
+            print("QA", qa[-1], flush=True)
+        for style, st in styles:
+            clean = work / f"{style}-{it['id']}.wav"
+            post(best[1], clean, st.get("pitch", 1.0), st.get("tempo", 1.0))
             mp3(clean, out / style / f"{it['id']}.mp3")
-            reel.append(clean)
+            reels[style].append(clean)
             with wave.open(str(clean)) as w:
                 report.append(f"{style}\t{it['id']}\t{w.getnframes() / w.getframerate():.2f}s\t{it['text']}")
-            print(report[-1], flush=True)
-            if asr and si == 0:
-                heard = asr.transcribe(str(raw), language=it["lang"], fp16=False, temperature=0)["text"].strip()
-                score = difflib.SequenceMatcher(None, norm(it["text"], it["lang"]), norm(heard, it["lang"])).ratio()
-                qa.append(f"{it['id']}\t{score:.2f}\t{it['text']}\t{heard}")
-                print("QA", qa[-1], flush=True)
-        if spec.get("reels") and reel:
-            joined = work / f"reel-{style}.wav"
-            gap = array.array("h", [0]) * int(RATE * 0.7)
+    if spec.get("reels"):
+        gap = array.array("h", [0]) * int(RATE * 0.7)
+        for style, clips in reels.items():
+            if not clips:
+                continue
             allpcm = array.array("h")
-            for c in reel:
+            for c in clips:
                 allpcm.extend(read_pcm(c)); allpcm.extend(gap)
-            write_pcm(joined, allpcm)
-            mp3(joined, out / f"reel-{style}.mp3")
+            write_pcm(work / f"reel-{style}.wav", allpcm)
+            mp3(work / f"reel-{style}.wav", out / f"reel-{style}.mp3")
     (out / f"report-{shard}.tsv").write_text("\n".join(report) + "\n", encoding="utf-8")
     if qa:
         (out / f"qa-{shard}.tsv").write_text("\n".join(qa) + "\n", encoding="utf-8")

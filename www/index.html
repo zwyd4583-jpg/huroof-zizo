@@ -696,8 +696,10 @@ h1 span{color:var(--orange)}
     {c:'Y', w:'Yellow', e:'💛'}, {c:'Z', w:'Zebra', e:'🦓'}
   ];
   // How each English letter's name is spelled for recording it (a lone "A" can be read as "uh")
-  var EN_SAY = { A:'Ay.', B:'Bee.', C:'See.', D:'Dee.', E:'Ee.', F:'Eff.', G:'Gee.', H:'Aitch.', I:'Eye.', J:'Jay.', K:'Kay.', L:'El.', M:'Em.',
-                 N:'En.', O:'Oh.', P:'Pee.', Q:'Cue.', R:'Are.', S:'Ess.', T:'Tee.', U:'You.', V:'Vee.', W:'Double you.', X:'Ex.', Y:'Why.', Z:'Zee.' };
+  // (the recording reads "A."; "W" is spelled out; any of these heard back counts as right)
+  var EN_SAY = { W: 'Double you.' };
+  var EN_NAMES = { A:'ay', B:'bee', C:'see', D:'dee', E:'ee', F:'eff', G:'gee', H:'aitch', I:'eye', J:'jay', K:'kay', L:'el', M:'em',
+                   N:'en', O:'oh', P:'pee', Q:'cue', R:'are', S:'ess', T:'tee', U:'you', V:'vee', W:'double you', X:'ex', Y:'why', Z:'zee' };
   // English numbers 1–10 (the pictures to count are the same as the Arabic numbers)
   var ENN = ['one','two','three','four','five','six','seven','eight','nine','ten'].map(function(w, i){
     return { d: String(i + 1), w: w, e: N[i].e };
@@ -858,6 +860,7 @@ h1 span{color:var(--orange)}
   function shuffle(a){ for (var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
   function colorVars(i){ var c = COLORS[i % COLORS.length]; return '--c:var(' + c[0] + ');--cd:var(' + c[1] + ')'; }
   function SN(i){ return i === 0 ? 'أَلِف' : L[i].n; }
+  function letterS(i){ return 'حَرْفُ ال' + SN(i); } // a letter's name on its own is said as "the letter ..."
   var reduce = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   document.querySelectorAll('.ico-spk').forEach(function(s){ s.outerHTML = SPK; });
@@ -1412,7 +1415,7 @@ h1 span{color:var(--orange)}
       if (!quiet) say([{ en: l.c }, { en: l.w }]);
     } else {
       zizo(l.w + ' تبدأ بحرف ال' + l.n, 'happy');
-      if (!quiet) say([SN(cur), l.s]);
+      if (!quiet) say([letterS(cur), l.s]);
     }
   }
   function backToGrid(){
@@ -1422,12 +1425,12 @@ h1 span{color:var(--orange)}
   $('backBtn').addEventListener('click', backToGrid);
   $('prevL').addEventListener('click', function(){ openLetter(cur - 1); });
   $('nextL').addEventListener('click', function(){ openLetter(cur + 1); });
-  $('sayLetterBtn').addEventListener('click', function(){ if (lLang === 'en') sayEn(EN[cur].c); else say(SN(cur)); });
+  $('sayLetterBtn').addEventListener('click', function(){ if (lLang === 'en') sayEn(EN[cur].c); else say(letterS(cur)); });
   $('sayWordBtn').addEventListener('click', function(){ if (lLang === 'en') sayEn(EN[cur].w); else say(L[cur].s); });
   $('toTrace').addEventListener('click', function(){
     var en = lLang === 'en';
     setTraceKind(en ? 'en' : 'letters', cur); show('trace');
-    if (en) sayEn(EN[cur].c); else say(SN(cur));
+    if (en) sayEn(EN[cur].c); else say(letterS(cur));
   });
 
   /* ---------- numbers ---------- */
@@ -2029,7 +2032,7 @@ h1 span{color:var(--orange)}
     if (tKind === 'numbers') say(N[i].s);
     else if (tKind === 'en') sayEn(EN[i].c);
     else if (tKind === 'enNum') sayEn(ENN[i].w);
-    else say(SN(i));
+    else say(letterS(i));
   }
   function setTraceKind(kind, idx){
     tSaved[tKind] = tIdx;
@@ -2088,7 +2091,7 @@ h1 span{color:var(--orange)}
   function allPhrases(){
     var out = [], seen = {};
     function add(text, speak){ var k = vkey(text); if (!seen[k]){ seen[k] = 1; out.push({ key: k, lang: 'ar', speak: speak || text }); } }
-    function addEn(text, speak){ var k = 'en:' + text; if (!seen[k]){ seen[k] = 1; out.push({ key: k, lang: 'en', speak: speak || text }); } }
+    function addEn(text, speak, accept){ var k = 'en:' + text; if (!seen[k]){ seen[k] = 1; out.push({ key: k, lang: 'en', speak: speak || text, accept: accept || [] }); } }
     var VOWELLED = {
       'أحسنت!': 'أَحْسَنْتَ!', 'رائع!': 'رائِع!', 'ممتاز!': 'مُمْتاز!', 'برافو!': 'بْرافُو!', 'شاطر!': 'شاطِر!',
       'أحسنتِ!': 'أَحْسَنْتِ!', 'رائعة!': 'رائِعَة!', 'ممتازة!': 'مُمْتازَة!', 'شاطرة!': 'شاطِرَة!',
@@ -2096,7 +2099,7 @@ h1 span{color:var(--orange)}
       'حاولي مرة أخرى': 'حاوِلي مَرَّةً أُخْرَى.', 'قريب! جرّبي مرة ثانية': 'قَرِيب! جَرِّبي مَرَّةً ثانِيَة.'
     };
     Object.keys(VOWELLED).forEach(function(t){ add(t, VOWELLED[t]); });
-    L.forEach(function(l, i){ add(SN(i)); add(l.s); add('أَيْنَ حَرْفُ ال' + SN(i) + '؟'); });
+    L.forEach(function(l, i){ add(letterS(i), letterS(i) + '.'); add(l.s); add('أَيْنَ حَرْفُ ال' + SN(i) + '؟'); });
     N.forEach(function(n){ add(n.s); });
     PAINTS.forEach(function(p){ add(p.s); add(p.fs); add('أَيْنَ اللَّوْنُ ' + p.the + '؟'); });
     [SHAPES, ANIMALS, FOODS, BODY, JOBS].forEach(function(list){
@@ -2128,7 +2131,7 @@ h1 span{color:var(--orange)}
     ['لا تَنْسَ', 'لا تَنْسَيْ'].forEach(function(d){
       [' الرَّسْمَةَ الصَّغِيرَة', ' النِّقاط', ' النُّقْطَة'].forEach(function(w){ add(d + w); });
     });
-    EN.forEach(function(e){ addEn(e.c, EN_SAY[e.c]); addEn(e.w, e.w + '.'); });
+    EN.forEach(function(e){ addEn(e.c, EN_SAY[e.c] || e.c + '.', [e.c, EN_NAMES[e.c]]); addEn(e.w, e.w + '.'); });
     ENN.forEach(function(n){ addEn(n.w, n.w.charAt(0).toUpperCase() + n.w.slice(1) + '.'); });
     addEn('How many?');
     return out;
