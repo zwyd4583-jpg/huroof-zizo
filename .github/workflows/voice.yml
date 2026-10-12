@@ -1,7 +1,7 @@
 name: Make Zizo's voice
 
 # Run by hand (Actions > Make Zizo's voice > Run workflow) with the list of phrases to record.
-# The work is split over several machines; the MP3 files are pushed to the branch "voice-out".
+# The work is split over several machines; the MP3 files are pushed to the branch "voice-out-<list name>".
 on:
   workflow_dispatch:
     inputs:
@@ -79,7 +79,8 @@ jobs:
           cat out/qa-*.tsv > out/qa.tsv 2>/dev/null || true
           cd out
           git init -q
-          git checkout -q -b voice-out
+          b="voice-out-$(basename "${{ inputs.list }}" .json)"
+          git checkout -q -b "$b"
           git add -A
           git -c user.name="zizo-voice" -c user.email="zizo-voice@users.noreply.github.com" commit -qm "Voice from ${{ inputs.list }} at ${GITHUB_SHA::7}"
-          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" voice-out
+          git push -q -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" "$b"
