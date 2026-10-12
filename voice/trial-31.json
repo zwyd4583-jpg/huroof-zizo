@@ -1,0 +1,200 @@
+{
+ "engine": "gemini",
+ "gemini": {
+  "models": [
+   "gemini-3.8-flash-tts",
+   "gemini-3.8-flash-lite-tts",
+   "gemini-3.1-flash-tts-preview"
+  ],
+  "voice": "Puck",
+  "rpm": 4,
+  "style": {
+   "ar": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow, every letter and vowel mark pronounced exactly as written",
+   "en": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear American English, a little slow"
+  },
+  "batch": 30,
+  "batch_chars": 2000
+ },
+ "items": [
+  {
+   "id": "ar-3593e926",
+   "lang": "ar",
+   "text": "حَرْفُ الأَلِف.",
+   "key": "حَرْفُ الأَلِف"
+  },
+  {
+   "id": "ar-5496ed86",
+   "lang": "ar",
+   "text": "أَرْنَب",
+   "key": "أَرْنَب"
+  },
+  {
+   "id": "ar-0c4ed00f",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الأَلِف؟",
+   "key": "أَيْنَ حَرْفُ الأَلِف؟"
+  },
+  {
+   "id": "ar-8c14cdbe",
+   "lang": "ar",
+   "text": "حَرْفُ الباء.",
+   "key": "حَرْفُ الباء"
+  },
+  {
+   "id": "ar-2de38e32",
+   "lang": "ar",
+   "text": "بَطَّة",
+   "key": "بَطَّة"
+  },
+  {
+   "id": "ar-9b49c262",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الباء؟",
+   "key": "أَيْنَ حَرْفُ الباء؟"
+  },
+  {
+   "id": "ar-f6d49ede",
+   "lang": "ar",
+   "text": "حَرْفُ التاء.",
+   "key": "حَرْفُ التاء"
+  },
+  {
+   "id": "ar-255480c2",
+   "lang": "ar",
+   "text": "تُفَّاحَة",
+   "key": "تُفَّاحَة"
+  },
+  {
+   "id": "ar-0cd6d34b",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ التاء؟",
+   "key": "أَيْنَ حَرْفُ التاء؟"
+  },
+  {
+   "id": "ar-cbb4b76e",
+   "lang": "ar",
+   "text": "حَرْفُ الثاء.",
+   "key": "حَرْفُ الثاء"
+  },
+  {
+   "id": "ar-cf8dcf93",
+   "lang": "ar",
+   "text": "ثَعْلَب",
+   "key": "ثَعْلَب"
+  },
+  {
+   "id": "ar-aaa1d8ff",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الثاء؟",
+   "key": "أَيْنَ حَرْفُ الثاء؟"
+  },
+  {
+   "id": "ar-d4a50c38",
+   "lang": "ar",
+   "text": "حَرْفُ الجيم.",
+   "key": "حَرْفُ الجيم"
+  },
+  {
+   "id": "ar-2a48a158",
+   "lang": "ar",
+   "text": "جَمَل",
+   "key": "جَمَل"
+  },
+  {
+   "id": "ar-1af35738",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الجيم؟",
+   "key": "أَيْنَ حَرْفُ الجيم؟"
+  },
+  {
+   "id": "ar-44f442ce",
+   "lang": "ar",
+   "text": "حَرْفُ الحاء.",
+   "key": "حَرْفُ الحاء"
+  },
+  {
+   "id": "ar-85b958e5",
+   "lang": "ar",
+   "text": "حِصَان",
+   "key": "حِصَان"
+  },
+  {
+   "id": "ar-c971edc5",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الحاء؟",
+   "key": "أَيْنَ حَرْفُ الحاء؟"
+  },
+  {
+   "id": "ar-0354381e",
+   "lang": "ar",
+   "text": "حَرْفُ الخاء.",
+   "key": "حَرْفُ الخاء"
+  },
+  {
+   "id": "ar-a4bf59bf",
+   "lang": "ar",
+   "text": "خَرُوف",
+   "key": "خَرُوف"
+  },
+  {
+   "id": "ar-f899f758",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الخاء؟",
+   "key": "أَيْنَ حَرْفُ الخاء؟"
+  },
+  {
+   "id": "ar-6c2bf4a8",
+   "lang": "ar",
+   "text": "حَرْفُ الدال.",
+   "key": "حَرْفُ الدال"
+  },
+  {
+   "id": "ar-e4c73bc9",
+   "lang": "ar",
+   "text": "دُبّ",
+   "key": "دُبّ"
+  },
+  {
+   "id": "ar-d8d41f82",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الدال؟",
+   "key": "أَيْنَ حَرْفُ الدال؟"
+  },
+  {
+   "id": "ar-8e9bf4fb",
+   "lang": "ar",
+   "text": "حَرْفُ الذال.",
+   "key": "حَرْفُ الذال"
+  },
+  {
+   "id": "ar-05f2bb5e",
+   "lang": "ar",
+   "text": "ذُرَة",
+   "key": "ذُرَة"
+  },
+  {
+   "id": "ar-4942f3a5",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الذال؟",
+   "key": "أَيْنَ حَرْفُ الذال؟"
+  },
+  {
+   "id": "ar-e1e4384d",
+   "lang": "ar",
+   "text": "حَرْفُ الراء.",
+   "key": "حَرْفُ الراء"
+  },
+  {
+   "id": "ar-cf61480a",
+   "lang": "ar",
+   "text": "رِسَالَة",
+   "key": "رِسَالَة"
+  },
+  {
+   "id": "ar-690f1b7f",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الراء؟",
+   "key": "أَيْنَ حَرْفُ الراء؟"
+  }
+ ]
+}

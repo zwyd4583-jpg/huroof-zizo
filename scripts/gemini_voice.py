@@ -124,9 +124,13 @@ def request(model, voice, text, style):
             "response_format": {"type": "audio"},
             "generation_config": {"speech_config": [{"voice": voice}]},
         }
-    # older TTS models read the direction from the text itself
+    # older TTS models read the direction from the text itself and know no pause tags
+    lines = text.split("\n<long pause>\n")
+    if len(lines) > 1:
+        text = "\n\n".join(lines)
+        style = (style + "; " if style else "") + "read each line below, stopping for two full seconds of silence after every line, and say nothing else"
     return API.format(model=model), {
-        "contents": [{"parts": [{"text": f"{style}:\n{text}" if style else text}]}],
+        "contents": [{"parts": [{"text": f"{style}:\n\n{text}" if style else text}]}],
         "generationConfig": {
             "responseModalities": ["AUDIO"],
             "speechConfig": {"voiceConfig": {"prebuiltVoiceConfig": {"voiceName": voice}}},
