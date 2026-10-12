@@ -75,13 +75,16 @@ class Auth:
 def call(auth, url, body):
     req = urllib.request.Request(url, data=json.dumps(body).encode(), headers=auth.headers())
     try:
-        with urllib.request.urlopen(req, timeout=180) as r:
+        with urllib.request.urlopen(req, timeout=900) as r:
             return 200, one(json.load(r))
     except urllib.error.HTTPError as e:
         try:
             return e.code, one(json.load(e))
         except Exception:
             return e.code, {}
+    except (TimeoutError, OSError) as e:  # long answers sometimes time out; treat like a server error
+        print(f"  no answer ({type(e).__name__}), trying again")
+        return 599, {}
 
 
 def one(res):
