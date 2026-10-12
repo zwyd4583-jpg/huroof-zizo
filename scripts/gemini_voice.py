@@ -15,7 +15,10 @@ API = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateC
 
 
 def sh(*cmd):
-    return subprocess.run(cmd, capture_output=True, text=True).stdout.strip()
+    r = subprocess.run(cmd, capture_output=True, text=True)
+    if r.returncode:
+        print("  [" + " ".join(cmd[:4]) + "] " + r.stderr.strip()[-300:])
+    return r.stdout.strip()
 
 
 class DailyQuota(Exception):
@@ -50,8 +53,8 @@ class Auth:
         find = ("gcloud", "services", "api-keys", "list", "--filter=displayName=zizo-voice", "--format=value(name)")
         names = sh(*find).split()
         if not names:
-            subprocess.run(["gcloud", "services", "api-keys", "create", "--display-name=zizo-voice",
-                            "--api-target=service=generativelanguage.googleapis.com"], capture_output=True)
+            sh("gcloud", "services", "api-keys", "create", "--display-name=zizo-voice",
+               "--api-target=service=generativelanguage.googleapis.com")
             names = sh(*find).split()
         if not names:
             raise SystemExit("could not make an API key in this project")
@@ -116,6 +119,8 @@ def synth(auth, models, voice, text):
             print(f"  {model} not available ({msg}); trying {models[1]}")
             models.pop(0)
             continue
+        if code in (401, 403):
+            print(f"  HTTP {code}: {msg}")
         if code in (401, 403) and auth.switch_to_key():
             continue
         if code == 429:
