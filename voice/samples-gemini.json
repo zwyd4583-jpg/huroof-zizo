@@ -3,15 +3,17 @@
  "gemini": {
   "models": [
    "gemini-3.8-flash-tts",
-   "gemini-3.1-flash-tts-preview",
-   "gemini-2.5-flash-preview-tts"
+   "gemini-3.8-flash-lite-tts",
+   "gemini-3.1-flash-tts-preview"
   ],
   "voice": "Puck",
-  "rpm": 8,
+  "rpm": 4,
   "style": {
    "ar": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow, every letter and vowel mark pronounced exactly as written",
    "en": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear American English, a little slow"
-  }
+  },
+  "batch": 6,
+  "batch_chars": 1800
  },
  "items": [
   {

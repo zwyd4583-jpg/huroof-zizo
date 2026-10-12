@@ -23,6 +23,9 @@ def sh(*cmd):
     return r.stdout.strip()
 
 
+KEYFILE = pathlib.Path.home() / ".config" / "zizo-voice" / "key"
+
+
 class DailyQuota(Exception):
     pass
 
@@ -32,7 +35,7 @@ class Auth:
 
     def __init__(self):
         self.project = os.environ.get("GOOGLE_CLOUD_PROJECT") or sh("gcloud", "config", "get-value", "project")
-        self.key = os.environ.get("GEMINI_API_KEY", "")
+        self.key = os.environ.get("GEMINI_API_KEY", "") or (KEYFILE.read_text().strip() if KEYFILE.exists() else "")
         self.token, self.t0 = "", 0.0
 
     def headers(self):
@@ -61,6 +64,11 @@ class Auth:
         if not names:
             raise SystemExit("could not make an API key in this project")
         self.key = sh("gcloud", "services", "api-keys", "get-key-string", names[0], "--format=value(keyString)")
+        if self.key:
+            # kept only in this Cloud Shell home, so later runs need no sign-in
+            KEYFILE.parent.mkdir(parents=True, exist_ok=True)
+            KEYFILE.write_text(self.key)
+            KEYFILE.chmod(0o600)
         return bool(self.key)
 
 
@@ -98,7 +106,7 @@ def per_day(err):
         for v in d.get("violations", []):
             if "PerDay" in v.get("quotaId", "") or "per_day" in v.get("quotaId", "").lower():
                 return True
-    return False
+    return "per day" in err.get("error", {}).get("message", "")
 
 
 def new_api(model):
@@ -179,54 +187,82 @@ def synth(auth, models, voice, text, style):
         raise RuntimeError(f"HTTP {code}: {msg}")
 
 
-def main(list_path, out):
+def chunks(items, g):
+    """Consecutive sentences with the same voice and style, up to "batch" of them per request."""
+    size, limit = int(g.get("batch", 1)), int(g.get("batch_chars", 1500))
+    cur, key, chars = [], None, 0
+    for it in items:
+        k = (it.get("voice") or g["voice"], it.get("style") or g.get("style", {}).get(it["lang"], ""))
+        if cur and (k != key or len(cur) >= size or chars + len(it["text"]) > limit):
+            yield key, cur
+            cur, chars = [], 0
+        cur.append(it)
+        key = k
+        chars += len(it["text"])
+    if cur:
+        yield key, cur
+
+
+def save(f, pcm):
+    f.parent.mkdir(parents=True, exist_ok=True)
+    with wave.open(str(f), "wb") as w:
+        w.setnchannels(1)
+        w.setsampwidth(2)
+        w.setframerate(24000)
+        w.writeframes(pcm)
+
+
+def main(list_path, out, model=None):
     spec = json.loads(pathlib.Path(list_path).read_text(encoding="utf-8"))
     g = spec["gemini"]
-    models = list(g["models"])
+    models = [model] if model else list(g["models"])
     out = pathlib.Path(out)
     auth = Auth()
-    print("project:", auth.project or "(none)")
-    sh("gcloud", "services", "enable", "generativelanguage.googleapis.com")
-    gap = 60.0 / float(g.get("rpm", 8))
+    print("project:", auth.project or "(none)", "| model:", models[0])
+    if not auth.key:
+        sh("gcloud", "services", "enable", "generativelanguage.googleapis.com")
+    gap = 60.0 / float(g.get("rpm", 4))
     report = out / "report.tsv"
     out.mkdir(parents=True, exist_ok=True)
     items = spec["items"]
+    groups = list(chunks(items, g))
     done = stopped = 0
     last = 0.0
-    for n, it in enumerate(items, 1):
-        voice = it.get("voice") or g["voice"]
-        f = out / voice / f"{it['id']}.wav"
+    for n, ((voice, style), group) in enumerate(groups, 1):
+        single = len(group) == 1
+        f = out / voice / (f"{group[0]['id']}.wav" if single else f"chunk-{group[0]['id']}-{len(group)}.wav")
         if f.exists():
-            done += 1
+            done += len(group)
             continue
-        style = it.get("style") or g.get("style", {}).get(it["lang"], "")
+        # sentences of one request are kept apart by long pauses and cut at those pauses later
+        text = group[0]["text"] if single else "\n<long pause>\n".join(it["text"] for it in group)
         time.sleep(max(0.0, gap - (time.time() - last)))
         last = time.time()
         try:
-            pcm, model = synth(auth, models, voice, it["text"], style)
+            pcm, used = synth(auth, models, voice, text, style)
         except DailyQuota as e:
-            print(f"\nDaily quota reached after {done} of {len(items)} ({e}). Run the same command again tomorrow.")
+            print(f"\nDaily quota reached after {done} of {len(items)} ({str(e)[:160]}).")
+            print("Run the same command again after the quota resets; finished parts are kept.")
             stopped = 1
             break
-        f.parent.mkdir(parents=True, exist_ok=True)
-        with wave.open(str(f), "wb") as w:
-            w.setnchannels(1)
-            w.setsampwidth(2)
-            w.setframerate(24000)
-            w.writeframes(pcm)
+        save(f, pcm)
+        if not single:
+            f.with_suffix(".json").write_text(json.dumps(
+                {"model": used, "voice": voice, "items": [{"id": it["id"], "text": it["text"]} for it in group]},
+                ensure_ascii=False, indent=1), encoding="utf-8")
         sec = len(pcm) / 48000
         with report.open("a", encoding="utf-8") as r:
-            r.write(f"{it['id']}\t{voice}\t{model}\t{sec:.2f}\t{it['text']}\n")
-        done += 1
-        print(f"{n}/{len(items)} {voice} {sec:4.1f}s {it['text']}")
+            r.write(f"{f.name}\t{voice}\t{used}\t{sec:.2f}\t{len(group)}\t{group[0]['text']}\n")
+        done += len(group)
+        print(f"request {n}/{len(groups)}: {voice} {len(group)} sentence(s) {sec:5.1f}s  {group[0]['text']}")
     zp = pathlib.Path("out.zip")
     with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
         for p in sorted(out.rglob("*")):
             if p.is_file():
                 z.write(p, p.relative_to(out.parent))
-    print(f"\n{done} of {len(items)} recorded -> {zp.resolve()}  (download it with: cloudshell download out.zip)")
+    print(f"\n{done} of {len(items)} sentences recorded -> {zp.resolve()}")
     return stopped
 
 
 if __name__ == "__main__":
-    sys.exit(main(*sys.argv[1:3]))
+    sys.exit(main(*sys.argv[1:4]))
