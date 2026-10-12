@@ -58,6 +58,41 @@ def keep_speech(a, gap_s=0.4):
     return a[max(0, s - 2) * fr:min(len(a), (e + 4) * fr)]
 
 
+def speech_parts(a, gap_s=0.12, floor=0.06):
+    """Split a recording into its spoken parts (separated by pauses of gap_s or more)."""
+    fr = RATE // 100  # 10 ms
+    peaks = [max((abs(x) for x in a[i:i + fr]), default=0) for i in range(0, len(a), fr)]
+    if not peaks or max(peaks) == 0:
+        return []
+    th, gap = floor * max(peaks), int(gap_s * 100)
+    parts, start, quiet = [], None, 0
+    for k, pk in enumerate(peaks):
+        if pk > th:
+            if start is None:
+                start = k
+            quiet, end = 0, k
+        elif start is not None:
+            quiet += 1
+            if quiet >= gap:
+                parts.append((start, end)); start = None
+    if start is not None:
+        parts.append((start, end))
+    return [(s * fr, (e + 1) * fr) for s, e in parts]
+
+
+def middle_take(path, n):
+    """The word was said n times in a row ("فِيل، فِيل، فِيل"): keep the middle one, which is spoken
+    at a natural pace (a word said alone comes out rushed and clipped). False if the parts aren't clear."""
+    a = read_pcm(path)
+    parts = speech_parts(a)
+    if len(parts) != n:
+        return False
+    s, e = parts[n // 2]
+    pad = int(RATE * 0.04)
+    write_pcm(path, a[max(0, s - pad):min(len(a), e + pad)])
+    return True
+
+
 def sentences(text):
     parts = [p.strip() for p in re.findall(r"[^.!؟?]+[.!؟?]*", text) if p.strip(" .!؟?")]
     return parts or [text]
@@ -198,8 +233,15 @@ def main(list_path, out_dir, shard=0, shards=1):
         best = None
         for c in range(n):
             raw = work / f"{it['id']}-c{c}.wav"
+            text, rep = it["text"], it.get("repeat", 0)
+            if rep:
+                word, end = text.rstrip(".!؟?"), text[len(text.rstrip(".!؟?")):] or "."
+                text = ("، " if it["lang"] == "ar" else ", ").join([word] * rep) + end
             try:
-                say(it["lang"], it["text"], dict(base, **it.get("style", {})), raw, it.get("voice"))
+                say(it["lang"], text, dict(base, **it.get("style", {})), raw, it.get("voice"))
+                if rep and not middle_take(raw, rep):
+                    print(f"try {c} of {it['id']}: the {rep} words didn't come apart clearly", flush=True)
+                    continue
             except Exception as e:  # keep going; the report says which ones failed
                 print(f"FAILED {it['id']} try {c}: {type(e).__name__}: {e}", flush=True)
                 continue
