@@ -1,0 +1,126 @@
+{
+ "engine": "chatterbox",
+ "styles": {
+  "normal": {
+   "pitch": 1.0
+  }
+ },
+ "qa": true,
+ "qa_model": "medium",
+ "reels": true,
+ "items": [
+  {
+   "id": "s00",
+   "lang": "ar",
+   "text": "أهلاً! أنا زيزو الفيل. هيا نلعب!",
+   "candidates": 4
+  },
+  {
+   "id": "s01",
+   "lang": "ar",
+   "text": "حرف الباء.",
+   "candidates": 4
+  },
+  {
+   "id": "s02",
+   "lang": "ar",
+   "text": "بطة.",
+   "candidates": 4
+  },
+  {
+   "id": "s03",
+   "lang": "ar",
+   "text": "أين حرف التاء؟",
+   "candidates": 4
+  },
+  {
+   "id": "s04",
+   "lang": "ar",
+   "text": "أحسنت!",
+   "candidates": 4
+  },
+  {
+   "id": "s05",
+   "lang": "ar",
+   "text": "رائعة!",
+   "candidates": 4
+  },
+  {
+   "id": "s06",
+   "lang": "ar",
+   "text": "حاول مرة أخرى.",
+   "candidates": 4
+  },
+  {
+   "id": "s07",
+   "lang": "ar",
+   "text": "واحد.",
+   "candidates": 4
+  },
+  {
+   "id": "s08",
+   "lang": "ar",
+   "text": "خمسة.",
+   "candidates": 4
+  },
+  {
+   "id": "s09",
+   "lang": "ar",
+   "text": "سبعة.",
+   "candidates": 4
+  },
+  {
+   "id": "s10",
+   "lang": "ar",
+   "text": "ثلاثة زائد اثنان يساوي خمسة.",
+   "candidates": 4
+  },
+  {
+   "id": "s11",
+   "lang": "ar",
+   "text": "الأسد يزأر.",
+   "candidates": 4
+  },
+  {
+   "id": "s12",
+   "lang": "ar",
+   "text": "تفاحة حمراء.",
+   "candidates": 4
+  },
+  {
+   "id": "s13",
+   "lang": "ar",
+   "text": "قطة.",
+   "candidates": 4
+  },
+  {
+   "id": "s14",
+   "lang": "ar",
+   "text": "فيل.",
+   "candidates": 4
+  },
+  {
+   "id": "s15",
+   "lang": "ar",
+   "text": "شمس.",
+   "candidates": 4
+  },
+  {
+   "id": "s16",
+   "lang": "ar",
+   "text": "بالعين نرى.",
+   "candidates": 4
+  },
+  {
+   "id": "s17",
+   "lang": "ar",
+   "text": "الطبيب يعالج المرضى.",
+   "candidates": 4
+  }
+ ],
+ "chatterbox": {
+  "exaggeration": 0.5,
+  "cfg_weight": 0.5,
+  "strip_marks": true
+ }
+}

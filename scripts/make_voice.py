@@ -14,7 +14,7 @@ Each item becomes <out>/<style>/<id>.mp3. With "reels", every style also gets on
 With "qa", Whisper listens to every recording and qa-<shard>.tsv says how close it is to the text.
 With shard/shards, only every shards-th item from shard on is made (to split the work).
 """
-import array, difflib, json, os, pathlib, re, subprocess, sys, urllib.request, wave, zlib
+import array, difflib, json, os, pathlib, re, subprocess, sys, urllib.parse, urllib.request, wave, zlib
 
 HF = "https://huggingface.co/rhasspy/piper-voices/resolve/main"
 RATE = 24000
@@ -173,20 +173,41 @@ def piper_engine(spec, work):
     return say
 
 
+def archive_prompt(ident, start, dur, work):
+    """A short clip of a public-domain LibriVox reading (archive.org) for the voice to copy."""
+    meta = json.loads(urllib.request.urlopen(f"https://archive.org/metadata/{ident}").read())
+    mp3s = sorted(f["name"] for f in meta["files"] if f["name"].endswith(".mp3") and "64kb" in f["name"])
+    mp3s = mp3s or sorted(f["name"] for f in meta["files"] if f["name"].endswith(".mp3"))
+    src = work / f"{ident}.mp3"
+    if not src.exists():
+        urllib.request.urlretrieve(f"https://archive.org/download/{ident}/{urllib.parse.quote(mp3s[0])}", src)
+    out = work / f"{ident}-{start}.wav"
+    subprocess.run(["ffmpeg", "-loglevel", "error", "-y", "-ss", str(start), "-t", str(dur), "-i", str(src),
+                    "-ac", "1", "-ar", "24000", "-af", "loudnorm=I=-18", str(out)], check=True)
+    print("voice to copy:", ident, mp3s[0], start, dur, flush=True)
+    return out
+
+
 def chatterbox_engine(spec, work):
     import torch, torchaudio
     from chatterbox.mtl_tts import ChatterboxMultilingualTTS
     torch.set_num_threads(max(1, os.cpu_count() or 1))
     model = ChatterboxMultilingualTTS.from_pretrained(device="cpu")
-    opts = spec.get("chatterbox", {})
+    opts = dict(spec.get("chatterbox", {}))
+    if opts.get("prompt_archive"):
+        opts["prompt"] = str(archive_prompt(opts["prompt_archive"], opts.get("prompt_start", 60), opts.get("prompt_dur", 12), work))
     cache = {}
 
-    def one(lang, text):
-        if (lang, text) in cache:
-            return cache[(lang, text)]
-        # the same text always gives the same recording
-        torch.manual_seed(zlib.crc32(f"{lang}|{text}".encode("utf-8")))
+    def one(lang, text, take):
+        if lang == "ar" and opts.get("strip_marks"):
+            text = AR_MARKS.sub("", text)  # this engine reads plain Arabic best
+        if (lang, text, take) in cache:
+            return cache[(lang, text, take)]
+        # the same text and take always give the same recording; another take gives another try
+        torch.manual_seed(zlib.crc32(f"{lang}|{text}|{take}".encode("utf-8")))
         kw = {"language_id": lang, "exaggeration": opts.get("exaggeration", 0.5), "cfg_weight": opts.get("cfg_weight", 0.5)}
+        if opts.get("temperature"):
+            kw["temperature"] = opts["temperature"]
         if opts.get("prompt"):
             kw["audio_prompt_path"] = opts["prompt"]
         wav = model.generate(text, **kw)
@@ -194,7 +215,7 @@ def chatterbox_engine(spec, work):
         torchaudio.save(str(tmp), wav, model.sr)
         to_pcm(tmp, work / "cb-one-pcm.wav")
         a = keep_speech(read_pcm(work / "cb-one-pcm.wav"))
-        cache[(lang, text)] = a
+        cache[(lang, text, take)] = a
         return a
 
     def say(lang, text, st, path, voice=None):
@@ -203,7 +224,7 @@ def chatterbox_engine(spec, work):
         for k, s in enumerate(sentences(text)):
             if k:
                 out.extend(array.array("h", [0]) * int(RATE * 0.22))
-            out.extend(one(lang, s))
+            out.extend(one(lang, s, st.get("take", 0)))
         write_pcm(path, out)
     return say
 
@@ -277,6 +298,7 @@ def main(list_path, out_dir, shard=0, shards=1):
                 text = it.get("sep", "، " if it["lang"] == "ar" else ", ").join([word] * rep) + end
             try:
                 st = dict(base, **it.get("style", {}))
+                st["take"] = c
                 if it.get("vary"):  # retries: each take a little slower than the one before
                     st["length"] = st["length"] * (1 + 0.12 * (c % 5))
                 say(it["lang"], text, st, raw, it.get("voice"))
