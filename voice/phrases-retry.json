@@ -1,0 +1,553 @@
+{
+ "engine": "piper",
+ "voices": {
+  "ar": "ar_JO-kareem-medium",
+  "en": "en_US-arctic-medium@bdl"
+ },
+ "length": 1.1,
+ "styles": {
+  "normal": {
+   "pitch": 1.0
+  },
+  "zizo": {
+   "pitch": 1.18
+  }
+ },
+ "qa": true,
+ "qa_model": "medium",
+ "items": [
+  {
+   "id": "ar-8c52ea32",
+   "lang": "ar",
+   "text": "شاطِر!",
+   "key": "شاطر!",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-8ed8ac8e",
+   "lang": "ar",
+   "text": "رائِعَة!",
+   "key": "رائعة!",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-5496ed86",
+   "lang": "ar",
+   "text": "أَرْنَب",
+   "key": "أَرْنَب",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-2de38e32",
+   "lang": "ar",
+   "text": "بَطَّة",
+   "key": "بَطَّة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-255480c2",
+   "lang": "ar",
+   "text": "تُفَّاحَة",
+   "key": "تُفَّاحَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-cf8dcf93",
+   "lang": "ar",
+   "text": "ثَعْلَب",
+   "key": "ثَعْلَب",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-85b958e5",
+   "lang": "ar",
+   "text": "حِصَان",
+   "key": "حِصَان",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-e4c73bc9",
+   "lang": "ar",
+   "text": "دُبّ",
+   "key": "دُبّ",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-05f2bb5e",
+   "lang": "ar",
+   "text": "ذُرَة",
+   "key": "ذُرَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-690f1b7f",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ الراء؟",
+   "key": "أَيْنَ حَرْفُ الراء؟",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-89ca8f6b",
+   "lang": "ar",
+   "text": "شَمْس",
+   "key": "شَمْس",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-4daf3713",
+   "lang": "ar",
+   "text": "صَارُوخ",
+   "key": "صَارُوخ",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-adf0024c",
+   "lang": "ar",
+   "text": "ضِفْدَع",
+   "key": "ضِفْدَع",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-ecf45a3c",
+   "lang": "ar",
+   "text": "حَرْفُ الظاء.",
+   "key": "حَرْفُ الظاء",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-dbedfd26",
+   "lang": "ar",
+   "text": "ظَبْي",
+   "key": "ظَبْي",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-979d6687",
+   "lang": "ar",
+   "text": "عِنَب",
+   "key": "عِنَب",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-14053ec3",
+   "lang": "ar",
+   "text": "غَيْمَة",
+   "key": "غَيْمَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-bbf768c5",
+   "lang": "ar",
+   "text": "فِيل",
+   "key": "فِيل",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-b6778ced",
+   "lang": "ar",
+   "text": "قِطَّة",
+   "key": "قِطَّة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-fd8c2c77",
+   "lang": "ar",
+   "text": "كُرَة",
+   "key": "كُرَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-d0d5c4e3",
+   "lang": "ar",
+   "text": "مَوْز",
+   "key": "مَوْز",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-20fb2685",
+   "lang": "ar",
+   "text": "نَحْلَة",
+   "key": "نَحْلَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-3e516d13",
+   "lang": "ar",
+   "text": "هَدِيَّة",
+   "key": "هَدِيَّة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-c0da7580",
+   "lang": "ar",
+   "text": "يَد",
+   "key": "يَد",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-ad3cd586",
+   "lang": "ar",
+   "text": "أَرْبَعَة",
+   "key": "أَرْبَعَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-5a3fa3dd",
+   "lang": "ar",
+   "text": "خَمْسَة",
+   "key": "خَمْسَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-c23fa950",
+   "lang": "ar",
+   "text": "سِتَّة",
+   "key": "سِتَّة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-7fd87312",
+   "lang": "ar",
+   "text": "سَبْعَة",
+   "key": "سَبْعَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-3da98ef3",
+   "lang": "ar",
+   "text": "أَحْمَر",
+   "key": "أَحْمَر",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-77e69ee7",
+   "lang": "ar",
+   "text": "أَزْرَق",
+   "key": "أَزْرَق",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-df31c85a",
+   "lang": "ar",
+   "text": "أَصْفَر",
+   "key": "أَصْفَر",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-29f9a3c5",
+   "lang": "ar",
+   "text": "أَخْضَر",
+   "key": "أَخْضَر",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-21abf517",
+   "lang": "ar",
+   "text": "مُثَلَّث",
+   "key": "مُثَلَّث",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-8c26bd51",
+   "lang": "ar",
+   "text": "قَلْب",
+   "key": "قَلْب",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-a56b380b",
+   "lang": "ar",
+   "text": "أَسَد",
+   "key": "أَسَد",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-9b5da912",
+   "lang": "ar",
+   "text": "كَلْب",
+   "key": "كَلْب",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-0181428d",
+   "lang": "ar",
+   "text": "حِصان",
+   "key": "حِصان",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-4405b413",
+   "lang": "ar",
+   "text": "بَقَرَة",
+   "key": "بَقَرَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-76bbbf39",
+   "lang": "ar",
+   "text": "دِيك",
+   "key": "دِيك",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-a11f90fb",
+   "lang": "ar",
+   "text": "الدِّيكُ يَصِيح",
+   "key": "الدِّيكُ يَصِيح",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-31285589",
+   "lang": "ar",
+   "text": "عُصْفُور",
+   "key": "عُصْفُور",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-249f7669",
+   "lang": "ar",
+   "text": "ذِئْب",
+   "key": "ذِئْب",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-923f13d8",
+   "lang": "ar",
+   "text": "الذِّئْبُ يَعْوِي",
+   "key": "الذِّئْبُ يَعْوِي",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-59d7af96",
+   "lang": "ar",
+   "text": "تُفّاحَة",
+   "key": "تُفّاحَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-02f1528c",
+   "lang": "ar",
+   "text": "بِطِّيخَة",
+   "key": "بِطِّيخَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-d19eee2f",
+   "lang": "ar",
+   "text": "كَرَز",
+   "key": "كَرَز",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-97a7f09c",
+   "lang": "ar",
+   "text": "طَماطِم",
+   "key": "طَماطِم",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-718716f4",
+   "lang": "ar",
+   "text": "خِيار",
+   "key": "خِيار",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-b57d0a8f",
+   "lang": "ar",
+   "text": "عَيْن",
+   "key": "عَيْن",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-1ed78a75",
+   "lang": "ar",
+   "text": "أُذُن",
+   "key": "أُذُن",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-75aabc06",
+   "lang": "ar",
+   "text": "فَم",
+   "key": "فَم",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-4f51e8eb",
+   "lang": "ar",
+   "text": "لِسان",
+   "key": "لِسان",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-8a02eea8",
+   "lang": "ar",
+   "text": "إِصْبَع",
+   "key": "إِصْبَع",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-b89347c1",
+   "lang": "ar",
+   "text": "قَدَم",
+   "key": "قَدَم",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-39df07fc",
+   "lang": "ar",
+   "text": "طَبِيب",
+   "key": "طَبِيب",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-65f539af",
+   "lang": "ar",
+   "text": "طَبّاخ",
+   "key": "طَبّاخ",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-8f0d3d38",
+   "lang": "ar",
+   "text": "إِطْفائِيّ",
+   "key": "إِطْفائِيّ",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-b9a70145",
+   "lang": "ar",
+   "text": "شُرْطِيّ",
+   "key": "شُرْطِيّ",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-6331f653",
+   "lang": "ar",
+   "text": "فَلّاح",
+   "key": "فَلّاح",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-7c751c71",
+   "lang": "ar",
+   "text": "طَيّار",
+   "key": "طَيّار",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-cf994670",
+   "lang": "ar",
+   "text": "رَسّامَة",
+   "key": "رَسّامَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-d9ac900d",
+   "lang": "ar",
+   "text": "مِيكانِيكِيّ",
+   "key": "مِيكانِيكِيّ",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "ar-90e6658b",
+   "lang": "ar",
+   "text": "عالِمَة",
+   "key": "عالِمَة",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "en-eeb2aa18",
+   "lang": "en",
+   "text": "Van.",
+   "key": "en:Van",
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "en-2fec39b8",
+   "lang": "en",
+   "text": "X.",
+   "key": "en:X",
+   "accept": [
+    "X",
+    "ex"
+   ],
+   "candidates": 12,
+   "vary": true
+  },
+  {
+   "id": "en-ec39114a",
+   "lang": "en",
+   "text": "Six.",
+   "key": "en:six",
+   "candidates": 12,
+   "vary": true
+  }
+ ],
+ "reels": false
+}

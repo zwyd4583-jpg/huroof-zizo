@@ -276,7 +276,10 @@ def main(list_path, out_dir, shard=0, shards=1):
                 word, end = text.rstrip(".!؟?"), text[len(text.rstrip(".!؟?")):] or "."
                 text = it.get("sep", "، " if it["lang"] == "ar" else ", ").join([word] * rep) + end
             try:
-                say(it["lang"], text, dict(base, **it.get("style", {})), raw, it.get("voice"))
+                st = dict(base, **it.get("style", {}))
+                if it.get("vary"):  # retries: each take a little slower than the one before
+                    st["length"] = st["length"] * (1 + 0.12 * (c % 5))
+                say(it["lang"], text, st, raw, it.get("voice"))
                 if rep and not middle_take(raw, rep):
                     print(f"try {c} of {it['id']}: the {rep} words didn't come apart clearly", flush=True)
                     continue
