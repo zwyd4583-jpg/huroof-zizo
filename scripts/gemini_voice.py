@@ -152,7 +152,7 @@ def main(list_path, out):
         if f.exists():
             done += 1
             continue
-        style = g.get("style", {}).get(it["lang"], "")
+        style = it.get("style") or g.get("style", {}).get(it["lang"], "")
         text = f"{style}\n{it['text']}" if style else it["text"]
         time.sleep(max(0.0, gap - (time.time() - last)))
         last = time.time()
