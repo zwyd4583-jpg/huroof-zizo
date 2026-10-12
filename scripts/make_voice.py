@@ -132,15 +132,35 @@ def piper_engine(spec, work):
         loaded[full] = (v, sid)
         return loaded[full]
 
-    def say(lang, text, st, path, voice=None):
-        v, sid = get(voice or spec["voices"][lang])
-        raw = path.with_suffix(".piper.wav")
+    def synth(v, sid, text, length, raw, steady):
         with wave.open(str(raw), "wb") as wf:
             try:
                 from piper import SynthesisConfig
-                v.synthesize_wav(text, wf, syn_config=SynthesisConfig(length_scale=st.get("length", 1.0), speaker_id=sid))
+                cfg = SynthesisConfig(length_scale=length, speaker_id=sid)
+                if steady:  # short words: less random timing
+                    cfg = SynthesisConfig(length_scale=length, speaker_id=sid, noise_w_scale=0.4)
+                v.synthesize_wav(text, wf, syn_config=cfg)
             except ImportError:
-                v.synthesize(text, wf, length_scale=st.get("length", 1.0), speaker_id=sid)
+                v.synthesize(text, wf, length_scale=length, speaker_id=sid)
+        with wave.open(str(raw)) as r:
+            return r.getnframes() / r.getframerate()
+
+    def say(lang, text, st, path, voice=None):
+        v, sid = get(voice or spec["voices"][lang])
+        raw = path.with_suffix(".piper.wav")
+        length = st.get("length", 1.0)
+        short = len(text.split()) <= 2
+        dur = synth(v, sid, text, length, raw, short)
+        if short:
+            # A word on its own comes out far too fast (فيل in 0.15 s). Slow it down to a natural
+            # length for its sounds: about 0.12 s a sound, plus a little.
+            try:
+                n = sum(len([p for p in w if p not in "ˈˌ.'"]) for w in v.phonemize(text))
+            except Exception:
+                n = len(text)
+            want = 0.12 * n + 0.12
+            if dur < 0.85 * want:
+                dur = synth(v, sid, text, min(3.5, length * want / max(dur, 0.05)), raw, True)
         to_pcm(raw, path)
     return say
 

@@ -8,6 +8,9 @@
  "styles": {
   "normal": {
    "pitch": 1.0
+  },
+  "zizo": {
+   "pitch": 1.18
   }
  },
  "qa": true,
@@ -15,111 +18,112 @@
  "reels": true,
  "items": [
   {
-   "id": "fil-r1.1",
+   "id": "fil",
    "lang": "ar",
    "text": "فِيل.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 4
   },
   {
-   "id": "fam-r1.1",
+   "id": "fam",
    "lang": "ar",
    "text": "فَم.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 4
   },
   {
-   "id": "asfur-r1.1",
+   "id": "asfur",
    "lang": "ar",
    "text": "عُصْفُور.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 4
   },
   {
-   "id": "kura-r1.1",
+   "id": "kura",
    "lang": "ar",
    "text": "كُرَة.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 4
   },
   {
-   "id": "dheeb-r1.1",
+   "id": "dheeb",
    "lang": "ar",
    "text": "ذِئْب.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 4
   },
   {
-   "id": "batta-r1.1",
+   "id": "batta",
    "lang": "ar",
    "text": "بَطَّة.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 4
   },
   {
-   "id": "sabaa-r1.1",
+   "id": "qitta",
+   "lang": "ar",
+   "text": "قِطَّة.",
+   "candidates": 4
+  },
+  {
+   "id": "sabaa",
    "lang": "ar",
    "text": "سَبْعَة.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 4
   },
   {
-   "id": "raia-r1.1",
+   "id": "raia",
    "lang": "ar",
    "text": "رائِع!",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 4
   },
   {
-   "id": "wahid-r1.1",
+   "id": "wahid",
    "lang": "ar",
    "text": "واحِد.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 4
   },
   {
-   "id": "ahmar-r1.1",
+   "id": "ahmar",
    "lang": "ar",
    "text": "أَحْمَر.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 4
+  },
+  {
+   "id": "yad",
+   "lang": "ar",
+   "text": "يَد.",
+   "candidates": 4
+  },
+  {
+   "id": "kalb",
+   "lang": "ar",
+   "text": "كَلْب.",
+   "candidates": 4
+  },
+  {
+   "id": "dubb",
+   "lang": "ar",
+   "text": "دُبّ.",
+   "candidates": 4
+  },
+  {
+   "id": "mumtaz",
+   "lang": "ar",
+   "text": "مُمْتاز!",
+   "candidates": 4
+  },
+  {
+   "id": "bravo",
+   "lang": "ar",
+   "text": "بْرافُو!",
+   "candidates": 4
+  },
+  {
+   "id": "letter",
+   "lang": "ar",
+   "text": "حَرْفُ الباء.",
+   "candidates": 4
   },
   {
    "id": "en-egg",
    "lang": "en",
    "text": "Egg.",
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 3
   },
   {
    "id": "en-B",
@@ -129,52 +133,16 @@
     "B",
     "bee"
    ],
-   "candidates": 3,
-   "repeat": 3
+   "candidates": 3
   },
   {
-   "id": "fil-dots",
-   "lang": "ar",
-   "text": "فِيل.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3,
-   "sep": " ... "
-  },
-  {
-   "id": "fam-dots",
-   "lang": "ar",
-   "text": "فَم.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3,
-   "sep": " ... "
-  },
-  {
-   "id": "asfur-dots",
-   "lang": "ar",
-   "text": "عُصْفُور.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3,
-   "sep": " ... "
-  },
-  {
-   "id": "kura-dots",
-   "lang": "ar",
-   "text": "كُرَة.",
-   "style": {
-    "length": 1.1
-   },
-   "candidates": 3,
-   "repeat": 3,
-   "sep": " ... "
+   "id": "en-W",
+   "lang": "en",
+   "text": "Double you.",
+   "accept": [
+    "W"
+   ],
+   "candidates": 3
   }
  ]
 }
