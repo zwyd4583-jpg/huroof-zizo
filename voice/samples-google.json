@@ -1,0 +1,669 @@
+{
+ "engine": "google",
+ "google": {
+  "ar": {
+   "name": "ar-XA-Wavenet-B",
+   "rate": 0.9
+  },
+  "en": {
+   "name": "en-US-Chirp3-HD-Puck",
+   "rate": 0.9
+  }
+ },
+ "styles": {
+  "normal": {
+   "pitch": 1.0
+  }
+ },
+ "reels": false,
+ "items": [
+  {
+   "id": "puck-00",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-01",
+   "lang": "ar",
+   "text": "حَرْفُ الباء.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-02",
+   "lang": "ar",
+   "text": "بَطَّة.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-03",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ التاء؟",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-04",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ!",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-05",
+   "lang": "ar",
+   "text": "رائِعَة!",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-06",
+   "lang": "ar",
+   "text": "حاوِلْ مَرَّةً أُخْرَى.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-07",
+   "lang": "ar",
+   "text": "واحِد.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-08",
+   "lang": "ar",
+   "text": "خَمْسَة.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-09",
+   "lang": "ar",
+   "text": "سَبْعَة.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-10",
+   "lang": "ar",
+   "text": "ثَلاثَة زائِدُ اِثْنان يُساوي خَمْسَة.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-11",
+   "lang": "ar",
+   "text": "الأَسَدُ يَزْأَر.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-12",
+   "lang": "ar",
+   "text": "تُفّاحَة حَمْراء.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-13",
+   "lang": "ar",
+   "text": "قِطَّة.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-14",
+   "lang": "ar",
+   "text": "فِيل.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-15",
+   "lang": "ar",
+   "text": "شَمْس.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-16",
+   "lang": "ar",
+   "text": "بِالعَيْنِ نَرَى.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "puck-17",
+   "lang": "ar",
+   "text": "الطَّبِيبُ يُعالِجُ المَرْضَى.",
+   "voice": "ar-XA-Chirp3-HD-Puck"
+  },
+  {
+   "id": "kore-00",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-01",
+   "lang": "ar",
+   "text": "حَرْفُ الباء.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-02",
+   "lang": "ar",
+   "text": "بَطَّة.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-03",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ التاء؟",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-04",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ!",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-05",
+   "lang": "ar",
+   "text": "رائِعَة!",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-06",
+   "lang": "ar",
+   "text": "حاوِلْ مَرَّةً أُخْرَى.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-07",
+   "lang": "ar",
+   "text": "واحِد.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-08",
+   "lang": "ar",
+   "text": "خَمْسَة.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-09",
+   "lang": "ar",
+   "text": "سَبْعَة.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-10",
+   "lang": "ar",
+   "text": "ثَلاثَة زائِدُ اِثْنان يُساوي خَمْسَة.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-11",
+   "lang": "ar",
+   "text": "الأَسَدُ يَزْأَر.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-12",
+   "lang": "ar",
+   "text": "تُفّاحَة حَمْراء.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-13",
+   "lang": "ar",
+   "text": "قِطَّة.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-14",
+   "lang": "ar",
+   "text": "فِيل.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-15",
+   "lang": "ar",
+   "text": "شَمْس.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-16",
+   "lang": "ar",
+   "text": "بِالعَيْنِ نَرَى.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "kore-17",
+   "lang": "ar",
+   "text": "الطَّبِيبُ يُعالِجُ المَرْضَى.",
+   "voice": "ar-XA-Chirp3-HD-Kore"
+  },
+  {
+   "id": "leda-00",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-01",
+   "lang": "ar",
+   "text": "حَرْفُ الباء.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-02",
+   "lang": "ar",
+   "text": "بَطَّة.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-03",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ التاء؟",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-04",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ!",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-05",
+   "lang": "ar",
+   "text": "رائِعَة!",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-06",
+   "lang": "ar",
+   "text": "حاوِلْ مَرَّةً أُخْرَى.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-07",
+   "lang": "ar",
+   "text": "واحِد.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-08",
+   "lang": "ar",
+   "text": "خَمْسَة.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-09",
+   "lang": "ar",
+   "text": "سَبْعَة.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-10",
+   "lang": "ar",
+   "text": "ثَلاثَة زائِدُ اِثْنان يُساوي خَمْسَة.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-11",
+   "lang": "ar",
+   "text": "الأَسَدُ يَزْأَر.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-12",
+   "lang": "ar",
+   "text": "تُفّاحَة حَمْراء.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-13",
+   "lang": "ar",
+   "text": "قِطَّة.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-14",
+   "lang": "ar",
+   "text": "فِيل.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-15",
+   "lang": "ar",
+   "text": "شَمْس.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-16",
+   "lang": "ar",
+   "text": "بِالعَيْنِ نَرَى.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "leda-17",
+   "lang": "ar",
+   "text": "الطَّبِيبُ يُعالِجُ المَرْضَى.",
+   "voice": "ar-XA-Chirp3-HD-Leda"
+  },
+  {
+   "id": "fenrir-00",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-01",
+   "lang": "ar",
+   "text": "حَرْفُ الباء.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-02",
+   "lang": "ar",
+   "text": "بَطَّة.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-03",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ التاء؟",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-04",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ!",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-05",
+   "lang": "ar",
+   "text": "رائِعَة!",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-06",
+   "lang": "ar",
+   "text": "حاوِلْ مَرَّةً أُخْرَى.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-07",
+   "lang": "ar",
+   "text": "واحِد.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-08",
+   "lang": "ar",
+   "text": "خَمْسَة.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-09",
+   "lang": "ar",
+   "text": "سَبْعَة.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-10",
+   "lang": "ar",
+   "text": "ثَلاثَة زائِدُ اِثْنان يُساوي خَمْسَة.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-11",
+   "lang": "ar",
+   "text": "الأَسَدُ يَزْأَر.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-12",
+   "lang": "ar",
+   "text": "تُفّاحَة حَمْراء.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-13",
+   "lang": "ar",
+   "text": "قِطَّة.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-14",
+   "lang": "ar",
+   "text": "فِيل.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-15",
+   "lang": "ar",
+   "text": "شَمْس.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-16",
+   "lang": "ar",
+   "text": "بِالعَيْنِ نَرَى.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "fenrir-17",
+   "lang": "ar",
+   "text": "الطَّبِيبُ يُعالِجُ المَرْضَى.",
+   "voice": "ar-XA-Chirp3-HD-Fenrir"
+  },
+  {
+   "id": "wavenetb-00",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-01",
+   "lang": "ar",
+   "text": "حَرْفُ الباء.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-02",
+   "lang": "ar",
+   "text": "بَطَّة.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-03",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ التاء؟",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-04",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ!",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-05",
+   "lang": "ar",
+   "text": "رائِعَة!",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-06",
+   "lang": "ar",
+   "text": "حاوِلْ مَرَّةً أُخْرَى.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-07",
+   "lang": "ar",
+   "text": "واحِد.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-08",
+   "lang": "ar",
+   "text": "خَمْسَة.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-09",
+   "lang": "ar",
+   "text": "سَبْعَة.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-10",
+   "lang": "ar",
+   "text": "ثَلاثَة زائِدُ اِثْنان يُساوي خَمْسَة.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-11",
+   "lang": "ar",
+   "text": "الأَسَدُ يَزْأَر.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-12",
+   "lang": "ar",
+   "text": "تُفّاحَة حَمْراء.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-13",
+   "lang": "ar",
+   "text": "قِطَّة.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-14",
+   "lang": "ar",
+   "text": "فِيل.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-15",
+   "lang": "ar",
+   "text": "شَمْس.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-16",
+   "lang": "ar",
+   "text": "بِالعَيْنِ نَرَى.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetb-17",
+   "lang": "ar",
+   "text": "الطَّبِيبُ يُعالِجُ المَرْضَى.",
+   "voice": "ar-XA-Wavenet-B"
+  },
+  {
+   "id": "wavenetd-00",
+   "lang": "ar",
+   "text": "أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-01",
+   "lang": "ar",
+   "text": "حَرْفُ الباء.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-02",
+   "lang": "ar",
+   "text": "بَطَّة.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-03",
+   "lang": "ar",
+   "text": "أَيْنَ حَرْفُ التاء؟",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-04",
+   "lang": "ar",
+   "text": "أَحْسَنْتَ!",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-05",
+   "lang": "ar",
+   "text": "رائِعَة!",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-06",
+   "lang": "ar",
+   "text": "حاوِلْ مَرَّةً أُخْرَى.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-07",
+   "lang": "ar",
+   "text": "واحِد.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-08",
+   "lang": "ar",
+   "text": "خَمْسَة.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-09",
+   "lang": "ar",
+   "text": "سَبْعَة.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-10",
+   "lang": "ar",
+   "text": "ثَلاثَة زائِدُ اِثْنان يُساوي خَمْسَة.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-11",
+   "lang": "ar",
+   "text": "الأَسَدُ يَزْأَر.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-12",
+   "lang": "ar",
+   "text": "تُفّاحَة حَمْراء.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-13",
+   "lang": "ar",
+   "text": "قِطَّة.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-14",
+   "lang": "ar",
+   "text": "فِيل.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-15",
+   "lang": "ar",
+   "text": "شَمْس.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-16",
+   "lang": "ar",
+   "text": "بِالعَيْنِ نَرَى.",
+   "voice": "ar-XA-Wavenet-D"
+  },
+  {
+   "id": "wavenetd-17",
+   "lang": "ar",
+   "text": "الطَّبِيبُ يُعالِجُ المَرْضَى.",
+   "voice": "ar-XA-Wavenet-D"
+  }
+ ]
+}

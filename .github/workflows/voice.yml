@@ -49,6 +49,8 @@ jobs:
           if [ -f "${{ inputs.list }}" ] && grep -q '"engine": *"chatterbox"' "${{ inputs.list }}"; then
             pip install torch==2.6.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cpu
             pip install chatterbox-tts
+          elif [ -f "${{ inputs.list }}" ] && grep -q '"engine": *"google"' "${{ inputs.list }}"; then
+            echo "Google voices: nothing to install"
           else
             pip install piper-tts onnxruntime
           fi
@@ -56,6 +58,8 @@ jobs:
           sudo apt-get update -qq && sudo apt-get install -y -qq ffmpeg
 
       - name: Record the phrases
+        env:
+          GOOGLE_TTS_KEY: ${{ secrets.GOOGLE_TTS_KEY }}
         run: |
           if [ "${{ inputs.list }}" = "debug" ]; then python scripts/voice_debug.py out; else
           python scripts/make_voice.py "${{ inputs.list }}" out ${{ matrix.shard }} ${{ inputs.shards }}; fi

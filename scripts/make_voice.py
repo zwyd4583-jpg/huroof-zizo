@@ -14,7 +14,7 @@ Each item becomes <out>/<style>/<id>.mp3. With "reels", every style also gets on
 With "qa", Whisper listens to every recording and qa-<shard>.tsv says how close it is to the text.
 With shard/shards, only every shards-th item from shard on is made (to split the work).
 """
-import array, difflib, json, os, pathlib, re, subprocess, sys, urllib.parse, urllib.request, wave, zlib
+import array, base64, difflib, json, os, pathlib, re, subprocess, sys, time, urllib.error, urllib.parse, urllib.request, wave, zlib
 
 HF = "https://huggingface.co/rhasspy/piper-voices/resolve/main"
 RATE = 24000
@@ -173,6 +173,45 @@ def piper_engine(spec, work):
     return say
 
 
+def google_engine(spec, work):
+    """Google Cloud Text-to-Speech (the key comes from the GOOGLE_TTS_KEY secret).
+    spec["google"] = {"ar": {"name": "ar-XA-Wavenet-B", "rate": 0.9}, "en": {...}}; an item may name its own voice."""
+    key = os.environ["GOOGLE_TTS_KEY"].strip()
+    opts = spec.get("google", {})
+    url = "https://texttospeech.googleapis.com/v1/text:synthesize?key=" + urllib.parse.quote(key)
+
+    def say(lang, text, st, path, voice=None):
+        v = dict(opts.get(lang, {}))
+        if voice:
+            v["name"] = voice
+        code = v.get("languageCode") or "-".join(v["name"].split("-")[:2])
+        audio = {"audioEncoding": "LINEAR16", "sampleRateHertz": RATE, "speakingRate": v.get("rate", 0.9)}
+        if v.get("pitch") is not None:
+            audio["pitch"] = v["pitch"]
+        body = json.dumps({"input": {"text": text}, "voice": {"languageCode": code, "name": v["name"]}, "audioConfig": audio}).encode()
+        for attempt in range(6):
+            try:
+                req = urllib.request.Request(url, data=body, headers={"Content-Type": "application/json"})
+                r = json.loads(urllib.request.urlopen(req, timeout=90).read())
+                break
+            except urllib.error.HTTPError as e:
+                msg = e.read().decode("utf-8", "replace")[:300]
+                if e.code in (429, 500, 503) and attempt < 5:
+                    time.sleep(2 ** attempt)
+                    continue
+                raise RuntimeError(f"Google said {e.code}: {msg}")
+        raw = path.with_suffix(".g.wav")
+        raw.write_bytes(base64.b64decode(r["audioContent"]))
+        to_pcm(raw, path)
+    return say
+
+
+def google_voices():
+    key = os.environ["GOOGLE_TTS_KEY"].strip()
+    r = json.loads(urllib.request.urlopen("https://texttospeech.googleapis.com/v1/voices?key=" + urllib.parse.quote(key), timeout=60).read())
+    return r.get("voices", [])
+
+
 def archive_prompt(ident, start, dur, work):
     """A short clip of a public-domain LibriVox reading (archive.org) for the voice to copy."""
     meta = json.loads(urllib.request.urlopen(f"https://archive.org/metadata/{ident}").read())
@@ -274,7 +313,16 @@ def main(list_path, out_dir, shard=0, shards=1):
     spec = json.loads(pathlib.Path(list_path).read_text(encoding="utf-8"))
     out = pathlib.Path(out_dir); out.mkdir(parents=True, exist_ok=True)
     work = pathlib.Path("/tmp/zizo-voice"); work.mkdir(parents=True, exist_ok=True)
-    say = chatterbox_engine(spec, work) if spec.get("engine") == "chatterbox" else piper_engine(spec, work)
+    engine = spec.get("engine", "piper")
+    if engine == "google":
+        say = google_engine(spec, work)
+        if shard == 0:  # write down which voices the account offers
+            vs = google_voices()
+            (out / "google-voices.tsv").write_text("\n".join(f"{v['name']}\t{','.join(v.get('languageCodes', []))}\t{v.get('ssmlGender', '')}" for v in vs) + "\n", encoding="utf-8")
+    elif engine == "chatterbox":
+        say = chatterbox_engine(spec, work)
+    else:
+        say = piper_engine(spec, work)
     asr = None
     if spec.get("qa"):
         import whisper
@@ -291,8 +339,8 @@ def main(list_path, out_dir, shard=0, shards=1):
         for c in range(n):
             raw = work / f"{it['id']}-c{c}.wav"
             text, rep = it["text"], it.get("repeat", 0)
-            if it["lang"] == "ar" and spec.get("engine") != "chatterbox":
-                text = pausal(text)  # Piper adds "-tun" to a final ة; Chatterbox says it right by itself
+            if it["lang"] == "ar" and spec.get("engine", "piper") == "piper":
+                text = pausal(text)  # Piper adds "-tun" to a final ة; the others say it right by themselves
             if rep:
                 word, end = text.rstrip(".!؟?"), text[len(text.rstrip(".!؟?")):] or "."
                 text = it.get("sep", "، " if it["lang"] == "ar" else ", ").join([word] * rep) + end

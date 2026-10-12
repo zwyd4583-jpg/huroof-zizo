@@ -1,6 +1,8 @@
-node_modules/
-android/
-out/
+*.pyc
 .DS_Store
+__pycache__/
+android/
+node_modules/
+out/
 signing/*.jks
 www/capacitor.js
