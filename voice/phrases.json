@@ -21,63 +21,63 @@
    "lang": "ar",
    "text": "أَحْسَنْتَ!",
    "key": "أحسنت!",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-e4ce5ea4",
    "lang": "ar",
    "text": "رائِع!",
    "key": "رائع!",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-ec540b29",
    "lang": "ar",
    "text": "مُمْتاز!",
    "key": "ممتاز!",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-a1496b8f",
    "lang": "ar",
    "text": "بْرافُو!",
    "key": "برافو!",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-8c52ea32",
    "lang": "ar",
    "text": "شاطِر!",
    "key": "شاطر!",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-3ff2b3ca",
    "lang": "ar",
    "text": "أَحْسَنْتِ!",
    "key": "أحسنتِ!",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-8ed8ac8e",
    "lang": "ar",
    "text": "رائِعَة!",
    "key": "رائعة!",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-1bf4e769",
    "lang": "ar",
    "text": "مُمْتازَة!",
    "key": "ممتازة!",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-65cf9e1b",
    "lang": "ar",
    "text": "شاطِرَة!",
    "key": "شاطرة!",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-d987013c",
@@ -112,14 +112,14 @@
    "lang": "ar",
    "text": "حَرْفُ الأَلِف.",
    "key": "حَرْفُ الأَلِف",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-5496ed86",
    "lang": "ar",
    "text": "أَرْنَب",
    "key": "أَرْنَب",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0c4ed00f",
@@ -133,14 +133,14 @@
    "lang": "ar",
    "text": "حَرْفُ الباء.",
    "key": "حَرْفُ الباء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-2de38e32",
    "lang": "ar",
    "text": "بَطَّة",
    "key": "بَطَّة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-9b49c262",
@@ -154,14 +154,14 @@
    "lang": "ar",
    "text": "حَرْفُ التاء.",
    "key": "حَرْفُ التاء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-255480c2",
    "lang": "ar",
    "text": "تُفَّاحَة",
    "key": "تُفَّاحَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0cd6d34b",
@@ -175,14 +175,14 @@
    "lang": "ar",
    "text": "حَرْفُ الثاء.",
    "key": "حَرْفُ الثاء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-cf8dcf93",
    "lang": "ar",
    "text": "ثَعْلَب",
    "key": "ثَعْلَب",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-aaa1d8ff",
@@ -196,14 +196,14 @@
    "lang": "ar",
    "text": "حَرْفُ الجيم.",
    "key": "حَرْفُ الجيم",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-2a48a158",
    "lang": "ar",
    "text": "جَمَل",
    "key": "جَمَل",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-1af35738",
@@ -217,14 +217,14 @@
    "lang": "ar",
    "text": "حَرْفُ الحاء.",
    "key": "حَرْفُ الحاء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-85b958e5",
    "lang": "ar",
    "text": "حِصَان",
    "key": "حِصَان",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c971edc5",
@@ -238,14 +238,14 @@
    "lang": "ar",
    "text": "حَرْفُ الخاء.",
    "key": "حَرْفُ الخاء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-a4bf59bf",
    "lang": "ar",
    "text": "خَرُوف",
    "key": "خَرُوف",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-f899f758",
@@ -259,14 +259,14 @@
    "lang": "ar",
    "text": "حَرْفُ الدال.",
    "key": "حَرْفُ الدال",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-e4c73bc9",
    "lang": "ar",
    "text": "دُبّ",
    "key": "دُبّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-d8d41f82",
@@ -280,14 +280,14 @@
    "lang": "ar",
    "text": "حَرْفُ الذال.",
    "key": "حَرْفُ الذال",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-05f2bb5e",
    "lang": "ar",
    "text": "ذُرَة",
    "key": "ذُرَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-4942f3a5",
@@ -301,14 +301,14 @@
    "lang": "ar",
    "text": "حَرْفُ الراء.",
    "key": "حَرْفُ الراء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-cf61480a",
    "lang": "ar",
    "text": "رِسَالَة",
    "key": "رِسَالَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-690f1b7f",
@@ -322,14 +322,14 @@
    "lang": "ar",
    "text": "حَرْفُ الزاي.",
    "key": "حَرْفُ الزاي",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0071bea8",
    "lang": "ar",
    "text": "زَرَافَة",
    "key": "زَرَافَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-d443cf86",
@@ -343,14 +343,14 @@
    "lang": "ar",
    "text": "حَرْفُ السين.",
    "key": "حَرْفُ السين",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-6317f8e0",
    "lang": "ar",
    "text": "سَمَكَة",
    "key": "سَمَكَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-89230546",
@@ -364,14 +364,14 @@
    "lang": "ar",
    "text": "حَرْفُ الشين.",
    "key": "حَرْفُ الشين",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-89ca8f6b",
    "lang": "ar",
    "text": "شَمْس",
    "key": "شَمْس",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-4c843bc8",
@@ -385,14 +385,14 @@
    "lang": "ar",
    "text": "حَرْفُ الصاد.",
    "key": "حَرْفُ الصاد",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-4daf3713",
    "lang": "ar",
    "text": "صَارُوخ",
    "key": "صَارُوخ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-97de1266",
@@ -406,14 +406,14 @@
    "lang": "ar",
    "text": "حَرْفُ الضاد.",
    "key": "حَرْفُ الضاد",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-adf0024c",
    "lang": "ar",
    "text": "ضِفْدَع",
    "key": "ضِفْدَع",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-a63608fb",
@@ -427,14 +427,14 @@
    "lang": "ar",
    "text": "حَرْفُ الطاء.",
    "key": "حَرْفُ الطاء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-684db54f",
    "lang": "ar",
    "text": "طَائِرَة",
    "key": "طَائِرَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0adf2e45",
@@ -448,14 +448,14 @@
    "lang": "ar",
    "text": "حَرْفُ الظاء.",
    "key": "حَرْفُ الظاء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-dbedfd26",
    "lang": "ar",
    "text": "ظَبْي",
    "key": "ظَبْي",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-fc975eac",
@@ -469,14 +469,14 @@
    "lang": "ar",
    "text": "حَرْفُ العين.",
    "key": "حَرْفُ العين",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-979d6687",
    "lang": "ar",
    "text": "عِنَب",
    "key": "عِنَب",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-2d535a08",
@@ -490,14 +490,14 @@
    "lang": "ar",
    "text": "حَرْفُ الغين.",
    "key": "حَرْفُ الغين",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-14053ec3",
    "lang": "ar",
    "text": "غَيْمَة",
    "key": "غَيْمَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-1cbb4095",
@@ -511,14 +511,14 @@
    "lang": "ar",
    "text": "حَرْفُ الفاء.",
    "key": "حَرْفُ الفاء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-bbf768c5",
    "lang": "ar",
    "text": "فِيل",
    "key": "فِيل",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0dc6beb3",
@@ -532,14 +532,14 @@
    "lang": "ar",
    "text": "حَرْفُ القاف.",
    "key": "حَرْفُ القاف",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-b6778ced",
    "lang": "ar",
    "text": "قِطَّة",
    "key": "قِطَّة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-bcdf85ab",
@@ -553,14 +553,14 @@
    "lang": "ar",
    "text": "حَرْفُ الكاف.",
    "key": "حَرْفُ الكاف",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-fd8c2c77",
    "lang": "ar",
    "text": "كُرَة",
    "key": "كُرَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-1aa88e1f",
@@ -574,14 +574,14 @@
    "lang": "ar",
    "text": "حَرْفُ اللام.",
    "key": "حَرْفُ اللام",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-07a18da8",
    "lang": "ar",
    "text": "لَيْمُون",
    "key": "لَيْمُون",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-d806184d",
@@ -595,14 +595,14 @@
    "lang": "ar",
    "text": "حَرْفُ الميم.",
    "key": "حَرْفُ الميم",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-d0d5c4e3",
    "lang": "ar",
    "text": "مَوْز",
    "key": "مَوْز",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-8c7c2be9",
@@ -616,14 +616,14 @@
    "lang": "ar",
    "text": "حَرْفُ النون.",
    "key": "حَرْفُ النون",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-20fb2685",
    "lang": "ar",
    "text": "نَحْلَة",
    "key": "نَحْلَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c512dc4d",
@@ -637,14 +637,14 @@
    "lang": "ar",
    "text": "حَرْفُ الهاء.",
    "key": "حَرْفُ الهاء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-3e516d13",
    "lang": "ar",
    "text": "هَدِيَّة",
    "key": "هَدِيَّة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-6e168b89",
@@ -658,14 +658,14 @@
    "lang": "ar",
    "text": "حَرْفُ الواو.",
    "key": "حَرْفُ الواو",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-eda456e0",
    "lang": "ar",
    "text": "وَرْدَة",
    "key": "وَرْدَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-177ee16a",
@@ -679,14 +679,14 @@
    "lang": "ar",
    "text": "حَرْفُ الياء.",
    "key": "حَرْفُ الياء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c0da7580",
    "lang": "ar",
    "text": "يَد",
    "key": "يَد",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0fc1ea49",
@@ -700,84 +700,84 @@
    "lang": "ar",
    "text": "واحِد",
    "key": "واحِد",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-1bac86b6",
    "lang": "ar",
    "text": "اِثْنان",
    "key": "اِثْنان",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-360a52a5",
    "lang": "ar",
    "text": "ثَلاثَة",
    "key": "ثَلاثَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-ad3cd586",
    "lang": "ar",
    "text": "أَرْبَعَة",
    "key": "أَرْبَعَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-5a3fa3dd",
    "lang": "ar",
    "text": "خَمْسَة",
    "key": "خَمْسَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c23fa950",
    "lang": "ar",
    "text": "سِتَّة",
    "key": "سِتَّة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-7fd87312",
    "lang": "ar",
    "text": "سَبْعَة",
    "key": "سَبْعَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-6cb69389",
    "lang": "ar",
    "text": "ثَمانِيَة",
    "key": "ثَمانِيَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-9e5fec41",
    "lang": "ar",
    "text": "تِسْعَة",
    "key": "تِسْعَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-9f7d192a",
    "lang": "ar",
    "text": "عَشَرَة",
    "key": "عَشَرَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-3da98ef3",
    "lang": "ar",
    "text": "أَحْمَر",
    "key": "أَحْمَر",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-d7bea69c",
    "lang": "ar",
    "text": "تُفّاحَة حَمْراء",
    "key": "تُفّاحَة حَمْراء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-6762ac80",
@@ -791,14 +791,14 @@
    "lang": "ar",
    "text": "أَزْرَق",
    "key": "أَزْرَق",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-4c3de72f",
    "lang": "ar",
    "text": "حُوت أَزْرَق",
    "key": "حُوت أَزْرَق",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-547b21fe",
@@ -812,14 +812,14 @@
    "lang": "ar",
    "text": "أَصْفَر",
    "key": "أَصْفَر",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-dc285996",
    "lang": "ar",
    "text": "مَوْزَة صَفْراء",
    "key": "مَوْزَة صَفْراء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-8718ad1d",
@@ -833,14 +833,14 @@
    "lang": "ar",
    "text": "أَخْضَر",
    "key": "أَخْضَر",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-35f31d2a",
    "lang": "ar",
    "text": "ضِفْدَع أَخْضَر",
    "key": "ضِفْدَع أَخْضَر",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-aba175d0",
@@ -854,14 +854,14 @@
    "lang": "ar",
    "text": "بُرْتُقالِيّ",
    "key": "بُرْتُقالِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-908c29e2",
    "lang": "ar",
    "text": "بُرْتُقالَة بُرْتُقالِيَّة",
    "key": "بُرْتُقالَة بُرْتُقالِيَّة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-00bb5dd2",
@@ -875,14 +875,14 @@
    "lang": "ar",
    "text": "بَنَفْسَجِيّ",
    "key": "بَنَفْسَجِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-14f9ce61",
    "lang": "ar",
    "text": "عِنَب بَنَفْسَجِيّ",
    "key": "عِنَب بَنَفْسَجِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-f1c857e1",
@@ -896,14 +896,14 @@
    "lang": "ar",
    "text": "وَرْدِيّ",
    "key": "وَرْدِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-a8e5c300",
    "lang": "ar",
    "text": "زَهْرَة وَرْدِيَّة",
    "key": "زَهْرَة وَرْدِيَّة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-b6ded83a",
@@ -917,14 +917,14 @@
    "lang": "ar",
    "text": "بُنِّيّ",
    "key": "بُنِّيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-60412dd3",
    "lang": "ar",
    "text": "دُبّ بُنِّيّ",
    "key": "دُبّ بُنِّيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-920e8019",
@@ -938,7 +938,7 @@
    "lang": "ar",
    "text": "دائِرَة",
    "key": "دائِرَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-bd4b4b17",
@@ -952,14 +952,14 @@
    "lang": "ar",
    "text": "أَيْنَ الدّائِرَة؟",
    "key": "أَيْنَ الدّائِرَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-5afc4b66",
    "lang": "ar",
    "text": "مُرَبَّع",
    "key": "مُرَبَّع",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-94ea3b2c",
@@ -973,14 +973,14 @@
    "lang": "ar",
    "text": "أَيْنَ المُرَبَّع؟",
    "key": "أَيْنَ المُرَبَّع؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-21abf517",
    "lang": "ar",
    "text": "مُثَلَّث",
    "key": "مُثَلَّث",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-e976b563",
@@ -994,14 +994,14 @@
    "lang": "ar",
    "text": "أَيْنَ المُثَلَّث؟",
    "key": "أَيْنَ المُثَلَّث؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c4bdd70a",
    "lang": "ar",
    "text": "مُسْتَطِيل",
    "key": "مُسْتَطِيل",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-a69e5f9f",
@@ -1015,14 +1015,14 @@
    "lang": "ar",
    "text": "أَيْنَ المُسْتَطِيل؟",
    "key": "أَيْنَ المُسْتَطِيل؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0ae01b76",
    "lang": "ar",
    "text": "نَجْمَة",
    "key": "نَجْمَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-be298562",
@@ -1036,252 +1036,252 @@
    "lang": "ar",
    "text": "أَيْنَ النَّجْمَة؟",
    "key": "أَيْنَ النَّجْمَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-8c26bd51",
    "lang": "ar",
    "text": "قَلْب",
    "key": "قَلْب",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-88b12e7f",
    "lang": "ar",
    "text": "شَكْلُ المَحَبَّة",
    "key": "شَكْلُ المَحَبَّة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-f3f7184f",
    "lang": "ar",
    "text": "أَيْنَ القَلْب؟",
    "key": "أَيْنَ القَلْب؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-a56b380b",
    "lang": "ar",
    "text": "أَسَد",
    "key": "أَسَد",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-4237182e",
    "lang": "ar",
    "text": "الأَسَدُ يَزْأَر",
    "key": "الأَسَدُ يَزْأَر",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-2e71f373",
    "lang": "ar",
    "text": "أَيْنَ الأَسَد؟",
    "key": "أَيْنَ الأَسَد؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-9b5da912",
    "lang": "ar",
    "text": "كَلْب",
    "key": "كَلْب",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-51bcb4dc",
    "lang": "ar",
    "text": "الكَلْبُ يَنْبَح",
    "key": "الكَلْبُ يَنْبَح",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-3279c78f",
    "lang": "ar",
    "text": "أَيْنَ الكَلْب؟",
    "key": "أَيْنَ الكَلْب؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-4d89bada",
    "lang": "ar",
    "text": "القِطَّةُ تَمُوء",
    "key": "القِطَّةُ تَمُوء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-ef0ef578",
    "lang": "ar",
    "text": "أَيْنَ القِطَّة؟",
    "key": "أَيْنَ القِطَّة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0181428d",
    "lang": "ar",
    "text": "حِصان",
    "key": "حِصان",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-9c837f5e",
    "lang": "ar",
    "text": "الحِصانُ يَصْهَل",
    "key": "الحِصانُ يَصْهَل",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-f378f076",
    "lang": "ar",
    "text": "أَيْنَ الحِصان؟",
    "key": "أَيْنَ الحِصان؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-4405b413",
    "lang": "ar",
    "text": "بَقَرَة",
    "key": "بَقَرَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-cfda3072",
    "lang": "ar",
    "text": "البَقَرَةُ تَخُور",
    "key": "البَقَرَةُ تَخُور",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-142e9a8d",
    "lang": "ar",
    "text": "أَيْنَ البَقَرَة؟",
    "key": "أَيْنَ البَقَرَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-09872733",
    "lang": "ar",
    "text": "الخَرُوفُ يَثْغُو",
    "key": "الخَرُوفُ يَثْغُو",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-913afe3d",
    "lang": "ar",
    "text": "أَيْنَ الخَرُوف؟",
    "key": "أَيْنَ الخَرُوف؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-76bbbf39",
    "lang": "ar",
    "text": "دِيك",
    "key": "دِيك",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-a11f90fb",
    "lang": "ar",
    "text": "الدِّيكُ يَصِيح",
    "key": "الدِّيكُ يَصِيح",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-a88aae5d",
    "lang": "ar",
    "text": "أَيْنَ الدِّيك؟",
    "key": "أَيْنَ الدِّيك؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-f8980d59",
    "lang": "ar",
    "text": "البَطَّةُ تُبَطْبِط",
    "key": "البَطَّةُ تُبَطْبِط",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-07a0d610",
    "lang": "ar",
    "text": "أَيْنَ البَطَّة؟",
    "key": "أَيْنَ البَطَّة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-31285589",
    "lang": "ar",
    "text": "عُصْفُور",
    "key": "عُصْفُور",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-eb52e090",
    "lang": "ar",
    "text": "العُصْفُورُ يُزَقْزِق",
    "key": "العُصْفُورُ يُزَقْزِق",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-fe309037",
    "lang": "ar",
    "text": "أَيْنَ العُصْفُور؟",
    "key": "أَيْنَ العُصْفُور؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-9f0bbf6d",
    "lang": "ar",
    "text": "الضِّفْدَعُ يُنَقْنِق",
    "key": "الضِّفْدَعُ يُنَقْنِق",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-e68d7e41",
    "lang": "ar",
    "text": "أَيْنَ الضِّفْدَع؟",
    "key": "أَيْنَ الضِّفْدَع؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-249f7669",
    "lang": "ar",
    "text": "ذِئْب",
    "key": "ذِئْب",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-923f13d8",
    "lang": "ar",
    "text": "الذِّئْبُ يَعْوِي",
    "key": "الذِّئْبُ يَعْوِي",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-7d97bbff",
    "lang": "ar",
    "text": "أَيْنَ الذِّئْب؟",
    "key": "أَيْنَ الذِّئْب؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c512e5d5",
    "lang": "ar",
    "text": "النَّحْلَةُ تَطِنّ",
    "key": "النَّحْلَةُ تَطِنّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-93297bea",
    "lang": "ar",
    "text": "أَيْنَ النَّحْلَة؟",
    "key": "أَيْنَ النَّحْلَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-59d7af96",
    "lang": "ar",
    "text": "تُفّاحَة",
    "key": "تُفّاحَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-93bc45c4",
@@ -1295,14 +1295,14 @@
    "lang": "ar",
    "text": "أَيْنَ التُّفّاحَة؟",
    "key": "أَيْنَ التُّفّاحَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-5fa8781a",
    "lang": "ar",
    "text": "مَوْزَة",
    "key": "مَوْزَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-5d241b03",
@@ -1316,7 +1316,7 @@
    "lang": "ar",
    "text": "أَيْنَ المَوْزَة؟",
    "key": "أَيْنَ المَوْزَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-48f75e1c",
@@ -1330,14 +1330,14 @@
    "lang": "ar",
    "text": "أَيْنَ العِنَب؟",
    "key": "أَيْنَ العِنَب؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-e044e3fe",
    "lang": "ar",
    "text": "بُرْتُقالَة",
    "key": "بُرْتُقالَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c34776c8",
@@ -1351,14 +1351,14 @@
    "lang": "ar",
    "text": "أَيْنَ البُرْتُقالَة؟",
    "key": "أَيْنَ البُرْتُقالَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-b256cbf7",
    "lang": "ar",
    "text": "فَراوِلَة",
    "key": "فَراوِلَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-dbe5f0e5",
@@ -1372,14 +1372,14 @@
    "lang": "ar",
    "text": "أَيْنَ الفَراوِلَة؟",
    "key": "أَيْنَ الفَراوِلَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-02f1528c",
    "lang": "ar",
    "text": "بِطِّيخَة",
    "key": "بِطِّيخَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-6d67100b",
@@ -1393,14 +1393,14 @@
    "lang": "ar",
    "text": "أَيْنَ البِطِّيخَة؟",
    "key": "أَيْنَ البِطِّيخَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c2b0722e",
    "lang": "ar",
    "text": "أَناناس",
    "key": "أَناناس",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-60e08f05",
@@ -1414,14 +1414,14 @@
    "lang": "ar",
    "text": "أَيْنَ الأَناناس؟",
    "key": "أَيْنَ الأَناناس؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-d19eee2f",
    "lang": "ar",
    "text": "كَرَز",
    "key": "كَرَز",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-da66be90",
@@ -1435,14 +1435,14 @@
    "lang": "ar",
    "text": "أَيْنَ الكَرَز؟",
    "key": "أَيْنَ الكَرَز؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-454f7569",
    "lang": "ar",
    "text": "جَزَرَة",
    "key": "جَزَرَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-2ff22549",
@@ -1456,14 +1456,14 @@
    "lang": "ar",
    "text": "أَيْنَ الجَزَرَة؟",
    "key": "أَيْنَ الجَزَرَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-97a7f09c",
    "lang": "ar",
    "text": "طَماطِم",
    "key": "طَماطِم",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-fde61950",
@@ -1477,14 +1477,14 @@
    "lang": "ar",
    "text": "أَيْنَ الطَّماطِم؟",
    "key": "أَيْنَ الطَّماطِم؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-718716f4",
    "lang": "ar",
    "text": "خِيار",
    "key": "خِيار",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-8e0336a4",
@@ -1498,7 +1498,7 @@
    "lang": "ar",
    "text": "أَيْنَ الخِيار؟",
    "key": "أَيْنَ الخِيار؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-9ae59dcf",
@@ -1512,77 +1512,77 @@
    "lang": "ar",
    "text": "أَيْنَ الذُّرَة؟",
    "key": "أَيْنَ الذُّرَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-b57d0a8f",
    "lang": "ar",
    "text": "عَيْن",
    "key": "عَيْن",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-078662f0",
    "lang": "ar",
    "text": "بِالعَيْنِ نَرَى",
    "key": "بِالعَيْنِ نَرَى",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-b949efaa",
    "lang": "ar",
    "text": "أَيْنَ العَيْن؟",
    "key": "أَيْنَ العَيْن؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-1ed78a75",
    "lang": "ar",
    "text": "أُذُن",
    "key": "أُذُن",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0f94e3d2",
    "lang": "ar",
    "text": "بِالأُذُنِ نَسْمَع",
    "key": "بِالأُذُنِ نَسْمَع",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-baa2ce17",
    "lang": "ar",
    "text": "أَيْنَ الأُذُن؟",
    "key": "أَيْنَ الأُذُن؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-d707bac2",
    "lang": "ar",
    "text": "أَنْف",
    "key": "أَنْف",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-1dfb9c55",
    "lang": "ar",
    "text": "بِالأَنْفِ نَشُمّ",
    "key": "بِالأَنْفِ نَشُمّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-37ff0f14",
    "lang": "ar",
    "text": "أَيْنَ الأَنْف؟",
    "key": "أَيْنَ الأَنْف؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-75aabc06",
    "lang": "ar",
    "text": "فَم",
    "key": "فَم",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-22f54be3",
@@ -1596,14 +1596,14 @@
    "lang": "ar",
    "text": "أَيْنَ الفَم؟",
    "key": "أَيْنَ الفَم؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-4f51e8eb",
    "lang": "ar",
    "text": "لِسان",
    "key": "لِسان",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-dfe13f5e",
@@ -1617,7 +1617,7 @@
    "lang": "ar",
    "text": "أَيْنَ اللِّسان؟",
    "key": "أَيْنَ اللِّسان؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-9e3d8f3c",
@@ -1631,14 +1631,14 @@
    "lang": "ar",
    "text": "أَيْنَ اليَد؟",
    "key": "أَيْنَ اليَد؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-8a02eea8",
    "lang": "ar",
    "text": "إِصْبَع",
    "key": "إِصْبَع",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-741c4d9d",
@@ -1652,14 +1652,14 @@
    "lang": "ar",
    "text": "أَيْنَ الإِصْبَع؟",
    "key": "أَيْنَ الإِصْبَع؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-b89347c1",
    "lang": "ar",
    "text": "قَدَم",
    "key": "قَدَم",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c6895b2d",
@@ -1673,14 +1673,14 @@
    "lang": "ar",
    "text": "أَيْنَ القَدَم؟",
    "key": "أَيْنَ القَدَم؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-39df07fc",
    "lang": "ar",
    "text": "طَبِيب",
    "key": "طَبِيب",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-2ad3bdde",
@@ -1694,14 +1694,14 @@
    "lang": "ar",
    "text": "أَيْنَ الطَّبِيب؟",
    "key": "أَيْنَ الطَّبِيب؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-35481542",
    "lang": "ar",
    "text": "مُعَلِّمَة",
    "key": "مُعَلِّمَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-06638021",
@@ -1715,14 +1715,14 @@
    "lang": "ar",
    "text": "أَيْنَ المُعَلِّمَة؟",
    "key": "أَيْنَ المُعَلِّمَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-65f539af",
    "lang": "ar",
    "text": "طَبّاخ",
    "key": "طَبّاخ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-bd8d2c94",
@@ -1736,14 +1736,14 @@
    "lang": "ar",
    "text": "أَيْنَ الطَّبّاخ؟",
    "key": "أَيْنَ الطَّبّاخ؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-8f0d3d38",
    "lang": "ar",
    "text": "إِطْفائِيّ",
    "key": "إِطْفائِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-27bb4505",
@@ -1757,35 +1757,35 @@
    "lang": "ar",
    "text": "أَيْنَ الإِطْفائِيّ؟",
    "key": "أَيْنَ الإِطْفائِيّ؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-b9a70145",
    "lang": "ar",
    "text": "شُرْطِيّ",
    "key": "شُرْطِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-533b6601",
    "lang": "ar",
    "text": "الشُّرْطِيُّ يَحْمِينا",
    "key": "الشُّرْطِيُّ يَحْمِينا",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-b640eba9",
    "lang": "ar",
    "text": "أَيْنَ الشُّرْطِيّ؟",
    "key": "أَيْنَ الشُّرْطِيّ؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-6331f653",
    "lang": "ar",
    "text": "فَلّاح",
    "key": "فَلّاح",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-df5e9a73",
@@ -1799,14 +1799,14 @@
    "lang": "ar",
    "text": "أَيْنَ الفَلّاح؟",
    "key": "أَيْنَ الفَلّاح؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-7c751c71",
    "lang": "ar",
    "text": "طَيّار",
    "key": "طَيّار",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-fe9925e5",
@@ -1820,14 +1820,14 @@
    "lang": "ar",
    "text": "أَيْنَ الطَّيّار؟",
    "key": "أَيْنَ الطَّيّار؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-9b6c566c",
    "lang": "ar",
    "text": "بَنّاء",
    "key": "بَنّاء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-32562e65",
@@ -1841,14 +1841,14 @@
    "lang": "ar",
    "text": "أَيْنَ البَنّاء؟",
    "key": "أَيْنَ البَنّاء؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-cf994670",
    "lang": "ar",
    "text": "رَسّامَة",
    "key": "رَسّامَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-23b3bf43",
@@ -1862,14 +1862,14 @@
    "lang": "ar",
    "text": "أَيْنَ الرَّسّامَة؟",
    "key": "أَيْنَ الرَّسّامَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-d9ac900d",
    "lang": "ar",
    "text": "مِيكانِيكِيّ",
    "key": "مِيكانِيكِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-ff635d86",
@@ -1883,14 +1883,14 @@
    "lang": "ar",
    "text": "أَيْنَ المِيكانِيكِيّ؟",
    "key": "أَيْنَ المِيكانِيكِيّ؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-2f3b6f8b",
    "lang": "ar",
    "text": "رائِدُ فَضاء",
    "key": "رائِدُ فَضاء",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-b0fc292b",
@@ -1911,7 +1911,7 @@
    "lang": "ar",
    "text": "عالِمَة",
    "key": "عالِمَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-d67a58b3",
@@ -1925,7 +1925,7 @@
    "lang": "ar",
    "text": "أَيْنَ العالِمَة؟",
    "key": "أَيْنَ العالِمَة؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-bd60e075",
@@ -3192,154 +3192,154 @@
    "lang": "ar",
    "text": "القُبَّعَةُ الصُّوفِيَّة",
    "key": "القُبَّعَةُ الصُّوفِيَّة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0d771029",
    "lang": "ar",
    "text": "الوِشاحُ البُرْتُقالِيّ",
    "key": "الوِشاحُ البُرْتُقالِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-cc83a1da",
    "lang": "ar",
    "text": "بِدُونِ إِضافَة",
    "key": "بِدُونِ إِضافَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-160565cc",
    "lang": "ar",
    "text": "التّاجُ الذَّهَبِيّ",
    "key": "التّاجُ الذَّهَبِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-41ba65a6",
    "lang": "ar",
    "text": "قُبَّعَةُ الحَفْلَة",
    "key": "قُبَّعَةُ الحَفْلَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-86973aa5",
    "lang": "ar",
    "text": "قُبَّعَةُ التَّخَرُّج",
    "key": "قُبَّعَةُ التَّخَرُّج",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-1adf8af2",
    "lang": "ar",
    "text": "قُبَّعَةُ الطَّبّاخ",
    "key": "قُبَّعَةُ الطَّبّاخ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c274f5b2",
    "lang": "ar",
    "text": "قُبَّعَةُ السّاحِر",
    "key": "قُبَّعَةُ السّاحِر",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-8448e3a7",
    "lang": "ar",
    "text": "الوِشاحُ الأَزْرَق",
    "key": "الوِشاحُ الأَزْرَق",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-da57de85",
    "lang": "ar",
    "text": "الوِشاحُ الأَخْضَر",
    "key": "الوِشاحُ الأَخْضَر",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c9f722e7",
    "lang": "ar",
    "text": "الوِشاحُ الوَرْدِيّ",
    "key": "الوِشاحُ الوَرْدِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-8220a0cd",
    "lang": "ar",
    "text": "الوِشاحُ البَنَفْسَجِيّ",
    "key": "الوِشاحُ البَنَفْسَجِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-b692b8f0",
    "lang": "ar",
    "text": "الوِشاحُ الفَيْرُوزِيّ",
    "key": "الوِشاحُ الفَيْرُوزِيّ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-4f89bf50",
    "lang": "ar",
    "text": "الوَرْدَة",
    "key": "الوَرْدَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-21989b97",
    "lang": "ar",
    "text": "النَّظّارَة",
    "key": "النَّظّارَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-7e5783b7",
    "lang": "ar",
    "text": "النُّجُومُ اللّامِعَة",
    "key": "النُّجُومُ اللّامِعَة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c667d44b",
    "lang": "ar",
    "text": "المِيدالِيَّةُ الذَّهَبِيَّة",
    "key": "المِيدالِيَّةُ الذَّهَبِيَّة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-46811b89",
    "lang": "ar",
    "text": "النَّظّارَةُ الشَّمْسِيَّة",
    "key": "النَّظّارَةُ الشَّمْسِيَّة",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0ee972b6",
    "lang": "ar",
    "text": "كَمْ عَدَدُها؟",
    "key": "كَمْ عَدَدُها؟",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-04d9313b",
    "lang": "ar",
    "text": "أَيْنَ حَرْف",
    "key": "أَيْنَ حَرْف",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0bb48626",
    "lang": "ar",
    "text": "أَيْنَ",
    "key": "أَيْنَ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-4f8ff0de",
    "lang": "ar",
    "text": "شُكْراً!",
    "key": "شُكْراً!",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-1754e65c",
@@ -3395,14 +3395,14 @@
    "lang": "ar",
    "text": "أَحْسَنْتَ",
    "key": "أَحْسَنْتَ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-c3db2f9c",
    "lang": "ar",
    "text": "أَحْسَنْتِ",
    "key": "أَحْسَنْتِ",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "ar-0e93e340",
@@ -3539,14 +3539,14 @@
     "A",
     "ay"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-2d8c6a8c",
    "lang": "en",
    "text": "Apple.",
    "key": "en:Apple",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-d28ec0c2",
@@ -3557,14 +3557,14 @@
     "B",
     "bee"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-68c94a48",
    "lang": "en",
    "text": "Ball.",
    "key": "en:Ball",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-a589f054",
@@ -3575,14 +3575,14 @@
     "C",
     "see"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-093d32f9",
    "lang": "en",
    "text": "Cat.",
    "key": "en:Cat",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-3bed65f7",
@@ -3593,14 +3593,14 @@
     "D",
     "dee"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-164f482c",
    "lang": "en",
    "text": "Dog.",
    "key": "en:Dog",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-4cea5561",
@@ -3611,14 +3611,14 @@
     "E",
     "ee"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-df54a813",
    "lang": "en",
    "text": "Egg.",
    "key": "en:Egg",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-d5e304db",
@@ -3629,14 +3629,14 @@
     "F",
     "eff"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-238f4620",
    "lang": "en",
    "text": "Fish.",
    "key": "en:Fish",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-a2e4344d",
@@ -3647,14 +3647,14 @@
     "G",
     "gee"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-ae2d56f9",
    "lang": "en",
    "text": "Grapes.",
    "key": "en:Grapes",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-325b29dc",
@@ -3665,14 +3665,14 @@
     "H",
     "aitch"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-0568dd18",
    "lang": "en",
    "text": "Hat.",
    "key": "en:Hat",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-455c194a",
@@ -3683,14 +3683,14 @@
     "I",
     "eye"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-5a7d2d8a",
    "lang": "en",
    "text": "Ice cream.",
    "key": "en:Ice cream",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-dc5548f0",
@@ -3701,14 +3701,14 @@
     "J",
     "jay"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-6280cc72",
    "lang": "en",
    "text": "Jet.",
    "key": "en:Jet",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-ab527866",
@@ -3719,14 +3719,14 @@
     "K",
     "kay"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-1df3daf8",
    "lang": "en",
    "text": "Key.",
    "key": "en:Key",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-3536edc5",
@@ -3737,14 +3737,14 @@
     "L",
     "el"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-43265e2c",
    "lang": "en",
    "text": "Lion.",
    "key": "en:Lion",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-4231dd53",
@@ -3755,14 +3755,14 @@
     "M",
     "em"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-ff1745fb",
    "lang": "en",
    "text": "Moon.",
    "key": "en:Moon",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-db388ce9",
@@ -3773,14 +3773,14 @@
     "N",
     "en"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-9c076ec0",
    "lang": "en",
    "text": "Nose.",
    "key": "en:Nose",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-ac3fbc7f",
@@ -3791,14 +3791,14 @@
     "O",
     "oh"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-92248d3d",
    "lang": "en",
    "text": "Orange.",
    "key": "en:Orange",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-2137b18a",
@@ -3809,14 +3809,14 @@
     "P",
     "pee"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-5b3ae406",
    "lang": "en",
    "text": "Pig.",
    "key": "en:Pig",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-5630811c",
@@ -3827,14 +3827,14 @@
     "Q",
     "cue"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-264f0e66",
    "lang": "en",
    "text": "Queen.",
    "key": "en:Queen",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-cf39d0a6",
@@ -3845,14 +3845,14 @@
     "R",
     "are"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-e5b02adc",
    "lang": "en",
    "text": "Rabbit.",
    "key": "en:Rabbit",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-b83ee030",
@@ -3863,14 +3863,14 @@
     "S",
     "ess"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-c6d7bfa6",
    "lang": "en",
    "text": "Sun.",
    "key": "en:Sun",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-265a7593",
@@ -3881,14 +3881,14 @@
     "T",
     "tee"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-abc55ccf",
    "lang": "en",
    "text": "Tree.",
    "key": "en:Tree",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-515d4505",
@@ -3899,14 +3899,14 @@
     "U",
     "you"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-b1747870",
    "lang": "en",
    "text": "Umbrella.",
    "key": "en:Umbrella",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-c85414bf",
@@ -3917,14 +3917,14 @@
     "V",
     "vee"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-eeb2aa18",
    "lang": "en",
    "text": "Van.",
    "key": "en:Van",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-bf532429",
@@ -3935,14 +3935,14 @@
     "W",
     "double you"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-d4a9f0fa",
    "lang": "en",
    "text": "Watch.",
    "key": "en:Watch",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-2fec39b8",
@@ -3953,14 +3953,14 @@
     "X",
     "ex"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-98c391b7",
    "lang": "en",
    "text": "Fox.",
    "key": "en:Fox",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-58eb092e",
@@ -3971,14 +3971,14 @@
     "Y",
     "why"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-5fe5d0da",
    "lang": "en",
    "text": "Yellow.",
    "key": "en:Yellow",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-c1e25894",
@@ -3989,91 +3989,91 @@
     "Z",
     "zee"
    ],
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-91f5e76a",
    "lang": "en",
    "text": "Zebra.",
    "key": "en:Zebra",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-d542b140",
    "lang": "en",
    "text": "One.",
    "key": "en:one",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-bee4bdd7",
    "lang": "en",
    "text": "Two.",
    "key": "en:two",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-03a64d2d",
    "lang": "en",
    "text": "Three.",
    "key": "en:three",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-2c08cb50",
    "lang": "en",
    "text": "Four.",
    "key": "en:four",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-807b61e6",
    "lang": "en",
    "text": "Five.",
    "key": "en:five",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-ec39114a",
    "lang": "en",
    "text": "Six.",
    "key": "en:six",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-d33738b4",
    "lang": "en",
    "text": "Seven.",
    "key": "en:seven",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-2369ab5e",
    "lang": "en",
    "text": "Eight.",
    "key": "en:eight",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-c7d4d150",
    "lang": "en",
    "text": "Nine.",
    "key": "en:nine",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-b117fd92",
    "lang": "en",
    "text": "Ten.",
    "key": "en:ten",
-   "candidates": 5
+   "candidates": 6
   },
   {
    "id": "en-1c5fa011",
    "lang": "en",
    "text": "How many?",
    "key": "en:How many?",
-   "candidates": 5
+   "candidates": 6
   }
  ],
  "reels": false

@@ -101,6 +101,14 @@ def middle_take(path, n):
     return True
 
 
+TA_END = re.compile("ة[\u064B-\u0652]*(?=\\s*(?:[.!؟?،,]|$))")
+
+
+def pausal(text):
+    """Say a word-final ة before a pause the way people do ("بَطَّه", not "بَطَّةٌ" with -tun)."""
+    return TA_END.sub("هْ", text)
+
+
 def sentences(text):
     parts = [p.strip() for p in re.findall(r"[^.!؟?]+[.!؟?]*", text) if p.strip(" .!؟?")]
     return parts or [text]
@@ -262,6 +270,8 @@ def main(list_path, out_dir, shard=0, shards=1):
         for c in range(n):
             raw = work / f"{it['id']}-c{c}.wav"
             text, rep = it["text"], it.get("repeat", 0)
+            if it["lang"] == "ar":
+                text = pausal(text)
             if rep:
                 word, end = text.rstrip(".!؟?"), text[len(text.rstrip(".!؟?")):] or "."
                 text = it.get("sep", "، " if it["lang"] == "ar" else ", ").join([word] * rep) + end
