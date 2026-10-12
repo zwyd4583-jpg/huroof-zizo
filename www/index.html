@@ -695,6 +695,9 @@ h1 span{color:var(--orange)}
     {c:'U', w:'Umbrella', e:'☂️'}, {c:'V', w:'Van', e:'🚐'}, {c:'W', w:'Watch', e:'⌚'}, {c:'X', w:'Fox', e:'🦊', end:true},
     {c:'Y', w:'Yellow', e:'💛'}, {c:'Z', w:'Zebra', e:'🦓'}
   ];
+  // How each English letter's name is spelled for recording it (a lone "A" can be read as "uh")
+  var EN_SAY = { A:'Ay.', B:'Bee.', C:'See.', D:'Dee.', E:'Ee.', F:'Eff.', G:'Gee.', H:'Aitch.', I:'Eye.', J:'Jay.', K:'Kay.', L:'El.', M:'Em.',
+                 N:'En.', O:'Oh.', P:'Pee.', Q:'Cue.', R:'Are.', S:'Ess.', T:'Tee.', U:'You.', V:'Vee.', W:'Double you.', X:'Ex.', Y:'Why.', Z:'Zee.' };
   // English numbers 1–10 (the pictures to count are the same as the Arabic numbers)
   var ENN = ['one','two','three','four','five','six','seven','eight','nine','ten'].map(function(w, i){
     return { d: String(i + 1), w: w, e: N[i].e };
@@ -845,6 +848,7 @@ h1 span{color:var(--orange)}
   }
   function retry(){ return pick(gx(['حاول مرة أخرى','قريب! جرّب مرة ثانية'], ['حاولي مرة أخرى','قريب! جرّبي مرة ثانية'])); }
   function hero(){ return kid.name || gx('بطل', 'بطلة'); }
+  function heroS(){ return kid.name || gx('بَطَل', 'بَطَلَة'); } // for speaking
   var SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 8.5a5 5 0 0 1 0 7"/><path d="M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
   var STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4L2.8 9.5l6.4-.8z"/></svg>';
 
@@ -880,6 +884,7 @@ h1 span{color:var(--orange)}
   var arVoice = null, enVoice = null, voicesSeen = false;
 
   function setNote(text, withInstall){
+    if (VOICE) return; // Zizo's recorded voice doesn't need the phone's voice
     var n = $('voiceNote');
     n.innerHTML = '';
     var p = document.createElement('span'); p.textContent = text; n.appendChild(p);
@@ -936,9 +941,72 @@ h1 span{color:var(--orange)}
     try { speechSynthesis.addEventListener('voiceschanged', pickVoice); } catch(e){ speechSynthesis.onvoiceschanged = pickVoice; }
   }
 
+  /* ---------- Zizo's recorded voice ----------
+     Every sentence the app says is recorded in voice/<id>.mp3; voice/index.json maps the sentence to
+     its file. Names aren't recorded, so " يا <name>" is left out of what is heard (it stays on screen).
+     A sentence without a recording falls back to the phone's voice. */
+  var VOICE = null, voiceGen = 0, voiceSrc = null, voiceOut = null, voiceBufs = {}, voiceOrder = [];
+  try {
+    fetch('voice/index.json').then(function(r){ return r.ok ? r.json() : null; }).then(function(j){
+      if (j && j.clips){ VOICE = j.clips; $('voiceNote').hidden = true; }
+    }).catch(function(){});
+  } catch(e){}
+  function vkey(part){
+    if (part && typeof part === 'object') return 'en:' + part.en;
+    var t = String(part);
+    if (kid.name) t = t.split(' يا ' + kid.name).join('');
+    return t.replace(/\s+/g, ' ').trim();
+  }
+  function clipBuf(c, id){
+    if (voiceBufs[id]) return voiceBufs[id];
+    var p = fetch('voice/' + id + '.mp3').then(function(r){ return r.arrayBuffer(); }).then(function(b){
+      return new Promise(function(res, rej){ c.decodeAudioData(b, res, rej); });
+    });
+    // keep the last few sentences ready; older ones are fetched again when needed
+    voiceBufs[id] = p; voiceOrder.push(id);
+    if (voiceOrder.length > 24) delete voiceBufs[voiceOrder.shift()];
+    p.catch(function(){ delete voiceBufs[id]; });
+    return p;
+  }
+  function stopClips(){
+    voiceGen++;
+    if (voiceSrc){ try { voiceSrc.onended = null; voiceSrc.stop(); } catch(e){} voiceSrc = null; }
+  }
+  function playClips(ids){
+    var c = audio(); if (!c) return false;
+    if (!voiceOut){ voiceOut = c.createGain(); voiceOut.gain.value = 1.0; voiceOut.connect(c.destination); }
+    stopClips();
+    var gen = voiceGen;
+    (function next(k){
+      if (gen !== voiceGen || k >= ids.length) return;
+      clipBuf(c, ids[k]).then(function(buf){
+        if (gen !== voiceGen) return;
+        var s = c.createBufferSource();
+        s.buffer = buf; s.connect(voiceOut);
+        s.onended = function(){ if (voiceSrc === s) voiceSrc = null; next(k + 1); };
+        voiceSrc = s; s.start();
+      }).catch(function(){ next(k + 1); });
+    })(0);
+    return true;
+  }
+  // The recordings for all the parts, or null if any part has none
+  function clipsFor(parts){
+    if (!VOICE) return null;
+    var ids = [];
+    for (var k = 0; k < parts.length; k++){
+      var id = VOICE[vkey(parts[k])];
+      if (!id){ if (window.__zizoTest) (window.__zizoTest.missing = window.__zizoTest.missing || []).push(vkey(parts[k])); return null; }
+      ids.push(id);
+    }
+    return ids;
+  }
+
   // Each part is Arabic text, or { en: 'text' } to be read in English
   function say(parts){
     parts = [].concat(parts);
+    var ids = clipsFor(parts);
+    if (ids && playClips(ids)){ ttsStop(); return; }
+    stopClips();
     if (NTTS){
       parts.forEach(function(t, k){
         var en = t && typeof t === 'object';
@@ -962,10 +1030,11 @@ h1 span{color:var(--orange)}
     } catch(e){}
   }
   function sayEn(t){ say({ en: t }); }
-  function hush(){
+  function ttsStop(){
     if (NTTS) NTTS.stop().catch(function(){});
     else if (hasWebTTS) try { speechSynthesis.cancel(); } catch(e){}
   }
+  function hush(){ stopClips(); ttsStop(); }
 
   /* ---------- Zizo & stars ---------- */
   var zEl = document.querySelector('.zizo'), bub = $('bubble');
@@ -1065,24 +1134,24 @@ h1 span{color:var(--orange)}
   /* ---------- Zizo's shop ---------- */
   // Stars are spent here: the child chooses what to buy for Zizo. What is bought stays theirs.
   var PRIZES = [
-    {id:'cap',     slot:'hat',   name:'القبعة الصوفية',     price:0},
-    {id:'orange',  slot:'scarf', name:'الوشاح البرتقالي',   price:0},
-    {id:'none',    slot:'extra', name:'بدون إضافة',         price:0},
-    {id:'crown',   slot:'hat',   name:'التاج الذهبي',       price:5},
-    {id:'party',   slot:'hat',   name:'قبعة الحفلة',        price:6},
-    {id:'grad',    slot:'hat',   name:'قبعة التخرج',        price:8},
-    {id:'chef',    slot:'hat',   name:'قبعة الطبّاخ',       price:8},
-    {id:'wizard',  slot:'hat',   name:'قبعة الساحر',        price:15},
-    {id:'blue',    slot:'scarf', name:'الوشاح الأزرق',      price:4},
-    {id:'green',   slot:'scarf', name:'الوشاح الأخضر',      price:4},
-    {id:'pink',    slot:'scarf', name:'الوشاح الوردي',      price:4},
-    {id:'purple',  slot:'scarf', name:'الوشاح البنفسجي',    price:5},
-    {id:'teal',    slot:'scarf', name:'الوشاح الفيروزي',    price:5},
-    {id:'flower',  slot:'extra', name:'الوردة',             price:5},
-    {id:'glasses', slot:'extra', name:'النظارة',            price:6},
-    {id:'sparkle', slot:'extra', name:'النجوم اللامعة',     price:10},
-    {id:'medal',   slot:'extra', name:'الميدالية الذهبية',  price:12},
-    {id:'shades',  slot:'extra', name:'النظارة الشمسية',    price:12}
+    {id:'cap',     slot:'hat',   name:'القبعة الصوفية',     s:'القُبَّعَةُ الصُّوفِيَّة', price:0},
+    {id:'orange',  slot:'scarf', name:'الوشاح البرتقالي',   s:'الوِشاحُ البُرْتُقالِيّ', price:0},
+    {id:'none',    slot:'extra', name:'بدون إضافة',         s:'بِدُونِ إِضافَة', price:0},
+    {id:'crown',   slot:'hat',   name:'التاج الذهبي',       s:'التّاجُ الذَّهَبِيّ', price:5},
+    {id:'party',   slot:'hat',   name:'قبعة الحفلة',        s:'قُبَّعَةُ الحَفْلَة', price:6},
+    {id:'grad',    slot:'hat',   name:'قبعة التخرج',        s:'قُبَّعَةُ التَّخَرُّج', price:8},
+    {id:'chef',    slot:'hat',   name:'قبعة الطبّاخ',       s:'قُبَّعَةُ الطَّبّاخ', price:8},
+    {id:'wizard',  slot:'hat',   name:'قبعة الساحر',        s:'قُبَّعَةُ السّاحِر', price:15},
+    {id:'blue',    slot:'scarf', name:'الوشاح الأزرق',      s:'الوِشاحُ الأَزْرَق', price:4},
+    {id:'green',   slot:'scarf', name:'الوشاح الأخضر',      s:'الوِشاحُ الأَخْضَر', price:4},
+    {id:'pink',    slot:'scarf', name:'الوشاح الوردي',      s:'الوِشاحُ الوَرْدِيّ', price:4},
+    {id:'purple',  slot:'scarf', name:'الوشاح البنفسجي',    s:'الوِشاحُ البَنَفْسَجِيّ', price:5},
+    {id:'teal',    slot:'scarf', name:'الوشاح الفيروزي',    s:'الوِشاحُ الفَيْرُوزِيّ', price:5},
+    {id:'flower',  slot:'extra', name:'الوردة',             s:'الوَرْدَة', price:5},
+    {id:'glasses', slot:'extra', name:'النظارة',            s:'النَّظّارَة', price:6},
+    {id:'sparkle', slot:'extra', name:'النجوم اللامعة',     s:'النُّجُومُ اللّامِعَة', price:10},
+    {id:'medal',   slot:'extra', name:'الميدالية الذهبية',  s:'المِيدالِيَّةُ الذَّهَبِيَّة', price:12},
+    {id:'shades',  slot:'extra', name:'النظارة الشمسية',    s:'النَّظّارَةُ الشَّمْسِيَّة', price:12}
   ];
   var SCARF = { orange:['--orange','--orange-dark'], blue:['--blue','--blue-dark'], green:['--green','--green-dark'],
                 pink:['--pink','--pink-dark'], purple:['--purple','--purple-dark'], teal:['--teal','--teal-dark'] };
@@ -1268,7 +1337,7 @@ h1 span{color:var(--orange)}
     $('buyPrize').focus();
     zizo(can ? gx('هل تشتري لي ', 'هل تشترين لي ') + p.name + '؟'
              : 'ينقصك ' + starsText(p.price - stars) + ' لتشتري ' + p.name + '. ' + gx('العب واجمع النجوم!', 'العبي واجمعي النجوم!'), can ? 'happy' : 'sad');
-    say(can ? p.name : gx('اِجْمَعْ نُجُوماً أَكْثَر', 'اِجْمَعِي نُجُوماً أَكْثَر'));
+    say(can ? p.s : gx('اِجْمَعْ نُجُوماً أَكْثَر', 'اِجْمَعِي نُجُوماً أَكْثَر'));
   }
   function closePrize(){
     $('prizeModal').hidden = true;
@@ -1653,7 +1722,7 @@ h1 span{color:var(--orange)}
     $('stageNext').hidden = last20;
     renderDots();
     zizo(sub, 'happy');
-    say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + hero());
+    say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + heroS());
     burst();
     stage = i; // keep for the buttons below
   }
@@ -1900,7 +1969,7 @@ h1 span{color:var(--orange)}
       if (mode === 'first') wordInto($('pWord'), target, false);
       if (mode === 'math'){ var qm = $('pEq').querySelector('.qm'); qm.textContent = N[target].d; qm.classList.add('ok'); }
       var won = POOLS[mode][target];
-      say(mode === 'enListen' ? [pr, { en: won.c + ', ' + won.w }] : mode === 'enWord' ? [pr, { en: won.w }] :
+      say(mode === 'enListen' ? [pr, { en: won.c }, { en: won.w }] : mode === 'enWord' ? [pr, { en: won.w }] :
           mode === 'enCount' ? [{ en: won.w }, pr] :
           mode === 'math' ? [pr, mathSpoken() + ' يُساوي ' + N[target].s] :
           mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] :
@@ -1926,12 +1995,12 @@ h1 span{color:var(--orange)}
                                       : gx('أعدت', 'أعدتِ') + ' تحدّي اليوم. التحدّي القادم غداً';
       $('endNext').textContent = (st > 1 ? '🔥 ' + daysText(st) + '! ' : '') + gx('عُد', 'عودي') + ' غداً لتحدٍّ جديد';
       zizo(first ? 'رائع! ٥ نجوم إضافية لك' + (st > 1 ? '، و' + daysText(st) + '!' : '!') : gx('أحسنت! عُد غداً لتحدٍّ جديد', 'أحسنتِ! عودي غداً لتحدٍّ جديد'), 'happy');
-      say(first ? gx('أَحْسَنْتَ! رَبِحْتَ خَمْسَ نُجُومٍ إِضافِيَّة', 'أَحْسَنْتِ! رَبِحْتِ خَمْسَ نُجُومٍ إِضافِيَّة') : gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + (kid.name || gx('بَطَل', 'بَطَلَة')));
+      say(first ? gx('أَحْسَنْتَ! رَبِحْتَ خَمْسَ نُجُومٍ إِضافِيَّة', 'أَحْسَنْتِ! رَبِحْتِ خَمْسَ نُجُومٍ إِضافِيَّة') : gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + heroS());
     } else {
       $('endSub').textContent = gx('جمعت', 'جمعتِ') + ' خمس نجوم جديدة';
       $('endNext').textContent = shopText();
       zizo(gx('أحسنت يا ', 'أحسنتِ يا ') + hero() + '! ' + gx('جمعت', 'جمعتِ') + ' خمس نجوم', 'happy');
-      say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + (kid.name || gx('بَطَل', 'بَطَلَة')));
+      say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + heroS());
     }
     renderDots();
     burst();
@@ -2008,7 +2077,62 @@ h1 span{color:var(--orange)}
     return { x: S/2 + (left - right)/2, y: S/2 + (asc - desc)/2 };
   }
   // used by the phone simulation only
-  if (window.__zizoTest){ window.__zizoTest.placeGlyph = placeGlyph; window.__zizoTest.target = function(){ return { target: target, mode: mode }; }; }
+  if (window.__zizoTest){
+    window.__zizoTest.placeGlyph = placeGlyph;
+    window.__zizoTest.target = function(){ return { target: target, mode: mode }; };
+    window.__zizoTest.phrases = allPhrases;
+  }
+
+  // Every sentence the app can say, for recording Zizo's voice (scripts/voice_phrases.py collects it).
+  // key: what say() is given (as vkey() makes it); speak: the same with full vowels, for the recording.
+  function allPhrases(){
+    var out = [], seen = {};
+    function add(text, speak){ var k = vkey(text); if (!seen[k]){ seen[k] = 1; out.push({ key: k, lang: 'ar', speak: speak || text }); } }
+    function addEn(text, speak){ var k = 'en:' + text; if (!seen[k]){ seen[k] = 1; out.push({ key: k, lang: 'en', speak: speak || text }); } }
+    var VOWELLED = {
+      'أحسنت!': 'أَحْسَنْتَ!', 'رائع!': 'رائِع!', 'ممتاز!': 'مُمْتاز!', 'برافو!': 'بْرافُو!', 'شاطر!': 'شاطِر!',
+      'أحسنتِ!': 'أَحْسَنْتِ!', 'رائعة!': 'رائِعَة!', 'ممتازة!': 'مُمْتازَة!', 'شاطرة!': 'شاطِرَة!',
+      'حاول مرة أخرى': 'حاوِلْ مَرَّةً أُخْرَى.', 'قريب! جرّب مرة ثانية': 'قَرِيب! جَرِّبْ مَرَّةً ثانِيَة.',
+      'حاولي مرة أخرى': 'حاوِلي مَرَّةً أُخْرَى.', 'قريب! جرّبي مرة ثانية': 'قَرِيب! جَرِّبي مَرَّةً ثانِيَة.'
+    };
+    Object.keys(VOWELLED).forEach(function(t){ add(t, VOWELLED[t]); });
+    L.forEach(function(l, i){ add(SN(i)); add(l.s); add('أَيْنَ حَرْفُ ال' + SN(i) + '؟'); });
+    N.forEach(function(n){ add(n.s); });
+    PAINTS.forEach(function(p){ add(p.s); add(p.fs); add('أَيْنَ اللَّوْنُ ' + p.the + '؟'); });
+    [SHAPES, ANIMALS, FOODS, BODY, JOBS].forEach(function(list){
+      list.forEach(function(x){ add(x.s); add(x.fs); add('أَيْنَ ' + x.the + '؟'); });
+    });
+    var keep = mq;
+    for (var a = 1; a <= 10; a++) for (var b = 1; b <= 10; b++){
+      [true, false].forEach(function(plus){
+        var ans = plus ? a + b : a - b;
+        if (ans < 1 || ans > 10) return;
+        mq = { add: plus, a: a, b: b, ans: ans };
+        add(mathSpoken() + '، كَمْ يُساوي؟');
+        add(mathSpoken() + ' يُساوي ' + N[ans - 1].s);
+      });
+    }
+    mq = keep;
+    PRIZES.forEach(function(p){ add(p.s); });
+    [
+      'كَمْ عَدَدُها؟', 'أَيْنَ حَرْف', 'أَيْنَ', 'شُكْراً!', 'شُكْراً! هَدِيَّةٌ رائِعَة',
+      'اِجْمَعْ نُجُوماً أَكْثَر', 'اِجْمَعِي نُجُوماً أَكْثَر',
+      'أَكْمِلِ المَرْحَلَةَ السّابِقَةَ أَوَّلاً', 'أَكْمِلي المَرْحَلَةَ السّابِقَةَ أَوَّلاً',
+      'أَحْسَنْتَ يا بَطَل', 'أَحْسَنْتِ يا بَطَلَة', 'أَحْسَنْتَ', 'أَحْسَنْتِ',
+      'أَحْسَنْتَ! رَبِحْتَ خَمْسَ نُجُومٍ إِضافِيَّة', 'أَحْسَنْتِ! رَبِحْتِ خَمْسَ نُجُومٍ إِضافِيَّة',
+      'ارْسُمْ فَوْقَ الرَّقْم', 'ارْسُمْ فَوْقَ الحَرْف', 'ارْسُمْ فَوْقَ النِّقاطِ فَقَط', 'ارْسُمْ بِهُدُوءٍ فَوْقَ النِّقاط',
+      'أَكْمِلْ رَسْمَ الرَّقْمِ كُلِّه', 'أَكْمِلْ رَسْمَ الحَرْفِ كُلِّه',
+      'أَهْلاً! هَيّا نَلْعَب', 'أَهْلاً يا بَطَل! هَيّا نَلْعَب', 'أَهْلاً يا بَطَلَة! هَيّا نَلْعَب',
+      'أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟'
+    ].forEach(function(t){ add(t); });
+    ['لا تَنْسَ', 'لا تَنْسَيْ'].forEach(function(d){
+      [' الرَّسْمَةَ الصَّغِيرَة', ' النِّقاط', ' النُّقْطَة'].forEach(function(w){ add(d + w); });
+    });
+    EN.forEach(function(e){ addEn(e.c, EN_SAY[e.c]); addEn(e.w, e.w + '.'); });
+    ENN.forEach(function(n){ addEn(n.w, n.w.charAt(0).toUpperCase() + n.w.slice(1) + '.'); });
+    addEn('How many?');
+    return out;
+  }
   function inkWidth(){ return Math.max(10, S*0.05); }
   function strokePaths(c){
     strokes.forEach(function(s){
