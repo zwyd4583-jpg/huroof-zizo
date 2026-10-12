@@ -68,12 +68,19 @@ def call(auth, url, body):
     req = urllib.request.Request(url, data=json.dumps(body).encode(), headers=auth.headers())
     try:
         with urllib.request.urlopen(req, timeout=180) as r:
-            return 200, json.load(r)
+            return 200, one(json.load(r))
     except urllib.error.HTTPError as e:
         try:
-            return e.code, json.load(e)
+            return e.code, one(json.load(e))
         except Exception:
             return e.code, {}
+
+
+def one(res):
+    # some endpoints answer with a list of objects
+    if isinstance(res, list):
+        res = res[-1] if res and isinstance(res[-1], dict) else {}
+    return res
 
 
 def retry_after(err):
@@ -154,7 +161,7 @@ def synth(auth, models, voice, text, style):
             print(f"  {model} not available ({msg}); trying {models[1]}")
             models.pop(0)
             continue
-        if code in (401, 403):
+        if code != 429:
             print(f"  HTTP {code}: {msg}")
         if code in (401, 403) and auth.switch_to_key():
             continue
@@ -162,7 +169,7 @@ def synth(auth, models, voice, text, style):
             if per_day(res):
                 raise DailyQuota(msg)
             wait = retry_after(res)
-            print(f"  busy, waiting {wait:.0f}s")
+            print(f"  busy, waiting {wait:.0f}s ({msg[:120]})")
             time.sleep(wait)
             continue
         fails += 1
