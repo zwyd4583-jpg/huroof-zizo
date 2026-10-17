@@ -1,0 +1,396 @@
+{
+ "engine": "gemini",
+ "gemini": {
+  "models": [
+   "gemini-3.8-flash-tts"
+  ],
+  "voice": "Puck",
+  "rpm": 4,
+  "style": {
+   "ar": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow, every letter and vowel mark pronounced exactly as written",
+   "en": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear American English, a little slow; a line with a single letter is the name of that letter of the alphabet"
+  },
+  "batch": 16,
+  "batch_chars": 400
+ },
+ "items": [
+  {
+   "id": "en-4b879178",
+   "lang": "en",
+   "text": "A.",
+   "key": "en:A"
+  },
+  {
+   "id": "en-d28ec0c2",
+   "lang": "en",
+   "text": "B.",
+   "key": "en:B"
+  },
+  {
+   "id": "en-a589f054",
+   "lang": "en",
+   "text": "C.",
+   "key": "en:C"
+  },
+  {
+   "id": "en-3bed65f7",
+   "lang": "en",
+   "text": "D.",
+   "key": "en:D"
+  },
+  {
+   "id": "en-4cea5561",
+   "lang": "en",
+   "text": "E.",
+   "key": "en:E"
+  },
+  {
+   "id": "en-d5e304db",
+   "lang": "en",
+   "text": "F.",
+   "key": "en:F"
+  },
+  {
+   "id": "en-a2e4344d",
+   "lang": "en",
+   "text": "G.",
+   "key": "en:G"
+  },
+  {
+   "id": "en-325b29dc",
+   "lang": "en",
+   "text": "H.",
+   "key": "en:H"
+  },
+  {
+   "id": "en-455c194a",
+   "lang": "en",
+   "text": "I.",
+   "key": "en:I"
+  },
+  {
+   "id": "en-dc5548f0",
+   "lang": "en",
+   "text": "J.",
+   "key": "en:J"
+  },
+  {
+   "id": "en-ab527866",
+   "lang": "en",
+   "text": "K.",
+   "key": "en:K"
+  },
+  {
+   "id": "en-3536edc5",
+   "lang": "en",
+   "text": "L.",
+   "key": "en:L"
+  },
+  {
+   "id": "en-4231dd53",
+   "lang": "en",
+   "text": "M.",
+   "key": "en:M"
+  },
+  {
+   "id": "en-db388ce9",
+   "lang": "en",
+   "text": "N.",
+   "key": "en:N"
+  },
+  {
+   "id": "en-ac3fbc7f",
+   "lang": "en",
+   "text": "O.",
+   "key": "en:O"
+  },
+  {
+   "id": "en-2137b18a",
+   "lang": "en",
+   "text": "P.",
+   "key": "en:P"
+  },
+  {
+   "id": "en-5630811c",
+   "lang": "en",
+   "text": "Q.",
+   "key": "en:Q"
+  },
+  {
+   "id": "en-cf39d0a6",
+   "lang": "en",
+   "text": "R.",
+   "key": "en:R"
+  },
+  {
+   "id": "en-b83ee030",
+   "lang": "en",
+   "text": "S.",
+   "key": "en:S"
+  },
+  {
+   "id": "en-265a7593",
+   "lang": "en",
+   "text": "T.",
+   "key": "en:T"
+  },
+  {
+   "id": "en-515d4505",
+   "lang": "en",
+   "text": "U.",
+   "key": "en:U"
+  },
+  {
+   "id": "en-c85414bf",
+   "lang": "en",
+   "text": "V.",
+   "key": "en:V"
+  },
+  {
+   "id": "en-2fec39b8",
+   "lang": "en",
+   "text": "X.",
+   "key": "en:X"
+  },
+  {
+   "id": "en-58eb092e",
+   "lang": "en",
+   "text": "Y.",
+   "key": "en:Y"
+  },
+  {
+   "id": "en-c1e25894",
+   "lang": "en",
+   "text": "Z.",
+   "key": "en:Z"
+  },
+  {
+   "id": "en-2d8c6a8c",
+   "lang": "en",
+   "text": "Apple.",
+   "key": "en:Apple"
+  },
+  {
+   "id": "en-68c94a48",
+   "lang": "en",
+   "text": "Ball.",
+   "key": "en:Ball"
+  },
+  {
+   "id": "en-093d32f9",
+   "lang": "en",
+   "text": "Cat.",
+   "key": "en:Cat"
+  },
+  {
+   "id": "en-164f482c",
+   "lang": "en",
+   "text": "Dog.",
+   "key": "en:Dog"
+  },
+  {
+   "id": "en-df54a813",
+   "lang": "en",
+   "text": "Egg.",
+   "key": "en:Egg"
+  },
+  {
+   "id": "en-238f4620",
+   "lang": "en",
+   "text": "Fish.",
+   "key": "en:Fish"
+  },
+  {
+   "id": "en-ae2d56f9",
+   "lang": "en",
+   "text": "Grapes.",
+   "key": "en:Grapes"
+  },
+  {
+   "id": "en-0568dd18",
+   "lang": "en",
+   "text": "Hat.",
+   "key": "en:Hat"
+  },
+  {
+   "id": "en-5a7d2d8a",
+   "lang": "en",
+   "text": "Ice cream.",
+   "key": "en:Ice cream"
+  },
+  {
+   "id": "en-6280cc72",
+   "lang": "en",
+   "text": "Jet.",
+   "key": "en:Jet"
+  },
+  {
+   "id": "en-1df3daf8",
+   "lang": "en",
+   "text": "Key.",
+   "key": "en:Key"
+  },
+  {
+   "id": "en-43265e2c",
+   "lang": "en",
+   "text": "Lion.",
+   "key": "en:Lion"
+  },
+  {
+   "id": "en-ff1745fb",
+   "lang": "en",
+   "text": "Moon.",
+   "key": "en:Moon"
+  },
+  {
+   "id": "en-9c076ec0",
+   "lang": "en",
+   "text": "Nose.",
+   "key": "en:Nose"
+  },
+  {
+   "id": "en-92248d3d",
+   "lang": "en",
+   "text": "Orange.",
+   "key": "en:Orange"
+  },
+  {
+   "id": "en-5b3ae406",
+   "lang": "en",
+   "text": "Pig.",
+   "key": "en:Pig"
+  },
+  {
+   "id": "en-264f0e66",
+   "lang": "en",
+   "text": "Queen.",
+   "key": "en:Queen"
+  },
+  {
+   "id": "en-e5b02adc",
+   "lang": "en",
+   "text": "Rabbit.",
+   "key": "en:Rabbit"
+  },
+  {
+   "id": "en-c6d7bfa6",
+   "lang": "en",
+   "text": "Sun.",
+   "key": "en:Sun"
+  },
+  {
+   "id": "en-abc55ccf",
+   "lang": "en",
+   "text": "Tree.",
+   "key": "en:Tree"
+  },
+  {
+   "id": "en-b1747870",
+   "lang": "en",
+   "text": "Umbrella.",
+   "key": "en:Umbrella"
+  },
+  {
+   "id": "en-4bc72fa6",
+   "lang": "en",
+   "text": "Violin.",
+   "key": "en:Violin"
+  },
+  {
+   "id": "en-bf532429",
+   "lang": "en",
+   "text": "Double you.",
+   "key": "en:W"
+  },
+  {
+   "id": "en-d4a9f0fa",
+   "lang": "en",
+   "text": "Watch.",
+   "key": "en:Watch"
+  },
+  {
+   "id": "en-98c391b7",
+   "lang": "en",
+   "text": "Fox.",
+   "key": "en:Fox"
+  },
+  {
+   "id": "en-5fe5d0da",
+   "lang": "en",
+   "text": "Yellow.",
+   "key": "en:Yellow"
+  },
+  {
+   "id": "en-91f5e76a",
+   "lang": "en",
+   "text": "Zebra.",
+   "key": "en:Zebra"
+  },
+  {
+   "id": "en-d542b140",
+   "lang": "en",
+   "text": "One.",
+   "key": "en:one"
+  },
+  {
+   "id": "en-bee4bdd7",
+   "lang": "en",
+   "text": "Two.",
+   "key": "en:two"
+  },
+  {
+   "id": "en-03a64d2d",
+   "lang": "en",
+   "text": "Three.",
+   "key": "en:three"
+  },
+  {
+   "id": "en-2c08cb50",
+   "lang": "en",
+   "text": "Four.",
+   "key": "en:four"
+  },
+  {
+   "id": "en-807b61e6",
+   "lang": "en",
+   "text": "Five.",
+   "key": "en:five"
+  },
+  {
+   "id": "en-ec39114a",
+   "lang": "en",
+   "text": "Six.",
+   "key": "en:six"
+  },
+  {
+   "id": "en-d33738b4",
+   "lang": "en",
+   "text": "Seven.",
+   "key": "en:seven"
+  },
+  {
+   "id": "en-2369ab5e",
+   "lang": "en",
+   "text": "Eight.",
+   "key": "en:eight"
+  },
+  {
+   "id": "en-c7d4d150",
+   "lang": "en",
+   "text": "Nine.",
+   "key": "en:nine"
+  },
+  {
+   "id": "en-b117fd92",
+   "lang": "en",
+   "text": "Ten.",
+   "key": "en:ten"
+  },
+  {
+   "id": "en-1c5fa011",
+   "lang": "en",
+   "text": "How many?",
+   "key": "en:How many?"
+  }
+ ]
+}
