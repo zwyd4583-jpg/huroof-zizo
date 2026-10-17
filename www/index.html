@@ -313,6 +313,65 @@ h1 span{color:var(--orange)}
 @keyframes tilt{25%{transform:rotate(-7deg)}75%{transform:rotate(5deg)}}
 @keyframes flap{0%,84%,100%{transform:rotate(0)}89%{transform:rotate(-9deg)}94%{transform:rotate(7deg)}}
 @keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+/* parents' corner: a calm full-screen report for adults, behind a sum children can't do yet */
+.parents{position:fixed; inset:0; z-index:30; overflow-y:auto; background:var(--sky);
+  padding-inline:16px; padding-block:calc(14px + env(safe-area-inset-top,0px)) calc(24px + env(safe-area-inset-bottom,0px))}
+.pa-inner{max-width:460px; margin:0 auto; display:grid; gap:14px}
+.pa-head{display:flex; align-items:center; justify-content:space-between; gap:12px}
+.pa-head h2{margin:0; font-size:1.6rem; font-weight:800}
+.pa-head .btn{font-size:1rem; padding:8px 14px}
+.pa-sec{padding:16px 14px; display:grid; gap:10px; box-shadow:0 4px 0 var(--sky-dark); border-radius:22px}
+.pa-sec h3{margin:0; font-size:1.2rem; font-weight:800}
+.pa-sec p{margin:0; line-height:1.6; font-weight:700}
+.pa-soft{color:var(--ink-soft); font-weight:700; font-size:.95rem}
+.pa-gate{padding:22px 16px; display:grid; gap:12px; text-align:center; justify-items:center}
+.pa-kicker{margin:0; color:var(--orange); font-weight:800; font-size:1.2rem}
+.pa-q{margin:0; font-size:1.6rem; font-weight:800; font-variant-numeric:tabular-nums}
+.pa-gate input{width:100%; max-width:200px; font-family:var(--f-ui); font-size:1.6rem; font-weight:800; text-align:center; color:var(--ink); background:var(--paper); border:3px solid var(--sky-dark); border-radius:16px; padding:8px 12px; -webkit-user-select:text; user-select:text}
+.pa-gate input:focus{outline:none; border-color:var(--blue)}
+.pa-err{margin:0; color:var(--red); font-weight:800; min-height:1.4em}
+.pa-big{display:flex; align-items:baseline; gap:8px; flex-wrap:wrap}
+.pa-big b{font-size:2rem; line-height:1.1; font-variant-numeric:tabular-nums}
+.pa-week{display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:6px; align-items:end; height:120px}
+.pa-day{display:grid; grid-template-rows:1fr auto auto; justify-items:center; gap:2px; height:100%; min-width:0}
+.pa-bar{width:70%; align-self:end; background:var(--blue); border-radius:8px 8px 3px 3px; min-height:3px}
+.pa-day.today .pa-bar{background:var(--orange)}
+.pa-day .m{font-size:.8rem; font-weight:800; font-variant-numeric:tabular-nums}
+.pa-day .d{font-size:.72rem; color:var(--ink-soft); font-weight:700; white-space:nowrap}
+.pa-limit{display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:6px}
+.pa-limit button{border:0; border-radius:14px; padding:10px 2px; font-weight:800; font-size:1rem; background:var(--sky); color:var(--ink); box-shadow:0 3px 0 var(--sky-dark); line-height:1.25}
+.pa-limit button[aria-pressed="true"]{background:var(--green); color:var(--white); box-shadow:0 3px 0 var(--green-dark)}
+.pa-tiles{display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:6px}
+.pa-tile{position:relative; display:grid; place-items:center; aspect-ratio:1; border-radius:12px; font-weight:700; font-size:1.25rem; line-height:1;
+  background:var(--lock); color:var(--ink-soft)}
+.pa-tile.ar{font-family:var(--f-letter); font-size:1.4rem}
+.pa-tile.seen{background:var(--r2); color:var(--ink)}
+.pa-tile.done{background:var(--green); color:var(--white)}
+.pa-tile.weak::after{content:""; position:absolute; top:3px; inset-inline-end:3px; width:9px; height:9px; border-radius:50%; background:var(--red); box-shadow:0 0 0 2px var(--paper)}
+.pa-key{display:flex; flex-wrap:wrap; gap:4px 14px; font-size:.85rem; font-weight:700; color:var(--ink-soft)}
+.pa-key span{display:inline-flex; align-items:center; gap:5px}
+.pa-key i{width:14px; height:14px; border-radius:4px; display:inline-block}
+.pa-rows{display:grid; gap:8px; margin:0; padding:0; list-style:none}
+.pa-rows li{display:grid; grid-template-columns:1fr auto; gap:2px 10px; align-items:center}
+.pa-rows .name{font-weight:800}
+.pa-rows .val{font-weight:800; font-variant-numeric:tabular-nums}
+.pa-rows .meter{grid-column:1 / -1; height:8px; border-radius:99px; background:var(--sky); overflow:hidden}
+.pa-rows .meter i{display:block; height:100%; border-radius:99px; background:var(--green)}
+.pa-rows .meter i.low{background:var(--orange)}
+.pa-facts{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px}
+.pa-fact{background:var(--sky); border-radius:16px; padding:10px 8px; text-align:center; display:grid; gap:2px}
+.pa-fact b{font-size:1.5rem; font-variant-numeric:tabular-nums}
+.pa-fact span{font-size:.9rem; font-weight:700; color:var(--ink-soft)}
+/* rest time: the day's play time is over */
+.rest{position:fixed; inset:0; z-index:25; overflow-y:auto; display:grid; place-items:center; text-align:center;
+  padding:calc(16px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px));
+  background:radial-gradient(90px 34px at 16% 14%, rgba(255,255,255,.18) 60%, transparent 63%), radial-gradient(110px 38px at 82% 30%, rgba(255,255,255,.14) 60%, transparent 63%), #2B3A63; color:var(--white)}
+.rest-inner{max-width:380px; display:grid; justify-items:center; gap:12px}
+.rest h2{margin:0; font-size:1.9rem; font-weight:800; line-height:1.35}
+.rest p{margin:0; font-size:1.3rem; font-weight:700; line-height:1.6; opacity:.92}
+.rest .moon{font-size:3rem; line-height:1}
+.rest .zizo-hero{animation:sway 4s ease-in-out infinite}
+.rest .linkbtn{color:#C9D3EA; margin-top:8px}
 @keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
 @keyframes pulse{50%{transform:scale(1.06)}}
 @keyframes spark{from{transform:translate(0,0) scale(.3); opacity:1} to{transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(45deg); opacity:0}}
@@ -606,6 +665,7 @@ h1 span{color:var(--orange)}
         <div class="wl-links">
           <button class="linkbtn" id="editName">تغيير الاسم</button>
           <button class="linkbtn sfx-toggle" id="sfxToggle" aria-pressed="true"></button>
+          <button class="linkbtn" id="openParents">ركن الوالدين</button>
         </div>
       </div>
       <form class="card setup" id="setup" hidden>
@@ -631,6 +691,79 @@ h1 span{color:var(--orange)}
       <div class="btnrow">
         <button class="btn" id="buyPrize" style="--b:var(--green);--bd:var(--green-dark)"></button>
         <button class="btn ghost" id="laterPrize">رجوع</button>
+      </div>
+    </div>
+  </div>
+  <div class="rest" id="rest" role="dialog" aria-modal="true" aria-labelledby="restTitle" hidden>
+    <div class="rest-inner">
+      <div class="moon" aria-hidden="true">🌙</div>
+      <svg class="zizo-hero" id="restZizo" viewBox="0 -4 120 124" aria-hidden="true"></svg>
+      <h2 id="restTitle">انتهى وقت اللعب لليوم</h2>
+      <p>زيزو يرتاح الآن 😴<br>نلعب معاً غداً!</p>
+      <button class="linkbtn" id="restParents">للوالدين: وقت إضافي</button>
+    </div>
+  </div>
+  <div class="parents" id="parents" role="dialog" aria-modal="true" aria-labelledby="paTitle" hidden>
+    <div class="pa-inner">
+      <div class="pa-head">
+        <h2 id="paTitle">ركن الوالدين</h2>
+        <button class="btn ghost" id="paClose">رجوع</button>
+      </div>
+      <form class="card pa-gate" id="paGate">
+        <p class="pa-kicker">للوالدين فقط</p>
+        <label class="pa-q" id="paQ" for="paA"></label>
+        <input id="paA" inputmode="numeric" autocomplete="off" enterkeyhint="done" aria-describedby="paErr">
+        <p class="pa-err" id="paErr" aria-live="polite"></p>
+        <button class="btn" type="submit" style="--b:var(--green);--bd:var(--green-dark)">دخول</button>
+      </form>
+      <div id="paBody" hidden>
+        <div class="pa-inner">
+          <section class="card pa-sec">
+            <h3>وقت اللعب</h3>
+            <div class="pa-big"><b id="paToday"></b><span class="pa-soft" id="paTodayNote"></span></div>
+            <div class="pa-week" id="paWeek" aria-label="دقائق اللعب في آخر سبعة أيام"></div>
+          </section>
+          <section class="card pa-sec">
+            <h3>حدّ يومي للعب</h3>
+            <div class="pa-limit" id="paLimit" role="group" aria-label="الحد اليومي بالدقائق"></div>
+            <p class="pa-soft" id="paLimitNote"></p>
+            <button class="btn ghost" id="paExtra" hidden>أضف ١٥ دقيقة لليوم</button>
+          </section>
+          <section class="card pa-sec">
+            <h3>الحروف العربية</h3>
+            <p id="paArSum"></p>
+            <div class="pa-tiles" id="paAr"></div>
+          </section>
+          <section class="card pa-sec">
+            <h3>الأرقام</h3>
+            <p id="paNumSum"></p>
+            <div class="pa-tiles" id="paNum"></div>
+          </section>
+          <section class="card pa-sec">
+            <h3>الإنجليزي</h3>
+            <p id="paEnSum"></p>
+            <div class="pa-tiles" id="paEn"></div>
+          </section>
+          <div class="pa-key" aria-hidden="true">
+            <span><i style="background:var(--lock)"></i>لم يفتحه بعد</span>
+            <span><i style="background:var(--r2)"></i>شاهده</span>
+            <span><i style="background:var(--green)"></i>تدرّب عليه</span>
+            <span><i style="background:var(--red); border-radius:50%"></i>يخطئ فيه كثيراً</span>
+          </div>
+          <section class="card pa-sec">
+            <h3>يحتاج تدريباً</h3>
+            <ul class="pa-rows" id="paWeak"></ul>
+          </section>
+          <section class="card pa-sec">
+            <h3>الألعاب</h3>
+            <ul class="pa-rows" id="paGames"></ul>
+          </section>
+          <section class="card pa-sec">
+            <h3>إنجازات</h3>
+            <div class="pa-facts" id="paFacts"></div>
+            <p class="pa-soft" id="paSince"></p>
+          </section>
+        </div>
       </div>
     </div>
   </div>
@@ -1132,7 +1265,37 @@ h1 span{color:var(--orange)}
       (function(el){ setTimeout(function(){ el.remove(); }, 950); })(s);
     }
   }
+  /* ---------- what the child did, for the parents' corner (kept on this phone only) ---------- */
+  var stats = { since: dayKey(), days: {}, earned: 0, games: {},
+                seen: { ar: {}, en: {}, num: {}, enNum: {} }, ok: { ar: {}, en: {}, num: {}, enNum: {} },
+                bad: { ar: {}, en: {}, num: {}, enNum: {} }, traced: { ar: {}, en: {}, num: {}, enNum: {} } };
+  try {
+    var savedSt = JSON.parse(localStorage.getItem('zizo-stats') || 'null');
+    if (savedSt) Object.keys(stats).forEach(function(k){
+      if (savedSt[k] === undefined) return;
+      if (typeof stats[k] === 'object' && stats[k] && !Array.isArray(stats[k]) && k !== 'days' && k !== 'games'){
+        Object.keys(stats[k]).forEach(function(j){ if (savedSt[k][j]) stats[k][j] = savedSt[k][j]; });
+      } else stats[k] = savedSt[k];
+    });
+  } catch(e){}
+  function saveStats(){ try { localStorage.setItem('zizo-stats', JSON.stringify(stats)); } catch(e){} }
+  function bump(o, k, n){ o[k] = (o[k] || 0) + (n || 1); }
+  // which list a game's answers come from
+  var KIND = { listen: 'ar', first: 'ar', count: 'num', math: 'num', enListen: 'en', enWord: 'en', enCount: 'enNum' };
+  var TRACE_KIND = { letters: 'ar', numbers: 'num', en: 'en', enNum: 'enNum' };
+  function noteSeen(kind, i){ bump(stats.seen[kind], i); saveStats(); }
+  function noteAnswer(m, i, right){
+    var g = stats.games[m] || (stats.games[m] = { ok: 0, bad: 0 });
+    if (right) g.ok++; else g.bad++;
+    if (KIND[m]) bump((right ? stats.ok : stats.bad)[KIND[m]], i);
+    saveStats();
+  }
+  function noteTraced(kind, i){ bump(stats.traced[TRACE_KIND[kind]], i); saveStats(); }
+  function noteEarned(n){ stats.earned += n; saveStats(); }
+  function todaySecs(){ return stats.days[dayKey()] || 0; }
+
   function addStar(){
+    noteEarned(1);
     sfx('correct');
     stars++;
     saveStars();
@@ -1407,6 +1570,7 @@ h1 span{color:var(--orange)}
     var en = lLang === 'en', list = en ? EN : L;
     cur = (i + list.length) % list.length;
     var l = list[cur];
+    noteSeen(en ? 'en' : 'ar', cur);
     detail.style.cssText = colorVars(cur);
     $('dLetter').className = 'bigletter' + (en ? ' en' : '');
     $('dLetter').textContent = en ? l.c + l.c.toLowerCase() : l.c;
@@ -1504,6 +1668,7 @@ h1 span{color:var(--orange)}
     var en = nLang === 'en';
     ncur = (i + N.length) % N.length;
     var x = en ? ENN[ncur] : N[ncur];
+    noteSeen(en ? 'enNum' : 'num', ncur);
     ndetail.style.cssText = colorVars(ncur);
     $('nDigit').className = 'bigletter' + (en ? ' en' : '');
     $('nDigit').textContent = x.d;
@@ -1827,7 +1992,7 @@ h1 span{color:var(--orange)}
     if (dailyDone()) return false;
     dailyState.streak = dailyState.last === yesterdayKey() ? dailyState.streak + 1 : 1;
     dailyState.last = dayKey(); saveDaily();
-    stars += 5; saveStars(); renderStars();
+    stars += 5; saveStars(); renderStars(); noteEarned(5);
     return true;
   }
 
@@ -1974,6 +2139,7 @@ h1 span{color:var(--orange)}
     if (o === target){
       locked = true;
       b.classList.add('right');
+      noteAnswer(mode, target, true);
       var pr = praise();
       zizo(pr, 'happy'); addStar();
       if (mode === 'first') wordInto($('pWord'), target, false);
@@ -1988,6 +2154,7 @@ h1 span{color:var(--orange)}
       nextTimer = setTimeout(function(){ whenNoPrize(nextRound); }, 1500);
     } else {
       b.classList.add('wrong'); b.disabled = true; mistakes++; sfx('wrong');
+      noteAnswer(mode, target, false);
       var r = retry(); zizo(r, 'sad'); say(r);
     }
   }
@@ -2133,7 +2300,7 @@ h1 span{color:var(--orange)}
       'ارْسُمْ فَوْقَ الرَّقْم', 'ارْسُمْ فَوْقَ الحَرْف', 'ارْسُمْ فَوْقَ النِّقاطِ فَقَط', 'ارْسُمْ بِهُدُوءٍ فَوْقَ النِّقاط',
       'أَكْمِلْ رَسْمَ الرَّقْمِ كُلِّه', 'أَكْمِلْ رَسْمَ الحَرْفِ كُلِّه',
       'أَهْلاً! هَيّا نَلْعَب', 'أَهْلاً يا بَطَل! هَيّا نَلْعَب', 'أَهْلاً يا بَطَلَة! هَيّا نَلْعَب',
-      'أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟'
+      'أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟', REST_SAY
     ].forEach(function(t){ add(t); });
     ['لا تَنْسَ', 'لا تَنْسَيْ'].forEach(function(d){
       [' الرَّسْمَةَ الصَّغِيرَة', ' النِّقاط', ' النُّقْطَة'].forEach(function(w){ add(d + w); });
@@ -2343,6 +2510,7 @@ h1 span{color:var(--orange)}
       return;
     }
     traceDone = true; drawAll();
+    noteTraced(tKind, tIdx);
     var pr = praise(); addStar(); zizo(pr, 'happy'); say(pr);
     traceTimer = setTimeout(function(){ whenNoPrize(function(){ setTrace(tIdx + 1, true); }); }, 1600);
   });
@@ -2428,6 +2596,228 @@ h1 span{color:var(--orange)}
     sfx('correct');
   });
   renderSfxToggle();
+
+  /* ---------- play time, a daily limit, and the parents' corner ---------- */
+  var parent = { limit: 0, extra: {} };
+  try {
+    var savedP = JSON.parse(localStorage.getItem('zizo-parent') || 'null');
+    if (savedP){ parent.limit = savedP.limit | 0; parent.extra = savedP.extra || {}; }
+  } catch(e){}
+  function saveParent(){ try { localStorage.setItem('zizo-parent', JSON.stringify(parent)); } catch(e){} }
+  var LIMITS = [0, 15, 30, 45, 60];
+  function allowedSecs(){ return parent.limit ? (parent.limit + (parent.extra[dayKey()] || 0)) * 60 : Infinity; }
+  function timeUp(){ return todaySecs() >= allowedSecs(); }
+  var restEl = $('rest'), parentsEl = $('parents');
+  var REST_SAY = 'اِنْتَهى وَقْتُ اللَّعِبِ اليَوْم. زِيزُو يَرْتاحُ الآن، نَلْعَبُ غَداً!';
+  // only with a recording: this screen stays quiet rather than use the phone's voice
+  function sayRecorded(t){ var id = VOICE && VOICE[vkey(t)]; if (id) playClips([id]); }
+  function checkRest(){
+    var up = timeUp();
+    if (up && restEl.hidden){
+      hush(); clearTimeout(nextTimer); clearTimeout(traceTimer); stopAutoCount();
+      $('restZizo').innerHTML = zizoMarkup(outfit);
+      restEl.hidden = false;
+      sayRecorded(REST_SAY);
+    } else if (!up && !restEl.hidden) restEl.hidden = true;
+  }
+  // Play time is counted while the app is on screen (not while it waits in the background)
+  var tickAt = Date.now();
+  function tick(force){
+    var now = Date.now(), dt = Math.min(now - tickAt, 30000) / 1000;
+    tickAt = now;
+    if ((force || document.visibilityState !== 'hidden') && restEl.hidden && parentsEl.hidden){
+      var k = dayKey();
+      stats.days[k] = Math.round((stats.days[k] || 0) + dt);
+      var keys = Object.keys(stats.days).sort();
+      while (keys.length > 62) delete stats.days[keys.shift()];
+      saveStats();
+    }
+    if (parentsEl.hidden) checkRest();
+  }
+  setInterval(tick, 10000);
+  document.addEventListener('visibilitychange', function(){
+    if (document.visibilityState === 'hidden') tick(true);
+    tickAt = Date.now();
+  });
+
+  // The way in: a sum young children can't do yet, new every time
+  var gateAns = 0;
+  function newGate(){
+    var a = 6 + Math.floor(Math.random() * 4), b = 6 + Math.floor(Math.random() * 4);
+    gateAns = a * b;
+    $('paQ').textContent = 'كم يساوي ' + fmt(a) + ' × ' + fmt(b) + '؟';
+    $('paA').value = '';
+  }
+  function westernDigits(s){
+    return String(s).replace(/[٠-٩]/g, function(d){ return String('٠١٢٣٤٥٦٧٨٩'.indexOf(d)); })
+                    .replace(/[۰-۹]/g, function(d){ return String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)); }).replace(/\D/g, '');
+  }
+  function openParents(){
+    hush();
+    tick();
+    parentsEl.hidden = false; parentsEl.scrollTop = 0;
+    $('paGate').hidden = false; $('paBody').hidden = true; $('paErr').textContent = '';
+    newGate();
+  }
+  function closeParents(){
+    try { $('paA').blur(); } catch(_){}
+    parentsEl.hidden = true;
+    tickAt = Date.now();
+    checkRest();
+  }
+  $('paGate').addEventListener('submit', function(e){
+    e.preventDefault();
+    if (parseInt(westernDigits($('paA').value), 10) === gateAns){
+      try { $('paA').blur(); } catch(_){}
+      $('paGate').hidden = true; $('paBody').hidden = false;
+      renderParents();
+    } else {
+      $('paErr').textContent = 'إجابة غير صحيحة، جرّب هذا السؤال';
+      newGate();
+    }
+  });
+  $('openParents').addEventListener('click', openParents);
+  $('restParents').addEventListener('click', openParents);
+  $('paClose').addEventListener('click', closeParents);
+
+  // Arabic counted nouns: 1, 2, 3-10, 11+
+  function countText(n, one, two, few, many){
+    return n === 1 ? one : n === 2 ? two : fmt(n) + ' ' + (n >= 3 && n <= 10 ? few : many);
+  }
+  function minsText(sec){
+    var m = Math.round(sec / 60);
+    return m < 1 ? 'أقل من دقيقة' : countText(m, 'دقيقة واحدة', 'دقيقتان', 'دقائق', 'دقيقة');
+  }
+  var WEEKDAYS = ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+  function who(m, f){ return (kid.name ? kid.name + ' ' : '') + gx(m, f); }
+
+  function tileState(kind, i){
+    var seen = stats.seen[kind][i] || 0, ok = stats.ok[kind][i] || 0, bad = stats.bad[kind][i] || 0, tr = stats.traced[kind][i] || 0;
+    var cls = (ok >= 1 || tr >= 1) ? 'done' : (seen || bad) ? 'seen' : '';
+    if (bad >= 3 && bad > ok) cls += ' weak';
+    return cls.trim();
+  }
+  function renderTiles(el, parts){
+    var h = '', done = 0, seen = 0, n = 0;
+    parts.forEach(function(p){
+      p.list.forEach(function(x, i){
+        var cls = tileState(p.kind, i);
+        n++;
+        if (cls) seen++;
+        if (cls.indexOf('done') === 0) done++;
+        var state = cls.indexOf('done') === 0 ? 'تدرّب عليه' : cls ? 'شاهده' : 'لم يفتحه بعد';
+        if (cls.indexOf('weak') !== -1) state += '، ويخطئ فيه كثيراً';
+        h += '<span class="pa-tile' + (p.ar ? ' ar' : '') + (cls ? ' ' + cls : '') + '" role="img" aria-label="' + p.name(x) + ': ' + state + '">' +
+             p.label(x) + '</span>';
+      });
+    });
+    el.innerHTML = h;
+    return { done: done, seen: seen, n: n };
+  }
+  function tilesSum(r, noun){
+    if (!r.seen) return who('لم يبدأ', 'لم تبدأ') + ' هذا القسم بعد.';
+    if (!r.done) return who('شاهد', 'شاهدت') + ' ' + fmt(r.seen) + ' من ' + fmt(r.n) + ' ' + noun + '، ولم ' + gx('يتدرّب', 'تتدرّب') + ' عليها في الألعاب أو الرسم بعد.';
+    return who('تدرّب', 'تدرّبت') + ' على ' + fmt(r.done) + ' من ' + fmt(r.n) + ' ' + noun +
+           (r.seen > r.done ? '، و' + gx('شاهد', 'شاهدت') + ' ' + fmt(r.seen - r.done) + ' غيرها' : '') + '.';
+  }
+
+  function renderParents(){
+    // play time: today and the last seven days
+    var today = todaySecs(), week = 0, maxM = 10, days = [];
+    for (var d = 6; d >= 0; d--){
+      var dt = new Date(); dt.setDate(dt.getDate() - d);
+      var s = stats.days[dayKey(dt)] || 0;
+      week += s; days.push({ s: s, d: dt, today: d === 0 });
+      maxM = Math.max(maxM, s / 60);
+    }
+    $('paToday').textContent = minsText(today);
+    $('paTodayNote').textContent = 'اليوم، و' + minsText(week) + ' في آخر سبعة أيام';
+    $('paWeek').innerHTML = days.map(function(x){
+      var m = Math.round(x.s / 60);
+      return '<div class="pa-day' + (x.today ? ' today' : '') + '"><span class="pa-bar" style="height:' + Math.round(100 * m / maxM) + '%"></span>' +
+             '<span class="m">' + fmt(m) + '</span><span class="d">' + (x.today ? 'اليوم' : WEEKDAYS[x.d.getDay()]) + '</span></div>';
+    }).join('');
+
+    // daily limit
+    $('paLimit').innerHTML = LIMITS.map(function(m){
+      return '<button type="button" data-m="' + m + '" aria-pressed="' + (parent.limit === m) + '">' + (m ? fmt(m) + '<br>دقيقة' : 'بلا<br>حدّ') + '</button>';
+    }).join('');
+    if (parent.limit){
+      var left = Math.max(0, allowedSecs() - today);
+      $('paLimitNote').textContent = 'يتوقف اللعب بعد ' + minsText(allowedSecs()) + ' في اليوم، ثم يعود في اليوم التالي. ' +
+        (left > 0 ? 'بقي اليوم: ' + minsText(left) + '.' : 'انتهى وقت اليوم.');
+    } else {
+      $('paLimitNote').textContent = 'لا يوجد حدّ يومي الآن. اختر مدة ليتوقف اللعب بعدها كل يوم.';
+    }
+    $('paExtra').hidden = !parent.limit;
+
+    // what the child has learned
+    var ar = renderTiles($('paAr'), [{ kind: 'ar', list: L, ar: true, label: function(x){ return x.c; }, name: function(x){ return 'حرف ال' + x.n; } }]);
+    $('paArSum').textContent = tilesSum(ar, 'حرفاً');
+    var nums = renderTiles($('paNum'), [
+      { kind: 'num', list: N, label: function(x){ return x.d; }, name: function(x){ return 'الرقم ' + x.n; } },
+      { kind: 'enNum', list: ENN, label: function(x){ return x.d; }, name: function(x){ return x.w; } }
+    ]);
+    $('paNum').style.gridTemplateColumns = 'repeat(5,minmax(0,1fr))';
+    $('paNumSum').textContent = tilesSum(nums, 'رقماً (بالعربي والإنجليزي)');
+    var en = renderTiles($('paEn'), [{ kind: 'en', list: EN, label: function(x){ return x.c; }, name: function(x){ return 'الحرف ' + x.c; } }]);
+    $('paEnSum').textContent = tilesSum(en, 'حرفاً إنجليزياً');
+
+    // the items answered wrong most often
+    var weak = [];
+    [['ar', L, function(x){ return 'حرف ال' + x.n + ' (' + x.c + ')'; }],
+     ['num', N, function(x){ return 'الرقم ' + x.n + ' (' + x.d + ')'; }],
+     ['en', EN, function(x){ return 'الحرف الإنجليزي ' + x.c; }],
+     ['enNum', ENN, function(x){ return 'الرقم بالإنجليزي ' + x.w; }]].forEach(function(k){
+      Object.keys(stats.bad[k[0]]).forEach(function(i){
+        var bad = stats.bad[k[0]][i] || 0, ok = stats.ok[k[0]][i] || 0;
+        if (bad >= 2 && bad >= ok / 2 && k[1][i]) weak.push({ name: k[2](k[1][i]), bad: bad, ok: ok, score: bad - ok / 2 });
+      });
+    });
+    weak.sort(function(a, b){ return b.score - a.score; });
+    $('paWeak').innerHTML = weak.length ? weak.slice(0, 5).map(function(w){
+      return '<li><span class="name">' + w.name + '</span><span class="val">' + countText(w.bad, 'خطأ واحد', 'خطآن', 'أخطاء', 'خطأً') + '</span>' +
+             '<span class="pa-soft" style="grid-column:1 / -1">' + (w.ok ? gx('وأجاب', 'وأجابت') + ' عنه صحيحاً ' + countText(w.ok, 'مرة واحدة', 'مرتين', 'مرات', 'مرة') : gx('ولم يجب', 'ولم تجب') + ' عنه صحيحاً بعد') + '</span></li>';
+    }).join('') : '<li class="pa-soft">لا شيء يحتاج تدريباً خاصاً الآن 👍</li>';
+
+    // games
+    var rows = GAMES.filter(function(g){ var s = stats.games[g.mode]; return s && s.ok + s.bad > 0; }).map(function(g){
+      var s = stats.games[g.mode], acc = Math.round(100 * s.ok / (s.ok + s.bad));
+      return '<li><span class="name">' + g.t + ' <span class="pa-soft">(' + countText(s.ok, 'سؤال واحد', 'سؤالان', 'أسئلة', 'سؤالاً') + ')</span></span>' +
+             '<span class="val">' + fmt(acc) + '٪</span><span class="meter" aria-hidden="true"><i class="' + (acc < 60 ? 'low' : '') + '" style="width:' + acc + '%"></i></span></li>';
+    });
+    $('paGames').innerHTML = rows.length ? rows.join('') + '<li class="pa-soft">النسبة: الإجابات الصحيحة من كل المحاولات</li>'
+                                         : '<li class="pa-soft">' + gx('لم يلعب', 'لم تلعب') + ' أي لعبة بعد</li>';
+
+    // milestones
+    var stagesDone = jStars.filter(function(x){ return x > 0; }).length;
+    var gifts = PRIZES.filter(function(p){ return p.price > 0 && isOwned(p); }).length;
+    var traced = 0; ['ar', 'num', 'en', 'enNum'].forEach(function(k){ Object.keys(stats.traced[k]).forEach(function(i){ traced += stats.traced[k][i]; }); });
+    var playDays = Object.keys(stats.days).filter(function(k){ return stats.days[k] >= 60; }).length;
+    var facts = [
+      [fmt(stagesDone) + ' / ' + fmt(STAGES.length), 'مراحل رحلة زيزو'],
+      [fmt(streakNow()), 'أيام تحدٍّ متتالية'],
+      [fmt(stats.earned), 'نجمة ' + gx('جمعها', 'جمعتها')],
+      [fmt(gifts), 'هدية ' + gx('اشتراها', 'اشترتها') + ' لزيزو'],
+      [fmt(traced), 'رسمة ناجحة لحرف أو رقم'],
+      [fmt(playDays), 'يوم ' + gx('لعب', 'لعبت') + ' فيه']
+    ];
+    $('paFacts').innerHTML = facts.map(function(f){ return '<div class="pa-fact"><b>' + f[0] + '</b><span>' + f[1] + '</span></div>'; }).join('');
+    var since = new Date(stats.since + 'T12:00:00'), sinceText = stats.since;
+    try { sinceText = since.toLocaleDateString('ar-IQ', { day: 'numeric', month: 'long', year: 'numeric' }); } catch(e){}
+    $('paSince').textContent = 'تُحسب هذه الأرقام منذ ' + sinceText + '، وهي محفوظة على هذا الهاتف فقط.';
+  }
+  $('paLimit').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    parent.limit = parseInt(b.dataset.m, 10) || 0;
+    saveParent(); renderParents();
+  });
+  $('paExtra').addEventListener('click', function(){
+    var k = dayKey(), extra = {}; extra[k] = (parent.extra[k] || 0) + 15;
+    parent.extra = extra; // only today's extra time is kept
+    saveParent(); renderParents();
+  });
+
   $('goJourney').addEventListener('click', function(){ leaveWelcome(); show('play'); showMap(); });
   $('goDaily').addEventListener('click', function(){ leaveWelcome(); show('play'); startDaily(); });
   $('goLearn').addEventListener('click', function(){
@@ -2438,6 +2828,8 @@ h1 span{color:var(--orange)}
   // Android back button: close what's open, then go back to the welcome screen, then leave the app.
   if (AppPlugin){
     AppPlugin.addListener('backButton', function(){
+      if (!parentsEl.hidden){ closeParents(); return; }
+      if (!restEl.hidden){ AppPlugin.exitApp(); return; }
       if (prizeOpen()){ closePrize(); return; }
       if (!welcome.hidden){
         if (!$('setup').hidden && kid.set) showWelcome();
@@ -2458,6 +2850,7 @@ h1 span{color:var(--orange)}
   renderZizo();
   show('letters');
   showWelcome();
+  checkRest();
   if (hasWebTTS) setTimeout(updateWebNote, 1500);
   else if (!NTTS && !isNative) updateWebNote();
 })();
