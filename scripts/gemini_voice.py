@@ -30,6 +30,10 @@ class DailyQuota(Exception):
     pass
 
 
+class NoAudio(Exception):
+    """The model answered without audio (it gives up on some texts); retrying the same text rarely helps."""
+
+
 class Auth:
     """Cloud Shell's own sign-in first; if the API wants a key, make one in this project and keep it here."""
 
@@ -167,10 +171,7 @@ def synth(auth, models, voice, text, style):
             try:
                 return pcm_of(model, res), model
             except (KeyError, IndexError):
-                fails += 1
-                if fails > 4:
-                    raise RuntimeError("no audio in the answer: " + json.dumps(res)[:300])
-                continue
+                raise NoAudio(json.dumps(res, ensure_ascii=False)[:200])
         msg = res.get("error", {}).get("message", "")[:200]
         if code == 404 and len(models) > 1:
             print(f"  {model} not available ({msg}); trying {models[1]}")
@@ -235,7 +236,11 @@ def main(list_path, out, model=None):
     groups = list(chunks(items, g))
     done = stopped = 0
     last = 0.0
-    for n, ((voice, style), group) in enumerate(groups, 1):
+    queue = list(groups)
+    n = 0
+    while queue:
+        (voice, style), group = queue.pop(0)
+        n += 1
         single = len(group) == 1
         f = out / voice / (f"{group[0]['id']}.wav" if single else f"chunk-{group[0]['id']}-{len(group)}.wav")
         if f.exists():
@@ -247,6 +252,13 @@ def main(list_path, out, model=None):
         last = time.time()
         try:
             pcm, used = synth(auth, models, voice, text, style)
+        except NoAudio as e:
+            # a long text the model will not read in one go: try its two halves instead
+            print(f"  no audio for {len(group)} sentence(s): {str(e)[:120]}")
+            if len(group) > 1:
+                h = len(group) // 2
+                queue[:0] = [((voice, style), group[:h]), ((voice, style), group[h:])]
+            continue
         except DailyQuota as e:
             print(f"\nDaily quota reached after {done} of {len(items)} ({str(e)[:160]}).")
             print("Run the same command again after the quota resets; finished parts are kept.")
@@ -261,7 +273,7 @@ def main(list_path, out, model=None):
         with report.open("a", encoding="utf-8") as r:
             r.write(f"{f.name}\t{voice}\t{used}\t{sec:.2f}\t{len(group)}\t{group[0]['text']}\n")
         done += len(group)
-        print(f"request {n}/{len(groups)}: {voice} {len(group)} sentence(s) {sec:5.1f}s  {group[0]['text']}")
+        print(f"request {n} ({len(queue)} left): {voice} {len(group)} sentence(s) {sec:5.1f}s  {group[0]['text']}")
     zp = pathlib.Path("out.zip")
     with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
         for p in sorted(out.rglob("*")):

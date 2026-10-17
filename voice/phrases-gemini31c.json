@@ -7,8 +7,8 @@
   "voice": "Puck",
   "rpm": 4,
   "style": {
-   "ar": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow, every letter and vowel mark pronounced exactly as written. These are separate unrelated lines, not one text and not a count: say each line on its own",
-   "en": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear American English, a little slow; a line with a single letter is the name of that letter of the alphabet. These are separate lines: say each line on its own"
+   "ar": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow, every letter and vowel mark pronounced exactly as written",
+   "en": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear American English, a little slow; a line with a single letter is the name of that letter of the alphabet"
   },
   "batch": 63,
   "batch_chars": 1350
