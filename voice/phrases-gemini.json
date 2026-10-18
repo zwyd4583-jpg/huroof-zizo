@@ -3437,6 +3437,1315 @@
    "text": "اِنْتَهى وَقْتُ اللَّعِبِ اليَوْم. زِيزُو يَرْتاحُ الآن، نَلْعَبُ غَداً!",
    "key": "اِنْتَهى وَقْتُ اللَّعِبِ اليَوْم. زِيزُو يَرْتاحُ الآن، نَلْعَبُ غَداً!",
    "candidates": 2
+  },
+  {
+   "id": "ar-a8e336b9",
+   "lang": "ar",
+   "text": "أَهْلاً",
+   "key": "أَهْلاً",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c1f0fa20",
+   "lang": "ar",
+   "text": "هَيّا نَلْعَب",
+   "key": "هَيّا نَلْعَب",
+   "candidates": 2
+  },
+  {
+   "id": "ar-598b5d5d",
+   "lang": "ar",
+   "text": "يا مُحَمَّد",
+   "key": "name:محمد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-6d79f4ac",
+   "lang": "ar",
+   "text": "يا عَلِيّ",
+   "key": "name:علي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-e656edcb",
+   "lang": "ar",
+   "text": "يا حُسَيْن",
+   "key": "name:حسين",
+   "candidates": 2
+  },
+  {
+   "id": "ar-68371db5",
+   "lang": "ar",
+   "text": "يا حَسَن",
+   "key": "name:حسن",
+   "candidates": 2
+  },
+  {
+   "id": "ar-cd037576",
+   "lang": "ar",
+   "text": "يا أَحْمَد",
+   "key": "name:احمد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a576b431",
+   "lang": "ar",
+   "text": "يا عَبّاس",
+   "key": "name:عباس",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c862b729",
+   "lang": "ar",
+   "text": "يا مُصْطَفَى",
+   "key": "name:مصطفي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-30299cac",
+   "lang": "ar",
+   "text": "يا يُوسُف",
+   "key": "name:يوسف",
+   "candidates": 2
+  },
+  {
+   "id": "ar-42280db1",
+   "lang": "ar",
+   "text": "يا زَيْد",
+   "key": "name:زيد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-aeb20eba",
+   "lang": "ar",
+   "text": "يا آدَم",
+   "key": "name:ادم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c4ab46fe",
+   "lang": "ar",
+   "text": "يا عُمَر",
+   "key": "name:عمر",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c6dff808",
+   "lang": "ar",
+   "text": "يا مَهْدِي",
+   "key": "name:مهدي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-3dc55479",
+   "lang": "ar",
+   "text": "يا مُرْتَضَى",
+   "key": "name:مرتضي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-e08711f0",
+   "lang": "ar",
+   "text": "يا سَجّاد",
+   "key": "name:سجاد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-e631da6c",
+   "lang": "ar",
+   "text": "يا كَرّار",
+   "key": "name:كرار",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a6a793b9",
+   "lang": "ar",
+   "text": "يا حَيْدَر",
+   "key": "name:حيدر",
+   "candidates": 2
+  },
+  {
+   "id": "ar-8ebb36d8",
+   "lang": "ar",
+   "text": "يا باقِر",
+   "key": "name:باقر",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a6502957",
+   "lang": "ar",
+   "text": "يا صادِق",
+   "key": "name:صادق",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a7628571",
+   "lang": "ar",
+   "text": "يا جَعْفَر",
+   "key": "name:جعفر",
+   "candidates": 2
+  },
+  {
+   "id": "ar-51b335cd",
+   "lang": "ar",
+   "text": "يا مُوسَى",
+   "key": "name:موسي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-264499f7",
+   "lang": "ar",
+   "text": "يا كاظِم",
+   "key": "name:كاظم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-9e9e84c2",
+   "lang": "ar",
+   "text": "يا رِضا",
+   "key": "name:رضا",
+   "candidates": 2
+  },
+  {
+   "id": "ar-06bdb848",
+   "lang": "ar",
+   "text": "يا أَمِير",
+   "key": "name:امير",
+   "candidates": 2
+  },
+  {
+   "id": "ar-f733b068",
+   "lang": "ar",
+   "text": "يا أَنَس",
+   "key": "name:انس",
+   "candidates": 2
+  },
+  {
+   "id": "ar-17f9f015",
+   "lang": "ar",
+   "text": "يا ياسِين",
+   "key": "name:ياسين",
+   "candidates": 2
+  },
+  {
+   "id": "ar-37f7ec60",
+   "lang": "ar",
+   "text": "يا طٰهٰ",
+   "key": "name:طه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-44cfd221",
+   "lang": "ar",
+   "text": "يا إِبْراهِيم",
+   "key": "name:ابراهيم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-f74d8e9a",
+   "lang": "ar",
+   "text": "يا إِسْماعِيل",
+   "key": "name:اسماعيل",
+   "candidates": 2
+  },
+  {
+   "id": "ar-f6808f8f",
+   "lang": "ar",
+   "text": "يا يَحْيَى",
+   "key": "name:يحيي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-b538968f",
+   "lang": "ar",
+   "text": "يا زَكَرِيّا",
+   "key": "name:زكريا",
+   "candidates": 2
+  },
+  {
+   "id": "ar-881aa915",
+   "lang": "ar",
+   "text": "يا عِيسَى",
+   "key": "name:عيسي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-305f7510",
+   "lang": "ar",
+   "text": "يا نُوح",
+   "key": "name:نوح",
+   "candidates": 2
+  },
+  {
+   "id": "ar-5bdd1580",
+   "lang": "ar",
+   "text": "يا هادِي",
+   "key": "name:هادي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-f1fe999f",
+   "lang": "ar",
+   "text": "يا سُلَيْمان",
+   "key": "name:سليمان",
+   "candidates": 2
+  },
+  {
+   "id": "ar-bc84b0e3",
+   "lang": "ar",
+   "text": "يا داوُد",
+   "key": "name:داود",
+   "candidates": 2
+  },
+  {
+   "id": "ar-e3025337",
+   "lang": "ar",
+   "text": "يا أَيُّوب",
+   "key": "name:ايوب",
+   "candidates": 2
+  },
+  {
+   "id": "ar-7bf9bc73",
+   "lang": "ar",
+   "text": "يا يُونُس",
+   "key": "name:يونس",
+   "candidates": 2
+  },
+  {
+   "id": "ar-13e94233",
+   "lang": "ar",
+   "text": "يا خالِد",
+   "key": "name:خالد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-4533211d",
+   "lang": "ar",
+   "text": "يا عُثْمان",
+   "key": "name:عثمان",
+   "candidates": 2
+  },
+  {
+   "id": "ar-0a14a6a5",
+   "lang": "ar",
+   "text": "يا بِلال",
+   "key": "name:بلال",
+   "candidates": 2
+  },
+  {
+   "id": "ar-e6a89093",
+   "lang": "ar",
+   "text": "يا حَمْزَة",
+   "key": "name:حمزه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-ba85188f",
+   "lang": "ar",
+   "text": "يا سَيْف",
+   "key": "name:سيف",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a078572b",
+   "lang": "ar",
+   "text": "يا لَيْث",
+   "key": "name:ليث",
+   "candidates": 2
+  },
+  {
+   "id": "ar-f12f00eb",
+   "lang": "ar",
+   "text": "يا أُسامَة",
+   "key": "name:اسامه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c2969401",
+   "lang": "ar",
+   "text": "يا مُعاذ",
+   "key": "name:معاذ",
+   "candidates": 2
+  },
+  {
+   "id": "ar-cd1cd75e",
+   "lang": "ar",
+   "text": "يا عَبْدُ الله",
+   "key": "name:عبدالله",
+   "candidates": 2
+  },
+  {
+   "id": "ar-1fad7e38",
+   "lang": "ar",
+   "text": "يا عَبْدُ الرَّحْمٰن",
+   "key": "name:عبدالرحمن",
+   "candidates": 2
+  },
+  {
+   "id": "ar-672d8f11",
+   "lang": "ar",
+   "text": "يا فَهْد",
+   "key": "name:فهد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-9c1b5ff6",
+   "lang": "ar",
+   "text": "يا ماجِد",
+   "key": "name:ماجد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-ee2de869",
+   "lang": "ar",
+   "text": "يا سامِر",
+   "key": "name:سامر",
+   "candidates": 2
+  },
+  {
+   "id": "ar-d1a22125",
+   "lang": "ar",
+   "text": "يا رامِي",
+   "key": "name:رامي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-56b7ad4e",
+   "lang": "ar",
+   "text": "يا كَرِيم",
+   "key": "name:كريم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-df4e3ffd",
+   "lang": "ar",
+   "text": "يا جاسِم",
+   "key": "name:جاسم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-8c667da2",
+   "lang": "ar",
+   "text": "يا قاسِم",
+   "key": "name:قاسم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-db114480",
+   "lang": "ar",
+   "text": "يا هاشِم",
+   "key": "name:هاشم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a9f989f4",
+   "lang": "ar",
+   "text": "يا مِيثَم",
+   "key": "name:ميثم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-3e253a54",
+   "lang": "ar",
+   "text": "يا مُنْتَظَر",
+   "key": "name:منتظر",
+   "candidates": 2
+  },
+  {
+   "id": "ar-2e51e68d",
+   "lang": "ar",
+   "text": "يا مُؤَمَّل",
+   "key": "name:مومل",
+   "candidates": 2
+  },
+  {
+   "id": "ar-7b1373d7",
+   "lang": "ar",
+   "text": "يا مُقْتَدَى",
+   "key": "name:مقتدي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-9a780a37",
+   "lang": "ar",
+   "text": "يا مُحْسِن",
+   "key": "name:محسن",
+   "candidates": 2
+  },
+  {
+   "id": "ar-2d74270d",
+   "lang": "ar",
+   "text": "يا مُجْتَبَى",
+   "key": "name:مجتبي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-f7760ea7",
+   "lang": "ar",
+   "text": "يا حُسام",
+   "key": "name:حسام",
+   "candidates": 2
+  },
+  {
+   "id": "ar-99a2d4d9",
+   "lang": "ar",
+   "text": "يا عَلاء",
+   "key": "name:علاء",
+   "candidates": 2
+  },
+  {
+   "id": "ar-18ca5e07",
+   "lang": "ar",
+   "text": "يا سَلام",
+   "key": "name:سلام",
+   "candidates": 2
+  },
+  {
+   "id": "ar-b49a793e",
+   "lang": "ar",
+   "text": "يا أَيْهَم",
+   "key": "name:ايهم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-d0182965",
+   "lang": "ar",
+   "text": "يا تَيْم",
+   "key": "name:تيم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a96ca0f5",
+   "lang": "ar",
+   "text": "يا رَيّان",
+   "key": "name:ريان",
+   "candidates": 2
+  },
+  {
+   "id": "ar-8321915a",
+   "lang": "ar",
+   "text": "يا آسِر",
+   "key": "name:اسر",
+   "candidates": 2
+  },
+  {
+   "id": "ar-fdad9d62",
+   "lang": "ar",
+   "text": "يا أَوْس",
+   "key": "name:اوس",
+   "candidates": 2
+  },
+  {
+   "id": "ar-1981a49c",
+   "lang": "ar",
+   "text": "يا زَيْن",
+   "key": "name:زين",
+   "candidates": 2
+  },
+  {
+   "id": "ar-bc96d866",
+   "lang": "ar",
+   "text": "يا زَيْنُ العابِدِين",
+   "key": "name:زينالعابدين",
+   "candidates": 2
+  },
+  {
+   "id": "ar-21d0e508",
+   "lang": "ar",
+   "text": "يا أَكْرَم",
+   "key": "name:اكرم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-e1d918ad",
+   "lang": "ar",
+   "text": "يا سَعْد",
+   "key": "name:سعد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c0aebbd4",
+   "lang": "ar",
+   "text": "يا سَعِيد",
+   "key": "name:سعيد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-88e1831e",
+   "lang": "ar",
+   "text": "يا رائِد",
+   "key": "name:رايد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a6591802",
+   "lang": "ar",
+   "text": "يا وِسام",
+   "key": "name:وسام",
+   "candidates": 2
+  },
+  {
+   "id": "ar-d0da1a51",
+   "lang": "ar",
+   "text": "يا ضِياء",
+   "key": "name:ضياء",
+   "candidates": 2
+  },
+  {
+   "id": "ar-b975ed0d",
+   "lang": "ar",
+   "text": "يا عَمّار",
+   "key": "name:عمار",
+   "candidates": 2
+  },
+  {
+   "id": "ar-8726f631",
+   "lang": "ar",
+   "text": "يا ياسِر",
+   "key": "name:ياسر",
+   "candidates": 2
+  },
+  {
+   "id": "ar-1e78478c",
+   "lang": "ar",
+   "text": "يا نَبِيل",
+   "key": "name:نبيل",
+   "candidates": 2
+  },
+  {
+   "id": "ar-8e0ca7b6",
+   "lang": "ar",
+   "text": "يا جَواد",
+   "key": "name:جواد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-393a7269",
+   "lang": "ar",
+   "text": "يا مالِك",
+   "key": "name:مالك",
+   "candidates": 2
+  },
+  {
+   "id": "ar-78ced81c",
+   "lang": "ar",
+   "text": "يا أَمْجَد",
+   "key": "name:امجد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-2e17fcea",
+   "lang": "ar",
+   "text": "يا أَيْمَن",
+   "key": "name:ايمن",
+   "candidates": 2
+  },
+  {
+   "id": "ar-2777b604",
+   "lang": "ar",
+   "text": "يا طارِق",
+   "key": "name:طارق",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c32d1345",
+   "lang": "ar",
+   "text": "يا زِياد",
+   "key": "name:زياد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-75358269",
+   "lang": "ar",
+   "text": "يا غَيْث",
+   "key": "name:غيث",
+   "candidates": 2
+  },
+  {
+   "id": "ar-d1485733",
+   "lang": "ar",
+   "text": "يا يَزَن",
+   "key": "name:يزن",
+   "candidates": 2
+  },
+  {
+   "id": "ar-840dc3ca",
+   "lang": "ar",
+   "text": "يا إِلْياس",
+   "key": "name:ياس",
+   "candidates": 2
+  },
+  {
+   "id": "ar-68ab1789",
+   "lang": "ar",
+   "text": "يا فارِس",
+   "key": "name:فارس",
+   "candidates": 2
+  },
+  {
+   "id": "ar-1c77bfa3",
+   "lang": "ar",
+   "text": "يا فاطِمَة",
+   "key": "name:فاطمه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-dc7acd54",
+   "lang": "ar",
+   "text": "يا زَيْنَب",
+   "key": "name:زينب",
+   "candidates": 2
+  },
+  {
+   "id": "ar-203da57f",
+   "lang": "ar",
+   "text": "يا زَهْراء",
+   "key": "name:زهراء",
+   "candidates": 2
+  },
+  {
+   "id": "ar-35679874",
+   "lang": "ar",
+   "text": "يا مَرْيَم",
+   "key": "name:مريم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-245e295f",
+   "lang": "ar",
+   "text": "يا نُور",
+   "key": "name:نور",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a3526698",
+   "lang": "ar",
+   "text": "يا سارَة",
+   "key": "name:ساره",
+   "candidates": 2
+  },
+  {
+   "id": "ar-66326974",
+   "lang": "ar",
+   "text": "يا رُقَيَّة",
+   "key": "name:رقيه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a50c5836",
+   "lang": "ar",
+   "text": "يا حَوْراء",
+   "key": "name:حوراء",
+   "candidates": 2
+  },
+  {
+   "id": "ar-16f3263f",
+   "lang": "ar",
+   "text": "يا بَنِين",
+   "key": "name:بنين",
+   "candidates": 2
+  },
+  {
+   "id": "ar-341482dd",
+   "lang": "ar",
+   "text": "يا بَتُول",
+   "key": "name:بتول",
+   "candidates": 2
+  },
+  {
+   "id": "ar-56527b06",
+   "lang": "ar",
+   "text": "يا نَرْجِس",
+   "key": "name:نرجس",
+   "candidates": 2
+  },
+  {
+   "id": "ar-f6b06bc4",
+   "lang": "ar",
+   "text": "يا مَلاك",
+   "key": "name:ملاك",
+   "candidates": 2
+  },
+  {
+   "id": "ar-bb28ca2a",
+   "lang": "ar",
+   "text": "يا مَلَك",
+   "key": "name:ملك",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c7288ff6",
+   "lang": "ar",
+   "text": "يا رِيم",
+   "key": "name:ريم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c89dd8bc",
+   "lang": "ar",
+   "text": "يا رَهَف",
+   "key": "name:رهف",
+   "candidates": 2
+  },
+  {
+   "id": "ar-fcbc3a1f",
+   "lang": "ar",
+   "text": "يا لِين",
+   "key": "name:لين",
+   "candidates": 2
+  },
+  {
+   "id": "ar-9f9d2a9e",
+   "lang": "ar",
+   "text": "يا لَيان",
+   "key": "name:ليان",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c6fd3830",
+   "lang": "ar",
+   "text": "يا جَنَى",
+   "key": "name:جني",
+   "candidates": 2
+  },
+  {
+   "id": "ar-b84c448d",
+   "lang": "ar",
+   "text": "يا جَنَّة",
+   "key": "name:جنه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-f90ac1b8",
+   "lang": "ar",
+   "text": "يا تَبارَك",
+   "key": "name:تبارك",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c6868cf8",
+   "lang": "ar",
+   "text": "يا آيَة",
+   "key": "name:ايه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-4f6e85b2",
+   "lang": "ar",
+   "text": "يا هِبَة",
+   "key": "name:هبه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-0f41d2bf",
+   "lang": "ar",
+   "text": "يا دُعاء",
+   "key": "name:دعاء",
+   "candidates": 2
+  },
+  {
+   "id": "ar-e5a34539",
+   "lang": "ar",
+   "text": "يا رَحْمَة",
+   "key": "name:رحمه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-507bbd8b",
+   "lang": "ar",
+   "text": "يا نَبَأ",
+   "key": "name:نبا",
+   "candidates": 2
+  },
+  {
+   "id": "ar-1ac7b0c3",
+   "lang": "ar",
+   "text": "يا أَنْوار",
+   "key": "name:انوار",
+   "candidates": 2
+  },
+  {
+   "id": "ar-4099a146",
+   "lang": "ar",
+   "text": "يا غَدِير",
+   "key": "name:غدير",
+   "candidates": 2
+  },
+  {
+   "id": "ar-88462a5a",
+   "lang": "ar",
+   "text": "يا كَوْثَر",
+   "key": "name:كوثر",
+   "candidates": 2
+  },
+  {
+   "id": "ar-0306a0e0",
+   "lang": "ar",
+   "text": "يا عَذْراء",
+   "key": "name:عذراء",
+   "candidates": 2
+  },
+  {
+   "id": "ar-60097977",
+   "lang": "ar",
+   "text": "يا ضُحَى",
+   "key": "name:ضحي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-3490ef8a",
+   "lang": "ar",
+   "text": "يا هُدَى",
+   "key": "name:هدي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-2329061a",
+   "lang": "ar",
+   "text": "يا رُسُل",
+   "key": "name:رسل",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c5b06b42",
+   "lang": "ar",
+   "text": "يا شَهْد",
+   "key": "name:شهد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-44cb0998",
+   "lang": "ar",
+   "text": "يا حَنِين",
+   "key": "name:حنين",
+   "candidates": 2
+  },
+  {
+   "id": "ar-22b05e5a",
+   "lang": "ar",
+   "text": "يا مِسْك",
+   "key": "name:مسك",
+   "candidates": 2
+  },
+  {
+   "id": "ar-9ab40452",
+   "lang": "ar",
+   "text": "يا دانَة",
+   "key": "name:دانه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-995ff594",
+   "lang": "ar",
+   "text": "يا رَغَد",
+   "key": "name:رغد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-14ba27f8",
+   "lang": "ar",
+   "text": "يا ياسَمِين",
+   "key": "name:ياسمين",
+   "candidates": 2
+  },
+  {
+   "id": "ar-fe563109",
+   "lang": "ar",
+   "text": "يا لَمَى",
+   "key": "name:لمي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-2049ec53",
+   "lang": "ar",
+   "text": "يا لارا",
+   "key": "name:لارا",
+   "candidates": 2
+  },
+  {
+   "id": "ar-7acfeb0e",
+   "lang": "ar",
+   "text": "يا سَما",
+   "key": "name:سما",
+   "candidates": 2
+  },
+  {
+   "id": "ar-0b00b67d",
+   "lang": "ar",
+   "text": "يا سَلْمَى",
+   "key": "name:سلمي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-984cb564",
+   "lang": "ar",
+   "text": "يا مَيار",
+   "key": "name:ميار",
+   "candidates": 2
+  },
+  {
+   "id": "ar-8e74e6cd",
+   "lang": "ar",
+   "text": "يا مَيْس",
+   "key": "name:ميس",
+   "candidates": 2
+  },
+  {
+   "id": "ar-488a9392",
+   "lang": "ar",
+   "text": "يا دِيما",
+   "key": "name:ديما",
+   "candidates": 2
+  },
+  {
+   "id": "ar-11e62254",
+   "lang": "ar",
+   "text": "يا رِيتاج",
+   "key": "name:ريتاج",
+   "candidates": 2
+  },
+  {
+   "id": "ar-d3acf395",
+   "lang": "ar",
+   "text": "يا رَوان",
+   "key": "name:روان",
+   "candidates": 2
+  },
+  {
+   "id": "ar-f3618017",
+   "lang": "ar",
+   "text": "يا رَزان",
+   "key": "name:رزان",
+   "candidates": 2
+  },
+  {
+   "id": "ar-02490637",
+   "lang": "ar",
+   "text": "يا رَنا",
+   "key": "name:رنا",
+   "candidates": 2
+  },
+  {
+   "id": "ar-0c928e05",
+   "lang": "ar",
+   "text": "يا رَنْد",
+   "key": "name:رند",
+   "candidates": 2
+  },
+  {
+   "id": "ar-93222d59",
+   "lang": "ar",
+   "text": "يا سِدْرَة",
+   "key": "name:سدره",
+   "candidates": 2
+  },
+  {
+   "id": "ar-4eb4654c",
+   "lang": "ar",
+   "text": "يا تُقَى",
+   "key": "name:تقي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c911ee7d",
+   "lang": "ar",
+   "text": "يا أَسْماء",
+   "key": "name:اسماء",
+   "candidates": 2
+  },
+  {
+   "id": "ar-80df6210",
+   "lang": "ar",
+   "text": "يا خَدِيجَة",
+   "key": "name:خديجه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-69a4f107",
+   "lang": "ar",
+   "text": "يا عائِشَة",
+   "key": "name:عايشه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-d906e5f4",
+   "lang": "ar",
+   "text": "يا آمِنَة",
+   "key": "name:امنه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a4dda8da",
+   "lang": "ar",
+   "text": "يا حَلا",
+   "key": "name:حلا",
+   "candidates": 2
+  },
+  {
+   "id": "ar-56ec239e",
+   "lang": "ar",
+   "text": "يا إِسْراء",
+   "key": "name:اسراء",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a92b9c30",
+   "lang": "ar",
+   "text": "يا سَجَى",
+   "key": "name:سجي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-ad0d70d6",
+   "lang": "ar",
+   "text": "يا شَيْماء",
+   "key": "name:شيماء",
+   "candidates": 2
+  },
+  {
+   "id": "ar-5dbc5865",
+   "lang": "ar",
+   "text": "يا مَنار",
+   "key": "name:منار",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c170a6e0",
+   "lang": "ar",
+   "text": "يا مُنَى",
+   "key": "name:مني",
+   "candidates": 2
+  },
+  {
+   "id": "ar-9c76a1e3",
+   "lang": "ar",
+   "text": "يا مَها",
+   "key": "name:مها",
+   "candidates": 2
+  },
+  {
+   "id": "ar-f18b73bc",
+   "lang": "ar",
+   "text": "يا هاجَر",
+   "key": "name:هاجر",
+   "candidates": 2
+  },
+  {
+   "id": "ar-2755365b",
+   "lang": "ar",
+   "text": "يا إِيلاف",
+   "key": "name:ايلاف",
+   "candidates": 2
+  },
+  {
+   "id": "ar-0fb8918d",
+   "lang": "ar",
+   "text": "يا زَهْرَة",
+   "key": "name:زهره",
+   "candidates": 2
+  },
+  {
+   "id": "ar-9e7cf03c",
+   "lang": "ar",
+   "text": "يا جُود",
+   "key": "name:جود",
+   "candidates": 2
+  },
+  {
+   "id": "ar-142344d1",
+   "lang": "ar",
+   "text": "يا رِيماس",
+   "key": "name:ريماس",
+   "candidates": 2
+  },
+  {
+   "id": "ar-b9d17823",
+   "lang": "ar",
+   "text": "يا لانا",
+   "key": "name:لانا",
+   "candidates": 2
+  },
+  {
+   "id": "ar-e97dee12",
+   "lang": "ar",
+   "text": "يا تالا",
+   "key": "name:تالا",
+   "candidates": 2
+  },
+  {
+   "id": "ar-3d48bbef",
+   "lang": "ar",
+   "text": "يا رِيتال",
+   "key": "name:ريتال",
+   "candidates": 2
+  },
+  {
+   "id": "ar-149cf969",
+   "lang": "ar",
+   "text": "يا لَيْلَى",
+   "key": "name:ليلي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-92699149",
+   "lang": "ar",
+   "text": "يا لُجَيْن",
+   "key": "name:لجين",
+   "candidates": 2
+  },
+  {
+   "id": "ar-fa461972",
+   "lang": "ar",
+   "text": "يا أَرِيج",
+   "key": "name:اريج",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c1f6a462",
+   "lang": "ar",
+   "text": "يا أَفْنان",
+   "key": "name:افنان",
+   "candidates": 2
+  },
+  {
+   "id": "ar-77fba8d4",
+   "lang": "ar",
+   "text": "يا يَقِين",
+   "key": "name:يقين",
+   "candidates": 2
+  },
+  {
+   "id": "ar-3ef1574a",
+   "lang": "ar",
+   "text": "يا بَراءَة",
+   "key": "name:براءه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-1179107a",
+   "lang": "ar",
+   "text": "يا فَرَح",
+   "key": "name:فرح",
+   "candidates": 2
+  },
+  {
+   "id": "ar-54d39a7f",
+   "lang": "ar",
+   "text": "يا أَمَل",
+   "key": "name:امل",
+   "candidates": 2
+  },
+  {
+   "id": "ar-fc74429f",
+   "lang": "ar",
+   "text": "يا وَعْد",
+   "key": "name:وعد",
+   "candidates": 2
+  },
+  {
+   "id": "ar-54134609",
+   "lang": "ar",
+   "text": "يا رُؤَى",
+   "key": "name:روي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-553b5d3c",
+   "lang": "ar",
+   "text": "يا غَزَل",
+   "key": "name:غزل",
+   "candidates": 2
+  },
+  {
+   "id": "ar-94813013",
+   "lang": "ar",
+   "text": "يا سُكَيْنَة",
+   "key": "name:سكينه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-d2cf14bc",
+   "lang": "ar",
+   "text": "يا تَسْنِيم",
+   "key": "name:تسنيم",
+   "candidates": 2
+  },
+  {
+   "id": "ar-5b2a79e8",
+   "lang": "ar",
+   "text": "يا بَيان",
+   "key": "name:بيان",
+   "candidates": 2
+  },
+  {
+   "id": "ar-6a95b0fa",
+   "lang": "ar",
+   "text": "يا جِنان",
+   "key": "name:جنان",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c20ca28e",
+   "lang": "ar",
+   "text": "يا فَدَك",
+   "key": "name:فدك",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c35167cb",
+   "lang": "ar",
+   "text": "يا عَبِير",
+   "key": "name:عبير",
+   "candidates": 2
+  },
+  {
+   "id": "ar-09f0c63a",
+   "lang": "ar",
+   "text": "يا نَدَى",
+   "key": "name:ندي",
+   "candidates": 2
+  },
+  {
+   "id": "ar-e77498b4",
+   "lang": "ar",
+   "text": "يا هَنا",
+   "key": "name:هنا",
+   "candidates": 2
+  },
+  {
+   "id": "ar-218928a5",
+   "lang": "ar",
+   "text": "يا رَيْحانَة",
+   "key": "name:ريحانه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-b667e79c",
+   "lang": "ar",
+   "text": "يا مِيرال",
+   "key": "name:ميرال",
+   "candidates": 2
+  },
+  {
+   "id": "ar-a7cf2200",
+   "lang": "ar",
+   "text": "يا ماسَة",
+   "key": "name:ماسه",
+   "candidates": 2
+  },
+  {
+   "id": "ar-c4b89d72",
+   "lang": "ar",
+   "text": "يا جُورِي",
+   "key": "name:جوري",
+   "candidates": 2
+  },
+  {
+   "id": "ar-ae43334a",
+   "lang": "ar",
+   "text": "يا آلاء",
+   "key": "name:الاء",
+   "candidates": 2
   }
  ]
 }

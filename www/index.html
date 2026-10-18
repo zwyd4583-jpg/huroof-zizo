@@ -965,6 +965,33 @@ h1 span{color:var(--orange)}
   }
   var COLORS = [['--orange','--orange-dark'],['--blue','--blue-dark'],['--green','--green-dark'],['--pink','--pink-dark'],['--purple','--purple-dark'],['--teal','--teal-dark']];
   var NONCONN = 'اأإآدذرزو';
+  // Common children's names in Iraq, recorded in Zizo's voice as "يا <name>" so he can call the child by name.
+  // A name not on the list is said by the phone's own voice instead.
+  var KID_NAMES = [
+    'مُحَمَّد','عَلِيّ','حُسَيْن','حَسَن','أَحْمَد','عَبّاس','مُصْطَفَى','يُوسُف','زَيْد','آدَم','عُمَر','مَهْدِي',
+    'مُرْتَضَى','سَجّاد','كَرّار','حَيْدَر','باقِر','صادِق','جَعْفَر','مُوسَى','كاظِم','رِضا','أَمِير','أَنَس',
+    'ياسِين','طٰهٰ','إِبْراهِيم','إِسْماعِيل','يَحْيَى','زَكَرِيّا','عِيسَى','نُوح','هادِي','سُلَيْمان','داوُد','أَيُّوب',
+    'يُونُس','خالِد','عُثْمان','بِلال','حَمْزَة','سَيْف','لَيْث','أُسامَة','مُعاذ','عَبْدُ الله','عَبْدُ الرَّحْمٰن','فَهْد',
+    'ماجِد','سامِر','رامِي','كَرِيم','جاسِم','قاسِم','هاشِم','مِيثَم','مُنْتَظَر','مُؤَمَّل','مُقْتَدَى','مُحْسِن',
+    'مُجْتَبَى','حُسام','عَلاء','سَلام','أَيْهَم','تَيْم','رَيّان','آسِر','أَوْس','زَيْن','زَيْنُ العابِدِين','أَكْرَم',
+    'سَعْد','سَعِيد','رائِد','وِسام','ضِياء','عَمّار','ياسِر','نَبِيل','جَواد','مالِك','أَمْجَد','أَيْمَن',
+    'طارِق','زِياد','غَيْث','يَزَن','إِلْياس','فارِس',
+    'فاطِمَة','زَيْنَب','زَهْراء','مَرْيَم','نُور','سارَة','رُقَيَّة','حَوْراء','بَنِين','بَتُول','نَرْجِس','مَلاك',
+    'مَلَك','رِيم','رَهَف','لِين','لَيان','جَنَى','جَنَّة','تَبارَك','آيَة','هِبَة','دُعاء','رَحْمَة',
+    'نَبَأ','أَنْوار','غَدِير','كَوْثَر','عَذْراء','ضُحَى','هُدَى','رُسُل','شَهْد','حَنِين','مِسْك','دانَة',
+    'رَغَد','ياسَمِين','لَمَى','لارا','سَما','سَلْمَى','مَيار','مَيْس','دِيما','رِيتاج','رَوان','رَزان',
+    'رَنا','رَنْد','سِدْرَة','تُقَى','أَسْماء','خَدِيجَة','عائِشَة','آمِنَة','حَلا','إِسْراء','سَجَى','شَيْماء',
+    'مَنار','مُنَى','مَها','هاجَر','إِيلاف','زَهْرَة','جُود','رِيماس','لانا','تالا','رِيتال','لَيْلَى',
+    'لُجَيْن','أَرِيج','أَفْنان','يَقِين','بَراءَة','فَرَح','أَمَل','وَعْد','رُؤَى','غَزَل','سُكَيْنَة','تَسْنِيم',
+    'بَيان','جِنان','فَدَك','عَبِير','نَدَى','هَنا','رَيْحانَة','مِيرال','ماسَة','جُورِي','آلاء'
+  ];
+  // The same name however a parent types it: no vowel marks or spaces, one form of alef, ة as ه, ى as ي, no "ال"
+  function plainName(n){
+    var t = String(n).replace(/[ً-ٰٟـ]/g, '').replace(/[أإآٱ]/g, 'ا').replace(/ة/g, 'ه')
+      .replace(/ى/g, 'ي').replace(/ؤ/g, 'و').replace(/ئ/g, 'ي').replace(/\s+/g, '');
+    return t.length > 4 && t.indexOf('ال') === 0 ? t.slice(2) : t;
+  }
+  function nameKey(n){ return 'name:' + plainName(n); }
   // The child, as a parent entered them on the welcome screen. Kept on this phone only.
   var kid = { name: '', g: 'm', set: false };
   try {
@@ -1081,7 +1108,7 @@ h1 span{color:var(--orange)}
      Every sentence the app says is recorded in voice/<id>.mp3; voice/index.json maps the sentence to
      its file. Names aren't recorded, so " يا <name>" is left out of what is heard (it stays on screen).
      A sentence without a recording falls back to the phone's voice. */
-  var VOICE = null, voiceLoading = true, voiceWaiting = null, voiceGen = 0, voiceSrc = null, voiceOut = null, voiceBufs = {}, voiceOrder = [];
+  var VOICE = null, voiceLoading = true, voiceWaiting = null, voiceGen = 0, voiceSrc = null, voiceOut = null, voiceBufs = {}, voiceOrder = [], voiceTts = false;
   function voiceLoaded(j){
     voiceLoading = false;
     if (j && j.clips){ VOICE = j.clips; $('voiceNote').hidden = true; }
@@ -1111,6 +1138,7 @@ h1 span{color:var(--orange)}
   }
   function stopClips(){
     voiceGen++;
+    if (voiceTts){ voiceTts = false; ttsStop(); }
     if (voiceSrc){ try { voiceSrc.onended = null; voiceSrc.stop(); } catch(e){} voiceSrc = null; }
   }
   function playClips(ids){
@@ -1121,6 +1149,7 @@ h1 span{color:var(--orange)}
     var gen = voiceGen;
     (function next(k){
       if (gen !== voiceGen || k >= ids.length) return;
+      if (typeof ids[k] === 'object'){ voiceTts = true; speakPart(ids[k].tts).then(function(){ if (gen === voiceGen){ voiceTts = false; next(k + 1); } }); return; }
       clipBuf(c, ids[k]).then(function(buf){
         if (gen !== voiceGen) return;
         var s = c.createBufferSource();
@@ -1131,11 +1160,44 @@ h1 span{color:var(--orange)}
     })(0);
     return true;
   }
+  // One short part in the phone's own voice, inside a run of recordings; resolves when it has been said
+  function speakPart(t){
+    return new Promise(function(done){
+      var over = false, end = function(){ if (!over){ over = true; done(); } };
+      setTimeout(end, 4000); // never hold the rest of the sentence up for long
+      if (window.__zizoTest) window.__zizoTest.ttsParts = (window.__zizoTest.ttsParts || 0) + 1;
+      try {
+        if (NTTS){ NTTS.speak({ text: t, lang: nativeLang, rate: 0.85, pitch: 1.1, volume: 1.0, queueStrategy: 0 }).then(end, end); return; }
+        if (hasWebTTS){
+          var u = new SpeechSynthesisUtterance(t);
+          u.lang = arVoice ? arVoice.lang : 'ar-SA'; if (arVoice) u.voice = arVoice;
+          u.rate = 0.82; u.pitch = 1.15; u.onend = end; u.onerror = end;
+          speechSynthesis.speak(u); return;
+        }
+      } catch(e){}
+      end();
+    });
+  }
+  // A sentence that calls the child by name ("أَحْسَنْتَ يا سارة! ..."): the words before the name, Zizo saying
+  // "يا <name>" (or the phone's voice when the name was never recorded), then the words after it.
+  // null when the words around the name have no recordings; the sentence is then said without the name.
+  function nameParts(t){
+    var tag = ' يا ' + kid.name, i = t.indexOf(tag);
+    var before = t.slice(0, i), after = t.slice(i + tag.length);
+    var mark = (after.match(/^[!؟?.،,]+/) || [''])[0], rest = after.slice(mark.length).trim();
+    var a = VOICE[vkey(before + mark)] || VOICE[vkey(before)], b = rest ? VOICE[vkey(rest)] : null;
+    if (!a || (rest && !b)) return null;
+    var out = [a, VOICE[nameKey(kid.name)] || { tts: 'يا ' + kid.name }];
+    if (b) out.push(b);
+    return out;
+  }
   // The recordings for all the parts, or null if any part has none
   function clipsFor(parts){
     if (!VOICE) return null;
     var ids = [];
     for (var k = 0; k < parts.length; k++){
+      var named = kid.name && typeof parts[k] === 'string' && parts[k].indexOf(' يا ' + kid.name) >= 0 && nameParts(parts[k]);
+      if (named){ ids.push.apply(ids, named); continue; }
       var id = VOICE[vkey(parts[k])];
       if (!id){ if (window.__zizoTest) (window.__zizoTest.missing = window.__zizoTest.missing || []).push(vkey(parts[k])); return null; }
       ids.push(id);
@@ -1148,7 +1210,7 @@ h1 span{color:var(--orange)}
     parts = [].concat(parts);
     if (voiceLoading){ voiceWaiting = parts; return; }
     var ids = clipsFor(parts);
-    if (ids && playClips(ids)){ ttsStop(); return; }
+    if (ids){ ttsStop(); if (playClips(ids)) return; }
     stopClips();
     if (NTTS){
       parts.forEach(function(t, k){
@@ -2299,7 +2361,7 @@ h1 span{color:var(--orange)}
       'أَحْسَنْتَ! رَبِحْتَ خَمْسَ نُجُومٍ إِضافِيَّة', 'أَحْسَنْتِ! رَبِحْتِ خَمْسَ نُجُومٍ إِضافِيَّة',
       'ارْسُمْ فَوْقَ الرَّقْم', 'ارْسُمْ فَوْقَ الحَرْف', 'ارْسُمْ فَوْقَ النِّقاطِ فَقَط', 'ارْسُمْ بِهُدُوءٍ فَوْقَ النِّقاط',
       'أَكْمِلْ رَسْمَ الرَّقْمِ كُلِّه', 'أَكْمِلْ رَسْمَ الحَرْفِ كُلِّه',
-      'أَهْلاً! هَيّا نَلْعَب', 'أَهْلاً يا بَطَل! هَيّا نَلْعَب', 'أَهْلاً يا بَطَلَة! هَيّا نَلْعَب',
+      'أَهْلاً! هَيّا نَلْعَب', 'أَهْلاً', 'هَيّا نَلْعَب', 'أَهْلاً يا بَطَل! هَيّا نَلْعَب', 'أَهْلاً يا بَطَلَة! هَيّا نَلْعَب',
       'أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟', REST_SAY
     ].forEach(function(t){ add(t); });
     ['لا تَنْسَ', 'لا تَنْسَيْ'].forEach(function(d){
@@ -2308,6 +2370,7 @@ h1 span{color:var(--orange)}
     EN.forEach(function(e){ addEn(e.c, EN_SAY[e.c] || e.c + '.', [e.c, EN_NAMES[e.c]]); addEn(e.w, e.w + '.'); });
     ENN.forEach(function(n){ addEn(n.w, n.w.charAt(0).toUpperCase() + n.w.slice(1) + '.'); });
     addEn('How many?');
+    KID_NAMES.forEach(function(n){ var k = nameKey(n); if (!seen[k]){ seen[k] = 1; out.push({ key: k, lang: 'ar', speak: 'يا ' + n }); } });
     return out;
   }
   function inkWidth(){ return Math.max(10, S*0.05); }

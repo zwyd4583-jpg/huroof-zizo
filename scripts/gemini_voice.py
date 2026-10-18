@@ -216,8 +216,13 @@ def packed(p):
     if p.suffix != ".wav":
         return p
     f = p.with_suffix(".flac")
-    for cmd in (["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(p), str(f)], ["flac", "-s", "-f", "-o", str(f), str(p)]):
-        if shutil.which(cmd[0]) and subprocess.run(cmd).returncode == 0 and f.exists():
+    try:  # pip install --user imageio-ffmpeg brings its own ffmpeg
+        import imageio_ffmpeg
+        ff = imageio_ffmpeg.get_ffmpeg_exe()
+    except Exception:
+        ff = "ffmpeg"
+    for cmd in ([ff, "-nostdin", "-v", "error", "-y", "-i", str(p), str(f)], ["flac", "-s", "-f", "-o", str(f), str(p)]):
+        if (shutil.which(cmd[0]) or os.path.exists(cmd[0])) and subprocess.run(cmd).returncode == 0 and f.exists():
             return f
     return p
 
