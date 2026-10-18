@@ -9,7 +9,7 @@ Only the Python standard library is used. Each sentence becomes out/<voice>/<id>
 The run can be repeated: sentences already recorded are skipped, so after a daily-quota stop
 it carries on from where it stopped.
 """
-import base64, io, json, os, pathlib, subprocess, sys, time, urllib.error, urllib.request, wave, zipfile
+import base64, io, json, os, pathlib, shutil, subprocess, sys, time, urllib.error, urllib.request, wave, zipfile
 
 API = "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 # Gemini 3.8 TTS uses the Interactions API: the text is read verbatim and the delivery goes in "style"
@@ -211,6 +211,17 @@ def chunks(items, g):
         yield key, cur
 
 
+def packed(p):
+    """A lossless FLAC copy of a recording (about half the size) for a quicker download, when an encoder is around."""
+    if p.suffix != ".wav":
+        return p
+    f = p.with_suffix(".flac")
+    for cmd in (["ffmpeg", "-nostdin", "-v", "error", "-y", "-i", str(p), str(f)], ["flac", "-s", "-f", "-o", str(f), str(p)]):
+        if shutil.which(cmd[0]) and subprocess.run(cmd).returncode == 0 and f.exists():
+            return f
+    return p
+
+
 def save(f, pcm):
     f.parent.mkdir(parents=True, exist_ok=True)
     with wave.open(str(f), "wb") as w:
@@ -277,7 +288,8 @@ def main(list_path, out, model=None):
     zp = pathlib.Path("out.zip")
     with zipfile.ZipFile(zp, "w", zipfile.ZIP_DEFLATED) as z:
         for p in sorted(out.rglob("*")):
-            if p.is_file():
+            if p.is_file() and p.suffix != ".flac":
+                p = packed(p)
                 z.write(p, p.relative_to(out.parent))
     print(f"\n{done} of {len(items)} sentences recorded -> {zp.resolve()}")
     return stopped
