@@ -298,8 +298,27 @@ h1 span{color:var(--orange)}
 #cv{display:block; background:var(--paper); border-radius:28px; box-shadow:0 6px 0 var(--sky-dark); touch-action:none; max-width:100%}
 
 /* tab bar */
-.tabs{position:fixed; left:0; right:0; bottom:0; z-index:5; background:var(--paper); box-shadow:0 -4px 0 var(--sky-dark); display:flex; justify-content:center; gap:6px; padding:8px 12px calc(10px + env(safe-area-inset-bottom,0px))}
-.tab{flex:1; min-width:0; max-width:140px; border:0; border-radius:18px; padding:8px 2px 6px; background:transparent; color:var(--ink-soft); font-weight:800; font-size:1rem; display:flex; flex-direction:column; align-items:center; gap:2px; line-height:1.2}
+.sgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stile{position:relative; min-width:0; border:0; border-radius:20px; background:var(--paper); color:var(--ink); box-shadow:0 5px 0 var(--sky-dark); padding:10px 6px; display:grid; justify-items:center; gap:7px; font-weight:800; font-size:.95rem; line-height:1.25; text-align:center; transition:transform .08s, box-shadow .08s}
+.stile:active{transform:translateY(4px); box-shadow:0 1px 0 var(--sky-dark)}
+.stile .sl{width:46px; height:46px; border-radius:50%; background:var(--c); color:var(--white); font-family:var(--f-letter); font-weight:700; font-size:1.7rem; line-height:1; padding-bottom:5px; display:grid; place-items:center; box-shadow:0 3px 0 var(--cd)}
+.stile .se{font-size:1.7rem; line-height:1.1}
+.stile .ok{position:absolute; top:6px; inset-inline-start:8px; width:22px; height:22px; border-radius:50%; background:var(--green); color:var(--white); font-size:.85rem; line-height:22px}
+.story{display:grid; justify-items:center; gap:10px; padding:16px 16px 18px; text-align:center}
+.stitle{margin:0; display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.2rem}
+.stitle .sl{width:40px; height:40px; border-radius:50%; background:var(--c); color:var(--white); font-family:var(--f-letter); font-weight:700; font-size:1.5rem; line-height:1; padding-bottom:4px; display:grid; place-items:center; box-shadow:0 3px 0 var(--cd)}
+.sscene{font-size:clamp(4rem,21vw,5.6rem); line-height:1.2; min-height:1.25em}
+.stext{margin:0; font-family:var(--f-letter); font-weight:700; font-size:clamp(1.45rem,6.4vw,1.9rem); line-height:2.05; color:var(--ink); min-height:4.1em; display:grid; place-items:center}
+.stext .hl{color:var(--cd); text-decoration:underline; text-decoration-thickness:3px; text-underline-offset:9px; text-decoration-color:var(--c)}
+.sdots{display:flex; gap:7px}
+.sdots i{width:11px; height:11px; border-radius:50%; background:var(--sky-dark)}
+.sdots i.on{background:var(--c)}
+.sask{margin:0; font-weight:800; font-size:1.3rem}
+.choice.semo{font-family:var(--f-ui); font-size:clamp(2.8rem,13vw,3.6rem); padding:0}
+.story .choice{background:var(--sky)}
+.story .btnrow{display:flex; flex-wrap:wrap; justify-content:center; gap:10px}
+.tabs{position:fixed; left:0; right:0; bottom:0; z-index:5; background:var(--paper); box-shadow:0 -4px 0 var(--sky-dark); display:flex; justify-content:center; gap:4px; padding:8px 8px calc(10px + env(safe-area-inset-bottom,0px))}
+.tab{flex:1; min-width:0; max-width:140px; border:0; border-radius:18px; padding:8px 1px 6px; background:transparent; color:var(--ink-soft); font-weight:800; font-size:.95rem; display:flex; flex-direction:column; align-items:center; gap:2px; line-height:1.2}
 .tab svg{width:28px; height:28px}
 .tab[aria-current="page"]{background:var(--tc); color:var(--white)}
 
@@ -441,6 +460,10 @@ h1 span{color:var(--orange)}
           <span class="count" id="dCount"></span>
           <button class="round" id="nextL" aria-label="الحرف التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
         </div>
+        <button class="btn wide" id="toStory" style="--b:var(--blue);--bd:var(--blue-dark)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5c-3.5-.5-6.5 0-8.5 1.5z"/><path d="M12 6.5v13"/></svg>
+          <span id="toStoryText"></span>
+        </button>
         <button class="btn wide" id="toTrace" style="--b:var(--pink);--bd:var(--pink-dark)">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 7l3 3"/></svg>
           ارسم هذا الحرف
@@ -589,6 +612,22 @@ h1 span{color:var(--orange)}
       <div class="shelf" id="shelf-extra"></div>
     </section>
 
+    <section id="v-stories" class="view" hidden>
+      <div id="sgrid" class="grid sgrid" aria-label="القصص"></div>
+      <div id="sreader" hidden>
+        <button class="btn ghost back" id="sbackBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          كل القصص
+        </button>
+        <div class="card story" id="sCard"></div>
+        <div class="stepper" id="sStep">
+          <button class="round" id="prevS" aria-label="الصفحة السابقة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+          <button class="btn" id="saySBtn"><span class="ico-spk"></span>اسمع</button>
+          <button class="round" id="nextS" aria-label="الصفحة التالية"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+        </div>
+      </div>
+    </section>
+
     <section id="v-trace" class="view" hidden>
       <div class="chips" role="group" aria-label="ماذا نرسم؟">
         <button class="chip tchip" data-kind="letters" aria-pressed="true">الحروف</button>
@@ -635,6 +674,10 @@ h1 span{color:var(--orange)}
     <button class="tab" data-v="trace" style="--tc:var(--pink)">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 7l3 3"/></svg>
       <span>ارسم</span>
+    </button>
+    <button class="tab" data-v="stories" style="--tc:var(--blue)">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 3.5 5v13c3.5-.5 6.5 0 8.5 1.5 2-1.5 5-2 8.5-1.5V5c-3.5-.5-6.5 0-8.5 1.5z"/><path d="M12 6.5v13"/></svg>
+      <span>قصص</span>
     </button>
   </nav>
   <div id="fx" aria-hidden="true"></div>
@@ -803,6 +846,180 @@ h1 span{color:var(--orange)}
     {c:'و', n:'واو', w:'وردة',  s:'وَرْدَة',  e:'🌹'},
     {c:'ي', n:'ياء', w:'يد',    s:'يَد',      e:'✋'}
   ];
+  // A short story for each Arabic letter (same order as L). Each page: the picture (emoji) and the
+  // sentence with full vowels; words in {braces} start with the story's letter and are coloured.
+  var STORIES = [
+    { t: 'الأرنب أنيس', p: [
+      ['🐰🏡', 'هذا {أَرْنَبٌ} صَغِيرٌ اسْمُهُ {أَنِيس}.'],
+      ['🐰🍍', '{أَنِيسٌ} {أَكَلَ} {أَناناساً} لَذِيذاً.'],
+      ['🐰🏃', 'ثُمَّ ذَهَبَ إِلى {أُمِّهِ} فَرِحاً.'],
+      ['🦁💤', 'في الطَّرِيقِ رَأَى {أَسَداً} نائِماً، فَمَشَى بِهُدُوء.'],
+      ['🐰❤️', 'قالَتْ {أُمُّهُ}: {أَحْسَنْتَ} يا {أَنِيس}!'] ] },
+    { t: 'البطة بطبوطة', p: [
+      ['🦆🌊', 'هذِهِ {بَطَّةٌ} اسْمُها {بَطْبُوطَة}.'],
+      ['🦆🏠', 'تَعِيشُ {بَطْبُوطَةُ} في {بَيْتٍ} قُرْبَ {البَحْر}.'],
+      ['🦆🍊', 'وَجَدَتْ {بُرْتُقالَةً} كَبِيرَةً عِنْدَ {البابِ}.'],
+      ['🦆🐥🐥', 'شارَكَتْها مَعَ صَدِيقاتِها {البَطّات}.'],
+      ['🦆😊', '{بَطْبُوطَةُ} {بَطَّةٌ} كَرِيمَة!'] ] },
+    { t: 'التمساح تامر', p: [
+      ['🐊', 'هذا {تِمْساحٌ} اسْمُهُ {تامِر}.'],
+      ['🐊🍎🌳', 'وَجَدَ {تامِرٌ} {تُفّاحَةً} حَمْراءَ {تَحْتَ} الشَّجَرَة.'],
+      ['🍎😋', 'قالَ {تامِرٌ}: {التُّفّاحُ} لَذِيذٌ جِدّاً!'],
+      ['🐊🌴', 'ثُمَّ أَكَلَ {تَمْراً} حُلْواً.'],
+      ['🐊😴', 'وَنامَ {تامِرٌ} سَعِيداً {تَحْتَ} الشَّجَرَة.'] ] },
+    { t: 'الثعلب ثامر', p: [
+      ['🦊', 'هذا {ثَعْلَبٌ} ذَكِيٌّ اسْمُهُ {ثامِر}.'],
+      ['🦊🍒', 'ذَهَبَ {ثامِرٌ} لِيَقْطِفَ {الثِّمار}.'],
+      ['🐂🌿', 'رَأَى {ثَوْراً} كَبِيراً يَأْكُلُ العُشْب.'],
+      ['🦊🍒🐂', 'أَعْطَى {ثامِرٌ} {الثَّوْرَ} {ثَمَرَةً} حُلْوَة.'],
+      ['🐂😊', 'قالَ {الثَّوْرُ}: شُكْراً يا {ثامِر}!'] ] },
+    { t: 'الجمل الجميل', p: [
+      ['🐫🏜️', 'هذا {جَمَلٌ} {جَمِيلٌ} يَمْشي في الصَّحْراء.'],
+      ['🐫⛰️', 'رَأَى {الجَمَلُ} {جَبَلاً} عالِياً.'],
+      ['🐫💤', '{جَلَسَ} {الجَمَلُ} يَرْتاحُ قُرْبَ {الجَبَل}.'],
+      ['🦗🎵', '{جاءَتْ} {جَرادَةٌ} صَغِيرَةٌ تُغَنِّي.'],
+      ['🐫🦗', 'قالَ {الجَمَلُ}: صَوْتُكِ {جَمِيلٌ} يا {جَرادَة}!'] ] },
+    { t: 'الحصان حمدان', p: [
+      ['🐴', 'هذا {حِصانٌ} سَرِيعٌ اسْمُهُ {حَمْدان}.'],
+      ['🐴🌳', 'يَرْكُضُ {حَمْدانُ} كُلَّ يَوْمٍ في {الحَدِيقَة}.'],
+      ['🐌', 'رَأَى {حَلَزُوناً} صَغِيراً يَمْشي بِبُطْء.'],
+      ['🐴🐌', '{حَمَلَ} {حَمْدانُ} {الحَلَزُونَ} عَلَى ظَهْرِه.'],
+      ['🐌😊', 'قالَ {الحَلَزُونُ}: شُكْراً يا {حَمْدان}!'] ] },
+    { t: 'الخروف خالد', p: [
+      ['🐑', 'هذا {خَرُوفٌ} أَبْيَضُ اسْمُهُ {خالِد}.'],
+      ['🐑🍞', '{خالِدٌ} يُحِبُّ أَكْلَ {الخُبْز}.'],
+      ['🐑🥒', 'وَيُحِبُّ أَيْضاً {الخِيارَ} الأَخْضَر.'],
+      ['⛺🐑', '{خَرَجَ} {خالِدٌ} مِنْ {خَيْمَتِهِ} لِيَلْعَب.'],
+      ['⛺🌙', 'وَفي المَساءِ عادَ إِلى {الخَيْمَةِ} وَنام.'] ] },
+    { t: 'الدب دبدوب', p: [
+      ['🐻', 'هذا {دُبٌّ} لَطِيفٌ اسْمُهُ {دَبْدُوب}.'],
+      ['🐻🐓', '{دَبْدُوبٌ} يَلْعَبُ مَعَ صَدِيقِهِ {الدِّيك}.'],
+      ['🐓🌅', 'يَصِيحُ {الدِّيكُ} كُلَّ صَباح: كُوكُوكُو!'],
+      ['🐻🐓🏠', '{دَخَلَ} {الدُّبُّ} وَ{الدِّيكُ} إِلى البَيْتِ {الدّافِئ}.'],
+      ['🐻❤️🐓', 'قالَ {دَبْدُوبٌ}: أَنْتَ صَدِيقِي يا {دِيك}!'] ] },
+    { t: 'الذئب ذياب', p: [
+      ['🐺', 'هذا {ذِئْبٌ} {ذَكِيٌّ} اسْمُهُ {ذِياب}.'],
+      ['🐺🌽', 'وَجَدَ {ذِيابٌ} {ذُرَةً} صَفْراءَ في الحَقْل.'],
+      ['🐺✨', '{ذِيابٌ} يُحَرِّكُ {ذَيْلَهُ} فَرَحاً.'],
+      ['👑', 'ثُمَّ وَجَدَ تاجاً مِنَ {الذَّهَب}.'],
+      ['🐺🌽', 'قالَ {ذِيابٌ}: {الذُّرَةُ} أَطْيَبُ مِنَ {الذَّهَب}!'] ] },
+    { t: 'رامي والرسالة', p: [
+      ['👦✉️', 'هذا {رامِي}، وَصَلَتْهُ {رِسالَة}.'],
+      ['✉️🎈', 'في {الرِّسالَةِ} دَعْوَةٌ إِلى حَفْلَة.'],
+      ['👦🎨', '{رَسَمَ} {رامِي} {رَسْمَةً} جَمِيلَةً لِصَدِيقِه.'],
+      ['👦🏃', '{رَكَضَ} {رامِي} إِلى الحَفْلَةِ مَسْرُوراً.'],
+      ['🎉🖼️', 'قالَ صَدِيقُهُ: {رَسْمَتُكَ} {رائِعَة}!'] ] },
+    { t: 'الزرافة زينة', p: [
+      ['🦒', 'هذِهِ {زَرافَةٌ} طَوِيلَةٌ اسْمُها {زَيْنَة}.'],
+      ['🦒🌸', 'تُحِبُّ {زَيْنَةُ} {الزُّهُورَ} المُلَوَّنَة.'],
+      ['🦒🌱', '{زَرَعَتْ} {زَيْنَةُ} {زَهْرَةً} في الحَدِيقَة.'],
+      ['🦒💧', 'سَقَتِ {الزَّهْرَةَ} كُلَّ يَوْم.'],
+      ['🦒🌺', 'كَبُرَتِ {الزَّهْرَةُ} وَفَرِحَتْ {زَيْنَة}!'] ] },
+    { t: 'السمكة سمسمة', p: [
+      ['🐟🌊', 'هذِهِ {سَمَكَةٌ} صَغِيرَةٌ اسْمُها {سِمْسِمَة}.'],
+      ['🐟💨', '{سِمْسِمَةُ} {سَبّاحَةٌ} {سَرِيعَة}.'],
+      ['🐢😊', 'رَأَتْ {سُلَحْفاةً} {سَعِيدَة}.'],
+      ['🐟🐢⛵', '{سَبَحَتا} مَعاً نَحْوَ {السَّفِينَة}.'],
+      ['🐟❤️🐢', 'قالَتْ {سِمْسِمَةُ}: {السِّباحَةُ} مَعَ الأَصْدِقاءِ أَجْمَل!'] ] },
+    { t: 'شادي والشمس', p: [
+      ['☀️', 'طَلَعَتِ {الشَّمْسُ} في الصَّباح.'],
+      ['👦🌳', '{شادِي} يَلْعَبُ تَحْتَ {الشَّجَرَة}.'],
+      ['👦🧃', '{شَرِبَ} {شادِي} {شَرابَ} البُرْتُقال.'],
+      ['🌅', 'في المَساءِ {شاهَدَ} {شادِي} {الشَّمْسَ} تَغِيب.'],
+      ['👦👋', 'قالَ {شادِي}: إِلى اللِّقاءِ يا {شَمْس}!'] ] },
+    { t: 'صالح والصاروخ', p: [
+      ['👦🚀', 'هذا {صالِحٌ}، {صَنَعَ} {صارُوخاً} مِنَ الوَرَق.'],
+      ['🚀☁️', '{صَعِدَ} {الصّارُوخُ} عالِياً في السَّماء.'],
+      ['🚀🦅', 'طارَ بِجانِبِهِ {صَقْرٌ} كَبِير.'],
+      ['🦅❓', '{صاحَ} {الصَّقْرُ}: ما هذا الطّائِر؟'],
+      ['👦😊', 'قالَ {صالِحٌ}: هذا {صارُوخِي} يا {صَدِيقِي}!'] ] },
+    { t: 'الضفدع ضياء', p: [
+      ['🐸', 'هذا {ضِفْدَعٌ} أَخْضَرُ اسْمُهُ {ضِياء}.'],
+      ['🐸💧', 'يَعِيشُ {ضِياءُ} قُرْبَ بِرْكَةٍ صَغِيرَة.'],
+      ['🐸😂', '{ضَحِكَ} {ضِياءُ} كَثِيراً مَعَ أَصْدِقائِه.'],
+      ['🌙✨', 'في اللَّيْلِ لَمَعَ {ضَوْءُ} القَمَرِ عَلَى الماء.'],
+      ['🐸🌙', 'قالَ {ضِياءُ}: ما أَجْمَلَ {الضَّوْء}!'] ] },
+    { t: 'طارق والطائرة', p: [
+      ['👦✈️', 'هذا {طارِقٌ}، يُحِبُّ {الطّائِراتِ} كَثِيراً.'],
+      ['✈️🏠', '{طارَتْ} {طائِرَةٌ} فَوْقَ بَيْتِه.'],
+      ['✈️🐦', 'رَأَى {طارِقٌ} {الطُّيُورَ} تَطِيرُ مَعَها.'],
+      ['👦💭', 'حَلُمَ {طارِقٌ} أَنْ يَصِيرَ {طَيّاراً}.'],
+      ['👨‍✈️😊', 'قالَتْ أُمُّهُ: سَتَكُونُ {طَيّاراً} رائِعاً يا {طارِق}!'] ] },
+    { t: 'الظبي الظريف', p: [
+      ['🦌🌲', 'هذا {ظَبْيٌ} {ظَرِيفٌ} يَعِيشُ في الغابَة.'],
+      ['☀️', 'في {الظُّهْرِ} صارَ الجَوُّ حارّاً.'],
+      ['🦌🌳', 'جَلَسَ {الظَّبْيُ} في {الظِّلِّ} تَحْتَ شَجَرَة.'],
+      ['🦌💧', 'شَرِبَ {الظَّبْيُ} ماءً بارِداً.'],
+      ['🦌😊', 'قالَ {الظَّبْيُ}: {الظِّلُّ} جَمِيلٌ في {الظُّهْر}!'] ] },
+    { t: 'العصفور والعنب', p: [
+      ['🐦🌳', 'هذا {عُصْفُورٌ} صَغِيرٌ يَعِيشُ في {عُشٍّ} {عالٍ}.'],
+      ['🐦🍇', 'رَأَى {العُصْفُورُ} {عِنَباً} لَذِيذاً.'],
+      ['🐦🍇', 'أَخَذَ حَبَّةَ {عِنَبٍ} وَطارَ إِلى {العُشّ}.'],
+      ['🐦🐣', 'أَطْعَمَ {العُصْفُورُ} صِغارَهُ في {العُشّ}.'],
+      ['🐣🐣😊', 'قالَ الصِّغارُ: {العِنَبُ} طَيِّبٌ يا أَبِي!'] ] },
+    { t: 'الغيمة والغابة', p: [
+      ['☁️', 'هذِهِ {غَيْمَةٌ} بَيْضاءُ في السَّماء.'],
+      ['☁️🌳', 'نَظَرَتِ {الغَيْمَةُ} إِلى {الغابَة}.'],
+      ['🌧️🌳', 'كانَتِ {الغابَةُ} عَطْشَى، فَأَمْطَرَتِ {الغَيْمَة}.'],
+      ['🐦🎶', '{غَنَّتِ} العَصافِيرُ فَرَحاً.'],
+      ['🌳❤️☁️', 'قالَتِ {الغابَةُ}: شُكْراً يا {غَيْمَة}!'] ] },
+    { t: 'الفيل زيزو', p: [
+      ['🐘', 'أَنا {الفِيلُ} زِيزُو، وَهذِهِ قِصَّتِي!'],
+      ['🐘🍓', 'أُحِبُّ أَكْلَ {الفَراوِلَة}.'],
+      ['🐘🦋', 'رَأَيْتُ {فَراشَةً} مُلَوَّنَةً في الحَدِيقَة.'],
+      ['🦋🐘', '{فَرِحَتِ} {الفَراشَةُ} وَطارَتْ فَوْقَ رَأْسِي.'],
+      ['🐘😄', '{فَرِحْتُ} أَنا أَيْضاً، وَضَحِكْنا مَعاً!'] ] },
+    { t: 'القطة قمر', p: [
+      ['🐱', 'هذِهِ {قِطَّةٌ} بَيْضاءُ اسْمُها {قَمَر}.'],
+      ['🐱🌙', '{قَمَرُ} تُحِبُّ النَّظَرَ إِلى {القَمَر}.'],
+      ['🐱🐒', 'جاءَ {قِرْدٌ} صَغِيرٌ يَلْعَبُ مَعَها.'],
+      ['🐒🎩', 'لَبِسَ {القِرْدُ} {قُبَّعَةً} حَمْراء.'],
+      ['🐱😂', '{قالَتْ} {قَمَرُ}: {قُبَّعَتُكَ} جَمِيلَة!'] ] },
+    { t: 'كريم والكرة', p: [
+      ['👦⚽', 'هذا {كَرِيمٌ}، عِنْدَهُ {كُرَةٌ} {كَبِيرَة}.'],
+      ['👦🐶', 'لَعِبَ {كَرِيمٌ} مَعَ {كَلْبِهِ} في الحَدِيقَة.'],
+      ['🐶⚽', 'رَكَضَ {الكَلْبُ} خَلْفَ {الكُرَة}.'],
+      ['🐶⚽👦', 'أَعادَ {الكَلْبُ} {الكُرَةَ} إِلى {كَرِيم}.'],
+      ['👦❤️🐶', 'قالَ {كَرِيمٌ}: أَنْتَ {كَلْبٌ} ذَكِيّ!'] ] },
+    { t: 'ليلى والليمون', p: [
+      ['👧🍋', 'هذِهِ {لَيْلَى}، عِنْدَها {لَيْمُونَةٌ} صَفْراء.'],
+      ['🍋🥤', 'عَصَرَتْ {لَيْلَى} {اللَّيْمُونَ} في كُوب.'],
+      ['👧🎨', 'ثُمَّ رَسَمَتْ {لَوْحَةً} جَمِيلَة.'],
+      ['🖼️🍋', 'في {اللَّوْحَةِ} {لَيْمُونَةٌ} {لامِعَة}.'],
+      ['👩❤️👧', 'قالَتْ أُمُّها: {لَوْحَتُكِ} {لَطِيفَةٌ} يا {لَيْلَى}!'] ] },
+    { t: 'مريم والموز', p: [
+      ['👧🍌', 'هذِهِ {مَرْيَمُ}، تُحِبُّ {المَوْزَ} كَثِيراً.'],
+      ['🍌🍽️', 'رَأَتْ {مَرْيَمُ} {مَوْزَةً} عَلَى {المائِدَة}.'],
+      ['🐒😋', 'جاءَ قِرْدٌ {مَرِحٌ} وَقالَ: أَنا جائِع!'],
+      ['👧🍌🐒', 'أَعْطَتْهُ {مَرْيَمُ} نِصْفَ {المَوْزَة}.'],
+      ['🐒❤️', 'قالَ القِرْدُ: شُكْراً يا {مَرْيَمُ}، أَنْتِ {مُمْتازَة}!'] ] },
+    { t: 'النحلة نور', p: [
+      ['🐝', 'هذِهِ {نَحْلَةٌ} {نَشِيطَةٌ} اسْمُها {نُور}.'],
+      ['🐝🏞️', 'تَطِيرُ {نُورُ} فَوْقَ {النَّهْر}.'],
+      ['🐝🌸', '{نَزَلَتْ} {نُورُ} عَلَى زَهْرَةٍ جَمِيلَة.'],
+      ['🐝⭐', 'في اللَّيْلِ {نَظَرَتْ} {نُورُ} إِلى {النُّجُوم}.'],
+      ['🐝😴', 'ثُمَّ {نامَتِ} {النَّحْلَةُ} سَعِيدَة.'] ] },
+    { t: 'هدية هادي', p: [
+      ['👦🎁', 'هذا {هادِي}، عِنْدَهُ {هَدِيَّةٌ} لِأُمِّه.'],
+      ['🎁🌹', 'في {الهَدِيَّةِ} وَرْدَةٌ حَمْراء.'],
+      ['👦🤫', '{هَمَسَ} {هادِي}: إِنَّها مُفاجَأَة!'],
+      ['👩🎁', 'فَتَحَتْ أُمُّهُ {الهَدِيَّةَ} وَفَرِحَتْ كَثِيراً.'],
+      ['👩❤️👦', 'قالَتْ أُمُّهُ: شُكْراً يا {هادِي}!'] ] },
+    { t: 'وعد والوردة', p: [
+      ['👧🌹', 'هذِهِ {وَعْدُ}، تُحِبُّ {الوُرُودَ} كَثِيراً.'],
+      ['👧🌹', '{وَجَدَتْ} {وَعْدُ} {وَرْدَةً} حَمْراءَ في الحَدِيقَة.'],
+      ['🌹💧', 'سَقَتِ {الوَرْدَةَ} بِالماءِ كُلَّ يَوْم.'],
+      ['🦋🌹', '{وَقَفَتْ} فَراشَةٌ عَلَى {الوَرْدَة}.'],
+      ['👧😊', 'قالَتْ {وَعْدُ}: ما أَجْمَلَ {الوَرْدَة}!'] ] },
+    { t: 'يوسف ويداه', p: [
+      ['👦✋', 'هذا {يُوسُفُ}، لَهُ {يَدانِ} نَظِيفَتان.'],
+      ['🧼✋', '{يَغْسِلُ} {يُوسُفُ} {يَدَيْهِ} قَبْلَ الأَكْل.'],
+      ['👦🍽️', 'ثُمَّ {يَأْكُلُ} طَعامَهُ بِهُدُوء.'],
+      ['👦👋', '{يُلَوِّحُ} {يُوسُفُ} لِأَصْدِقائِهِ: مَرْحَباً!'],
+      ['👦✨', 'قالَ {يُوسُفُ}: {يَدايَ} نَظِيفَتانِ دائِماً!'] ] }
+  ];
+  function storyAsk(i){ return 'أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ ال' + SN(i) + '؟'; }
+  function storySay(t){ return t.replace(/[{}]/g, ''); }
   // Numbers 1–10 in the digits Iraqi schools teach (١٢٣…), each with something to count
   var N = [
     {d:'١',  n:'واحد',   s:'واحِد',    e:'🐘'},
@@ -1114,7 +1331,7 @@ h1 span{color:var(--orange)}
     if (j && j.clips){ VOICE = j.clips; $('voiceNote').hidden = true; }
     // something was said while the list was still loading (the greeting at start): say it now
     var w = voiceWaiting; voiceWaiting = null;
-    if (w) say(w);
+    if (w) say(w[0], w[1]);
   }
   try {
     fetch('voice/index.json').then(function(r){ return r.ok ? r.json() : null; }).then(voiceLoaded).catch(function(){ voiceLoaded(null); });
@@ -1141,14 +1358,16 @@ h1 span{color:var(--orange)}
     if (voiceTts){ voiceTts = false; ttsStop(); }
     if (voiceSrc){ try { voiceSrc.onended = null; voiceSrc.stop(); } catch(e){} voiceSrc = null; }
   }
-  function playClips(ids){
+  // done (optional): called once the whole run has been played, unless something else is said first
+  function playClips(ids, done){
     var c = audio(); if (!c) return false;
     if (!voiceOut){ voiceOut = c.createGain(); voiceOut.gain.value = 1.0; voiceOut.connect(c.destination); }
     stopClips();
     if (window.__zizoTest) (window.__zizoTest.played = window.__zizoTest.played || []).push(ids.join('+'));
     var gen = voiceGen;
     (function next(k){
-      if (gen !== voiceGen || k >= ids.length) return;
+      if (gen !== voiceGen) return;
+      if (k >= ids.length){ if (done) done(); return; }
       if (typeof ids[k] === 'object'){ voiceTts = true; speakPart(ids[k].tts).then(function(){ if (gen === voiceGen){ voiceTts = false; next(k + 1); } }); return; }
       clipBuf(c, ids[k]).then(function(buf){
         if (gen !== voiceGen) return;
@@ -1206,40 +1425,44 @@ h1 span{color:var(--orange)}
   }
 
   // Each part is Arabic text, or { en: 'text' } to be read in English
-  function say(parts){
+  // done (optional): called when everything has been said (the stories turn the page then)
+  function say(parts, done){
     parts = [].concat(parts);
-    if (voiceLoading){ voiceWaiting = parts; return; }
+    if (voiceLoading){ voiceWaiting = [parts, done]; return; }
     var ids = clipsFor(parts);
-    if (ids){ ttsStop(); if (playClips(ids)) return; }
+    if (ids){ ttsStop(); if (playClips(ids, done)) return; }
     stopClips();
+    var gen = voiceGen, fin = function(){ if (done && gen === voiceGen) done(); };
     if (NTTS){
       parts.forEach(function(t, k){
         var en = t && typeof t === 'object';
-        NTTS.speak({ text: en ? t.en : t, lang: en ? 'en-US' : nativeLang, rate: en ? 0.8 : 0.85, pitch: 1.1, volume: 1.0, queueStrategy: k === 0 ? 0 : 1 })
-          .catch(en ? function(){} : voiceFailed);
+        var p = NTTS.speak({ text: en ? t.en : t, lang: en ? 'en-US' : nativeLang, rate: en ? 0.8 : 0.85, pitch: 1.1, volume: 1.0, queueStrategy: k === 0 ? 0 : 1 });
+        p.catch(en ? function(){} : voiceFailed);
+        if (k === parts.length - 1) p.then(fin, fin);
       });
       return;
     }
-    if (!hasWebTTS) return;
+    if (!hasWebTTS){ if (done) setTimeout(fin, 3500); return; }
     try {
       speechSynthesis.cancel();
-      parts.forEach(function(t){
+      parts.forEach(function(t, k){
         var en = t && typeof t === 'object';
         var u = new SpeechSynthesisUtterance(en ? t.en : t);
         var v = en ? enVoice : arVoice;
         u.lang = v ? v.lang : (en ? 'en-US' : 'ar-SA');
         if (v) u.voice = v;
         u.rate = en ? 0.8 : 0.82; u.pitch = 1.15;
+        if (k === parts.length - 1){ u.onend = fin; u.onerror = fin; }
         speechSynthesis.speak(u);
       });
-    } catch(e){}
+    } catch(e){ if (done) setTimeout(fin, 3500); }
   }
   function sayEn(t){ say({ en: t }); }
   function ttsStop(){
     if (NTTS) NTTS.stop().catch(function(){});
     else if (hasWebTTS) try { speechSynthesis.cancel(); } catch(e){}
   }
-  function hush(){ stopClips(); ttsStop(); }
+  function hush(){ stopClips(); ttsStop(); clearTimeout(storyTimer); storyRun++; } // also stops a story turning its pages
 
   /* ---------- Zizo & stars ---------- */
   var zEl = document.querySelector('.zizo'), bub = $('bubble');
@@ -1641,6 +1864,8 @@ h1 span{color:var(--orange)}
     $('dWord').className = 'word' + (en ? ' en' : '');
     if (en) enWordInto($('dWord'), l); else wordInto($('dWord'), cur, false);
     $('dCount').textContent = fmt(cur + 1) + ' من ' + fmt(list.length);
+    $('toStory').hidden = en;
+    if (!en) $('toStoryText').textContent = 'قصة حرف ال' + L[cur].n;
     grid.hidden = true; detail.hidden = false;
     window.scrollTo(0, 0);
     if (en){
@@ -1809,6 +2034,129 @@ h1 span{color:var(--orange)}
   $('sayDBtn').addEventListener('click', function(){ var item = TOPICS[dTopic].list[dcur]; say([item.s, item.fs]); });
   $('toGameD').addEventListener('click', function(){ show('play'); startGame(TOPICS[dTopic].game); });
   renderDGrid();
+
+  /* ---------- stories: one for each letter, read by Zizo page by page ---------- */
+  var sgrid = $('sgrid'), sreader = $('sreader'), sCard = $('sCard'), sIdx = 0, sPage = 0, storyTimer = null, storyRun = 0;
+  var storiesDone = [];
+  try { storiesDone = JSON.parse(localStorage.getItem('zizo-stories') || '[]').filter(function(i){ return i >= 0 && i < STORIES.length; }); } catch(e){}
+  function saveStories(){ try { localStorage.setItem('zizo-stories', JSON.stringify(storiesDone)); } catch(e){} }
+  function renderSGrid(){
+    sgrid.innerHTML = '';
+    STORIES.forEach(function(st, i){
+      var b = document.createElement('button');
+      b.className = 'stile'; b.style.cssText = colorVars(i);
+      b.innerHTML = '<span class="sl"></span><span class="se" aria-hidden="true"></span><span class="st"></span>' +
+        (storiesDone.indexOf(i) >= 0 ? '<span class="ok" aria-label="سمعتها">✓</span>' : '');
+      b.querySelector('.sl').textContent = L[i].c;
+      b.querySelector('.se').textContent = firstEmoji(st.p[0][0]);
+      b.querySelector('.st').textContent = st.t;
+      b.addEventListener('click', function(){ openStory(i); });
+      sgrid.appendChild(b);
+    });
+  }
+  // The first picture of a scene (an emoji can be several characters long)
+  function firstEmoji(t){
+    try { var m = t.match(/^\p{Extended_Pictographic}\uFE0F?(?:\u200D\p{Extended_Pictographic}\uFE0F?)*/u); if (m) return m[0]; } catch(e){}
+    return t;
+  }
+  function backToStories(){
+    clearTimeout(storyTimer); storyRun++;
+    sreader.hidden = true; sgrid.hidden = false;
+    renderSGrid();
+    zizo(gx('اختر حرفاً، وأنا أحكي لك قصته', 'اختاري حرفاً، وأنا أحكي لكِ قصته'));
+  }
+  function storyHead(){
+    return '<p class="stitle"><span class="sl"></span><span class="tt"></span></p>';
+  }
+  function fillHead(){
+    sCard.querySelector('.stitle .sl').textContent = L[sIdx].c;
+    sCard.querySelector('.stitle .tt').textContent = STORIES[sIdx].t;
+  }
+  function openStory(i){
+    sIdx = (i + STORIES.length) % STORIES.length;
+    sreader.style.cssText = colorVars(sIdx);
+    sgrid.hidden = true; sreader.hidden = false;
+    window.scrollTo(0, 0);
+    zizo('اسمع القصة، وانظر إلى كلمات حرف ال' + L[sIdx].n, 'happy');
+    showPage(0);
+  }
+  // A page: the picture, the sentence with the letter's words coloured, then on to the next page by itself
+  function showPage(k){
+    clearTimeout(storyTimer);
+    var run = ++storyRun, st = STORIES[sIdx];
+    sPage = k;
+    $('sStep').hidden = false;
+    $('prevS').disabled = k === 0;
+    sCard.innerHTML = storyHead() + '<div class="sscene" aria-hidden="true"></div><p class="stext"><span></span></p><div class="sdots"></div>';
+    fillHead();
+    sCard.querySelector('.sscene').textContent = st.p[k][0];
+    var line = sCard.querySelector('.stext span');
+    st.p[k][1].split(/(\{[^}]*\})/).forEach(function(part){
+      if (!part) return;
+      if (part.charAt(0) === '{'){ var h = document.createElement('span'); h.className = 'hl'; h.textContent = part.slice(1, -1); line.appendChild(h); }
+      else line.appendChild(document.createTextNode(part));
+    });
+    sCard.querySelector('.sdots').innerHTML = st.p.map(function(_, j){ return '<i' + (j === k ? ' class="on"' : '') + '></i>'; }).join('') + '<i></i>';
+    say(storySay(st.p[k][1]), function(){
+      if (run !== storyRun) return;
+      storyTimer = setTimeout(function(){ if (run === storyRun) nextPage(); }, 1100);
+    });
+  }
+  function nextPage(){ if (sPage < STORIES[sIdx].p.length - 1) showPage(sPage + 1); else storyQuestion(); }
+  // At the end: which picture starts with the story's letter?
+  function storyQuestion(){
+    clearTimeout(storyTimer); storyRun++;
+    var i = sIdx, others = shuffle(L.map(function(_, j){ return j; }).filter(function(j){ return j !== i && L[j].c !== L[i].c; })).slice(0, 2);
+    var opts = shuffle([i].concat(others));
+    $('sStep').hidden = true;
+    sCard.innerHTML = storyHead() + '<p class="sask"></p><div class="choices" style="width:100%"></div><div class="sdots"></div>';
+    fillHead();
+    sCard.querySelector('.sask').textContent = 'أي صورة تبدأ بحرف ال' + L[i].n + '؟';
+    sCard.querySelector('.sdots').innerHTML = STORIES[i].p.map(function(){ return '<i></i>'; }).join('') + '<i class="on"></i>';
+    var ch = sCard.querySelector('.choices');
+    opts.forEach(function(o){
+      var b = document.createElement('button');
+      b.className = 'choice semo';
+      b.textContent = L[o].e;
+      b.setAttribute('aria-label', L[o].w);
+      b.addEventListener('click', function(){
+        if (o === i){
+          b.classList.add('right');
+          ch.querySelectorAll('button').forEach(function(x){ x.disabled = true; });
+          var pr = praise();
+          zizo(pr + ' ' + L[i].w + ' تبدأ بحرف ال' + L[i].n, 'happy'); addStar();
+          if (storiesDone.indexOf(i) < 0){ storiesDone.push(i); saveStories(); }
+          var run = ++storyRun;
+          say([pr, L[i].s], function(){ if (run === storyRun) storyTimer = setTimeout(storyEnd, 500); });
+          storyTimer = setTimeout(function(){ if (run === storyRun) storyEnd(); }, 6000);
+        } else {
+          b.classList.add('wrong'); b.disabled = true; sfx('wrong');
+          var r = retry(); zizo(r, 'sad'); say(r);
+        }
+      });
+      ch.appendChild(b);
+    });
+    zizo('أي صورة تبدأ بحرف ال' + L[i].n + '؟');
+    say(storyAsk(i));
+  }
+  function storyEnd(){
+    clearTimeout(storyTimer); storyRun++;
+    $('sStep').hidden = true;
+    sCard.innerHTML = storyHead() + '<div class="sscene" aria-hidden="true">⭐📖</div><p class="sask"></p>' +
+      '<div class="btnrow"><button class="btn" id="sNext" style="--b:var(--green);--bd:var(--green-dark)">القصة التالية</button>' +
+      '<button class="btn ghost" id="sAgain">اسمعها مرة أخرى</button><button class="btn ghost" id="sAll">كل القصص</button></div>';
+    fillHead();
+    sCard.querySelector('.sask').textContent = gx('أحسنت! انتهت القصة', 'أحسنتِ! انتهت القصة');
+    $('sNext').addEventListener('click', function(){ openStory(sIdx + 1); });
+    $('sAgain').addEventListener('click', function(){ openStory(sIdx); });
+    $('sAll').addEventListener('click', function(){ hush(); backToStories(); });
+  }
+  $('sbackBtn').addEventListener('click', function(){ hush(); backToStories(); });
+  $('prevS').addEventListener('click', function(){ if (sPage > 0) showPage(sPage - 1); });
+  $('nextS').addEventListener('click', nextPage);
+  $('saySBtn').addEventListener('click', function(){ showPage(sPage); });
+  $('toStory').addEventListener('click', function(){ hush(); show('stories'); openStory(cur); });
+  renderSGrid();
 
   /* ---------- play ---------- */
   var ROUNDS = 5, mode = 'listen', round = 0, target = 0, last = -1, locked = false, nextTimer = null;
@@ -2353,6 +2701,7 @@ h1 span{color:var(--orange)}
     }
     mq = keep;
     PRIZES.forEach(function(p){ add(p.s); });
+    STORIES.forEach(function(st, i){ st.p.forEach(function(pg){ add(storySay(pg[1])); }); add(storyAsk(i)); });
     [
       'كَمْ عَدَدُها؟', 'أَيْنَ حَرْف', 'أَيْنَ', 'شُكْراً!', 'شُكْراً! هَدِيَّةٌ رائِعَة',
       'اِجْمَعْ نُجُوماً أَكْثَر', 'اِجْمَعِي نُجُوماً أَكْثَر',
@@ -2591,7 +2940,8 @@ h1 span{color:var(--orange)}
     currentView = v;
     clearTimeout(nextTimer); clearTimeout(traceTimer); stopAutoCount();
     afterPrize = null;
-    ['letters','numbers','discover','play','trace','rewards'].forEach(function(k){ $('v-' + k).hidden = (k !== v); });
+    clearTimeout(storyTimer); storyRun++;
+    ['letters','numbers','discover','play','trace','rewards','stories'].forEach(function(k){ $('v-' + k).hidden = (k !== v); });
     document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-current', t.dataset.v === v ? 'page' : 'false'); });
     window.scrollTo(0, 0);
     if (v === 'letters') backToGrid();
@@ -2600,6 +2950,7 @@ h1 span{color:var(--orange)}
     if (v === 'discover') backToD();
     if (v === 'play') showGameMenu();
     if (v === 'trace'){ lastW = 0; sizeCanvas(); setTrace(tIdx, false); }
+    if (v === 'stories') backToStories();
   }
   document.querySelectorAll('.tab').forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.v); }); });
 
@@ -2863,6 +3214,7 @@ h1 span{color:var(--orange)}
       [fmt(stats.earned), 'نجمة ' + gx('جمعها', 'جمعتها')],
       [fmt(gifts), 'هدية ' + gx('اشتراها', 'اشترتها') + ' لزيزو'],
       [fmt(traced), 'رسمة ناجحة لحرف أو رقم'],
+      [fmt(storiesDone.length) + ' / ' + fmt(STORIES.length), 'قصص ' + gx('أنهاها', 'أنهتها')],
       [fmt(playDays), 'يوم ' + gx('لعب', 'لعبت') + ' فيه']
     ];
     $('paFacts').innerHTML = facts.map(function(f){ return '<div class="pa-fact"><b>' + f[0] + '</b><span>' + f[1] + '</span></div>'; }).join('');
@@ -2902,6 +3254,7 @@ h1 span{color:var(--orange)}
       if (currentView === 'letters' && !detail.hidden){ hush(); backToGrid(); }
       else if (currentView === 'numbers' && !ndetail.hidden){ hush(); backToNumbers(); }
       else if (currentView === 'discover' && !ddetail.hidden){ hush(); backToD(); }
+      else if (currentView === 'stories' && !$('sreader').hidden){ hush(); backToStories(); }
       else if (currentView === 'play' && !$('gameArea').hidden){ hush(); if (stage !== null) showMap(); else showGameMenu(); }
       else if (currentView === 'play' && !$('mapArea').hidden){ hush(); showGameMenu(); }
       else showWelcome();

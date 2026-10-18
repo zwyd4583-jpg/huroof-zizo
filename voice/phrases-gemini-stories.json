@@ -1,0 +1,1166 @@
+{
+ "engine": "gemini",
+ "gemini": {
+  "models": [
+   "gemini-3.8-flash-tts"
+  ],
+  "voice": "Puck",
+  "rpm": 4,
+  "style": {
+   "ar": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow, every letter and vowel mark pronounced exactly as written",
+   "en": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear American English, a little slow; a line with a single letter is the name of that letter of the alphabet"
+  },
+  "batch": 16,
+  "batch_chars": 640
+ },
+ "items": [
+  {
+   "id": "ar-feb50c85",
+   "lang": "ar",
+   "text": "هذا أَرْنَبٌ صَغِيرٌ اسْمُهُ أَنِيس.",
+   "key": "هذا أَرْنَبٌ صَغِيرٌ اسْمُهُ أَنِيس.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-0e94a6ca",
+   "lang": "ar",
+   "text": "أَنِيسٌ أَكَلَ أَناناساً لَذِيذاً.",
+   "key": "أَنِيسٌ أَكَلَ أَناناساً لَذِيذاً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-9a13f4f6",
+   "lang": "ar",
+   "text": "ثُمَّ ذَهَبَ إِلى أُمِّهِ فَرِحاً.",
+   "key": "ثُمَّ ذَهَبَ إِلى أُمِّهِ فَرِحاً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-6568aa96",
+   "lang": "ar",
+   "text": "في الطَّرِيقِ رَأَى أَسَداً نائِماً، فَمَشَى بِهُدُوء.",
+   "key": "في الطَّرِيقِ رَأَى أَسَداً نائِماً، فَمَشَى بِهُدُوء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-f5e73bbd",
+   "lang": "ar",
+   "text": "قالَتْ أُمُّهُ: أَحْسَنْتَ يا أَنِيس!",
+   "key": "قالَتْ أُمُّهُ: أَحْسَنْتَ يا أَنِيس!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-9cfc6d2d",
+   "lang": "ar",
+   "text": "هذِهِ بَطَّةٌ اسْمُها بَطْبُوطَة.",
+   "key": "هذِهِ بَطَّةٌ اسْمُها بَطْبُوطَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-36801310",
+   "lang": "ar",
+   "text": "تَعِيشُ بَطْبُوطَةُ في بَيْتٍ قُرْبَ البَحْر.",
+   "key": "تَعِيشُ بَطْبُوطَةُ في بَيْتٍ قُرْبَ البَحْر.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-47365ccf",
+   "lang": "ar",
+   "text": "وَجَدَتْ بُرْتُقالَةً كَبِيرَةً عِنْدَ البابِ.",
+   "key": "وَجَدَتْ بُرْتُقالَةً كَبِيرَةً عِنْدَ البابِ.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-c4036547",
+   "lang": "ar",
+   "text": "شارَكَتْها مَعَ صَدِيقاتِها البَطّات.",
+   "key": "شارَكَتْها مَعَ صَدِيقاتِها البَطّات.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-a7584037",
+   "lang": "ar",
+   "text": "بَطْبُوطَةُ بَطَّةٌ كَرِيمَة!",
+   "key": "بَطْبُوطَةُ بَطَّةٌ كَرِيمَة!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-d8440e22",
+   "lang": "ar",
+   "text": "هذا تِمْساحٌ اسْمُهُ تامِر.",
+   "key": "هذا تِمْساحٌ اسْمُهُ تامِر.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-755b2e36",
+   "lang": "ar",
+   "text": "وَجَدَ تامِرٌ تُفّاحَةً حَمْراءَ تَحْتَ الشَّجَرَة.",
+   "key": "وَجَدَ تامِرٌ تُفّاحَةً حَمْراءَ تَحْتَ الشَّجَرَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-9c52d3b5",
+   "lang": "ar",
+   "text": "قالَ تامِرٌ: التُّفّاحُ لَذِيذٌ جِدّاً!",
+   "key": "قالَ تامِرٌ: التُّفّاحُ لَذِيذٌ جِدّاً!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-84ab6b5a",
+   "lang": "ar",
+   "text": "ثُمَّ أَكَلَ تَمْراً حُلْواً.",
+   "key": "ثُمَّ أَكَلَ تَمْراً حُلْواً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-817c8d0a",
+   "lang": "ar",
+   "text": "وَنامَ تامِرٌ سَعِيداً تَحْتَ الشَّجَرَة.",
+   "key": "وَنامَ تامِرٌ سَعِيداً تَحْتَ الشَّجَرَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-cd7321bb",
+   "lang": "ar",
+   "text": "هذا ثَعْلَبٌ ذَكِيٌّ اسْمُهُ ثامِر.",
+   "key": "هذا ثَعْلَبٌ ذَكِيٌّ اسْمُهُ ثامِر.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-8fd19660",
+   "lang": "ar",
+   "text": "ذَهَبَ ثامِرٌ لِيَقْطِفَ الثِّمار.",
+   "key": "ذَهَبَ ثامِرٌ لِيَقْطِفَ الثِّمار.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-4fb3c90e",
+   "lang": "ar",
+   "text": "رَأَى ثَوْراً كَبِيراً يَأْكُلُ العُشْب.",
+   "key": "رَأَى ثَوْراً كَبِيراً يَأْكُلُ العُشْب.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-ed4f1039",
+   "lang": "ar",
+   "text": "أَعْطَى ثامِرٌ الثَّوْرَ ثَمَرَةً حُلْوَة.",
+   "key": "أَعْطَى ثامِرٌ الثَّوْرَ ثَمَرَةً حُلْوَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-4701b0cc",
+   "lang": "ar",
+   "text": "قالَ الثَّوْرُ: شُكْراً يا ثامِر!",
+   "key": "قالَ الثَّوْرُ: شُكْراً يا ثامِر!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-2baf4c7b",
+   "lang": "ar",
+   "text": "هذا جَمَلٌ جَمِيلٌ يَمْشي في الصَّحْراء.",
+   "key": "هذا جَمَلٌ جَمِيلٌ يَمْشي في الصَّحْراء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-56831e9c",
+   "lang": "ar",
+   "text": "رَأَى الجَمَلُ جَبَلاً عالِياً.",
+   "key": "رَأَى الجَمَلُ جَبَلاً عالِياً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-536051c7",
+   "lang": "ar",
+   "text": "جَلَسَ الجَمَلُ يَرْتاحُ قُرْبَ الجَبَل.",
+   "key": "جَلَسَ الجَمَلُ يَرْتاحُ قُرْبَ الجَبَل.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-5021194f",
+   "lang": "ar",
+   "text": "جاءَتْ جَرادَةٌ صَغِيرَةٌ تُغَنِّي.",
+   "key": "جاءَتْ جَرادَةٌ صَغِيرَةٌ تُغَنِّي.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-ce230a51",
+   "lang": "ar",
+   "text": "قالَ الجَمَلُ: صَوْتُكِ جَمِيلٌ يا جَرادَة!",
+   "key": "قالَ الجَمَلُ: صَوْتُكِ جَمِيلٌ يا جَرادَة!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-d7753665",
+   "lang": "ar",
+   "text": "هذا حِصانٌ سَرِيعٌ اسْمُهُ حَمْدان.",
+   "key": "هذا حِصانٌ سَرِيعٌ اسْمُهُ حَمْدان.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-2c32ac2b",
+   "lang": "ar",
+   "text": "يَرْكُضُ حَمْدانُ كُلَّ يَوْمٍ في الحَدِيقَة.",
+   "key": "يَرْكُضُ حَمْدانُ كُلَّ يَوْمٍ في الحَدِيقَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-2df7ef5e",
+   "lang": "ar",
+   "text": "رَأَى حَلَزُوناً صَغِيراً يَمْشي بِبُطْء.",
+   "key": "رَأَى حَلَزُوناً صَغِيراً يَمْشي بِبُطْء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-bac9eb6d",
+   "lang": "ar",
+   "text": "حَمَلَ حَمْدانُ الحَلَزُونَ عَلَى ظَهْرِه.",
+   "key": "حَمَلَ حَمْدانُ الحَلَزُونَ عَلَى ظَهْرِه.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-3f498e68",
+   "lang": "ar",
+   "text": "قالَ الحَلَزُونُ: شُكْراً يا حَمْدان!",
+   "key": "قالَ الحَلَزُونُ: شُكْراً يا حَمْدان!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-d7918226",
+   "lang": "ar",
+   "text": "هذا خَرُوفٌ أَبْيَضُ اسْمُهُ خالِد.",
+   "key": "هذا خَرُوفٌ أَبْيَضُ اسْمُهُ خالِد.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-46cb2dfc",
+   "lang": "ar",
+   "text": "خالِدٌ يُحِبُّ أَكْلَ الخُبْز.",
+   "key": "خالِدٌ يُحِبُّ أَكْلَ الخُبْز.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-25443087",
+   "lang": "ar",
+   "text": "وَيُحِبُّ أَيْضاً الخِيارَ الأَخْضَر.",
+   "key": "وَيُحِبُّ أَيْضاً الخِيارَ الأَخْضَر.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-c49f3457",
+   "lang": "ar",
+   "text": "خَرَجَ خالِدٌ مِنْ خَيْمَتِهِ لِيَلْعَب.",
+   "key": "خَرَجَ خالِدٌ مِنْ خَيْمَتِهِ لِيَلْعَب.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-370721c7",
+   "lang": "ar",
+   "text": "وَفي المَساءِ عادَ إِلى الخَيْمَةِ وَنام.",
+   "key": "وَفي المَساءِ عادَ إِلى الخَيْمَةِ وَنام.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-54206e78",
+   "lang": "ar",
+   "text": "هذا دُبٌّ لَطِيفٌ اسْمُهُ دَبْدُوب.",
+   "key": "هذا دُبٌّ لَطِيفٌ اسْمُهُ دَبْدُوب.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-bd3c0206",
+   "lang": "ar",
+   "text": "دَبْدُوبٌ يَلْعَبُ مَعَ صَدِيقِهِ الدِّيك.",
+   "key": "دَبْدُوبٌ يَلْعَبُ مَعَ صَدِيقِهِ الدِّيك.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-7104f10c",
+   "lang": "ar",
+   "text": "يَصِيحُ الدِّيكُ كُلَّ صَباح: كُوكُوكُو!",
+   "key": "يَصِيحُ الدِّيكُ كُلَّ صَباح: كُوكُوكُو!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-d5366d75",
+   "lang": "ar",
+   "text": "دَخَلَ الدُّبُّ وَالدِّيكُ إِلى البَيْتِ الدّافِئ.",
+   "key": "دَخَلَ الدُّبُّ وَالدِّيكُ إِلى البَيْتِ الدّافِئ.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-cb210a9d",
+   "lang": "ar",
+   "text": "قالَ دَبْدُوبٌ: أَنْتَ صَدِيقِي يا دِيك!",
+   "key": "قالَ دَبْدُوبٌ: أَنْتَ صَدِيقِي يا دِيك!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-9e96c7e2",
+   "lang": "ar",
+   "text": "هذا ذِئْبٌ ذَكِيٌّ اسْمُهُ ذِياب.",
+   "key": "هذا ذِئْبٌ ذَكِيٌّ اسْمُهُ ذِياب.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-ddbce38e",
+   "lang": "ar",
+   "text": "وَجَدَ ذِيابٌ ذُرَةً صَفْراءَ في الحَقْل.",
+   "key": "وَجَدَ ذِيابٌ ذُرَةً صَفْراءَ في الحَقْل.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-0561cee1",
+   "lang": "ar",
+   "text": "ذِيابٌ يُحَرِّكُ ذَيْلَهُ فَرَحاً.",
+   "key": "ذِيابٌ يُحَرِّكُ ذَيْلَهُ فَرَحاً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-ca58f496",
+   "lang": "ar",
+   "text": "ثُمَّ وَجَدَ تاجاً مِنَ الذَّهَب.",
+   "key": "ثُمَّ وَجَدَ تاجاً مِنَ الذَّهَب.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-dcf7d7ad",
+   "lang": "ar",
+   "text": "قالَ ذِيابٌ: الذُّرَةُ أَطْيَبُ مِنَ الذَّهَب!",
+   "key": "قالَ ذِيابٌ: الذُّرَةُ أَطْيَبُ مِنَ الذَّهَب!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-b93c99f5",
+   "lang": "ar",
+   "text": "هذا رامِي، وَصَلَتْهُ رِسالَة.",
+   "key": "هذا رامِي، وَصَلَتْهُ رِسالَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-755244e2",
+   "lang": "ar",
+   "text": "في الرِّسالَةِ دَعْوَةٌ إِلى حَفْلَة.",
+   "key": "في الرِّسالَةِ دَعْوَةٌ إِلى حَفْلَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-76b4674d",
+   "lang": "ar",
+   "text": "رَسَمَ رامِي رَسْمَةً جَمِيلَةً لِصَدِيقِه.",
+   "key": "رَسَمَ رامِي رَسْمَةً جَمِيلَةً لِصَدِيقِه.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-d39711e7",
+   "lang": "ar",
+   "text": "رَكَضَ رامِي إِلى الحَفْلَةِ مَسْرُوراً.",
+   "key": "رَكَضَ رامِي إِلى الحَفْلَةِ مَسْرُوراً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-9e330ab6",
+   "lang": "ar",
+   "text": "قالَ صَدِيقُهُ: رَسْمَتُكَ رائِعَة!",
+   "key": "قالَ صَدِيقُهُ: رَسْمَتُكَ رائِعَة!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-e0b99657",
+   "lang": "ar",
+   "text": "هذِهِ زَرافَةٌ طَوِيلَةٌ اسْمُها زَيْنَة.",
+   "key": "هذِهِ زَرافَةٌ طَوِيلَةٌ اسْمُها زَيْنَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-76efd904",
+   "lang": "ar",
+   "text": "تُحِبُّ زَيْنَةُ الزُّهُورَ المُلَوَّنَة.",
+   "key": "تُحِبُّ زَيْنَةُ الزُّهُورَ المُلَوَّنَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-8fd6da08",
+   "lang": "ar",
+   "text": "زَرَعَتْ زَيْنَةُ زَهْرَةً في الحَدِيقَة.",
+   "key": "زَرَعَتْ زَيْنَةُ زَهْرَةً في الحَدِيقَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-f627b856",
+   "lang": "ar",
+   "text": "سَقَتِ الزَّهْرَةَ كُلَّ يَوْم.",
+   "key": "سَقَتِ الزَّهْرَةَ كُلَّ يَوْم.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-a5b80d92",
+   "lang": "ar",
+   "text": "كَبُرَتِ الزَّهْرَةُ وَفَرِحَتْ زَيْنَة!",
+   "key": "كَبُرَتِ الزَّهْرَةُ وَفَرِحَتْ زَيْنَة!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-6402bcee",
+   "lang": "ar",
+   "text": "هذِهِ سَمَكَةٌ صَغِيرَةٌ اسْمُها سِمْسِمَة.",
+   "key": "هذِهِ سَمَكَةٌ صَغِيرَةٌ اسْمُها سِمْسِمَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-6043a63f",
+   "lang": "ar",
+   "text": "سِمْسِمَةُ سَبّاحَةٌ سَرِيعَة.",
+   "key": "سِمْسِمَةُ سَبّاحَةٌ سَرِيعَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-7c917694",
+   "lang": "ar",
+   "text": "رَأَتْ سُلَحْفاةً سَعِيدَة.",
+   "key": "رَأَتْ سُلَحْفاةً سَعِيدَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-d734d765",
+   "lang": "ar",
+   "text": "سَبَحَتا مَعاً نَحْوَ السَّفِينَة.",
+   "key": "سَبَحَتا مَعاً نَحْوَ السَّفِينَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-17c730d6",
+   "lang": "ar",
+   "text": "قالَتْ سِمْسِمَةُ: السِّباحَةُ مَعَ الأَصْدِقاءِ أَجْمَل!",
+   "key": "قالَتْ سِمْسِمَةُ: السِّباحَةُ مَعَ الأَصْدِقاءِ أَجْمَل!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-3ebaf7c5",
+   "lang": "ar",
+   "text": "طَلَعَتِ الشَّمْسُ في الصَّباح.",
+   "key": "طَلَعَتِ الشَّمْسُ في الصَّباح.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-5f6afa5e",
+   "lang": "ar",
+   "text": "شادِي يَلْعَبُ تَحْتَ الشَّجَرَة.",
+   "key": "شادِي يَلْعَبُ تَحْتَ الشَّجَرَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-db09acaa",
+   "lang": "ar",
+   "text": "شَرِبَ شادِي شَرابَ البُرْتُقال.",
+   "key": "شَرِبَ شادِي شَرابَ البُرْتُقال.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-de3082a0",
+   "lang": "ar",
+   "text": "في المَساءِ شاهَدَ شادِي الشَّمْسَ تَغِيب.",
+   "key": "في المَساءِ شاهَدَ شادِي الشَّمْسَ تَغِيب.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-2e786cbd",
+   "lang": "ar",
+   "text": "قالَ شادِي: إِلى اللِّقاءِ يا شَمْس!",
+   "key": "قالَ شادِي: إِلى اللِّقاءِ يا شَمْس!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-cbced183",
+   "lang": "ar",
+   "text": "هذا صالِحٌ، صَنَعَ صارُوخاً مِنَ الوَرَق.",
+   "key": "هذا صالِحٌ، صَنَعَ صارُوخاً مِنَ الوَرَق.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-f4c970fb",
+   "lang": "ar",
+   "text": "صَعِدَ الصّارُوخُ عالِياً في السَّماء.",
+   "key": "صَعِدَ الصّارُوخُ عالِياً في السَّماء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-f46ad640",
+   "lang": "ar",
+   "text": "طارَ بِجانِبِهِ صَقْرٌ كَبِير.",
+   "key": "طارَ بِجانِبِهِ صَقْرٌ كَبِير.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-6a84f596",
+   "lang": "ar",
+   "text": "صاحَ الصَّقْرُ: ما هذا الطّائِر؟",
+   "key": "صاحَ الصَّقْرُ: ما هذا الطّائِر؟",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-782a302e",
+   "lang": "ar",
+   "text": "قالَ صالِحٌ: هذا صارُوخِي يا صَدِيقِي!",
+   "key": "قالَ صالِحٌ: هذا صارُوخِي يا صَدِيقِي!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-949ade07",
+   "lang": "ar",
+   "text": "هذا ضِفْدَعٌ أَخْضَرُ اسْمُهُ ضِياء.",
+   "key": "هذا ضِفْدَعٌ أَخْضَرُ اسْمُهُ ضِياء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-4fd2e137",
+   "lang": "ar",
+   "text": "يَعِيشُ ضِياءُ قُرْبَ بِرْكَةٍ صَغِيرَة.",
+   "key": "يَعِيشُ ضِياءُ قُرْبَ بِرْكَةٍ صَغِيرَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-4755910e",
+   "lang": "ar",
+   "text": "ضَحِكَ ضِياءُ كَثِيراً مَعَ أَصْدِقائِه.",
+   "key": "ضَحِكَ ضِياءُ كَثِيراً مَعَ أَصْدِقائِه.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-4f11ee81",
+   "lang": "ar",
+   "text": "في اللَّيْلِ لَمَعَ ضَوْءُ القَمَرِ عَلَى الماء.",
+   "key": "في اللَّيْلِ لَمَعَ ضَوْءُ القَمَرِ عَلَى الماء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-c593d1f5",
+   "lang": "ar",
+   "text": "قالَ ضِياءُ: ما أَجْمَلَ الضَّوْء!",
+   "key": "قالَ ضِياءُ: ما أَجْمَلَ الضَّوْء!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-dda32f16",
+   "lang": "ar",
+   "text": "هذا طارِقٌ، يُحِبُّ الطّائِراتِ كَثِيراً.",
+   "key": "هذا طارِقٌ، يُحِبُّ الطّائِراتِ كَثِيراً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-3c14d826",
+   "lang": "ar",
+   "text": "طارَتْ طائِرَةٌ فَوْقَ بَيْتِه.",
+   "key": "طارَتْ طائِرَةٌ فَوْقَ بَيْتِه.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-56db726d",
+   "lang": "ar",
+   "text": "رَأَى طارِقٌ الطُّيُورَ تَطِيرُ مَعَها.",
+   "key": "رَأَى طارِقٌ الطُّيُورَ تَطِيرُ مَعَها.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-8e50bcd2",
+   "lang": "ar",
+   "text": "حَلُمَ طارِقٌ أَنْ يَصِيرَ طَيّاراً.",
+   "key": "حَلُمَ طارِقٌ أَنْ يَصِيرَ طَيّاراً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-6479c1f8",
+   "lang": "ar",
+   "text": "قالَتْ أُمُّهُ: سَتَكُونُ طَيّاراً رائِعاً يا طارِق!",
+   "key": "قالَتْ أُمُّهُ: سَتَكُونُ طَيّاراً رائِعاً يا طارِق!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-775dc44a",
+   "lang": "ar",
+   "text": "هذا ظَبْيٌ ظَرِيفٌ يَعِيشُ في الغابَة.",
+   "key": "هذا ظَبْيٌ ظَرِيفٌ يَعِيشُ في الغابَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-99b51921",
+   "lang": "ar",
+   "text": "في الظُّهْرِ صارَ الجَوُّ حارّاً.",
+   "key": "في الظُّهْرِ صارَ الجَوُّ حارّاً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-c32ded1b",
+   "lang": "ar",
+   "text": "جَلَسَ الظَّبْيُ في الظِّلِّ تَحْتَ شَجَرَة.",
+   "key": "جَلَسَ الظَّبْيُ في الظِّلِّ تَحْتَ شَجَرَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-81368c67",
+   "lang": "ar",
+   "text": "شَرِبَ الظَّبْيُ ماءً بارِداً.",
+   "key": "شَرِبَ الظَّبْيُ ماءً بارِداً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-2d1cb4b1",
+   "lang": "ar",
+   "text": "قالَ الظَّبْيُ: الظِّلُّ جَمِيلٌ في الظُّهْر!",
+   "key": "قالَ الظَّبْيُ: الظِّلُّ جَمِيلٌ في الظُّهْر!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-29a9dcc8",
+   "lang": "ar",
+   "text": "هذا عُصْفُورٌ صَغِيرٌ يَعِيشُ في عُشٍّ عالٍ.",
+   "key": "هذا عُصْفُورٌ صَغِيرٌ يَعِيشُ في عُشٍّ عالٍ.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-49d757c7",
+   "lang": "ar",
+   "text": "رَأَى العُصْفُورُ عِنَباً لَذِيذاً.",
+   "key": "رَأَى العُصْفُورُ عِنَباً لَذِيذاً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-72843a2e",
+   "lang": "ar",
+   "text": "أَخَذَ حَبَّةَ عِنَبٍ وَطارَ إِلى العُشّ.",
+   "key": "أَخَذَ حَبَّةَ عِنَبٍ وَطارَ إِلى العُشّ.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-5027c7f1",
+   "lang": "ar",
+   "text": "أَطْعَمَ العُصْفُورُ صِغارَهُ في العُشّ.",
+   "key": "أَطْعَمَ العُصْفُورُ صِغارَهُ في العُشّ.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-a9e07a89",
+   "lang": "ar",
+   "text": "قالَ الصِّغارُ: العِنَبُ طَيِّبٌ يا أَبِي!",
+   "key": "قالَ الصِّغارُ: العِنَبُ طَيِّبٌ يا أَبِي!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-b5c41a3c",
+   "lang": "ar",
+   "text": "هذِهِ غَيْمَةٌ بَيْضاءُ في السَّماء.",
+   "key": "هذِهِ غَيْمَةٌ بَيْضاءُ في السَّماء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-86fb6052",
+   "lang": "ar",
+   "text": "نَظَرَتِ الغَيْمَةُ إِلى الغابَة.",
+   "key": "نَظَرَتِ الغَيْمَةُ إِلى الغابَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-9d7f9c03",
+   "lang": "ar",
+   "text": "كانَتِ الغابَةُ عَطْشَى، فَأَمْطَرَتِ الغَيْمَة.",
+   "key": "كانَتِ الغابَةُ عَطْشَى، فَأَمْطَرَتِ الغَيْمَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-f2cb0f48",
+   "lang": "ar",
+   "text": "غَنَّتِ العَصافِيرُ فَرَحاً.",
+   "key": "غَنَّتِ العَصافِيرُ فَرَحاً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-45c76f4e",
+   "lang": "ar",
+   "text": "قالَتِ الغابَةُ: شُكْراً يا غَيْمَة!",
+   "key": "قالَتِ الغابَةُ: شُكْراً يا غَيْمَة!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-83087496",
+   "lang": "ar",
+   "text": "أَنا الفِيلُ زِيزُو، وَهذِهِ قِصَّتِي!",
+   "key": "أَنا الفِيلُ زِيزُو، وَهذِهِ قِصَّتِي!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-9e788bb2",
+   "lang": "ar",
+   "text": "أُحِبُّ أَكْلَ الفَراوِلَة.",
+   "key": "أُحِبُّ أَكْلَ الفَراوِلَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-e990bd43",
+   "lang": "ar",
+   "text": "رَأَيْتُ فَراشَةً مُلَوَّنَةً في الحَدِيقَة.",
+   "key": "رَأَيْتُ فَراشَةً مُلَوَّنَةً في الحَدِيقَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-08d56458",
+   "lang": "ar",
+   "text": "فَرِحَتِ الفَراشَةُ وَطارَتْ فَوْقَ رَأْسِي.",
+   "key": "فَرِحَتِ الفَراشَةُ وَطارَتْ فَوْقَ رَأْسِي.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-57695deb",
+   "lang": "ar",
+   "text": "فَرِحْتُ أَنا أَيْضاً، وَضَحِكْنا مَعاً!",
+   "key": "فَرِحْتُ أَنا أَيْضاً، وَضَحِكْنا مَعاً!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-5c9ddfb3",
+   "lang": "ar",
+   "text": "هذِهِ قِطَّةٌ بَيْضاءُ اسْمُها قَمَر.",
+   "key": "هذِهِ قِطَّةٌ بَيْضاءُ اسْمُها قَمَر.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-796462c7",
+   "lang": "ar",
+   "text": "قَمَرُ تُحِبُّ النَّظَرَ إِلى القَمَر.",
+   "key": "قَمَرُ تُحِبُّ النَّظَرَ إِلى القَمَر.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-efb0b3ad",
+   "lang": "ar",
+   "text": "جاءَ قِرْدٌ صَغِيرٌ يَلْعَبُ مَعَها.",
+   "key": "جاءَ قِرْدٌ صَغِيرٌ يَلْعَبُ مَعَها.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-24745af1",
+   "lang": "ar",
+   "text": "لَبِسَ القِرْدُ قُبَّعَةً حَمْراء.",
+   "key": "لَبِسَ القِرْدُ قُبَّعَةً حَمْراء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-6b173269",
+   "lang": "ar",
+   "text": "قالَتْ قَمَرُ: قُبَّعَتُكَ جَمِيلَة!",
+   "key": "قالَتْ قَمَرُ: قُبَّعَتُكَ جَمِيلَة!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-8f83af8d",
+   "lang": "ar",
+   "text": "هذا كَرِيمٌ، عِنْدَهُ كُرَةٌ كَبِيرَة.",
+   "key": "هذا كَرِيمٌ، عِنْدَهُ كُرَةٌ كَبِيرَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-c0c1af7f",
+   "lang": "ar",
+   "text": "لَعِبَ كَرِيمٌ مَعَ كَلْبِهِ في الحَدِيقَة.",
+   "key": "لَعِبَ كَرِيمٌ مَعَ كَلْبِهِ في الحَدِيقَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-94985858",
+   "lang": "ar",
+   "text": "رَكَضَ الكَلْبُ خَلْفَ الكُرَة.",
+   "key": "رَكَضَ الكَلْبُ خَلْفَ الكُرَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-f7b49be5",
+   "lang": "ar",
+   "text": "أَعادَ الكَلْبُ الكُرَةَ إِلى كَرِيم.",
+   "key": "أَعادَ الكَلْبُ الكُرَةَ إِلى كَرِيم.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-b40800d2",
+   "lang": "ar",
+   "text": "قالَ كَرِيمٌ: أَنْتَ كَلْبٌ ذَكِيّ!",
+   "key": "قالَ كَرِيمٌ: أَنْتَ كَلْبٌ ذَكِيّ!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-c3aea081",
+   "lang": "ar",
+   "text": "هذِهِ لَيْلَى، عِنْدَها لَيْمُونَةٌ صَفْراء.",
+   "key": "هذِهِ لَيْلَى، عِنْدَها لَيْمُونَةٌ صَفْراء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-a097616a",
+   "lang": "ar",
+   "text": "عَصَرَتْ لَيْلَى اللَّيْمُونَ في كُوب.",
+   "key": "عَصَرَتْ لَيْلَى اللَّيْمُونَ في كُوب.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-3e614687",
+   "lang": "ar",
+   "text": "ثُمَّ رَسَمَتْ لَوْحَةً جَمِيلَة.",
+   "key": "ثُمَّ رَسَمَتْ لَوْحَةً جَمِيلَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-8ec3ea0f",
+   "lang": "ar",
+   "text": "في اللَّوْحَةِ لَيْمُونَةٌ لامِعَة.",
+   "key": "في اللَّوْحَةِ لَيْمُونَةٌ لامِعَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-94be59e0",
+   "lang": "ar",
+   "text": "قالَتْ أُمُّها: لَوْحَتُكِ لَطِيفَةٌ يا لَيْلَى!",
+   "key": "قالَتْ أُمُّها: لَوْحَتُكِ لَطِيفَةٌ يا لَيْلَى!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-58621508",
+   "lang": "ar",
+   "text": "هذِهِ مَرْيَمُ، تُحِبُّ المَوْزَ كَثِيراً.",
+   "key": "هذِهِ مَرْيَمُ، تُحِبُّ المَوْزَ كَثِيراً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-5f81360c",
+   "lang": "ar",
+   "text": "رَأَتْ مَرْيَمُ مَوْزَةً عَلَى المائِدَة.",
+   "key": "رَأَتْ مَرْيَمُ مَوْزَةً عَلَى المائِدَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-4cf87ba6",
+   "lang": "ar",
+   "text": "جاءَ قِرْدٌ مَرِحٌ وَقالَ: أَنا جائِع!",
+   "key": "جاءَ قِرْدٌ مَرِحٌ وَقالَ: أَنا جائِع!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-01693ec1",
+   "lang": "ar",
+   "text": "أَعْطَتْهُ مَرْيَمُ نِصْفَ المَوْزَة.",
+   "key": "أَعْطَتْهُ مَرْيَمُ نِصْفَ المَوْزَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-9f461b7c",
+   "lang": "ar",
+   "text": "قالَ القِرْدُ: شُكْراً يا مَرْيَمُ، أَنْتِ مُمْتازَة!",
+   "key": "قالَ القِرْدُ: شُكْراً يا مَرْيَمُ، أَنْتِ مُمْتازَة!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-77dde15c",
+   "lang": "ar",
+   "text": "هذِهِ نَحْلَةٌ نَشِيطَةٌ اسْمُها نُور.",
+   "key": "هذِهِ نَحْلَةٌ نَشِيطَةٌ اسْمُها نُور.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-ff0eb81b",
+   "lang": "ar",
+   "text": "تَطِيرُ نُورُ فَوْقَ النَّهْر.",
+   "key": "تَطِيرُ نُورُ فَوْقَ النَّهْر.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-a1c50843",
+   "lang": "ar",
+   "text": "نَزَلَتْ نُورُ عَلَى زَهْرَةٍ جَمِيلَة.",
+   "key": "نَزَلَتْ نُورُ عَلَى زَهْرَةٍ جَمِيلَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-3f4d6702",
+   "lang": "ar",
+   "text": "في اللَّيْلِ نَظَرَتْ نُورُ إِلى النُّجُوم.",
+   "key": "في اللَّيْلِ نَظَرَتْ نُورُ إِلى النُّجُوم.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-4fcfdca9",
+   "lang": "ar",
+   "text": "ثُمَّ نامَتِ النَّحْلَةُ سَعِيدَة.",
+   "key": "ثُمَّ نامَتِ النَّحْلَةُ سَعِيدَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-5ba2fe75",
+   "lang": "ar",
+   "text": "هذا هادِي، عِنْدَهُ هَدِيَّةٌ لِأُمِّه.",
+   "key": "هذا هادِي، عِنْدَهُ هَدِيَّةٌ لِأُمِّه.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-fa5d0dc6",
+   "lang": "ar",
+   "text": "في الهَدِيَّةِ وَرْدَةٌ حَمْراء.",
+   "key": "في الهَدِيَّةِ وَرْدَةٌ حَمْراء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-82d4efae",
+   "lang": "ar",
+   "text": "هَمَسَ هادِي: إِنَّها مُفاجَأَة!",
+   "key": "هَمَسَ هادِي: إِنَّها مُفاجَأَة!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-0d2da8e0",
+   "lang": "ar",
+   "text": "فَتَحَتْ أُمُّهُ الهَدِيَّةَ وَفَرِحَتْ كَثِيراً.",
+   "key": "فَتَحَتْ أُمُّهُ الهَدِيَّةَ وَفَرِحَتْ كَثِيراً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-7fcf28ce",
+   "lang": "ar",
+   "text": "قالَتْ أُمُّهُ: شُكْراً يا هادِي!",
+   "key": "قالَتْ أُمُّهُ: شُكْراً يا هادِي!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-c11d8118",
+   "lang": "ar",
+   "text": "هذِهِ وَعْدُ، تُحِبُّ الوُرُودَ كَثِيراً.",
+   "key": "هذِهِ وَعْدُ، تُحِبُّ الوُرُودَ كَثِيراً.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-6cb8fc63",
+   "lang": "ar",
+   "text": "وَجَدَتْ وَعْدُ وَرْدَةً حَمْراءَ في الحَدِيقَة.",
+   "key": "وَجَدَتْ وَعْدُ وَرْدَةً حَمْراءَ في الحَدِيقَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-89f0ecfd",
+   "lang": "ar",
+   "text": "سَقَتِ الوَرْدَةَ بِالماءِ كُلَّ يَوْم.",
+   "key": "سَقَتِ الوَرْدَةَ بِالماءِ كُلَّ يَوْم.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-fda4e79b",
+   "lang": "ar",
+   "text": "وَقَفَتْ فَراشَةٌ عَلَى الوَرْدَة.",
+   "key": "وَقَفَتْ فَراشَةٌ عَلَى الوَرْدَة.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-58fde36c",
+   "lang": "ar",
+   "text": "قالَتْ وَعْدُ: ما أَجْمَلَ الوَرْدَة!",
+   "key": "قالَتْ وَعْدُ: ما أَجْمَلَ الوَرْدَة!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-c249d223",
+   "lang": "ar",
+   "text": "هذا يُوسُفُ، لَهُ يَدانِ نَظِيفَتان.",
+   "key": "هذا يُوسُفُ، لَهُ يَدانِ نَظِيفَتان.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-61d8721d",
+   "lang": "ar",
+   "text": "يَغْسِلُ يُوسُفُ يَدَيْهِ قَبْلَ الأَكْل.",
+   "key": "يَغْسِلُ يُوسُفُ يَدَيْهِ قَبْلَ الأَكْل.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-e8d7696b",
+   "lang": "ar",
+   "text": "ثُمَّ يَأْكُلُ طَعامَهُ بِهُدُوء.",
+   "key": "ثُمَّ يَأْكُلُ طَعامَهُ بِهُدُوء.",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-f1080d55",
+   "lang": "ar",
+   "text": "يُلَوِّحُ يُوسُفُ لِأَصْدِقائِهِ: مَرْحَباً!",
+   "key": "يُلَوِّحُ يُوسُفُ لِأَصْدِقائِهِ: مَرْحَباً!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-587f57c8",
+   "lang": "ar",
+   "text": "قالَ يُوسُفُ: يَدايَ نَظِيفَتانِ دائِماً!",
+   "key": "قالَ يُوسُفُ: يَدايَ نَظِيفَتانِ دائِماً!",
+   "style": "warm storyteller reading a picture book aloud to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow and expressive, every letter and vowel mark pronounced exactly as written"
+  },
+  {
+   "id": "ar-8ca11ce7",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الجيم؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الجيم؟"
+  },
+  {
+   "id": "ar-53409792",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ النون؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ النون؟"
+  },
+  {
+   "id": "ar-018c59b9",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الصاد؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الصاد؟"
+  },
+  {
+   "id": "ar-9a849894",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ التاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ التاء؟"
+  },
+  {
+   "id": "ar-42118459",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الزاي؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الزاي؟"
+  },
+  {
+   "id": "ar-ff5d50a0",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الراء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الراء؟"
+  },
+  {
+   "id": "ar-9993a196",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الياء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الياء؟"
+  },
+  {
+   "id": "ar-f844c056",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الهاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الهاء؟"
+  },
+  {
+   "id": "ar-dad67017",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الشين؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الشين؟"
+  },
+  {
+   "id": "ar-bb0111d7",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ العين؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ العين؟"
+  },
+  {
+   "id": "ar-812caab5",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الواو؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الواو؟"
+  },
+  {
+   "id": "ar-6ecbbc87",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الخاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الخاء؟"
+  },
+  {
+   "id": "ar-9c8d659a",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الطاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الطاء؟"
+  },
+  {
+   "id": "ar-8ae90b4a",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الغين؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الغين؟"
+  },
+  {
+   "id": "ar-8cfac5c0",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الكاف؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الكاف؟"
+  },
+  {
+   "id": "ar-3cf39320",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الثاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الثاء؟"
+  },
+  {
+   "id": "ar-5f23a61a",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الحاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الحاء؟"
+  },
+  {
+   "id": "ar-0d1b89bd",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الباء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الباء؟"
+  },
+  {
+   "id": "ar-4e86545d",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الدال؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الدال؟"
+  },
+  {
+   "id": "ar-30644324",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الضاد؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الضاد؟"
+  },
+  {
+   "id": "ar-9f571246",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الأَلِف؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الأَلِف؟"
+  },
+  {
+   "id": "ar-6ac51573",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الظاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الظاء؟"
+  },
+  {
+   "id": "ar-2a8dce74",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ القاف؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ القاف؟"
+  },
+  {
+   "id": "ar-4e545392",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ اللام؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ اللام؟"
+  },
+  {
+   "id": "ar-1f714e99",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ السين؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ السين؟"
+  },
+  {
+   "id": "ar-1a2e6036",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الميم؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الميم؟"
+  },
+  {
+   "id": "ar-df10b87a",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الذال؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الذال؟"
+  },
+  {
+   "id": "ar-9b94f56c",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الفاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الفاء؟"
+  }
+ ]
+}
