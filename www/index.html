@@ -221,15 +221,11 @@ h1 span{color:var(--orange)}
 .i-ar{margin:0; font-size:1.7rem; font-weight:800; color:var(--ink); animation:zoomIn .5s 2.05s cubic-bezier(.3,1.5,.5,1) both}
 .i-spark{position:absolute; left:50%; top:46%; width:26px; height:26px; margin:-13px; animation:spark .95s ease-out forwards}
 .i-skip{position:absolute; bottom:calc(18px + env(safe-area-inset-bottom,0px)); left:0; right:0; margin:0; text-align:center; color:var(--ink-soft); font-weight:700; font-size:.95rem; animation:zoomIn .4s 1.2s both}
-.i-rainbow{position:absolute; left:50%; top:22%; width:min(150vw,640px); aspect-ratio:2/1; margin-left:calc(min(150vw,640px) / -2); transform-origin:50% 100%;
-  background:radial-gradient(circle at 50% 100%, transparent 0 45%, #E9558D 45% 50%, #F08A2E 50% 55%, #F4C93B 55% 60%, #4DB86B 60% 65%, #4795DE 65% 70%, #8E62D9 70% 75%, transparent 75%);
-  opacity:.55; animation:rainbowUp .9s 1.45s cubic-bezier(.3,1.3,.5,1) both}
 .i-bird{position:absolute; left:-60px; width:34px; height:16px; overflow:visible; animation:flyAcross 4.2s linear both}
 .i-bird path{fill:none; stroke:#3D4B68; stroke-width:2.6; stroke-linecap:round; transform-box:fill-box; transform-origin:center; animation:wings .32s ease-in-out infinite alternate}
 .i-fly{position:absolute; font-size:1.9rem; line-height:1; animation:flutter 3.6s ease-in-out both}
 .i-flower{position:absolute; font-size:1.8rem; line-height:1; animation:zoomIn .45s cubic-bezier(.3,1.6,.5,1) both}
 .i-zizo.dance{animation:dance 1.3s ease-in-out both}
-@keyframes rainbowUp{from{transform:scale(0); opacity:0} to{transform:none; opacity:.55}}
 @keyframes flyAcross{from{transform:translateX(0)} to{transform:translateX(calc(100vw + 120px))}}
 @keyframes wings{from{transform:scaleY(1)} to{transform:scaleY(-.45)}}
 @keyframes flutter{0%{transform:translate(0,30px) rotate(-10deg); opacity:0} 15%{opacity:1} 35%{transform:translate(24px,-14px) rotate(12deg)} 60%{transform:translate(-10px,-46px) rotate(-14deg)} 85%{transform:translate(30px,-80px) rotate(10deg); opacity:1} 100%{transform:translate(10px,-120px) rotate(0); opacity:0}}
@@ -3503,7 +3499,6 @@ h1 span{color:var(--orange)}
     });
     var BIRD = '<svg class="i-bird" viewBox="0 0 34 16" style="top:TOP;animation-delay:DEL"><path d="M2 9 Q9 1 17 9 Q25 1 32 9"/></svg>';
     h += BIRD.replace('TOP', '12%').replace('DEL', '.25s') + BIRD.replace('TOP', '19%').replace('DEL', '.6s').replace('style="', 'style="width:25px;height:12px;');
-    h += '<div class="i-rainbow"></div>';
     h += '<div class="i-hill h1"></div><div class="i-hill h2"></div>';
     [['🌼', 8, 9, .7], ['🌷', 26, 5, .85], ['🌸', 70, 6, 1.0], ['🌼', 88, 10, 1.15], ['🌷', 52, 3, 1.3]].forEach(function(f){
       h += '<span class="i-flower" style="left:' + f[1] + '%;bottom:' + f[2] + '%;animation-delay:' + f[3] + 's">' + f[0] + '</span>';
