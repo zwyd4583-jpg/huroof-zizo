@@ -323,6 +323,18 @@ h1 span{color:var(--orange)}
 .tab[aria-current="page"]{background:var(--tc); color:var(--white)}
 
 /* effects */
+/* Zizo pops in from a different side with a new happy look each time the child gets it right */
+.cheer{position:fixed; inset:0; z-index:12; pointer-events:none; overflow:hidden}
+.cheer-in{position:absolute; display:flex; align-items:center; gap:2px; direction:ltr; animation:cheer 1.8s cubic-bezier(.3,1.25,.5,1) both}
+.cheer-z{width:150px; height:160px; flex:none; overflow:visible}
+.cheer-z .ear{transform-box:fill-box; transform-origin:center; animation:flapq .3s ease-in-out 6}
+@keyframes flapq{50%{transform:rotate(-10deg)}}
+.cheer-b{direction:rtl; margin:0; max-width:200px; background:var(--paper); color:var(--ink); border:4px solid var(--c); border-radius:24px; padding:8px 16px 10px; font-weight:800; font-size:1.55rem; line-height:1.35; text-align:center; box-shadow:0 5px 0 var(--cd)}
+.cheer.s-right .cheer-in{right:12px; top:33%; flex-direction:row-reverse; --fx:125%; --fy:0px}
+.cheer.s-left .cheer-in{left:12px; top:33%; flex-direction:row; --fx:-125%; --fy:0px}
+.cheer.s-bottom .cheer-in{left:0; right:0; margin:0 auto; width:max-content; bottom:calc(92px + env(safe-area-inset-bottom,0px)); flex-direction:column-reverse; --fx:0px; --fy:160%}
+.cheer.s-top .cheer-in{left:0; right:0; margin:0 auto; width:max-content; top:84px; flex-direction:column; --fx:0px; --fy:-160%}
+@keyframes cheer{0%{transform:translate(var(--fx),var(--fy))} 22%{transform:none} 28%{transform:scale(1.07) rotate(-2deg)} 34%{transform:none} 80%{transform:none} 100%{transform:translate(var(--fx),var(--fy))}}
 #fx{position:fixed; left:50%; top:42%; width:0; height:0; pointer-events:none; z-index:30}
 .spark{position:absolute; width:30px; height:30px; margin:-15px; animation:spark .9s ease-out forwards}
 .spark svg{width:100%; height:100%}
@@ -681,6 +693,7 @@ h1 span{color:var(--orange)}
     </button>
   </nav>
   <div id="fx" aria-hidden="true"></div>
+  <div id="cheer" class="cheer" hidden aria-hidden="true"><div class="cheer-in"><svg class="cheer-z" viewBox="0 -6 120 128"></svg><p class="cheer-b"></p></div></div>
   <div class="welcome" id="welcome" role="dialog" aria-modal="true" aria-label="أهلاً">
     <div class="wl-inner">
       <h1 class="wl-title" dir="ltr" lang="en"><span>Zizo</span> World</h1>
@@ -1471,6 +1484,24 @@ h1 span{color:var(--orange)}
     bub.textContent = text;
     if (mood && !reduce){ zEl.classList.remove('happy','sad'); zEl.getBoundingClientRect(); zEl.classList.add(mood); }
   }
+  // A right answer: Zizo jumps in with a new happy look, from a different side each time, saying the praise
+  var cheerEl = $('cheer'), cheerSide = -1, cheerPose = -1, cheerTimer = null;
+  var CHEER_SIDES = ['right', 'bottom', 'left', 'top'];
+  var CHEER_COLORS = [['--orange', '--orange-dark'], ['--blue', '--blue-dark'], ['--purple', '--purple-dark'], ['--pink', '--pink-dark'], ['--green', '--green-dark']];
+  function cheer(text){
+    var s = Math.floor(Math.random() * (CHEER_SIDES.length - 1)); if (s >= cheerSide) s++; if (cheerSide < 0) s = Math.floor(Math.random() * CHEER_SIDES.length); cheerSide = s;
+    var k = Math.floor(Math.random() * (POSES.length - 1)); if (k >= cheerPose) k++; if (cheerPose < 0) k = Math.floor(Math.random() * POSES.length); cheerPose = k;
+    cheerEl.querySelector('.cheer-z').innerHTML = zizoMarkup(outfit, POSES[k]);
+    cheerEl.querySelector('.cheer-b').textContent = text;
+    cheerEl.className = 'cheer s-' + CHEER_SIDES[s];
+    cheerEl.style.cssText = '--c:var(' + CHEER_COLORS[k][0] + ');--cd:var(' + CHEER_COLORS[k][1] + ')';
+    cheerEl.hidden = false;
+    var inner = cheerEl.querySelector('.cheer-in');
+    inner.style.animation = 'none'; inner.getBoundingClientRect(); inner.style.animation = '';
+    if (window.__zizoTest) (window.__zizoTest.cheers = window.__zizoTest.cheers || []).push(CHEER_SIDES[s] + ':' + POSES[k] + ':' + text);
+    clearTimeout(cheerTimer);
+    cheerTimer = setTimeout(function(){ cheerEl.hidden = true; }, 1850);
+  }
 
   var stars = 0;
   try { stars = parseInt(localStorage.getItem('zizo-stars') || '0', 10) || 0; } catch(e){}
@@ -1649,10 +1680,58 @@ h1 span{color:var(--orange)}
     return '<path d="M' + pts.join(' L') + 'Z" fill="var(--sun)" stroke="var(--sun-dark)" stroke-width="1" stroke-linejoin="round"/>';
   }
   // Zizo's drawing (viewBox 0 0 120 120) wearing outfit o
-  function zizoMarkup(o){
+  // A heart for Zizo's happy faces
+  function heartShape(x, y, r, fill){
+    return '<path d="M' + x + ' ' + (y + r) + ' C' + (x - r*1.7) + ' ' + (y - r*0.1) + ' ' + (x - r*0.7) + ' ' + (y - r*1.5) + ' ' + x + ' ' + (y - r*0.45) +
+      ' C' + (x + r*0.7) + ' ' + (y - r*1.5) + ' ' + (x + r*1.7) + ' ' + (y - r*0.1) + ' ' + x + ' ' + (y + r) + 'Z" fill="' + fill + '"/>';
+  }
+  // Zizo's face and trunk: his everyday look, or one of the happy looks he shows when a child answers well
+  var POSES = ['joy', 'wink', 'stars', 'love', 'laugh'];
+  function zizoFace(pose){
+    var eyeL = '<circle cx="47" cy="57" r="5.5" fill="var(--ink)"/><circle cx="49" cy="55" r="1.8" fill="var(--white)"/>',
+        eyeR = '<circle cx="73" cy="57" r="5.5" fill="var(--ink)"/><circle cx="75" cy="55" r="1.8" fill="var(--white)"/>',
+        arcL = '<path d="M41 59q6 -8 12 0" fill="none" stroke="var(--ink)" stroke-width="3.2" stroke-linecap="round"/>',
+        arcR = '<path d="M67 59q6 -8 12 0" fill="none" stroke="var(--ink)" stroke-width="3.2" stroke-linecap="round"/>',
+        smile = '<path d="M45 74q5 5 10 1" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/>',
+        open = '<path d="M43 72h15q-1 10 -7.5 10t-7.5 -10z" fill="var(--ink)"/><path d="M46.5 79.5q4 -3 8 0q-4 3 -8 0z" fill="var(--pink)"/>',
+        trunk = 'M60 66 C59 84 62 95 74 97', lines = true, back = '', front = '';
+    switch (pose){
+      case 'joy':
+        eyeL = arcL; eyeR = arcR; smile = open; trunk = 'M60 66 C58 90 76 101 91 85'; lines = false;
+        front = starShape(16, 30, 6) + starShape(104, 22, 5) + starShape(108, 92, 4);
+        break;
+      case 'wink':
+        eyeR = '<path d="M67 57q6 5 12 0" fill="none" stroke="var(--ink)" stroke-width="3.2" stroke-linecap="round"/>';
+        smile = '<path d="M43 73q7 8 15 0" fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round"/>';
+        trunk = 'M60 66 C58 84 70 92 85 86'; front = starShape(93, 82, 9);
+        break;
+      case 'stars':
+        eyeL = starShape(47, 57, 8).replace('var(--sun)', 'var(--sun-dark)'); eyeR = starShape(73, 57, 8).replace('var(--sun)', 'var(--sun-dark)');
+        smile = '<ellipse cx="51" cy="77" rx="4.2" ry="5" fill="var(--ink)"/>';
+        back = '<circle cx="14" cy="40" r="3" fill="var(--pink)"/><circle cx="106" cy="36" r="3" fill="var(--blue)"/><circle cx="20" cy="100" r="2.6" fill="var(--green)"/><circle cx="102" cy="104" r="2.6" fill="var(--sun)"/>';
+        break;
+      case 'love':
+        eyeL = heartShape(47, 57, 6, 'var(--pink-dark)'); eyeR = heartShape(73, 57, 6, 'var(--pink-dark)'); smile = open;
+        front = heartShape(16, 28, 6, 'var(--pink)') + heartShape(104, 20, 5, 'var(--pink)');
+        break;
+      case 'laugh':
+        eyeL = '<path d="M41 55l11 3l-11 3" fill="none" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+        eyeR = '<path d="M79 55l-11 3l11 3" fill="none" stroke="var(--ink)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+        smile = open; trunk = 'M60 66 C62 90 44 101 29 85'; lines = false;
+        front = '<path d="M98 30v-12l8 -2v12" fill="none" stroke="var(--purple)" stroke-width="2.4" stroke-linecap="round"/><circle cx="96" cy="30" r="3" fill="var(--purple)"/><circle cx="104" cy="28" r="3" fill="var(--purple)"/>' +
+                '<path d="M16 26v-10" fill="none" stroke="var(--blue)" stroke-width="2.4" stroke-linecap="round"/><circle cx="14" cy="26" r="3" fill="var(--blue)"/>';
+        break;
+    }
+    return { back: back, front: front,
+      trunk: '<path d="' + trunk + '" fill="none" stroke="var(--zizo)" stroke-width="13" stroke-linecap="round"/>' +
+             (lines ? '<path d="M55 79h9M56 86h8" fill="none" stroke="var(--zizo-dark)" stroke-width="2" stroke-linecap="round"/>' : ''),
+      face: '<ellipse cx="40" cy="69" rx="6" ry="3.5" fill="var(--blush)"/><ellipse cx="80" cy="69" rx="6" ry="3.5" fill="var(--blush)"/>' + eyeL + eyeR + smile };
+  }
+  function zizoMarkup(o, pose){
     var sc = SCARF[o.scarf] || SCARF.orange, s1 = 'var(' + sc[0] + ')', s2 = 'var(' + sc[1] + ')';
-    var h = '';
+    var h = '', f = zizoFace(pose);
     if (o.extra === 'sparkle') h += starShape(13, 22, 7) + starShape(107, 17, 6) + starShape(111, 98, 5);
+    h += f.back;
     h += '<g class="ear"><ellipse cx="95" cy="60" rx="22" ry="27" fill="var(--zizo-dark)"/><ellipse cx="96" cy="61" rx="13" ry="17" fill="var(--blush)"/></g>' +
          '<g class="ear"><ellipse cx="25" cy="60" rx="22" ry="27" fill="var(--zizo-dark)"/><ellipse cx="24" cy="61" rx="13" ry="17" fill="var(--blush)"/></g>' +
          '<circle cx="60" cy="60" r="33" fill="var(--zizo)"/>' +
@@ -1660,12 +1739,7 @@ h1 span{color:var(--orange)}
          '<path d="M37 89v7M43 89v7M49 89v7M71 89v7M77 89v7M83 89v7" fill="none" stroke="' + s2 + '" stroke-width="2" stroke-linecap="round"/>' +
          '<rect x="68" y="93" width="12" height="22" rx="4" fill="' + s1 + '" transform="rotate(-14 74 104)"/>' +
          '<path d="M70 110h10" fill="none" stroke="' + s2 + '" stroke-width="2" stroke-linecap="round" transform="rotate(-14 74 104)"/>' +
-         '<path d="M60 66 C59 84 62 95 74 97" fill="none" stroke="var(--zizo)" stroke-width="13" stroke-linecap="round"/>' +
-         '<path d="M55 79h9M56 86h8" fill="none" stroke="var(--zizo-dark)" stroke-width="2" stroke-linecap="round"/>' +
-         '<ellipse cx="40" cy="69" rx="6" ry="3.5" fill="var(--blush)"/><ellipse cx="80" cy="69" rx="6" ry="3.5" fill="var(--blush)"/>' +
-         '<circle cx="47" cy="57" r="5.5" fill="var(--ink)"/><circle cx="73" cy="57" r="5.5" fill="var(--ink)"/>' +
-         '<circle cx="49" cy="55" r="1.8" fill="var(--white)"/><circle cx="75" cy="55" r="1.8" fill="var(--white)"/>' +
-         '<path d="M45 74q5 5 10 1" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/>';
+         f.trunk + f.face;
     if (o.extra === 'medal') h +=
          '<path d="M43 97 L48 106 L53 97 Z" fill="var(--blue)"/>' +
          '<circle cx="48" cy="108" r="7.5" fill="var(--sun)" stroke="var(--sun-dark)" stroke-width="2"/>' + starShape(48, 108, 3.6).replace('var(--sun)', 'var(--white)');
@@ -1713,7 +1787,7 @@ h1 span{color:var(--orange)}
          '<rect x="33" y="36" width="54" height="9" rx="4.5" fill="' + s2 + '"/>' +
          '<circle cx="60" cy="20" r="6.5" fill="' + s2 + '"/>';
     }
-    return h;
+    return h + f.front;
   }
   function renderZizo(){ zEl.innerHTML = zizoMarkup(outfit); }
 
@@ -1965,7 +2039,7 @@ h1 span{color:var(--orange)}
     nBoxCtl = countBox($('nBox'), ncur + 1, x.e, function(auto){
       if (auto) return;
       var pr = praise();
-      zizo(en ? pr + ' ' + x.w + '!' : pr + ' عددها ' + x.n, 'happy'); addStar();
+      zizo(en ? pr + ' ' + x.w + '!' : pr + ' عددها ' + x.n, 'happy'); cheer(pr); addStar();
       say(en ? [{ en: x.w }, pr] : [x.s, pr]);
     }, en);
     ngrid.hidden = true; ndetail.hidden = false;
@@ -2124,7 +2198,7 @@ h1 span{color:var(--orange)}
           b.classList.add('right');
           ch.querySelectorAll('button').forEach(function(x){ x.disabled = true; });
           var pr = praise();
-          zizo(pr + ' ' + L[i].w + ' تبدأ بحرف ال' + L[i].n, 'happy'); addStar();
+          zizo(pr + ' ' + L[i].w + ' تبدأ بحرف ال' + L[i].n, 'happy'); cheer(pr); addStar();
           if (storiesDone.indexOf(i) < 0){ storiesDone.push(i); saveStories(); }
           var run = ++storyRun;
           say([pr, L[i].s], function(){ if (run === storyRun) storyTimer = setTimeout(storyEnd, 500); });
@@ -2551,7 +2625,7 @@ h1 span{color:var(--orange)}
       b.classList.add('right');
       noteAnswer(mode, target, true);
       var pr = praise();
-      zizo(pr, 'happy'); addStar();
+      zizo(pr, 'happy'); cheer(pr); addStar();
       if (mode === 'first') wordInto($('pWord'), target, false);
       if (mode === 'math'){ var qm = $('pEq').querySelector('.qm'); qm.textContent = N[target].d; qm.classList.add('ok'); }
       var won = POOLS[mode][target];
@@ -2668,6 +2742,7 @@ h1 span{color:var(--orange)}
     window.__zizoTest.placeGlyph = placeGlyph;
     window.__zizoTest.target = function(){ return { target: target, mode: mode }; };
     window.__zizoTest.phrases = allPhrases;
+    window.__zizoTest.zizoMarkup = function(pose){ return zizoMarkup(outfit, pose); };
   }
 
   // Every sentence the app can say, for recording Zizo's voice (scripts/voice_phrases.py collects it).
@@ -2923,7 +2998,7 @@ h1 span{color:var(--orange)}
     }
     traceDone = true; drawAll();
     noteTraced(tKind, tIdx);
-    var pr = praise(); addStar(); zizo(pr, 'happy'); say(pr);
+    var pr = praise(); addStar(); zizo(pr, 'happy'); cheer(pr); say(pr);
     traceTimer = setTimeout(function(){ whenNoPrize(function(){ setTrace(tIdx + 1, true); }); }, 1600);
   });
   if (window.ResizeObserver) new ResizeObserver(function(){ if (!$('v-trace').hidden) sizeCanvas(); }).observe($('cWrap'));
