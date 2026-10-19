@@ -211,16 +211,38 @@ def chunks(items, g):
         yield key, cur
 
 
+_FF = []
+
+
+def ffmpeg_exe():
+    """ffmpeg from the system, or from the imageio-ffmpeg package (installed for this Python on first use)."""
+    if not _FF:
+        ff = shutil.which("ffmpeg") or ""
+        if not ff:
+            for attempt in (0, 1):
+                try:
+                    import imageio_ffmpeg
+                    ff = imageio_ffmpeg.get_ffmpeg_exe()
+                    break
+                except Exception:
+                    if attempt == 0:
+                        subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--user", "imageio-ffmpeg"])
+                        import importlib, site
+                        importlib.invalidate_caches()
+                        try:
+                            sys.path.append(site.getusersitepackages())
+                        except Exception:
+                            pass
+        _FF.append(ff or "ffmpeg")
+    return _FF[0]
+
+
 def packed(p):
     """A lossless FLAC copy of a recording (about half the size) for a quicker download, when an encoder is around."""
     if p.suffix != ".wav":
         return p
     f = p.with_suffix(".flac")
-    try:  # pip install --user imageio-ffmpeg brings its own ffmpeg
-        import imageio_ffmpeg
-        ff = imageio_ffmpeg.get_ffmpeg_exe()
-    except Exception:
-        ff = "ffmpeg"
+    ff = ffmpeg_exe()
     for cmd in ([ff, "-nostdin", "-v", "error", "-y", "-i", str(p), str(f)], ["flac", "-s", "-f", "-o", str(f), str(p)]):
         if (shutil.which(cmd[0]) or os.path.exists(cmd[0])) and subprocess.run(cmd).returncode == 0 and f.exists():
             return f
