@@ -221,6 +221,19 @@ h1 span{color:var(--orange)}
 .i-ar{margin:0; font-size:1.7rem; font-weight:800; color:var(--ink); animation:zoomIn .5s 2.05s cubic-bezier(.3,1.5,.5,1) both}
 .i-spark{position:absolute; left:50%; top:46%; width:26px; height:26px; margin:-13px; animation:spark .95s ease-out forwards}
 .i-skip{position:absolute; bottom:calc(18px + env(safe-area-inset-bottom,0px)); left:0; right:0; margin:0; text-align:center; color:var(--ink-soft); font-weight:700; font-size:.95rem; animation:zoomIn .4s 1.2s both}
+.i-rainbow{position:absolute; left:50%; top:22%; width:min(150vw,640px); aspect-ratio:2/1; margin-left:calc(min(150vw,640px) / -2); transform-origin:50% 100%;
+  background:radial-gradient(circle at 50% 100%, transparent 0 45%, #E9558D 45% 50%, #F08A2E 50% 55%, #F4C93B 55% 60%, #4DB86B 60% 65%, #4795DE 65% 70%, #8E62D9 70% 75%, transparent 75%);
+  opacity:.55; animation:rainbowUp .9s 1.45s cubic-bezier(.3,1.3,.5,1) both}
+.i-bird{position:absolute; left:-60px; width:34px; height:16px; overflow:visible; animation:flyAcross 4.2s linear both}
+.i-bird path{fill:none; stroke:#3D4B68; stroke-width:2.6; stroke-linecap:round; transform-box:fill-box; transform-origin:center; animation:wings .32s ease-in-out infinite alternate}
+.i-fly{position:absolute; font-size:1.9rem; line-height:1; animation:flutter 3.6s ease-in-out both}
+.i-flower{position:absolute; font-size:1.8rem; line-height:1; animation:zoomIn .45s cubic-bezier(.3,1.6,.5,1) both}
+.i-zizo.dance{animation:dance 1.3s ease-in-out both}
+@keyframes rainbowUp{from{transform:scale(0); opacity:0} to{transform:none; opacity:.55}}
+@keyframes flyAcross{from{transform:translateX(0)} to{transform:translateX(calc(100vw + 120px))}}
+@keyframes wings{from{transform:scaleY(1)} to{transform:scaleY(-.45)}}
+@keyframes flutter{0%{transform:translate(0,30px) rotate(-10deg); opacity:0} 15%{opacity:1} 35%{transform:translate(24px,-14px) rotate(12deg)} 60%{transform:translate(-10px,-46px) rotate(-14deg)} 85%{transform:translate(30px,-80px) rotate(10deg); opacity:1} 100%{transform:translate(10px,-120px) rotate(0); opacity:0}}
+@keyframes dance{0%,100%{transform:none} 15%{transform:translateY(-14px) rotate(-8deg)} 30%{transform:translateY(0) rotate(0) scale(1.05,.95)} 45%{transform:translateY(-14px) rotate(8deg)} 60%{transform:translateY(0) rotate(0) scale(1.05,.95)} 78%{transform:translateY(-22px) rotate(-4deg) scale(1.04)} 90%{transform:scale(1.06,.94)}}
 @keyframes sunUp{from{transform:translateY(-170px) scale(.5)}}
 @keyframes driftR{to{transform:translateX(calc(100vw + 300px))}}
 @keyframes driftL{to{transform:translateX(calc(-100vw - 300px))}}
@@ -366,6 +379,27 @@ h1 span{color:var(--orange)}
 .tab[aria-current="page"]{background:var(--tc); color:var(--white)}
 
 /* effects */
+/* Zizo is alive: he blinks, looks around, and wiggles and giggles when tapped */
+.zlook{animation:look 9s ease-in-out infinite}
+.zblink{transform-box:fill-box; transform-origin:center; animation:blink 4.6s infinite}
+.ztap{transform-box:fill-box; transform-origin:50% 90%}
+.ztap.go{animation:wiggle .65s ease}
+.zizo, .zizo-hero, .zizo-big{cursor:pointer; -webkit-tap-highlight-color:transparent}
+@keyframes blink{0%,93%,100%{transform:none} 95.5%{transform:scaleY(.12)}}
+@keyframes look{0%,28%,100%{transform:none} 33%,48%{transform:translateX(2.6px)} 53%,70%{transform:translateX(-2.6px)} 75%{transform:none}}
+@keyframes wiggle{0%{transform:none} 20%{transform:rotate(-11deg) scale(1.1)} 40%{transform:rotate(9deg) scale(1.05)} 60%{transform:rotate(-6deg)} 80%{transform:rotate(3deg)} 100%{transform:none}}
+/* screens and their tiles come in instead of just appearing */
+.enter{animation:viewIn .3s ease both}
+.enter .grid > *, .grid.enter > *, .enter .games > *, .games.enter > *{animation:tileIn .4s cubic-bezier(.3,1.45,.5,1) both; animation-delay:calc(var(--i,0) * 16ms)}
+.choices .choice{animation:tileIn .35s cubic-bezier(.3,1.45,.5,1) both}
+.choices .choice:nth-child(2){animation-delay:.07s} .choices .choice:nth-child(3){animation-delay:.14s} .choices .choice:nth-child(4){animation-delay:.21s}
+.sscene{animation:sceneIn .5s cubic-bezier(.3,1.4,.5,1) both}
+.stext{animation:viewIn .45s .12s ease both}
+.tab[aria-current="page"] svg{animation:tabPop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes viewIn{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+@keyframes tileIn{from{opacity:0; transform:scale(.55)} to{opacity:1; transform:none}}
+@keyframes sceneIn{from{opacity:0; transform:scale(.4) rotate(-8deg)} to{opacity:1; transform:none}}
+@keyframes tabPop{0%{transform:scale(.6)} 60%{transform:scale(1.22)} 100%{transform:none}}
 /* Zizo pops in from a different side with a new happy look each time the child gets it right */
 .cheer{position:fixed; inset:0; z-index:12; pointer-events:none; overflow:hidden}
 .cheer-in{position:absolute; display:flex; align-items:center; gap:2px; direction:ltr; animation:cheer 1.8s cubic-bezier(.3,1.25,.5,1) both}
@@ -373,6 +407,7 @@ h1 span{color:var(--orange)}
 .cheer-z .ear{transform-box:fill-box; transform-origin:center; animation:flapq .3s ease-in-out 6}
 @keyframes flapq{50%{transform:rotate(-10deg)}}
 .cheer-b{direction:rtl; margin:0; max-width:185px; background:var(--paper); color:var(--ink); border:4px solid var(--c); border-radius:24px; padding:8px 16px 10px; font-weight:800; font-size:1.55rem; line-height:1.35; text-align:center; box-shadow:0 5px 0 var(--cd)}
+.cheer.oops .cheer-in{animation-duration:1.5s}
 .cheer.s-right .cheer-in{right:18px; top:33%; flex-direction:row-reverse; --fx:125%; --fy:0px}
 .cheer.s-left .cheer-in{left:18px; top:33%; flex-direction:row; --fx:-125%; --fy:0px}
 .cheer.s-bottom .cheer-in{left:0; right:0; margin:0 auto; width:max-content; bottom:calc(92px + env(safe-area-inset-bottom,0px)); flex-direction:column-reverse; --fx:0px; --fy:160%}
@@ -1532,19 +1567,27 @@ h1 span{color:var(--orange)}
   var cheerEl = $('cheer'), cheerSide = -1, cheerPose = -1, cheerTimer = null;
   var CHEER_SIDES = ['right', 'bottom', 'left', 'top'];
   var CHEER_COLORS = [['--orange', '--orange-dark'], ['--blue', '--blue-dark'], ['--purple', '--purple-dark'], ['--pink', '--pink-dark'], ['--green', '--green-dark']];
-  function cheer(text){
-    var s = Math.floor(Math.random() * (CHEER_SIDES.length - 1)); if (s >= cheerSide) s++; if (cheerSide < 0) s = Math.floor(Math.random() * CHEER_SIDES.length); cheerSide = s;
-    var k = Math.floor(Math.random() * (POSES.length - 1)); if (k >= cheerPose) k++; if (cheerPose < 0) k = Math.floor(Math.random() * POSES.length); cheerPose = k;
-    cheerEl.querySelector('.cheer-z').innerHTML = zizoMarkup(outfit, POSES[k]);
+  var oopsTurn = 0;
+  function cheer(text, oops){
+    var s = Math.floor(Math.random() * (CHEER_SIDES.length - 1)); if (s >= cheerSide) s++; if (cheerSide < 0) s = Math.floor(Math.random() * CHEER_SIDES.length);
+    if (oops && CHEER_SIDES[s] === 'bottom') s = cheerSide === 0 ? 2 : 0;
+    cheerSide = s;
+    var pose, col;
+    if (oops){ pose = (oopsTurn++ % 2) ? 'cheerup' : 'think'; col = pose === 'think' ? ['--blue', '--blue-dark'] : ['--teal', '--teal-dark']; }
+    else {
+      var k = Math.floor(Math.random() * (POSES.length - 1)); if (k >= cheerPose) k++; if (cheerPose < 0) k = Math.floor(Math.random() * POSES.length); cheerPose = k;
+      pose = POSES[k]; col = CHEER_COLORS[k];
+    }
+    cheerEl.querySelector('.cheer-z').innerHTML = zizoMarkup(outfit, pose);
     cheerEl.querySelector('.cheer-b').textContent = text;
-    cheerEl.className = 'cheer s-' + CHEER_SIDES[s];
-    cheerEl.style.cssText = '--c:var(' + CHEER_COLORS[k][0] + ');--cd:var(' + CHEER_COLORS[k][1] + ')';
+    cheerEl.className = 'cheer s-' + CHEER_SIDES[s] + (oops ? ' oops' : '');
+    cheerEl.style.cssText = '--c:var(' + col[0] + ');--cd:var(' + col[1] + ')';
     cheerEl.hidden = false;
     var inner = cheerEl.querySelector('.cheer-in');
     inner.style.animation = 'none'; inner.getBoundingClientRect(); inner.style.animation = '';
-    if (window.__zizoTest) (window.__zizoTest.cheers = window.__zizoTest.cheers || []).push(CHEER_SIDES[s] + ':' + POSES[k] + ':' + text);
+    if (window.__zizoTest) (window.__zizoTest.cheers = window.__zizoTest.cheers || []).push(CHEER_SIDES[s] + ':' + pose + ':' + text);
     clearTimeout(cheerTimer);
-    cheerTimer = setTimeout(function(){ cheerEl.hidden = true; }, 1850);
+    cheerTimer = setTimeout(function(){ cheerEl.hidden = true; }, oops ? 1550 : 1850);
   }
 
   var stars = 0;
@@ -1603,6 +1646,8 @@ h1 span{color:var(--orange)}
     pop: function(){ tone(620 + Math.random() * 220, 0, 0.09, { vol: 0.2, to: 240, attack: 0.004 }); },
     // coins for the shop
     coin: function(){ tone(987.8, 0, 0.09, { type: 'square', vol: 0.1 }); tone(1318.5, 0.08, 0.34, { type: 'square', vol: 0.1 }); tone(2637, 0.08, 0.2, { vol: 0.05 }); },
+    // Zizo giggling when he is tapped
+    giggle: function(){ [0, 0.11, 0.22, 0.34].forEach(function(t, k){ tone(700 + k * 70 + Math.random() * 60, t, 0.1, { type: 'triangle', vol: 0.16, to: 980 + k * 60 }); }); },
     // the opening: balloons popping up, Zizo's trumpet, a rising tune
     introPops: function(){ [0, 0.16, 0.3, 0.46].forEach(function(t){ tone(560 + Math.random() * 300, t, 0.09, { vol: 0.16, to: 260, attack: 0.004 }); }); },
     trumpet: function(){
@@ -1745,8 +1790,20 @@ h1 span{color:var(--orange)}
         arcR = '<path d="M67 59q6 -8 12 0" fill="none" stroke="var(--ink)" stroke-width="3.2" stroke-linecap="round"/>',
         smile = '<path d="M45 74q5 5 10 1" fill="none" stroke="var(--ink)" stroke-width="2.2" stroke-linecap="round"/>',
         open = '<path d="M43 72h15q-1 10 -7.5 10t-7.5 -10z" fill="var(--ink)"/><path d="M46.5 79.5q4 -3 8 0q-4 3 -8 0z" fill="var(--pink)"/>',
-        trunk = 'M60 66 C59 84 62 95 74 97', lines = true, back = '', front = '';
+        trunk = 'M60 66 C59 84 62 95 74 97', lines = true, back = '', front = '', alive = !pose;
     switch (pose){
+      case 'think': // eyes up, a little "o", trunk curled under the chin, a question mark
+        eyeL = '<circle cx="45" cy="54" r="5.5" fill="var(--ink)"/><circle cx="46.5" cy="52" r="1.8" fill="var(--white)"/>';
+        eyeR = '<circle cx="71" cy="54" r="5.5" fill="var(--ink)"/><circle cx="72.5" cy="52" r="1.8" fill="var(--white)"/>';
+        smile = '<ellipse cx="53" cy="76" rx="3.2" ry="2.8" fill="var(--ink)"/>';
+        trunk = 'M60 66 C58 84 46 93 38 85';
+        front = '<text x="96" y="34" font-size="30" font-weight="800" fill="var(--blue)" font-family="sans-serif">؟</text>';
+        break;
+      case 'cheerup': // a warm smile, trunk up to say "you can do it", a small heart
+        smile = '<path d="M44 73q7 7 14 0" fill="none" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round"/>';
+        trunk = 'M60 66 C58 90 76 101 91 85'; lines = false; alive = true;
+        front = heartShape(97, 76, 6, 'var(--pink)');
+        break;
       case 'joy':
         eyeL = arcL; eyeR = arcR; smile = open; trunk = 'M60 66 C58 90 76 101 91 85'; lines = false;
         front = starShape(16, 30, 6) + starShape(104, 22, 5) + starShape(108, 92, 4);
@@ -1776,7 +1833,8 @@ h1 span{color:var(--orange)}
     return { back: back, front: front,
       trunk: '<path d="' + trunk + '" fill="none" stroke="var(--zizo)" stroke-width="13" stroke-linecap="round"/>' +
              (lines ? '<path d="M55 79h9M56 86h8" fill="none" stroke="var(--zizo-dark)" stroke-width="2" stroke-linecap="round"/>' : ''),
-      face: '<ellipse cx="40" cy="69" rx="6" ry="3.5" fill="var(--blush)"/><ellipse cx="80" cy="69" rx="6" ry="3.5" fill="var(--blush)"/>' + eyeL + eyeR + smile };
+      face: '<ellipse cx="40" cy="69" rx="6" ry="3.5" fill="var(--blush)"/><ellipse cx="80" cy="69" rx="6" ry="3.5" fill="var(--blush)"/>' +
+            (alive ? '<g class="zlook"><g class="zblink">' + eyeL + eyeR + '</g></g>' : eyeL + eyeR) + smile };
   }
   function zizoMarkup(o, pose){
     var sc = SCARF[o.scarf] || SCARF.orange, s1 = 'var(' + sc[0] + ')', s2 = 'var(' + sc[1] + ')';
@@ -1841,6 +1899,41 @@ h1 span{color:var(--orange)}
     return h + f.front;
   }
   function renderZizo(){ zEl.innerHTML = zizoMarkup(outfit); }
+  // Tap Zizo anywhere: a wiggle, a giggle, a new face, and a funny line
+  var ZIZO_TAP = ['هِهِهِ! هذا يُدَغْدِغُنِي!', 'أَنا زِيزُو الفِيل!', 'خُرْطُومِي طَوِيلٌ جِدّاً!', 'هَيّا نَتَعَلَّمُ مَعاً!', 'أَنا سَعِيدٌ جِدّاً اليَوْم!'];
+  var tapLine = -1;
+  function plainAr(t){ return t.replace(/[\u064B-\u0652\u0670]/g, ''); }
+  function zizoTap(el){
+    if (el._busy) return;
+    el._busy = true;
+    var k = Math.floor(Math.random() * (ZIZO_TAP.length - 1)); if (k >= tapLine) k++; if (tapLine < 0) k = 0; tapLine = k;
+    el.innerHTML = '<g class="ztap go">' + zizoMarkup(outfit, pick(POSES)) + '</g>';
+    sfx('giggle');
+    var line = ZIZO_TAP[k], shown = plainAr(line), before = bub.textContent;
+    if (el === zEl) zizo(shown);
+    sayRecorded(line);
+    if (window.__zizoTest) (window.__zizoTest.taps = window.__zizoTest.taps || []).push(shown);
+    setTimeout(function(){
+      el.innerHTML = zizoMarkup(outfit); el._busy = false;
+      if (el === zEl && bub.textContent === shown) bub.textContent = before;
+    }, 1500);
+  }
+  zEl.addEventListener('click', function(){ zizoTap(zEl); });
+  // Screens, lists and cards come in with a little movement instead of just appearing
+  function enter(el){
+    if (!el || reduce) return;
+    el.classList.remove('enter'); el.getBoundingClientRect();
+    var lists = el.matches('.grid, .games') ? [el] : Array.prototype.slice.call(el.querySelectorAll('.grid, .games'));
+    lists.forEach(function(g){ Array.prototype.forEach.call(g.children, function(c, i){ c.style.setProperty('--i', Math.min(i, 30)); }); });
+    el.classList.add('enter');
+    clearTimeout(el._enterT);
+    el._enterT = setTimeout(function(){ el.classList.remove('enter'); }, 1000);
+  }
+  if (window.MutationObserver){
+    var enterWatch = new MutationObserver(function(ms){ ms.forEach(function(m){ if (!m.target.hidden) enter(m.target); }); });
+    ['v-letters','v-numbers','v-discover','v-play','v-trace','v-rewards','v-stories','grid','detail','ngrid','ndetail','dgrid','ddetail',
+     'sgrid','sreader','gameMenu','gameArea','mapArea'].forEach(function(id){ var el = $(id); if (el) enterWatch.observe(el, { attributes: true, attributeFilter: ['hidden'] }); });
+  }
 
   function starsText(n){
     if (n === 1) return 'نجمة واحدة';
@@ -1989,6 +2082,7 @@ h1 span{color:var(--orange)}
     $('dWord').className = 'word' + (en ? ' en' : '');
     if (en) enWordInto($('dWord'), l); else wordInto($('dWord'), cur, false);
     $('dCount').textContent = fmt(cur + 1) + ' من ' + fmt(list.length);
+    if (!detail.hidden) enter(detail.querySelector('.lcard'));
     $('toStory').hidden = en;
     if (!en) $('toStoryText').textContent = 'قصة حرف ال' + L[cur].n;
     grid.hidden = true; detail.hidden = false;
@@ -2087,6 +2181,7 @@ h1 span{color:var(--orange)}
     $('nName').className = 'lname' + (en ? ' en' : '');
     $('nName').textContent = en ? x.d + ' — ' + x.w : 'الرقم ' + x.n;
     $('nCount').textContent = fmt(ncur + 1) + ' من ' + fmt(N.length);
+    if (!ndetail.hidden) enter(ndetail.querySelector('.lcard'));
     nBoxCtl = countBox($('nBox'), ncur + 1, x.e, function(auto){
       if (auto) return;
       var pr = praise();
@@ -2142,6 +2237,7 @@ h1 span{color:var(--orange)}
     $('xName').textContent = item.n;
     $('dFact').textContent = (dTopic === 'colors' ? item.e + ' ' : '') + item.f;
     $('dCountD').textContent = fmt(dcur + 1) + ' من ' + fmt(T.list.length);
+    if (!ddetail.hidden) enter(ddetail.querySelector('.lcard'));
     $('dbackText').textContent = T.back;
     $('toGameText').textContent = 'العب: ' + GAMES.filter(function(g){ return g.mode === T.game; })[0].t;
     dgrid.hidden = true; ddetail.hidden = false;
@@ -2256,7 +2352,7 @@ h1 span{color:var(--orange)}
           storyTimer = setTimeout(function(){ if (run === storyRun) storyEnd(); }, 6000);
         } else {
           b.classList.add('wrong'); b.disabled = true; sfx('wrong');
-          var r = retry(); zizo(r, 'sad'); say(r);
+          var r = retry(); zizo(r, 'sad'); cheer(r, true); say(r);
         }
       });
       ch.appendChild(b);
@@ -2690,7 +2786,7 @@ h1 span{color:var(--orange)}
     } else {
       b.classList.add('wrong'); b.disabled = true; mistakes++; sfx('wrong');
       noteAnswer(mode, target, false);
-      var r = retry(); zizo(r, 'sad'); say(r);
+      var r = retry(); zizo(r, 'sad'); cheer(r, true); say(r);
     }
   }
   function finish(){
@@ -2838,7 +2934,7 @@ h1 span{color:var(--orange)}
       'أَكْمِلْ رَسْمَ الرَّقْمِ كُلِّه', 'أَكْمِلْ رَسْمَ الحَرْفِ كُلِّه',
       'أَهْلاً! هَيّا نَلْعَب', 'أَهْلاً', 'هَيّا نَلْعَب', 'أَهْلاً يا بَطَل! هَيّا نَلْعَب', 'أَهْلاً يا بَطَلَة! هَيّا نَلْعَب',
       'أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟', REST_SAY
-    ].forEach(function(t){ add(t); });
+    ].concat(ZIZO_TAP).forEach(function(t){ add(t); });
     ['لا تَنْسَ', 'لا تَنْسَيْ'].forEach(function(d){
       [' الرَّسْمَةَ الصَّغِيرَة', ' النِّقاط', ' النُّقْطَة'].forEach(function(w){ add(d + w); });
     });
@@ -3113,7 +3209,7 @@ h1 span{color:var(--orange)}
     $('wlHello').textContent = firstTime ? 'أهلاً! أنا زيزو الفيل' : 'تغيير الاسم';
     if (firstTime && !quiet) greet();
   }
-  function leaveWelcome(){ welcome.hidden = true; }
+  function leaveWelcome(){ welcome.hidden = true; enter($('v-' + currentView)); }
   $('setup').addEventListener('submit', function(e){
     e.preventDefault();
     kid.name = $('kidName').value.replace(/\s+/g, ' ').trim().slice(0, 20);
@@ -3405,7 +3501,15 @@ h1 span{color:var(--orange)}
     letters.forEach(function(l, k){
       h += '<span class="i-balloon" style="--c:var(' + cols[k] + ');--d:' + (0.08 + k * 0.17).toFixed(2) + 's;left:' + (4 + k * 13.5) + '%">' + l + '</span>';
     });
-    h += '<div class="i-hill h1"></div><div class="i-hill h2"></div><div class="i-stage">' +
+    var BIRD = '<svg class="i-bird" viewBox="0 0 34 16" style="top:TOP;animation-delay:DEL"><path d="M2 9 Q9 1 17 9 Q25 1 32 9"/></svg>';
+    h += BIRD.replace('TOP', '12%').replace('DEL', '.25s') + BIRD.replace('TOP', '19%').replace('DEL', '.6s').replace('style="', 'style="width:25px;height:12px;');
+    h += '<div class="i-rainbow"></div>';
+    h += '<div class="i-hill h1"></div><div class="i-hill h2"></div>';
+    [['🌼', 8, 9, .7], ['🌷', 26, 5, .85], ['🌸', 70, 6, 1.0], ['🌼', 88, 10, 1.15], ['🌷', 52, 3, 1.3]].forEach(function(f){
+      h += '<span class="i-flower" style="left:' + f[1] + '%;bottom:' + f[2] + '%;animation-delay:' + f[3] + 's">' + f[0] + '</span>';
+    });
+    h += '<span class="i-fly" style="left:12%;bottom:22%;animation-delay:.9s">🦋</span><span class="i-fly" style="right:14%;bottom:26%;animation-delay:1.5s">🦋</span>';
+    h += '<div class="i-stage">' +
          '<h1 class="i-title" dir="ltr" lang="en">' + 'Zizo World'.split('').map(function(ch, k){
            return '<span class="ch"' + (k < 4 ? ' style="color:var(--orange);' : ' style="') + '--d:' + (1.0 + k * 0.07).toFixed(2) + 's">' + (ch === ' ' ? '&nbsp;' : ch) + '</span>';
          }).join('') + '</h1>' +
@@ -3420,7 +3524,9 @@ h1 span{color:var(--orange)}
     at(1450, function(){ z.innerHTML = zizoMarkup(outfit, 'joy'); sfx('trumpet'); introBurst(); });
     at(1800, function(){ introGreeted = true; greet(); });
     at(2450, function(){ z.innerHTML = zizoMarkup(outfit, 'wink'); });
-    at(3500, finishIntro);
+    at(2700, function(){ z.innerHTML = zizoMarkup(outfit, 'laugh'); z.classList.add('dance'); sfx('giggle'); });
+    at(3500, function(){ z.innerHTML = zizoMarkup(outfit, 'love'); });
+    at(4300, finishIntro);
     return true;
   }
   function introBurst(){
@@ -3445,6 +3551,8 @@ h1 span{color:var(--orange)}
     setTimeout(function(){ welcome.classList.remove('wl-in'); }, 1300);
   }
   introEl.addEventListener('click', finishIntro);
+  $('heroZizo').addEventListener('click', function(){ zizoTap($('heroZizo')); });
+  $('bigZizo').addEventListener('click', function(){ zizoTap($('bigZizo')); });
   if (window.__zizoTest) window.__zizoTest.introDone = function(){ return introDone; };
 
   renderStars();

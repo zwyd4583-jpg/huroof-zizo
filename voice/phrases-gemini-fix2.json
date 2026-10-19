@@ -10,8 +10,8 @@
    "ar": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow, every letter and vowel mark pronounced exactly as written",
    "en": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear American English, a little slow; a line with a single letter is the name of that letter of the alphabet"
   },
-  "batch": 21,
-  "batch_chars": 460
+  "batch": 22,
+  "batch_chars": 520
  },
  "items": [
   {
@@ -193,6 +193,36 @@
    "lang": "ar",
    "text": "أَيْنَ حَرْفُ السين؟",
    "key": "أَيْنَ حَرْفُ السين؟"
+  },
+  {
+   "id": "ar-241febe7",
+   "lang": "ar",
+   "text": "هِهِهِ! هذا يُدَغْدِغُنِي!",
+   "key": "هِهِهِ! هذا يُدَغْدِغُنِي!"
+  },
+  {
+   "id": "ar-2db4c8ec",
+   "lang": "ar",
+   "text": "أَنا زِيزُو الفِيل!",
+   "key": "أَنا زِيزُو الفِيل!"
+  },
+  {
+   "id": "ar-25918460",
+   "lang": "ar",
+   "text": "خُرْطُومِي طَوِيلٌ جِدّاً!",
+   "key": "خُرْطُومِي طَوِيلٌ جِدّاً!"
+  },
+  {
+   "id": "ar-43a8896a",
+   "lang": "ar",
+   "text": "هَيّا نَتَعَلَّمُ مَعاً!",
+   "key": "هَيّا نَتَعَلَّمُ مَعاً!"
+  },
+  {
+   "id": "ar-d994727b",
+   "lang": "ar",
+   "text": "أَنا سَعِيدٌ جِدّاً اليَوْم!",
+   "key": "أَنا سَعِيدٌ جِدّاً اليَوْم!"
   },
   {
    "id": "ar-0cd6d34b",
