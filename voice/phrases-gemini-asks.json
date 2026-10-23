@@ -1,0 +1,90 @@
+{
+ "engine": "gemini",
+ "gemini": {
+  "models": [
+   "gemini-3.8-flash-tts"
+  ],
+  "voice": "Puck",
+  "rpm": 4,
+  "style": {
+   "ar": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear Modern Standard Arabic (fusha), a little slow, every letter and vowel mark pronounced exactly as written",
+   "en": "warm, cheerful kindergarten teacher talking to a five-year-old child; clear American English, a little slow; a line with a single letter is the name of that letter of the alphabet"
+  },
+  "batch": 12,
+  "batch_chars": 800
+ },
+ "items": [
+  {
+   "id": "ar-0d1b89bd",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الباء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الباء؟"
+  },
+  {
+   "id": "ar-4e545392",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ اللام؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ اللام؟"
+  },
+  {
+   "id": "ar-df10b87a",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الذال؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الذال؟"
+  },
+  {
+   "id": "ar-5f23a61a",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الحاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الحاء؟"
+  },
+  {
+   "id": "ar-2a8dce74",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ القاف؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ القاف؟"
+  },
+  {
+   "id": "ar-9b94f56c",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الفاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الفاء؟"
+  },
+  {
+   "id": "ar-9f571246",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الأَلِف؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الأَلِف؟"
+  },
+  {
+   "id": "ar-6ac51573",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الظاء؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الظاء؟"
+  },
+  {
+   "id": "ar-4e86545d",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الدال؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الدال؟"
+  },
+  {
+   "id": "ar-1f714e99",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ السين؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ السين؟"
+  },
+  {
+   "id": "ar-1a2e6036",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الميم؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الميم؟"
+  },
+  {
+   "id": "ar-30644324",
+   "lang": "ar",
+   "text": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الضاد؟",
+   "key": "أَيُّ صُورَةٍ تَبْدَأُ بِحَرْفِ الضاد؟"
+  }
+ ]
+}
