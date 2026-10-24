@@ -63,7 +63,8 @@ h1 span{color:var(--orange)}
 .zizo{width:84px; height:84px; flex:none; overflow:visible; transform-origin:50% 90%; animation:bob 3s ease-in-out infinite}
 .zizo.happy{animation:hop .65s ease}
 .zizo.sad{animation:tilt .6s ease}
-.zizo .ear{transform-box:fill-box; transform-origin:center; animation:flap 4.5s ease-in-out infinite}
+.zizo .ear, .zizo-hero .ear, .zizo-big .ear{transform-box:fill-box; transform-origin:center}
+.flapping .ear{animation:flapq .3s ease-in-out 2}
 .bubble{position:relative; flex:1; min-width:0; margin:0; background:var(--paper); border-radius:20px; padding:10px 16px; font-weight:700; font-size:1.08rem; line-height:1.55; box-shadow:0 3px 0 var(--sky-dark)}
 .bubble::before{content:""; position:absolute; inset-inline-start:-7px; top:calc(50% - 8px); width:16px; height:16px; background:var(--paper); transform:rotate(45deg); border-radius:3px}
 
@@ -173,7 +174,6 @@ h1 span{color:var(--orange)}
 .sfx-toggle svg{width:20px; height:20px}
 .wl-ar{margin:-12px 0 0; font-size:1.2rem; font-weight:700; color:var(--ink-soft)}
 .zizo-hero{width:180px; height:186px; overflow:visible; transform-origin:50% 90%; animation:enter .9s cubic-bezier(.3,1.4,.5,1) both, sway 2.6s 1s ease-in-out infinite}
-.zizo-hero .ear{transform-box:fill-box; transform-origin:center; animation:flap 2.2s ease-in-out infinite}
 .wl-hello{margin:0; font-size:1.8rem; font-weight:800; line-height:1.35; text-wrap:balance}
 .wl-stars{display:inline-flex; align-items:center; gap:6px; background:var(--sun); border-radius:999px; padding:4px 16px; font-weight:800; font-size:1.2rem; box-shadow:0 3px 0 var(--sun-dark); font-variant-numeric:tabular-nums}
 .wl-stars svg{width:22px; height:22px; color:var(--white)}
@@ -217,7 +217,10 @@ h1 span{color:var(--orange)}
 .i-title .ch{display:inline-block; color:var(--ink); animation:dropIn .55s var(--d) cubic-bezier(.3,1.55,.5,1) both}
 .i-zizo{width:min(230px,60vw); height:auto; aspect-ratio:120/132; overflow:visible; transform-origin:50% 95%;
   animation:zizoIn 1s .5s cubic-bezier(.3,1.45,.5,1) both, zizoJump .75s 1.55s ease-in-out both}
-.i-zizo .ear{transform-box:fill-box; transform-origin:center; animation:flapq .32s ease-in-out infinite}
+.i-zizo .ear{transform-box:fill-box; transform-origin:center; animation:flapq .32s ease-in-out 4}
+.i-sun, .i-cloud, .i-balloon, .i-bird, .i-fly, .i-flower, .i-zizo, .i-title .ch, .i-hill{will-change:transform}
+body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
+.intro.wait *{animation-play-state:paused}
 .i-ar{margin:0; font-size:1.7rem; font-weight:800; color:var(--ink); animation:zoomIn .5s 2.05s cubic-bezier(.3,1.5,.5,1) both}
 .i-spark{position:absolute; left:50%; top:46%; width:26px; height:26px; margin:-13px; animation:spark .95s ease-out forwards}
 .i-skip{position:absolute; bottom:calc(18px + env(safe-area-inset-bottom,0px)); left:0; right:0; margin:0; text-align:center; color:var(--ink-soft); font-weight:700; font-size:.95rem; animation:zoomIn .4s 1.2s both}
@@ -376,13 +379,13 @@ h1 span{color:var(--orange)}
 
 /* effects */
 /* Zizo is alive: he blinks, looks around, and wiggles and giggles when tapped */
-.zlook{animation:look 9s ease-in-out infinite}
-.zblink{transform-box:fill-box; transform-origin:center; animation:blink 4.6s infinite}
+.zlook{transition:transform .35s ease}
+.look-l .zlook{transform:translateX(-2.6px)} .look-r .zlook{transform:translateX(2.6px)}
+.zblink{transform-box:fill-box; transform-origin:center; transition:transform .07s}
+.blinking .zblink{transform:scaleY(.12)}
 .ztap{transform-box:fill-box; transform-origin:50% 90%}
 .ztap.go{animation:wiggle .65s ease}
 .zizo, .zizo-hero, .zizo-big{cursor:pointer; -webkit-tap-highlight-color:transparent}
-@keyframes blink{0%,93%,100%{transform:none} 95.5%{transform:scaleY(.12)}}
-@keyframes look{0%,28%,100%{transform:none} 33%,48%{transform:translateX(2.6px)} 53%,70%{transform:translateX(-2.6px)} 75%{transform:none}}
 @keyframes wiggle{0%{transform:none} 20%{transform:rotate(-11deg) scale(1.1)} 40%{transform:rotate(9deg) scale(1.05)} 60%{transform:rotate(-6deg)} 80%{transform:rotate(3deg)} 100%{transform:none}}
 /* screens and their tiles come in instead of just appearing */
 .enter{animation:viewIn .3s ease both}
@@ -1550,7 +1553,20 @@ h1 span{color:var(--orange)}
     if (NTTS) NTTS.stop().catch(function(){});
     else if (hasWebTTS) try { speechSynthesis.cancel(); } catch(e){}
   }
-  function hush(){ stopClips(); ttsStop(); clearTimeout(storyTimer); storyRun++; } // also stops a story turning its pages
+  function hush(){ stopClips(); ttsStop(); clearTimeout(storyTimer); storyRun++; advanceToken++; } // also stops a story turning its pages
+  // Say something, then move on only once it has been said (a short pause after it), so praise is never cut off.
+  // A safety limit moves on anyway if the voice never reports back. Leaving the screen cancels it.
+  var advanceToken = 0;
+  function sayThenTimer(parts, fn, setT, pause){
+    var token = ++advanceToken, fired = false;
+    function go(){
+      if (fired || token !== advanceToken) return;
+      fired = true;
+      setT(setTimeout(function(){ if (token === advanceToken) fn(); }, pause));
+    }
+    say(parts, go);
+    setT(setTimeout(go, 9000));
+  }
 
   /* ---------- Zizo & stars ---------- */
   var zEl = document.querySelector('.zizo'), bub = $('bubble');
@@ -1915,6 +1931,17 @@ h1 span{color:var(--orange)}
     }, 1500);
   }
   zEl.addEventListener('click', function(){ zizoTap(zEl); });
+  // Now and then every Zizo on screen blinks, glances to one side, or flaps his ears
+  setInterval(function(){
+    if (document.hidden || !introDone) return;
+    var zs = Array.prototype.filter.call(document.querySelectorAll('.zizo, .zizo-hero, .zizo-big'), function(z){ return z.getClientRects().length; });
+    var r = Math.random();
+    zs.forEach(function(z){
+      if (r < 0.55){ z.classList.add('blinking'); setTimeout(function(){ z.classList.remove('blinking'); }, 150); }
+      else if (r < 0.8){ var side = Math.random() < 0.5 ? 'look-l' : 'look-r'; z.classList.add(side); setTimeout(function(){ z.classList.remove(side); }, 1300); }
+      else { z.classList.remove('flapping'); z.getBoundingClientRect(); z.classList.add('flapping'); setTimeout(function(){ z.classList.remove('flapping'); }, 700); }
+    });
+  }, 2600);
   // Screens, lists and cards come in with a little movement instead of just appearing
   function enter(el){
     if (!el || reduce) return;
@@ -2772,13 +2799,13 @@ h1 span{color:var(--orange)}
       if (mode === 'first') wordInto($('pWord'), target, false);
       if (mode === 'math'){ var qm = $('pEq').querySelector('.qm'); qm.textContent = N[target].d; qm.classList.add('ok'); }
       var won = POOLS[mode][target];
-      say(mode === 'enListen' ? [pr, { en: won.c }, { en: won.w }] : mode === 'enWord' ? [pr, { en: won.w }] :
+      round++; renderDots();
+      sayThenTimer(mode === 'enListen' ? [pr, { en: won.c }, { en: won.w }] : mode === 'enWord' ? [pr, { en: won.w }] :
           mode === 'enCount' ? [{ en: won.w }, pr] :
           mode === 'math' ? [pr, mathSpoken() + ' يُساوي ' + N[target].s] :
           mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] :
-          mode === 'animal' ? [pr, won.fs] : POOL_TOPIC[mode] ? [pr, won.s] : pr);
-      round++; renderDots();
-      nextTimer = setTimeout(function(){ whenNoPrize(nextRound); }, 1500);
+          mode === 'animal' ? [pr, won.fs] : POOL_TOPIC[mode] ? [pr, won.s] : pr,
+        function(){ whenNoPrize(nextRound); }, function(t){ clearTimeout(nextTimer); nextTimer = t; }, 450);
     } else {
       b.classList.add('wrong'); b.disabled = true; mistakes++; sfx('wrong');
       noteAnswer(mode, target, false);
@@ -3141,8 +3168,8 @@ h1 span{color:var(--orange)}
     }
     traceDone = true; drawAll();
     noteTraced(tKind, tIdx);
-    var pr = praise(); addStar(); zizo(pr, 'happy'); cheer(pr); say(pr);
-    traceTimer = setTimeout(function(){ whenNoPrize(function(){ setTrace(tIdx + 1, true); }); }, 1600);
+    var pr = praise(); addStar(); zizo(pr, 'happy'); cheer(pr);
+    sayThenTimer(pr, function(){ whenNoPrize(function(){ setTrace(tIdx + 1, true); }); }, function(t){ clearTimeout(traceTimer); traceTimer = t; }, 500);
   });
   if (window.ResizeObserver) new ResizeObserver(function(){ if (!$('v-trace').hidden) sizeCanvas(); }).observe($('cWrap'));
   if (document.fonts && document.fonts.load){
@@ -3158,7 +3185,7 @@ h1 span{color:var(--orange)}
     currentView = v;
     clearTimeout(nextTimer); clearTimeout(traceTimer); stopAutoCount();
     afterPrize = null;
-    clearTimeout(storyTimer); storyRun++;
+    clearTimeout(storyTimer); storyRun++; advanceToken++;
     ['letters','numbers','discover','play','trace','rewards','stories'].forEach(function(k){ $('v-' + k).hidden = (k !== v); });
     document.querySelectorAll('.tab').forEach(function(t){ t.setAttribute('aria-current', t.dataset.v === v ? 'page' : 'false'); });
     window.scrollTo(0, 0);
@@ -3492,18 +3519,18 @@ h1 span{color:var(--orange)}
     var testing = window.__zizoTest && !window.__zizoTest.intro;
     if (reduce || testing || timeUp()) return false;
     introDone = false; introGreeted = false;
-    var letters = ['ا', 'ب', 'ت', 'ج', 'د', 'س', 'م'], cols = ['--orange', '--blue', '--green', '--pink', '--purple', '--teal', '--sun'];
+    var letters = ['ا', 'ب', 'ت', 'س', 'م'], cols = ['--orange', '--blue', '--green', '--pink', '--purple'];
     var h = '<div class="i-sun"></div><div class="i-cloud c1"></div><div class="i-cloud c2"></div>';
     letters.forEach(function(l, k){
-      h += '<span class="i-balloon" style="--c:var(' + cols[k] + ');--d:' + (0.08 + k * 0.17).toFixed(2) + 's;left:' + (4 + k * 13.5) + '%">' + l + '</span>';
+      h += '<span class="i-balloon" style="--c:var(' + cols[k] + ');--d:' + (0.08 + k * 0.22).toFixed(2) + 's;left:' + (6 + k * 19) + '%">' + l + '</span>';
     });
     var BIRD = '<svg class="i-bird" viewBox="0 0 34 16" style="top:TOP;animation-delay:DEL"><path d="M2 9 Q9 1 17 9 Q25 1 32 9"/></svg>';
-    h += BIRD.replace('TOP', '12%').replace('DEL', '.25s') + BIRD.replace('TOP', '19%').replace('DEL', '.6s').replace('style="', 'style="width:25px;height:12px;');
+    h += BIRD.replace('TOP', '13%').replace('DEL', '.3s');
     h += '<div class="i-hill h1"></div><div class="i-hill h2"></div>';
-    [['🌼', 8, 9, .7], ['🌷', 26, 5, .85], ['🌸', 70, 6, 1.0], ['🌼', 88, 10, 1.15], ['🌷', 52, 3, 1.3]].forEach(function(f){
+    [['🌼', 10, 9, .7], ['🌷', 34, 5, .9], ['🌸', 66, 6, 1.1], ['🌼', 88, 10, 1.3]].forEach(function(f){
       h += '<span class="i-flower" style="left:' + f[1] + '%;bottom:' + f[2] + '%;animation-delay:' + f[3] + 's">' + f[0] + '</span>';
     });
-    h += '<span class="i-fly" style="left:12%;bottom:22%;animation-delay:.9s">🦋</span><span class="i-fly" style="right:14%;bottom:26%;animation-delay:1.5s">🦋</span>';
+    h += '<span class="i-fly" style="right:14%;bottom:24%;animation-delay:1.2s">🦋</span>';
     h += '<div class="i-stage">' +
          '<h1 class="i-title" dir="ltr" lang="en">' + 'Zizo World'.split('').map(function(ch, k){
            return '<span class="ch"' + (k < 4 ? ' style="color:var(--orange);' : ' style="') + '--d:' + (1.0 + k * 0.07).toFixed(2) + 's">' + (ch === ' ' ? '&nbsp;' : ch) + '</span>';
@@ -3513,8 +3540,19 @@ h1 span{color:var(--orange)}
     introEl.innerHTML = h;
     var z = introEl.querySelector('.i-zizo');
     z.innerHTML = zizoMarkup(outfit);
-    introEl.classList.remove('out'); introEl.hidden = false;
+    introEl.classList.remove('out'); introEl.classList.add('wait'); introEl.hidden = false;
+    document.body.classList.add('intro-on');
+    // Start the sound system before anything moves: starting it mid-animation makes phones stutter
+    audio();
     var at = function(ms, fn){ introTimers.push(setTimeout(fn, ms)); };
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(function(){
+      if (introDone) return;
+      introEl.classList.remove('wait');
+      introRun(z, at);
+    }, 120); }); });
+    return true;
+  }
+  function introRun(z, at){
     at(150, function(){ sfx('introPops'); });
     at(1450, function(){ z.innerHTML = zizoMarkup(outfit, 'joy'); sfx('trumpet'); introBurst(); });
     at(1800, function(){ introGreeted = true; greet(); });
@@ -3522,7 +3560,6 @@ h1 span{color:var(--orange)}
     at(2700, function(){ z.innerHTML = zizoMarkup(outfit, 'laugh'); z.classList.add('dance'); sfx('giggle'); });
     at(3500, function(){ z.innerHTML = zizoMarkup(outfit, 'love'); });
     at(4300, finishIntro);
-    return true;
   }
   function introBurst(){
     var cs = ['var(--sun)', 'var(--orange)', 'var(--pink)', 'var(--green)', 'var(--blue)'];
@@ -3539,6 +3576,7 @@ h1 span{color:var(--orange)}
     introDone = true;
     introTimers.forEach(clearTimeout); introTimers = [];
     if (!introGreeted){ introGreeted = true; greet(); }
+    document.body.classList.remove('intro-on');
     introEl.classList.add('out');
     welcome.classList.add('wl-in');
     var hz = $('heroZizo'); hz.style.animation = 'none'; hz.getBoundingClientRect(); hz.style.animation = '';
