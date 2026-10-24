@@ -34,6 +34,11 @@ jobs:
       - name: Create the Android project
         run: bash scripts/prepare-android.sh
 
+      # Every test build is signed with the same debug key, so a new version installs over the old one
+      # (and keeps the child's stars and name) instead of Android refusing it as a different app.
+      - name: Use the fixed debug key
+        run: mkdir -p ~/.android && cp ci/debug.keystore ~/.android/debug.keystore
+
       - name: Build test APK
         working-directory: android
         run: ./gradlew assembleDebug --no-daemon --stacktrace
@@ -71,9 +76,13 @@ jobs:
       - name: Publish the test APK
         env:
           GH_TOKEN: ${{ github.token }}
+        # The file is replaced in place, so the download link never stops working during a build
         run: |
-          gh release delete test-build --yes --cleanup-tag || true
-          gh release create test-build out/zizo-world-test.apk \
-            --target "$GITHUB_SHA" --prerelease \
-            --title "نسخة تجربة - Zizo World" \
-            --notes "آخر نسخة تجربة من التطبيق. حمّل الملف zizo-world-test.apk على هاتف أندرويد وثبّته."
+          if gh release view test-build >/dev/null 2>&1; then
+            gh release upload test-build out/zizo-world-test.apk --clobber
+          else
+            gh release create test-build out/zizo-world-test.apk \
+              --target "$GITHUB_SHA" --prerelease \
+              --title "نسخة تجربة - Zizo World" \
+              --notes "آخر نسخة تجربة من التطبيق. حمّل الملف zizo-world-test.apk على هاتف أندرويد وثبّته."
+          fi
