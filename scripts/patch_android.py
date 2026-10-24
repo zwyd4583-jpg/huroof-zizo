@@ -2,6 +2,7 @@
 
 - versionCode / versionName from the VERSION_CODE and VERSION_NAME environment variables
 - release signing with signing/upload.jks when KEYSTORE_PASSWORD is set
+- debug signing with the fixed test key in ci/debug.keystore
 - portrait-only main screen
 """
 import os
@@ -22,6 +23,13 @@ g = re.sub(r'versionName\s+"[^"]*"', f'versionName "{name}"', g)
 if "signingConfigs" not in g:
     signing = '''android {
     signingConfigs {
+        // the same debug key on every build machine, so test versions install over each other
+        debug {
+            storeFile rootProject.file("../ci/debug.keystore")
+            storePassword "android"
+            keyAlias "androiddebugkey"
+            keyPassword "android"
+        }
         release {
             def ksPass = System.getenv("KEYSTORE_PASSWORD")
             if (ksPass) {

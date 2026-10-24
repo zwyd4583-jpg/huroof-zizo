@@ -34,11 +34,8 @@ jobs:
       - name: Create the Android project
         run: bash scripts/prepare-android.sh
 
-      # Every test build is signed with the same debug key, so a new version installs over the old one
-      # (and keeps the child's stars and name) instead of Android refusing it as a different app.
-      - name: Use the fixed debug key
-        run: mkdir -p ~/.android && cp ci/debug.keystore ~/.android/debug.keystore
-
+      # Every test build is signed with ci/debug.keystore (set in scripts/patch_android.py), so a new
+      # version installs over the old one and keeps the child's stars and name.
       - name: Build test APK
         working-directory: android
         run: ./gradlew assembleDebug --no-daemon --stacktrace
