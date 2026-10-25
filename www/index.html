@@ -388,8 +388,8 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
 .zizo, .zizo-hero, .zizo-big{cursor:pointer; -webkit-tap-highlight-color:transparent}
 @keyframes wiggle{0%{transform:none} 20%{transform:rotate(-11deg) scale(1.1)} 40%{transform:rotate(9deg) scale(1.05)} 60%{transform:rotate(-6deg)} 80%{transform:rotate(3deg)} 100%{transform:none}}
 /* screens and their tiles come in instead of just appearing */
-.enter{animation:viewIn .3s ease both}
-.enter .grid > *, .grid.enter > *, .enter .games > *, .games.enter > *{animation:tileIn .4s cubic-bezier(.3,1.45,.5,1) both; animation-delay:calc(var(--i,0) * 16ms)}
+.enter{animation:viewIn .22s ease-out both}
+.enter .grid > *, .grid.enter > *, .enter .games > *, .games.enter > *{animation:tileIn .3s cubic-bezier(.3,1.4,.5,1) both; animation-delay:calc(var(--i,0) * 10ms)}
 .choices .choice{animation:tileIn .35s cubic-bezier(.3,1.45,.5,1) both}
 .choices .choice:nth-child(2){animation-delay:.07s} .choices .choice:nth-child(3){animation-delay:.14s} .choices .choice:nth-child(4){animation-delay:.21s}
 .sscene{animation:sceneIn .5s cubic-bezier(.3,1.4,.5,1) both}
@@ -1440,7 +1440,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     });
     // keep the last few sentences ready; older ones are fetched again when needed
     voiceBufs[id] = p; voiceOrder.push(id);
-    if (voiceOrder.length > 24) delete voiceBufs[voiceOrder.shift()];
+    if (voiceOrder.length > 60) delete voiceBufs[voiceOrder.shift()];
     p.catch(function(){ delete voiceBufs[id]; });
     return p;
   }
@@ -1501,6 +1501,24 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     if (b) out.push(b);
     return out;
   }
+  // Get sentences ready before they are needed (fetched and decoded in the background),
+  // so Zizo starts talking the moment the child taps
+  function warm(parts){
+    if (!VOICE || !actx) return;
+    [].concat(parts).forEach(function(p){
+      if (typeof p === 'string' && kid.name && p.indexOf(' يا ' + kid.name) >= 0){
+        var np = nameParts(p); if (np) np.forEach(function(x){ if (typeof x === 'string') clipBuf(actx, x); });
+        return;
+      }
+      var id = VOICE[vkey(p)];
+      if (id) clipBuf(actx, id);
+    });
+  }
+  function praiseAll(){
+    var base = gx(['أحسنت!','رائع!','ممتاز!','برافو!','شاطر!'], ['أحسنتِ!','رائعة!','ممتازة!','برافو!','شاطرة!']);
+    return kid.name ? base.concat(base.map(function(p){ return p.replace('!', ' يا ' + kid.name + '!'); })) : base;
+  }
+  function warmCommon(){ warm(praiseAll().concat(gx(['حاول مرة أخرى','قريب! جرّب مرة ثانية'], ['حاولي مرة أخرى','قريب! جرّبي مرة ثانية']))); }
   // The recordings for all the parts, or null if any part has none
   function clipsFor(parts){
     if (!VOICE) return null;
@@ -1571,9 +1589,17 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
   /* ---------- Zizo & stars ---------- */
   var zEl = document.querySelector('.zizo'), bub = $('bubble');
   zEl.addEventListener('animationend', function(e){ if (e.animationName === 'hop' || e.animationName === 'tilt') zEl.classList.remove('happy','sad'); });
+  // Replay a CSS animation: take the class off now and put it back two frames later. (Reading the layout
+  // to force a restart, the usual trick, makes the whole page lay out again: on slow phones that stutters.)
+  function replay(el, cls, others){
+    if (others) others.forEach(function(c){ el.classList.remove(c); });
+    el.classList.remove(cls);
+    var t = el._replay = (el._replay || 0) + 1;
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ if (el._replay === t) el.classList.add(cls); }); });
+  }
   function zizo(text, mood){
     bub.textContent = text;
-    if (mood && !reduce){ zEl.classList.remove('happy','sad'); zEl.getBoundingClientRect(); zEl.classList.add(mood); }
+    if (mood && !reduce) replay(zEl, mood, ['happy', 'sad']);
   }
   // A right answer: Zizo jumps in with a new happy look, from a different side each time, saying the praise
   var cheerEl = $('cheer'), cheerSide = -1, cheerPose = -1, cheerTimer = null;
@@ -1590,13 +1616,12 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
       var k = Math.floor(Math.random() * (POSES.length - 1)); if (k >= cheerPose) k++; if (cheerPose < 0) k = Math.floor(Math.random() * POSES.length); cheerPose = k;
       pose = POSES[k]; col = CHEER_COLORS[k];
     }
-    cheerEl.querySelector('.cheer-z').innerHTML = zizoMarkup(outfit, pose);
+    // a new element each time, so its animation starts by itself
+    cheerEl.innerHTML = '<div class="cheer-in"><svg class="cheer-z" viewBox="0 -6 120 128">' + zizoMarkup(outfit, pose) + '</svg><p class="cheer-b"></p></div>';
     cheerEl.querySelector('.cheer-b').textContent = text;
     cheerEl.className = 'cheer s-' + CHEER_SIDES[s] + (oops ? ' oops' : '');
     cheerEl.style.cssText = '--c:var(' + col[0] + ');--cd:var(' + col[1] + ')';
     cheerEl.hidden = false;
-    var inner = cheerEl.querySelector('.cheer-in');
-    inner.style.animation = 'none'; inner.getBoundingClientRect(); inner.style.animation = '';
     if (window.__zizoTest) (window.__zizoTest.cheers = window.__zizoTest.cheers || []).push(CHEER_SIDES[s] + ':' + pose + ':' + text);
     clearTimeout(cheerTimer);
     cheerTimer = setTimeout(function(){ cheerEl.hidden = true; }, oops ? 1550 : 1850);
@@ -1614,7 +1639,8 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
   function audio(){
     if (!AC) return null;
     if (!actx){
-      try { actx = new AC(); master = actx.createGain(); master.gain.value = 1.0; master.connect(actx.destination); }
+      // "balanced": a slightly bigger sound buffer, so a busy phone does not crackle or cut the voice
+      try { try { actx = new AC({ latencyHint: 'balanced' }); } catch(e1){ actx = new AC(); } master = actx.createGain(); master.gain.value = 1.0; master.connect(actx.destination); }
       catch(e){ actx = null; return null; }
     }
     if (actx.state === 'suspended' && actx.resume) actx.resume().catch(function(){});
@@ -1724,7 +1750,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     stars++;
     saveStars();
     renderStars();
-    var p = $('starPill'); p.classList.remove('pop'); void p.offsetWidth; p.classList.add('pop');
+    replay($('starPill'), 'pop');
     burst();
   }
 
@@ -1934,21 +1960,22 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
   // Now and then every Zizo on screen blinks, glances to one side, or flaps his ears
   setInterval(function(){
     if (document.hidden || !introDone) return;
-    var zs = Array.prototype.filter.call(document.querySelectorAll('.zizo, .zizo-hero, .zizo-big'), function(z){ return z.getClientRects().length; });
+    // only the Zizos that can be seen, worked out without asking the browser for the layout
+    var zs = [];
+    if (!welcome.hidden) zs.push($('heroZizo')); else { zs.push(zEl); if (currentView === 'rewards') zs.push($('bigZizo')); }
     var r = Math.random();
     zs.forEach(function(z){
       if (r < 0.55){ z.classList.add('blinking'); setTimeout(function(){ z.classList.remove('blinking'); }, 150); }
       else if (r < 0.8){ var side = Math.random() < 0.5 ? 'look-l' : 'look-r'; z.classList.add(side); setTimeout(function(){ z.classList.remove(side); }, 1300); }
-      else { z.classList.remove('flapping'); z.getBoundingClientRect(); z.classList.add('flapping'); setTimeout(function(){ z.classList.remove('flapping'); }, 700); }
+      else { replay(z, 'flapping'); setTimeout(function(){ z.classList.remove('flapping'); }, 800); }
     });
   }, 2600);
   // Screens, lists and cards come in with a little movement instead of just appearing
   function enter(el){
     if (!el || reduce) return;
-    el.classList.remove('enter'); el.getBoundingClientRect();
     var lists = el.matches('.grid, .games') ? [el] : Array.prototype.slice.call(el.querySelectorAll('.grid, .games'));
-    lists.forEach(function(g){ Array.prototype.forEach.call(g.children, function(c, i){ c.style.setProperty('--i', Math.min(i, 30)); }); });
-    el.classList.add('enter');
+    lists.forEach(function(g){ Array.prototype.forEach.call(g.children, function(c, i){ if (!c.style.getPropertyValue('--i')) c.style.setProperty('--i', Math.min(i, 20)); }); });
+    replay(el, 'enter');
     clearTimeout(el._enterT);
     el._enterT = setTimeout(function(){ el.classList.remove('enter'); }, 1000);
   }
@@ -2116,8 +2143,13 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     } else {
       zizo(l.w + ' تبدأ بحرف ال' + l.n, 'happy');
       if (!quiet) say([letterS(cur), l.s]);
+      setTimeout(function(){ [cur + 1, cur - 1].forEach(function(j){ j = (j + L.length) % L.length; warm([letterS(j), L[j].s]); }); }, 300);
     }
   }
+  grid.addEventListener('pointerdown', function(e){
+    var t = e.target.closest && e.target.closest('.tile'); if (!t || lLang === 'en') return;
+    var i = Array.prototype.indexOf.call(grid.children, t); if (i >= 0 && L[i]) warm([letterS(i), L[i].s]);
+  });
   function backToGrid(){
     grid.hidden = false; detail.hidden = true;
     zizo(lLang === 'en' ? 'هذه حروف اللغة الإنجليزية. اختر حرفاً لنتعلّمه' : 'اختر حرفاً لنتعلّمه معاً');
@@ -2216,6 +2248,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     zizo(ncur === 0 ? (en ? 'هذا الرقم one. اضغط على الصورة لتعدّها' : 'هذا الرقم واحد. اضغط على الصورة لتعدّها')
                     : (en ? 'هيا نعدّ بالإنجليزي! اضغط على كل صورة' : 'هيا نعدّ معاً! اضغط على كل صورة'), 'happy');
     sayNum(ncur);
+    if (!en) setTimeout(function(){ var j = (ncur + 1) % N.length; warm([N[j].s, N[ncur].s]); }, 300);
   }
   function backToNumbers(){
     stopAutoCount(); ngrid.hidden = false; ndetail.hidden = true;
@@ -2267,6 +2300,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     window.scrollTo(0, 0);
     zizo(item.f, 'happy');
     say([item.s, item.fs]);
+    setTimeout(function(){ var nx = T.list[(dcur + 1) % T.list.length]; warm([nx.s, nx.fs]); }, 300);
   }
   function backToD(){ ddetail.hidden = true; dgrid.hidden = false; zizo(TOPICS[dTopic].hello); }
   document.querySelectorAll('.dchip').forEach(function(c){
@@ -2295,6 +2329,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
       b.querySelector('.se').textContent = firstEmoji(st.p[0][0]);
       b.querySelector('.st').textContent = st.t;
       b.addEventListener('click', function(){ openStory(i); });
+      b.addEventListener('pointerdown', function(){ warm(storySay(st.p[0][1])); });
       sgrid.appendChild(b);
     });
   }
@@ -2318,6 +2353,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
   }
   function openStory(i){
     sIdx = (i + STORIES.length) % STORIES.length;
+    warm(storySay(STORIES[sIdx].p[0][1]));
     sreader.style.cssText = colorVars(sIdx);
     sgrid.hidden = true; sreader.hidden = false;
     window.scrollTo(0, 0);
@@ -2345,6 +2381,8 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
       if (run !== storyRun) return;
       storyTimer = setTimeout(function(){ if (run === storyRun) nextPage(); }, 1100);
     });
+    // the next page (or the question at the end) is ready before this one finishes
+    setTimeout(function(){ warm(k + 1 < st.p.length ? storySay(st.p[k + 1][1]) : storyAsk(sIdx)); }, 200);
   }
   function nextPage(){ if (sPage < STORIES[sIdx].p.length - 1) showPage(sPage + 1); else storyQuestion(); }
   // At the end: which picture starts with the story's letter?
@@ -2667,7 +2705,18 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     for (var k=0;k<ROUNDS;k++){ var s = document.createElement('span'); s.className = 'dot' + (k < round ? ' done' : (k === round ? ' now' : '')); d.appendChild(s); }
     d.setAttribute('aria-label', 'السؤال ' + fmt(Math.min(round + 1, ROUNDS)) + ' من ' + fmt(ROUNDS));
   }
+  // What Zizo says after a right answer
+  function rightParts(pr){
+    var won = POOLS[mode][target];
+    return mode === 'enListen' ? [pr, { en: won.c }, { en: won.w }] : mode === 'enWord' ? [pr, { en: won.w }] :
+      mode === 'enCount' ? [{ en: won.w }, pr] :
+      mode === 'math' ? [pr, mathSpoken() + ' يُساوي ' + N[target].s] :
+      mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] :
+      mode === 'animal' ? [pr, won.fs] : POOL_TOPIC[mode] ? [pr, won.s] : pr;
+  }
   function ask(){
+    // while the question is asked, get the answer's praise and words ready
+    setTimeout(function(){ try { warmCommon(); warm([].concat(rightParts('')).filter(function(x){ return x; })); } catch(e){} }, 0);
     if (mode === 'enListen') say(['أَيْنَ حَرْف', { en: EN[target].c }]);
     else if (mode === 'enWord') say(['أَيْنَ', { en: EN[target].w }]);
     else if (mode === 'enCount') say({ en: 'How many?' });
@@ -2798,14 +2847,8 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
       zizo(pr, 'happy'); cheer(pr); addStar();
       if (mode === 'first') wordInto($('pWord'), target, false);
       if (mode === 'math'){ var qm = $('pEq').querySelector('.qm'); qm.textContent = N[target].d; qm.classList.add('ok'); }
-      var won = POOLS[mode][target];
       round++; renderDots();
-      sayThenTimer(mode === 'enListen' ? [pr, { en: won.c }, { en: won.w }] : mode === 'enWord' ? [pr, { en: won.w }] :
-          mode === 'enCount' ? [{ en: won.w }, pr] :
-          mode === 'math' ? [pr, mathSpoken() + ' يُساوي ' + N[target].s] :
-          mode === 'first' ? [pr, L[target].s] : mode === 'count' ? [N[target].s, pr] :
-          mode === 'animal' ? [pr, won.fs] : POOL_TOPIC[mode] ? [pr, won.s] : pr,
-        function(){ whenNoPrize(nextRound); }, function(t){ clearTimeout(nextTimer); nextTimer = t; }, 450);
+      sayThenTimer(rightParts(pr), function(){ whenNoPrize(nextRound); }, function(t){ clearTimeout(nextTimer); nextTimer = t; }, 450);
     } else {
       b.classList.add('wrong'); b.disabled = true; mistakes++; sfx('wrong');
       noteAnswer(mode, target, false);
@@ -2875,7 +2918,12 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
       setTrace(tIdx, true);
     });
   });
-  function tok(name){ return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  var tokCache = {};
+  function tok(name){
+    if (!(name in tokCache)) tokCache[name] = getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    return tokCache[name];
+  }
+  try { window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function(){ tokCache = {}; if (!$('v-trace').hidden) drawAll(); }); } catch(e){}
   function sizeCanvas(){
     var w = $('cWrap').clientWidth;
     if (!w || w === lastW) return;
@@ -2977,17 +3025,34 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     });
   }
   var traceDone = false;
+  // The big letter behind the child's lines is drawn once into its own canvas and reused on every redraw
+  var guideKey = '', guideCv = null;
+  function guideLayer(){
+    var ch = tChar(tIdx), dpr = window.devicePixelRatio || 1, key = [ch, S, dpr, traceDone, tKind].join('|');
+    if (key === guideKey && guideCv) return guideCv;
+    var c = guideCv || document.createElement('canvas');
+    c.width = Math.round(S * dpr); c.height = Math.round(S * dpr);
+    var g = c.getContext('2d');
+    g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, S, S);
+    var at = placeGlyph(g, ch);
+    g.fillStyle = tok(traceDone ? '--green' : '--guide');
+    if (traceDone) g.globalAlpha = 0.35;
+    g.fillText(ch, at.x, at.y);
+    g.globalAlpha = 1;
+    g.setLineDash([7, 7]); g.lineWidth = 2.5; g.strokeStyle = tok(traceDone ? '--green' : '--guide-line'); g.strokeText(ch, at.x, at.y);
+    guideCv = c; guideKey = key;
+    return c;
+  }
+  // Redraw at most once per screen refresh, however fast the finger moves
+  var drawPending = false;
+  function requestDraw(){
+    if (drawPending) return;
+    drawPending = true;
+    requestAnimationFrame(function(){ drawPending = false; drawAll(); });
+  }
   function drawAll(){
     ctx.clearRect(0, 0, S, S);
-    var ch = tChar(tIdx);
-    ctx.save();
-    var g = placeGlyph(ctx, ch);
-    ctx.fillStyle = tok(traceDone ? '--green' : '--guide');
-    if (traceDone) ctx.globalAlpha = 0.35;
-    ctx.fillText(ch, g.x, g.y);
-    ctx.globalAlpha = 1;
-    ctx.setLineDash([7, 7]); ctx.lineWidth = 2.5; ctx.strokeStyle = tok(traceDone ? '--green' : '--guide-line'); ctx.strokeText(ch, g.x, g.y);
-    ctx.restore();
+    ctx.drawImage(guideLayer(), 0, 0, S, S);
     ctx.lineCap = 'round'; ctx.lineJoin = 'round';
     ctx.lineWidth = inkWidth(); ctx.strokeStyle = tok(traceDone ? '--green' : '--orange');
     strokePaths(ctx);
@@ -3103,17 +3168,22 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
       if (!best || r.rank > best.rank) best = r;
     });
     return best;
-  }  function pt(e){ var r = cv.getBoundingClientRect(); return [(e.clientX - r.left)/r.width, (e.clientY - r.top)/r.height]; }
+  }
+  // where the board is on screen: read once when a line starts, not on every finger movement
+  var cvRect = null;
+  function pt(e){ var r = cvRect || cv.getBoundingClientRect(); return [(e.clientX - r.left)/r.width, (e.clientY - r.top)/r.height]; }
   cv.addEventListener('pointerdown', function(e){
     e.preventDefault();
     if (traceDone) return;
     try { cv.setPointerCapture(e.pointerId); } catch(_){}
-    drawing = true; strokes.push([pt(e)]); drawAll();
+    cvRect = cv.getBoundingClientRect();
+    drawing = true; strokes.push([pt(e)]); requestDraw();
   });
-  cv.addEventListener('pointermove', function(e){ if (!drawing) return; strokes[strokes.length-1].push(pt(e)); drawAll(); });
+  cv.addEventListener('pointermove', function(e){ if (!drawing) return; strokes[strokes.length-1].push(pt(e)); requestDraw(); });
   ['pointerup','pointercancel'].forEach(function(t){ cv.addEventListener(t, function(){ drawing = false; }); });
   function setTrace(i, speak){
     clearTimeout(traceTimer);
+    guideKey = ''; // draw the letter afresh (fonts may have finished loading since)
     var len = tList().length;
     tIdx = (i + len) % len; strokes = []; traceDone = false;
     $('tLabelText').textContent = tTitle(tIdx);
@@ -3194,7 +3264,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     if (v === 'rewards'){ renderRewards(); zizo(gx('هذا متجري! اختر ما تشتريه لي بنجومك', 'هذا متجري! اختاري ما تشترينه لي بنجومك')); }
     if (v === 'discover') backToD();
     if (v === 'play') showGameMenu();
-    if (v === 'trace'){ lastW = 0; sizeCanvas(); setTrace(tIdx, false); }
+    if (v === 'trace') requestAnimationFrame(function(){ sizeCanvas(); setTrace(tIdx, false); });
     if (v === 'stories') backToStories();
   }
   document.querySelectorAll('.tab').forEach(function(t){ t.addEventListener('click', function(){ show(t.dataset.v); }); });
@@ -3579,7 +3649,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     document.body.classList.remove('intro-on');
     introEl.classList.add('out');
     welcome.classList.add('wl-in');
-    var hz = $('heroZizo'); hz.style.animation = 'none'; hz.getBoundingClientRect(); hz.style.animation = '';
+    var hz = $('heroZizo'); hz.style.animation = 'none'; requestAnimationFrame(function(){ requestAnimationFrame(function(){ hz.style.animation = ''; }); });
     setTimeout(function(){ introEl.hidden = true; introEl.innerHTML = ''; }, 460);
     setTimeout(function(){ welcome.classList.remove('wl-in'); }, 1300);
   }
