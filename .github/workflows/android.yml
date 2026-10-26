@@ -35,10 +35,11 @@ jobs:
         run: bash scripts/prepare-android.sh
 
       # Every test build is signed with ci/debug.keystore (set in scripts/patch_android.py), so a new
-      # version installs over the old one and keeps the child's stars and name.
+      # version installs over the old one and keeps the child's stars and name. It is built like the
+      # store build ("fast"), so it runs at full speed on the phone.
       - name: Build test APK
         working-directory: android
-        run: ./gradlew assembleDebug --no-daemon --stacktrace
+        run: ./gradlew assembleFast --no-daemon --stacktrace
 
       - name: Restore the signing key
         if: env.KEYSTORE_PASSWORD != '' && env.KEYSTORE_BASE64 != ''
@@ -54,7 +55,7 @@ jobs:
       - name: Collect files
         run: |
           mkdir -p out
-          cp android/app/build/outputs/apk/debug/app-debug.apk out/zizo-world-test.apk
+          cp android/app/build/outputs/apk/fast/app-fast.apk out/zizo-world-test.apk
           if [ -f android/app/build/outputs/bundle/release/app-release.aab ]; then
             cp android/app/build/outputs/bundle/release/app-release.aab out/zizo-world-v${VERSION_CODE}.aab
           fi

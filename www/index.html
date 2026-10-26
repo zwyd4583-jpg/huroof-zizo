@@ -173,7 +173,9 @@ h1 span{color:var(--orange)}
 .sfx-toggle{display:inline-flex; align-items:center; gap:6px}
 .sfx-toggle svg{width:20px; height:20px}
 .wl-ar{margin:-12px 0 0; font-size:1.2rem; font-weight:700; color:var(--ink-soft)}
-.zizo-hero{width:180px; height:186px; overflow:visible; transform-origin:50% 90%; animation:enter .9s cubic-bezier(.3,1.4,.5,1) both, sway 2.6s 1s ease-in-out infinite}
+.hero-in{display:block; width:180px; height:186px; transform-origin:50% 90%; animation:enter .9s cubic-bezier(.3,1.4,.5,1) both}
+.zizo-hero{width:180px; height:186px; overflow:visible; transform-origin:50% 90%; animation:sway 2.6s 1s ease-in-out infinite}
+#heroZizo{display:block}
 .wl-hello{margin:0; font-size:1.8rem; font-weight:800; line-height:1.35; text-wrap:balance}
 .wl-stars{display:inline-flex; align-items:center; gap:6px; background:var(--sun); border-radius:999px; padding:4px 16px; font-weight:800; font-size:1.2rem; box-shadow:0 3px 0 var(--sun-dark); font-variant-numeric:tabular-nums}
 .wl-stars svg{width:22px; height:22px; color:var(--white)}
@@ -215,20 +217,26 @@ h1 span{color:var(--orange)}
 .i-stage{position:relative; display:grid; justify-items:center; gap:4px; margin-bottom:6vh}
 .i-title{margin:0; font-size:clamp(2.6rem,12vw,3.4rem); line-height:1.1; white-space:nowrap}
 .i-title .ch{display:inline-block; color:var(--ink); animation:dropIn .55s var(--d) cubic-bezier(.3,1.55,.5,1) both}
-.i-zizo{width:min(230px,60vw); height:auto; aspect-ratio:120/132; overflow:visible; transform-origin:50% 95%;
-  animation:zizoIn 1s .5s cubic-bezier(.3,1.45,.5,1) both, zizoJump .75s 1.55s ease-in-out both}
-.i-zizo .ear{transform-box:fill-box; transform-origin:center; animation:flapq .32s ease-in-out 4}
-.i-sun, .i-cloud, .i-balloon, .i-bird, .i-fly, .i-flower, .i-zizo, .i-title .ch, .i-hill{will-change:transform}
-body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
+.i-zizo{position:relative; width:min(230px,60vw); height:auto; aspect-ratio:120/132; transform-origin:50% 95%;
+  animation:zizoIn 1s .5s cubic-bezier(.3,1.45,.5,1) both}
+.i-jump{position:absolute; inset:0; transform-origin:50% 95%; will-change:transform; animation:zizoJump .75s 1.55s ease-in-out both}
+/* every pose is drawn once before the opening starts; changing pose only fades one in and the other out */
+.i-pose{position:absolute; inset:0; width:100%; height:100%; overflow:visible; opacity:0; will-change:opacity}
+.i-pose.on{opacity:1}
+.i-sun, .i-cloud, .i-balloon, .i-bird, .i-bird svg, .i-fly, .i-flower, .i-zizo, .i-title .ch, .i-hill{will-change:transform}
+/* the only things moving behind the opening wait for it (naming just these keeps the end of the opening light) */
+body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-play-state:paused}
 .intro.wait *{animation-play-state:paused}
 .i-ar{margin:0; font-size:1.7rem; font-weight:800; color:var(--ink); animation:zoomIn .5s 2.05s cubic-bezier(.3,1.5,.5,1) both}
-.i-spark{position:absolute; left:50%; top:46%; width:26px; height:26px; margin:-13px; animation:spark .95s ease-out forwards}
+.i-spark{position:absolute; left:50%; top:46%; width:26px; height:26px; margin:-13px; opacity:0}
+.intro.burst .i-spark{animation:spark .95s ease-out forwards}
 .i-skip{position:absolute; bottom:calc(18px + env(safe-area-inset-bottom,0px)); left:0; right:0; margin:0; text-align:center; color:var(--ink-soft); font-weight:700; font-size:.95rem; animation:zoomIn .4s 1.2s both}
-.i-bird{position:absolute; left:-60px; width:34px; height:16px; overflow:visible; animation:flyAcross 4.2s linear both}
-.i-bird path{fill:none; stroke:#3D4B68; stroke-width:2.6; stroke-linecap:round; transform-box:fill-box; transform-origin:center; animation:wings .32s ease-in-out infinite alternate}
+.i-bird{position:absolute; left:-60px; width:34px; height:16px; animation:flyAcross 4.2s linear both}
+.i-bird svg{display:block; width:100%; height:100%; overflow:visible; animation:wings .32s ease-in-out infinite alternate}
+.i-bird path{fill:none; stroke:#3D4B68; stroke-width:2.6; stroke-linecap:round}
 .i-fly{position:absolute; font-size:1.9rem; line-height:1; animation:flutter 3.6s ease-in-out both}
 .i-flower{position:absolute; font-size:1.8rem; line-height:1; animation:zoomIn .45s cubic-bezier(.3,1.6,.5,1) both}
-.i-zizo.dance{animation:dance 1.3s ease-in-out both}
+.i-jump.dance{animation:dance 1.3s ease-in-out both}
 @keyframes flyAcross{from{transform:translateX(0)} to{transform:translateX(calc(100vw + 120px))}}
 @keyframes wings{from{transform:scaleY(1)} to{transform:scaleY(-.45)}}
 @keyframes flutter{0%{transform:translate(0,30px) rotate(-10deg); opacity:0} 15%{opacity:1} 35%{transform:translate(24px,-14px) rotate(12deg)} 60%{transform:translate(-10px,-46px) rotate(-14deg)} 85%{transform:translate(30px,-80px) rotate(10deg); opacity:1} 100%{transform:translate(10px,-120px) rotate(0); opacity:0}}
@@ -244,7 +252,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
 @keyframes zoomIn{from{transform:scale(.3); opacity:0} to{transform:none; opacity:1}}
 @keyframes introOut{to{opacity:0; transform:scale(1.15)}}
 /* after the opening, the welcome screen comes in piece by piece */
-.welcome.wl-in .wl-inner > :not(.zizo-hero){animation:riseIn .5s cubic-bezier(.3,1.35,.5,1) both}
+.welcome.wl-in .wl-inner > :not(.hero-in){animation:riseIn .5s cubic-bezier(.3,1.35,.5,1) both}
 .welcome.wl-in .wl-inner > :nth-child(2){animation-delay:.08s}
 .welcome.wl-in .wl-inner > :nth-child(4){animation-delay:.3s}
 .welcome.wl-in .wl-inner > :nth-child(5), .welcome.wl-in .wl-inner > :nth-child(6){animation-delay:.42s}
@@ -776,7 +784,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     <div class="wl-inner">
       <h1 class="wl-title" dir="ltr" lang="en"><span>Zizo</span> World</h1>
       <p class="wl-ar">عالم زيزو</p>
-      <svg class="zizo-hero" id="heroZizo" viewBox="0 -4 120 124" aria-hidden="true"></svg>
+      <div class="hero-in" id="heroIn"><svg class="zizo-hero" id="heroZizo" viewBox="0 -4 120 124" aria-hidden="true"></svg></div>
       <p class="wl-hello" id="wlHello" aria-live="polite"></p>
       <div id="wlMain">
         <div class="wl-stars">
@@ -1405,7 +1413,12 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
       }).catch(function(){});
     }
   });
-  if (NTTS) checkNativeVoice();
+  // Starting the phone's speech engine takes the phone's attention for a moment, so it is started
+  // after the opening. Only a name without a recording needs it, and then it is started straight away.
+  var nttsUsed = false, nttsStarted = false;
+  function startNativeVoice(){ if (NTTS && !nttsStarted){ nttsStarted = true; checkNativeVoice(); } }
+  function nativeVoiceEarly(){ if (kid.name && VOICE && !VOICE[nameKey(kid.name)]) startNativeVoice(); }
+  if (NTTS) setTimeout(startNativeVoice, 7000);
   else if (isNative) setNote('تعذّر تشغيل الصوت في هذه النسخة من التطبيق.');
   else if (hasWebTTS){
     pickVoice();
@@ -1477,7 +1490,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
       setTimeout(end, 4000); // never hold the rest of the sentence up for long
       if (window.__zizoTest) window.__zizoTest.ttsParts = (window.__zizoTest.ttsParts || 0) + 1;
       try {
-        if (NTTS){ NTTS.speak({ text: t, lang: nativeLang, rate: 0.85, pitch: 1.1, volume: 1.0, queueStrategy: 0 }).then(end, end); return; }
+        if (NTTS){ nttsUsed = true; startNativeVoice(); NTTS.speak({ text: t, lang: nativeLang, rate: 0.85, pitch: 1.1, volume: 1.0, queueStrategy: 0 }).then(end, end); return; }
         if (hasWebTTS){
           var u = new SpeechSynthesisUtterance(t);
           u.lang = arVoice ? arVoice.lang : 'ar-SA'; if (arVoice) u.voice = arVoice;
@@ -1504,15 +1517,17 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
   // Get sentences ready before they are needed (fetched and decoded in the background),
   // so Zizo starts talking the moment the child taps
   function warm(parts){
-    if (!VOICE || !actx) return;
+    if (!VOICE || !actx) return null;
+    var ps = [];
     [].concat(parts).forEach(function(p){
       if (typeof p === 'string' && kid.name && p.indexOf(' يا ' + kid.name) >= 0){
-        var np = nameParts(p); if (np) np.forEach(function(x){ if (typeof x === 'string') clipBuf(actx, x); });
+        var np = nameParts(p); if (np) np.forEach(function(x){ if (typeof x === 'string') ps.push(clipBuf(actx, x)); });
         return;
       }
       var id = VOICE[vkey(p)];
-      if (id) clipBuf(actx, id);
+      if (id) ps.push(clipBuf(actx, id));
     });
+    return Promise.all(ps);
   }
   function praiseAll(){
     var base = gx(['أحسنت!','رائع!','ممتاز!','برافو!','شاطر!'], ['أحسنتِ!','رائعة!','ممتازة!','برافو!','شاطرة!']);
@@ -1545,6 +1560,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     if (NTTS){
       parts.forEach(function(t, k){
         var en = t && typeof t === 'object';
+        nttsUsed = true; startNativeVoice();
         var p = NTTS.speak({ text: en ? t.en : t, lang: en ? 'en-US' : nativeLang, rate: en ? 0.8 : 0.85, pitch: 1.1, volume: 1.0, queueStrategy: k === 0 ? 0 : 1 });
         p.catch(en ? function(){} : voiceFailed);
         if (k === parts.length - 1) p.then(fin, fin);
@@ -1568,7 +1584,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
   }
   function sayEn(t){ say({ en: t }); }
   function ttsStop(){
-    if (NTTS) NTTS.stop().catch(function(){});
+    if (NTTS){ if (nttsUsed) NTTS.stop().catch(function(){}); }
     else if (hasWebTTS) try { speechSynthesis.cancel(); } catch(e){}
   }
   function hush(){ stopClips(); ttsStop(); clearTimeout(storyTimer); storyRun++; advanceToken++; } // also stops a story turning its pages
@@ -3292,10 +3308,11 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     $('wlHello').textContent = 'أهلاً يا ' + hero() + '!';
     if (!quiet) greet();
   }
-  function greet(){
-    if (!kid.set) say('أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟');
-    else say(kid.name ? 'أَهْلاً يا ' + kid.name + '! هَيّا نَلْعَب' : gx('أَهْلاً يا بَطَل! هَيّا نَلْعَب', 'أَهْلاً يا بَطَلَة! هَيّا نَلْعَب'));
+  function greetText(){
+    if (!kid.set) return 'أَهْلاً! أَنا زِيزُو الفِيل. ما اسْمُك؟';
+    return kid.name ? 'أَهْلاً يا ' + kid.name + '! هَيّا نَلْعَب' : gx('أَهْلاً يا بَطَل! هَيّا نَلْعَب', 'أَهْلاً يا بَطَلَة! هَيّا نَلْعَب');
   }
+  function greet(){ say(greetText()); }
   function openSetup(firstTime, quiet){
     $('wlMain').hidden = true; $('setup').hidden = false;
     $('kidName').value = kid.name; setG(kid.g);
@@ -3585,6 +3602,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
 
   /* ---------- the opening: about three seconds of motion, a tap skips it ---------- */
   var introEl = $('intro'), introTimers = [], introDone = true, introGreeted = false;
+  function mark(n){ try { performance.mark(n); } catch(e){} }
   function playIntro(){
     var testing = window.__zizoTest && !window.__zizoTest.intro;
     if (reduce || testing || timeUp()) return false;
@@ -3594,7 +3612,7 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
     letters.forEach(function(l, k){
       h += '<span class="i-balloon" style="--c:var(' + cols[k] + ');--d:' + (0.08 + k * 0.22).toFixed(2) + 's;left:' + (6 + k * 19) + '%">' + l + '</span>';
     });
-    var BIRD = '<svg class="i-bird" viewBox="0 0 34 16" style="top:TOP;animation-delay:DEL"><path d="M2 9 Q9 1 17 9 Q25 1 32 9"/></svg>';
+    var BIRD = '<span class="i-bird" style="top:TOP;animation-delay:DEL"><svg viewBox="0 0 34 16"><path d="M2 9 Q9 1 17 9 Q25 1 32 9"/></svg></span>';
     h += BIRD.replace('TOP', '13%').replace('DEL', '.3s');
     h += '<div class="i-hill h1"></div><div class="i-hill h2"></div>';
     [['🌼', 10, 9, .7], ['🌷', 34, 5, .9], ['🌸', 66, 6, 1.1], ['🌼', 88, 10, 1.3]].forEach(function(f){
@@ -3605,51 +3623,84 @@ body.intro-on .app *, body.intro-on .welcome *{animation-play-state:paused}
          '<h1 class="i-title" dir="ltr" lang="en">' + 'Zizo World'.split('').map(function(ch, k){
            return '<span class="ch"' + (k < 4 ? ' style="color:var(--orange);' : ' style="') + '--d:' + (1.0 + k * 0.07).toFixed(2) + 's">' + (ch === ' ' ? '&nbsp;' : ch) + '</span>';
          }).join('') + '</h1>' +
-         '<svg class="i-zizo" viewBox="0 -8 120 132"></svg><p class="i-ar">عالم زيزو</p></div>' +
-         '<p class="i-skip">اضغط للمتابعة</p>';
+         '<div class="i-zizo"><div class="i-jump">' + INTRO_POSES.map(function(ps, k){
+           return '<svg class="i-pose' + (k ? '' : ' on') + '" data-p="' + ps + '" viewBox="0 -8 120 132">' + zizoMarkup(outfit, ps || undefined) + '</svg>';
+         }).join('') + '</div></div><p class="i-ar">عالم زيزو</p></div>' +
+         '<p class="i-skip">اضغط للمتابعة</p>' + introSparks();
     introEl.innerHTML = h;
-    var z = introEl.querySelector('.i-zizo');
-    z.innerHTML = zizoMarkup(outfit);
+    var z = introEl.querySelector('.i-jump');
     introEl.classList.remove('out'); introEl.classList.add('wait'); introEl.hidden = false;
     document.body.classList.add('intro-on');
     // Start the sound system before anything moves: starting it mid-animation makes phones stutter
     audio();
     var at = function(ms, fn){ introTimers.push(setTimeout(fn, ms)); };
-    requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(function(){
+    // Nothing moves until the phone has finished starting the app (letters, voice, drawing): the
+    // opening then plays on a phone that has nothing else to do
+    whenCalm(function(){
       if (introDone) return;
       introEl.classList.remove('wait');
       introRun(z, at);
-    }, 120); }); });
+    });
     return true;
   }
-  function introRun(z, at){
-    at(150, function(){ sfx('introPops'); });
-    at(1450, function(){ z.innerHTML = zizoMarkup(outfit, 'joy'); sfx('trumpet'); introBurst(); });
-    at(1800, function(){ introGreeted = true; greet(); });
-    at(2450, function(){ z.innerHTML = zizoMarkup(outfit, 'wink'); });
-    at(2700, function(){ z.innerHTML = zizoMarkup(outfit, 'laugh'); z.classList.add('dance'); sfx('giggle'); });
-    at(3500, function(){ z.innerHTML = zizoMarkup(outfit, 'love'); });
-    at(4300, finishIntro);
+  var INTRO_POSES = ['', 'joy', 'wink', 'laugh', 'love'];
+  function pose(z, ps){
+    Array.prototype.forEach.call(z.children, function(c){ c.classList.toggle('on', c.getAttribute('data-p') === ps); });
   }
-  function introBurst(){
-    var cs = ['var(--sun)', 'var(--orange)', 'var(--pink)', 'var(--green)', 'var(--blue)'];
+  // The stars of the burst, made with the rest of the opening and only set off later
+  function introSparks(){
+    var cs = ['var(--sun)', 'var(--orange)', 'var(--pink)', 'var(--green)', 'var(--blue)'], h = '';
     for (var k = 0; k < 12; k++){
-      var s = document.createElement('span'); s.className = 'i-spark'; s.innerHTML = STAR;
       var a = Math.PI * 2 * k / 12 + Math.random() * 0.3, d = 110 + Math.random() * 70;
-      s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(1) + 'px'); s.style.setProperty('--dy', (Math.sin(a) * d).toFixed(1) + 'px');
-      s.style.color = cs[k % cs.length];
-      introEl.appendChild(s);
+      h += '<span class="i-spark" style="--dx:' + (Math.cos(a) * d).toFixed(1) + 'px;--dy:' + (Math.sin(a) * d).toFixed(1) + 'px;color:' + cs[k % cs.length] + '">' + STAR + '</span>';
     }
+    return h;
+  }
+  // Calls fn once the app has settled: its letters drawn, the greeting's recording ready, and the
+  // screen keeping up for a run of frames in a row. Never waits more than 2.5 seconds.
+  function whenCalm(fn){
+    var t0 = performance.now(), last = 0, calm = 0, minD = 1e9, fontsOk = false, voiceOk = false, warming = false, fired = false;
+    try {
+      Promise.all([document.fonts.load('800 40px "Baloo Bhaijaan 2"', 'Zizo World'), document.fonts.load('700 30px "Noto Naskh Arabic"', 'عالم')])
+        .then(function(){ return document.fonts.ready; }).then(function(){ fontsOk = true; }, function(){ fontsOk = true; });
+    } catch(e){ fontsOk = true; }
+    function tick(t){
+      if (fired || introDone) return;
+      if (!voiceOk && !warming && !voiceLoading){
+        warming = true;
+        nativeVoiceEarly();
+        var w = warm(greetText());
+        if (w && w.then) w.then(function(){ voiceOk = true; }, function(){ voiceOk = true; }); else voiceOk = true;
+      }
+      // a calm frame comes right on time for this screen (60, 90 or 120 a second, or 30 when saving battery)
+      if (last){ var d = t - last; if (d > 4 && d < minD) minD = d; calm = d < minD * 1.45 + 2 ? calm + 1 : 0; }
+      last = t;
+      var ready = fontsOk && voiceOk && document.readyState === 'complete';
+      if ((ready && calm >= 8) || performance.now() - t0 > 2500){ fired = true; fn(); return; }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+  function introRun(z, at){
+    mark('zizo-intro-run');
+    at(150, function(){ sfx('introPops'); });
+    at(1450, function(){ pose(z, 'joy'); sfx('trumpet'); introEl.classList.add('burst'); });
+    at(1800, function(){ introGreeted = true; greet(); });
+    at(2450, function(){ pose(z, 'wink'); });
+    at(2700, function(){ pose(z, 'laugh'); z.classList.add('dance'); sfx('giggle'); });
+    at(3500, function(){ pose(z, 'love'); });
+    at(4300, finishIntro);
   }
   function finishIntro(){
     if (introDone) return;
     introDone = true;
+    mark('zizo-intro-end');
     introTimers.forEach(clearTimeout); introTimers = [];
     if (!introGreeted){ introGreeted = true; greet(); }
-    document.body.classList.remove('intro-on');
     introEl.classList.add('out');
     welcome.classList.add('wl-in');
-    var hz = $('heroZizo'); hz.style.animation = 'none'; requestAnimationFrame(function(){ requestAnimationFrame(function(){ hz.style.animation = ''; }); });
+    requestAnimationFrame(function(){ document.body.classList.remove('intro-on'); });
+    [$('heroIn'), $('heroZizo')].forEach(function(hz){ hz.style.animation = 'none'; requestAnimationFrame(function(){ requestAnimationFrame(function(){ hz.style.animation = ''; }); }); });
     setTimeout(function(){ introEl.hidden = true; introEl.innerHTML = ''; }, 460);
     setTimeout(function(){ welcome.classList.remove('wl-in'); }, 1300);
   }

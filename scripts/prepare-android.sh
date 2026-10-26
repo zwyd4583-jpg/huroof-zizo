@@ -16,5 +16,8 @@ cp -R android-overlay/. android/
 # Version number, signing, portrait screen
 python3 scripts/patch_android.py
 
+# The phone's speech engine starts on first use, not while the opening plays
+python3 scripts/patch_tts.py
+
 chmod +x android/gradlew
 npx cap sync android

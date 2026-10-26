@@ -3,6 +3,7 @@
 - versionCode / versionName from the VERSION_CODE and VERSION_NAME environment variables
 - release signing with signing/upload.jks when KEYSTORE_PASSWORD is set
 - debug signing with the fixed test key in ci/debug.keystore
+- a "fast" build type for test builds: built like the store build, signed with the test key
 - portrait-only main screen
 """
 import os
@@ -50,6 +51,18 @@ if "signingConfigs" not in g:
     )
     if n != 1:
         raise SystemExit("Could not find buildTypes.release in build.gradle")
+# "fast": the test build, made like the store build (the phone runs it at full speed; a debug
+# build is slowed down for debugging) but signed with the test key, so it installs over earlier tests
+if "buildTypes { fast" not in g:
+    g += '''
+android {
+    buildTypes { fast {
+        initWith release
+        signingConfig signingConfigs.debug
+        matchingFallbacks = ['release']
+    } }
+}
+'''
 gradle.write_text(g, encoding="utf-8")
 
 m = manifest.read_text(encoding="utf-8")
