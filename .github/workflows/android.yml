@@ -2,7 +2,8 @@ name: Build Android app
 
 on:
   push:
-    branches: [main]
+    # main, and the branches Claude Code works on (claude/...), so every change gets a test app
+    branches: [main, "claude/**"]
   workflow_dispatch:
 
 permissions:
