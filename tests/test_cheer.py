@@ -27,7 +27,7 @@ async def main():
                     await page.wait_for_timeout(1500)
                 await page.evaluate("window.__oldc = document.querySelector('#choices .choice')"); await page.click(f"#choices .choice[data-o='{st['target']}']")
                 await page.wait_for_timeout(500)
-                if mode == "listen": await page.screenshot(path=str(HERE / f"cheer-{r}.png"))
+                if mode == "listen": await page.screenshot(path=str(out("cheer") / f"cheer-{r}.png"))
                 vis = await page.evaluate("!document.getElementById('cheer').hidden")
                 if not vis: problems.append("Zizo did not jump in")
                 ow = await page.evaluate("document.documentElement.scrollWidth > document.documentElement.clientWidth")

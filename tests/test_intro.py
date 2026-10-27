@@ -22,7 +22,7 @@ async def run(p, kid, shots, problems, skip=False):
         t = 0
         for ms in shots:
             await page.wait_for_timeout(ms - t); t = ms
-            await page.screenshot(path=str(HERE / f"intro-{ms}.png"))
+            await page.screenshot(path=str(out("intro") / f"intro-{ms}.png"))
             ow = await page.evaluate("document.documentElement.scrollWidth > document.documentElement.clientWidth")
             if ow: problems.append(f"sideways scroll at {ms} ms")
         await page.wait_for_timeout(5000 - t)
@@ -31,7 +31,7 @@ async def run(p, kid, shots, problems, skip=False):
         played = await page.evaluate("window.__zizoTest.played || []")
         if len(played) != 1: problems.append(f"hello said {len(played)} times: {played}")
         await page.wait_for_timeout(1200)
-        await page.screenshot(path=str(HERE / "intro-after.png"))
+        await page.screenshot(path=str(out("intro") / "intro-after.png"))
         # buttons work after the opening
         if kid:
             await page.click("#goLearn")
