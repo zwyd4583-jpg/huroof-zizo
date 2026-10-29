@@ -515,10 +515,252 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
 @keyframes shake{20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
 @keyframes pulse{50%{transform:scale(1.06)}}
 @keyframes spark{from{transform:translate(0,0) scale(.3); opacity:1} to{transform:translate(var(--dx),var(--dy)) scale(1.1) rotate(45deg); opacity:0}}
+
+/* ---------- motion layer ----------
+   A living sky behind everything (turning sun, drifting clouds, a passing bird, rising letter bubbles,
+   swaying flowers), and things that bounce, float and fly. Following the smoothness rules: only
+   transform and opacity move, each element has one movement at a time (a wrapper when it needs two),
+   and nothing moves inside an SVG drawing: a drawing turns or slides as a whole. */
+:root{--sun-glow:#FFEFB0; --stem:#5FAE72; --bird:#3D4B68; --bub:rgba(255,255,255,.24); --bub-edge:rgba(255,255,255,.85); --bub-shine:rgba(255,255,255,.8)}
+body::before, body::after{content:none}
+.world{position:fixed; inset:0; z-index:-1; overflow:hidden; pointer-events:none; background:linear-gradient(180deg, var(--sky-top) 0%, var(--sky) 42%, var(--sky-low) 100%)}
+.w-sun{position:absolute; top:calc(-74px + env(safe-area-inset-top,0px)); right:-74px; width:200px; height:200px; animation:mSpin 50s linear infinite}
+/* letter bubbles: a riser going up holds a swayer going side to side; a tap on the sky pops one */
+.w-bub{position:absolute; left:var(--x); bottom:-90px; width:var(--s); height:var(--s); pointer-events:auto; animation:mBubUp var(--dur) linear var(--d) infinite}
+.w-bub i{display:grid; place-items:center; width:100%; height:100%; border-radius:50%; font-style:normal; font-family:var(--f-letter); font-weight:700; font-size:calc(var(--s) * .52); line-height:1;
+  padding-bottom:calc(var(--s) * .1); color:var(--c); opacity:.8; background:radial-gradient(circle at 32% 30%, var(--bub-shine) 0 11%, var(--bub) 13%); box-shadow:inset 0 0 0 1.5px var(--bub-edge);
+  animation:mBubSway 3.6s ease-in-out var(--d) infinite alternate}
+.w-bub.pop i{animation:mBubPop .3s ease-out forwards}
+.w-cloud{position:absolute; left:0; top:var(--top); width:150px; height:70px; opacity:var(--o); animation:mDrift var(--dur) linear var(--delay) infinite}
+.w-bird{position:absolute; top:19%; left:-50px; width:30px; height:15px; animation:mFly 26s linear 5s infinite}
+.w-bird svg{display:block; width:100%; height:100%; overflow:visible; animation:mWings .3s ease-in-out infinite alternate}
+.w-bird path{fill:none; stroke:var(--bird); stroke-width:2.6; stroke-linecap:round}
+.w-hills{position:absolute; left:0; bottom:0; width:100%; height:150px}
+.w-flower{position:absolute; left:var(--x); bottom:var(--b); width:28px; height:56px; transform-origin:50% 100%; animation:mSway 3.2s ease-in-out var(--fd) infinite}
+.wl-sky{position:absolute; inset:0; z-index:-1; overflow:hidden; pointer-events:none}
+.wl-balloon{position:absolute; bottom:-120px; width:52px; height:60px; border-radius:50% 50% 47% 47%; background:var(--c); color:var(--white); font-family:var(--f-letter); font-weight:700; font-size:1.8rem; line-height:1; padding-bottom:8px; display:grid; place-items:center; opacity:.85;
+  box-shadow:inset -7px -9px 0 var(--shade); animation:mRise 15s linear var(--d) infinite}
+.wl-balloon::after{content:""; position:absolute; top:100%; left:50%; width:2px; height:40px; background:var(--shade)}
+#fxc{position:fixed; inset:0; width:100%; height:100%; z-index:35; pointer-events:none}
+.m-flystar{position:fixed; left:0; top:0; width:36px; height:36px; z-index:36; color:var(--sun); pointer-events:none; filter:drop-shadow(0 2px 0 var(--sun-dark))}
+.m-flystar svg{display:block; width:100%; height:100%}
+
+/* Zizo bobs as he talks while his words pop into his bubble one by one (his whole drawing moves;
+   a hop or a tilt still wins over the talking) */
+.zizo.talking{animation:mTalkBob .3s ease-in-out infinite alternate}
+.zizo.talking.happy{animation:hop .65s ease}
+.zizo.talking.sad{animation:tilt .6s ease}
+.bubble{transform-origin:right center}
+.bubble.m-pop{animation:mBub .35s ease-out}
+.bubble .w{display:inline-block; animation:mWord .4s cubic-bezier(.3,1.5,.5,1) both; animation-delay:calc(var(--i) * 45ms)}
+.stars.pop > svg:first-child{animation:mStarSpin .6s ease-out}
+
+/* pictures float gently (one movement each; the tiles themselves keep still so a press stays crisp) */
+.gicon, .journey-card .jicon, .lcard .dvisual{animation:mFloat 3s ease-in-out infinite}
+/* an SVG drawing can only be moved on the graphics chip through `transform`, not `translate` */
+.prize .mini{animation:mFloatT 3s ease-in-out infinite}
+.games > :nth-child(odd) .gicon{animation-delay:-1.4s}
+.lcard .pic{animation:mWiggle 3.2s ease-in-out infinite}
+.choices .choice.right{animation:mRight .6s cubic-bezier(.3,1.5,.5,1) both}
+.choices .choice.wrong{animation:shake .45s ease}
+
+/* the big letter or number rocks gently, a dotted ring turning round it */
+.bigletter{position:relative; animation:mBigIdle 3.6s ease-in-out infinite}
+.bigletter::after{content:""; position:absolute; inset:-22px; border-radius:50%; border:3px dashed var(--c); opacity:.45; animation:mSpin 16s linear infinite; pointer-events:none}
+/* ...and when it opens, the letter spins in, the picture drops and bounces, the word rises in */
+.enter .bigletter{animation:mBigIn .7s cubic-bezier(.3,1.45,.5,1) both}
+/* (the "enter" class lands on the screen when it opens, or on the card itself when stepping to the next one) */
+.enter .lcard .pic, .lcard.enter .pic, .enter .lcard .dvisual, .lcard.enter .dvisual{animation:mDrop .72s .12s cubic-bezier(.3,1.3,.5,1) both}
+.enter .lcard .word, .lcard.enter .word{animation:mRise2 .45s .35s ease-out both}
+.enter .lcard .lname, .lcard.enter .lname, .enter .lcard .dname, .lcard.enter .dname, .enter .lcard .dfact, .lcard.enter .dfact{animation:mRise2 .4s .1s ease-out both}
+.enter .lcard .btnrow > *, .lcard.enter .btnrow > *{animation:mPop .4s .45s cubic-bezier(.3,1.5,.5,1) both}
+.enter .lcard .btnrow > :nth-child(2), .lcard.enter .btnrow > :nth-child(2){animation-delay:.55s}
+.enter .countbox .obj{animation:tileIn .4s cubic-bezier(.3,1.45,.5,1) both; animation-delay:calc(var(--k,0) * 45ms + .2s)}
+.countbox .obj:nth-child(2){--k:1} .countbox .obj:nth-child(3){--k:2} .countbox .obj:nth-child(4){--k:3} .countbox .obj:nth-child(5){--k:4}
+.countbox .obj:nth-child(6){--k:5} .countbox .obj:nth-child(7){--k:6} .countbox .obj:nth-child(8){--k:7} .countbox .obj:nth-child(9){--k:8} .countbox .obj:nth-child(10){--k:9}
+.obj.done{animation:mPop .4s cubic-bezier(.3,1.5,.5,1)}
+
+/* games: each new question flips in (from script); the listen button sends out sound rings */
+.prompt .pic{animation:mDrop .7s cubic-bezier(.3,1.3,.5,1) both}
+.speak-big{position:relative}
+.speak-big::before, .speak-big::after{content:""; position:absolute; inset:0; border-radius:50%; border:3px solid var(--c); animation:mRipple 2.2s ease-out infinite; pointer-events:none}
+.speak-big::after{animation-delay:1.1s}
+/* the end of a game: rays turn behind the stars */
+.end{position:relative; overflow:hidden; isolation:isolate}
+.end::before{content:""; position:absolute; left:50%; top:32%; width:640px; height:640px; margin:-320px 0 0 -320px; z-index:-1; pointer-events:none;
+  background:repeating-conic-gradient(var(--sun-glow) 0 10deg, transparent 10deg 20deg);
+  -webkit-mask:radial-gradient(circle, #000 16%, transparent 58%); mask:radial-gradient(circle, #000 16%, transparent 58%); animation:mSpin 26s linear infinite}
+.endstars span{animation:mStarIn .6s cubic-bezier(.3,1.5,.5,1) backwards}
+/* screens slide in with a little spring */
+.enter{animation:viewIn .34s cubic-bezier(.2,.9,.3,1.2) both}
+
+@keyframes mSpin{to{transform:rotate(360deg)}}
+@keyframes mBubUp{to{transform:translateY(calc(-100vh - 180px))}}
+@keyframes mBubSway{from{transform:translateX(-10px)} to{transform:translateX(10px)}}
+@keyframes mBubPop{to{transform:scale(1.7); opacity:0}}
+@keyframes mDrift{from{transform:translateX(105vw) scale(var(--s))} to{transform:translateX(-200px) scale(var(--s))}}
+@keyframes mFly{0%{transform:translate(0,0)} 50%{transform:translate(calc(50vw + 50px),-30px)} 100%{transform:translate(calc(100vw + 120px),10px)}}
+@keyframes mWings{from{transform:scaleY(1)} to{transform:scaleY(-.45)}}
+@keyframes mSway{0%,100%{transform:rotate(-6deg)} 50%{transform:rotate(6deg)}}
+@keyframes mRise{0%{transform:translateY(0) rotate(-6deg)} 50%{transform:translateY(-60vh) rotate(6deg)} 100%{transform:translateY(-125vh) rotate(-4deg)}}
+@keyframes mTalkBob{from{transform:none} to{transform:translateY(-2px) rotate(-2deg)}}
+@keyframes mBub{0%{transform:scale(.94)} 60%{transform:scale(1.03)} 100%{transform:none}}
+@keyframes mWord{from{opacity:0}}
+@keyframes mStarSpin{from{transform:rotate(0) scale(1)} 50%{transform:rotate(200deg) scale(1.3)} to{transform:rotate(360deg) scale(1)}}
+@keyframes mFloat{0%,100%{translate:0 0} 50%{translate:0 -4px}}
+@keyframes mFloatT{0%,100%{transform:none} 50%{transform:translateY(-4px)}}
+@keyframes mWiggle{0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg) translateY(-4px)}}
+@keyframes mRight{0%{transform:scale(1)} 40%{transform:scale(1.18) rotate(-4deg)} 70%{transform:scale(.95) rotate(2deg)} 100%{transform:none}}
+@keyframes mBigIdle{0%,100%{transform:rotate(-3deg)} 50%{transform:rotate(1deg) scale(1.03)}}
+@keyframes mBigIn{0%{transform:scale(.2) rotate(-200deg); opacity:0} 70%{transform:scale(1.1) rotate(4deg); opacity:1} 100%{transform:rotate(-3deg)}}
+@keyframes mDrop{0%{transform:translateY(-110px) scale(.6); opacity:0} 55%{transform:translateY(0) scale(1.15,.82); opacity:1} 75%{transform:translateY(-12px) scale(.95,1.05)} 100%{transform:none}}
+@keyframes mRise2{from{opacity:0; transform:translateY(14px)}}
+@keyframes mPop{0%{transform:scale(0); opacity:0} 100%{transform:none; opacity:1}}
+@keyframes mRipple{from{transform:scale(1); opacity:.7} to{transform:scale(1.6); opacity:0}}
+@keyframes mStarIn{from{transform:scale(0) rotate(-180deg); opacity:0}}
+@keyframes viewIn{from{opacity:0; transform:translateY(22px) scale(.97)} to{opacity:1; transform:none}}
+
+/* ---------- new shapes inside the app ----------
+   Letter and number tiles become glossy candies, each a slightly different blob; game answers become
+   balloons that pop when right and go limp when wrong; cards catch a sweep of light. */
+:root{--gloss:rgba(255,255,255,.42)}
+.tile{position:relative; border-radius:58% 42% 55% 45% / 47% 56% 44% 53%}
+.tile:nth-child(5n+2){border-radius:44% 56% 42% 58% / 56% 44% 56% 44%}
+.tile:nth-child(5n+3){border-radius:52% 48% 40% 60% / 44% 52% 48% 56%}
+.tile:nth-child(5n+4){border-radius:60% 40% 48% 52% / 52% 60% 40% 48%}
+.tile:nth-child(5n){border-radius:47% 53% 58% 42% / 58% 46% 54% 42%}
+.gicon, .stile .sl, .stitle .sl{position:relative}
+.tile::before, .gicon::before, .bigletter::before, .stile .sl::before, .node::before{content:""; position:absolute; top:12%; left:16%; width:24%; height:17%; border-radius:50%; background:var(--gloss); transform:rotate(-30deg); pointer-events:none}
+.gicon{border-radius:46% 54% 44% 56% / 52% 46% 54% 48%}
+.gicon.emo::before{display:none}
+
+/* answers are balloons on strings; a picture answer is a white balloon so its colours stay true */
+#choices .choice{--bc:var(--orange); --bcd:var(--orange-dark); position:relative; aspect-ratio:.86; margin-bottom:30px; border-radius:50% 50% 46% 46% / 56% 56% 44% 44%;
+  background:var(--bc); color:var(--white); text-shadow:0 3px 0 var(--bcd); box-shadow:inset -9px -11px 0 var(--shade), inset 6px 6px 0 var(--shine)}
+#choices .choice:nth-child(2){--bc:var(--blue); --bcd:var(--blue-dark)}
+#choices .choice:nth-child(3){--bc:var(--purple); --bcd:var(--purple-dark)}
+#choices .choice:nth-child(4){--bc:var(--pink); --bcd:var(--pink-dark)}
+#choices .choice.pic{--bc:var(--paper); --bcd:var(--sky-dark); color:var(--ink); text-shadow:none; box-shadow:inset -9px -11px 0 var(--sky), inset 0 0 0 3px var(--sky-dark)}
+#choices .choice::before{content:""; position:absolute; top:12%; left:19%; width:22%; height:26%; border-radius:50%; background:var(--gloss); transform:rotate(24deg); pointer-events:none}
+#choices .choice::after{content:""; position:absolute; top:100%; left:calc(50% - 1px); width:2px; height:28px; border-radius:1px; background:var(--ink-soft); opacity:.45; transform-origin:50% 0; animation:mSway 2.4s ease-in-out infinite}
+#choices .choice.right{background:var(--green); --bcd:var(--green-dark); color:var(--white); text-shadow:0 3px 0 var(--green-dark); animation:mBalloonPop .95s ease-in forwards}
+#choices .choice.right::after{opacity:0}
+#choices .choice.wrong{animation:mDeflate .6s ease-out forwards}
+
+/* a sweep of light across the big cards and buttons */
+.journey-card, .btn.big{position:relative; overflow:hidden}
+.journey-card::after, .btn.big::after{content:""; position:absolute; top:-20%; bottom:-20%; left:0; width:35%; pointer-events:none;
+  background:linear-gradient(100deg, transparent, var(--gloss), transparent); transform:translateX(-160%) skewX(-18deg); animation:mShine 4.2s ease-in-out infinite}
+.daily-card::after{animation-delay:1.6s}
+
+/* the tab bar: a bouncing dot under the open section; the star pill twinkles */
+.tab{position:relative}
+.tab::after{content:""; position:absolute; bottom:-6px; left:calc(50% - 3px); width:6px; height:6px; border-radius:50%; background:var(--tc); opacity:0; transform:scale(0); transition:opacity .2s, transform .3s cubic-bezier(.3,1.6,.5,1)}
+.tab[aria-current="page"]::after{opacity:1; transform:none; animation:mDotBob 1.6s ease-in-out infinite}
+.stars > svg:first-child{animation:mTwinkle 2.6s ease-in-out infinite}
+
+/* Zizo's journey map: the decorations bob, earned stars twinkle */
+.deco{animation:mFloat 3.2s ease-in-out infinite}
+.deco:nth-of-type(odd){animation-delay:-1.6s}
+.nstars span:not(.off){animation:mTwinkle 2.4s ease-in-out infinite}
+.nstars span:nth-child(2){animation-delay:-.8s} .nstars span:nth-child(3){animation-delay:-1.6s}
+
+/* discover: colour blobs and shapes wobble */
+.dtile .blob, .dtile .shape, .dvisual .blob, .dvisual .shape, .choice .blob, .choice .shape{animation:mWob 4s ease-in-out infinite}
+.dtile:nth-child(odd) .blob, .dtile:nth-child(odd) .shape{animation-delay:-2s}
+
+/* rest time: stars twinkle in the night sky and the moon floats */
+.rest::before{content:""; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:radial-gradient(2px 2px at 12% 18%, var(--white) 50%, transparent 55%), radial-gradient(2px 2px at 78% 12%, var(--white) 50%, transparent 55%),
+    radial-gradient(3px 3px at 30% 70%, var(--white) 50%, transparent 55%), radial-gradient(2px 2px at 88% 58%, var(--white) 50%, transparent 55%),
+    radial-gradient(2px 2px at 55% 28%, var(--white) 50%, transparent 55%), radial-gradient(3px 3px at 18% 46%, var(--white) 50%, transparent 55%),
+    radial-gradient(2px 2px at 66% 86%, var(--white) 50%, transparent 55%), radial-gradient(2px 2px at 92% 32%, var(--white) 50%, transparent 55%);
+  animation:mTwinkleBg 2.8s ease-in-out infinite alternate}
+.rest .moon{animation:mFloat 3s ease-in-out infinite}
+
+@keyframes mBalloonPop{0%{transform:scale(1)} 30%{transform:scale(1.22,1.16)} 62%{transform:scale(1.22,1.16); opacity:1} 72%{transform:scale(1.6); opacity:0} 100%{transform:scale(1.6); opacity:0}}
+@keyframes mDeflate{0%{transform:none} 20%{transform:translateX(-8px) rotate(-6deg)} 40%{transform:translateX(7px) rotate(5deg)} 60%{transform:translateX(-4px)} 100%{transform:scale(.8) translateY(14px) rotate(-8deg)}}
+@keyframes mShine{0%,55%{transform:translateX(-160%) skewX(-18deg)} 100%{transform:translateX(420%) skewX(-18deg)}}
+@keyframes mDotBob{50%{translate:0 -3px}}
+@keyframes mTwinkle{0%,100%{transform:none} 50%{transform:scale(1.16)}}
+@keyframes mWob{0%,100%{transform:rotate(-5deg)} 50%{transform:rotate(5deg) scale(1.05)}}
+@keyframes mTwinkleBg{from{opacity:.35} to{opacity:1}}
+
+/* ---------- Zizo's happy dance in the opening ----------
+   The timeline in introRun puts one class on .i-zizo for each beat: joy (a big squash-and-stretch jump
+   to the trumpet, music notes), spray (water from his trunk when he lands), wink (a tilt), dance (side
+   hops and a twirl in the air), love (hearts rising). His shadow on the ground shrinks when he is up and
+   spreads when he lands. Later beats win over earlier ones. Only .i-jump moves him, as a whole: nothing
+   inside his drawings animates, so the poses still just fade into each other. */
+.i-jump{animation:none}
+.i-shadow{position:absolute; left:18%; right:18%; bottom:-2%; height:10%; border-radius:50%; will-change:transform;
+  background:radial-gradient(closest-side, var(--shade), transparent); animation:zoomIn .5s 1s both}
+.i-zizo.joy .i-jump{animation:iJoy .95s cubic-bezier(.3,0,.4,1) both}
+.i-zizo.joy .i-shadow{animation:iShJoy .95s cubic-bezier(.3,0,.4,1) both}
+.i-zizo.wink .i-jump{animation:iWink .5s ease-out both}
+.i-zizo.wink .i-shadow{animation:iShWink .5s ease-out both}
+.i-zizo.dance .i-jump{animation:iDance 1.3s ease-in-out both}
+.i-zizo.dance .i-shadow{animation:iShDance 1.3s ease-in-out both}
+.i-drop, .i-note, .i-heart{position:absolute; opacity:0; pointer-events:none; will-change:transform}
+.i-drop{left:74%; top:68%; width:11px; height:14px; margin:-7px 0 0 -5px; border-radius:50% 50% 50% 50% / 60% 60% 40% 40%; background:var(--blue)}
+.i-drop:nth-child(3n){background:var(--white)}
+.i-zizo.spray .i-drop{animation:iDrop .85s ease-out var(--d) both}
+.i-note{left:72%; top:60%; font-size:2.4rem; font-weight:800; line-height:1; text-shadow:0 2px 0 var(--white), 0 0 6px var(--white)}
+.i-zizo.joy .i-note{animation:iNote 1.7s ease-out var(--d) both}
+.i-heart{top:14%; width:26px; height:26px; margin-left:-13px}
+.i-heart svg{display:block; width:100%; height:100%}
+.i-zizo.love .i-heart{animation:iHeart 1.3s ease-out var(--d) both}
+@keyframes iJoy{0%{transform:none} 14%{transform:translateY(8px) scale(1.14,.84)} 38%{transform:translateY(-44px) scale(.9,1.12) rotate(-7deg)} 50%{transform:translateY(-50px) scale(1) rotate(5deg)}
+  70%{transform:translateY(0) scale(1.16,.84)} 84%{transform:translateY(-10px) scale(.96,1.05)} 100%{transform:none}}
+@keyframes iShJoy{14%{transform:scale(1.15)} 38%, 50%{transform:scale(.5); opacity:.45} 70%{transform:scale(1.2); opacity:1} 100%{transform:none}}
+@keyframes iWink{0%{transform:none} 40%{transform:translateY(-8px) rotate(-9deg) scale(1.04)} 70%{transform:rotate(3deg)} 100%{transform:none}}
+@keyframes iShWink{40%{transform:scale(.85)}}
+@keyframes iDance{0%{transform:none} 10%{transform:translate(-12px,-24px) rotate(-11deg)} 20%{transform:translate(-12px,0) scale(1.08,.92) rotate(-4deg)}
+  30%{transform:translate(12px,-24px) rotate(11deg)} 40%{transform:translate(12px,0) scale(1.08,.92) rotate(4deg)} 50%{transform:translateY(-6px) scale(1.06,.94)}
+  64%{transform:translateY(-36px) scale(-1,1)} 78%{transform:translateY(0) scale(1.1,.9)} 88%{transform:translateY(-12px) scale(.97,1.04)} 100%{transform:none}}
+@keyframes iShDance{10%{transform:translateX(-12px) scale(.7)} 20%{transform:translateX(-12px) scale(1.1)} 30%{transform:translateX(12px) scale(.7)} 40%{transform:translateX(12px) scale(1.1)}
+  64%{transform:scale(.5); opacity:.5} 78%{transform:scale(1.2); opacity:1} 100%{transform:none}}
+@keyframes iDrop{0%{transform:translate(0,0) scale(.5); opacity:0} 10%{opacity:1} 45%{transform:translate(calc(var(--dx) * .55), var(--up)) scale(1)} 100%{transform:translate(var(--dx), var(--dn)) scale(.7); opacity:0}}
+@keyframes iNote{0%{transform:translate(0,0) scale(.4); opacity:0} 15%{opacity:1} 50%{transform:translate(var(--sx), -70px) rotate(-12deg) scale(1)} 100%{transform:translate(calc(var(--sx) * 1.6), -150px) rotate(10deg) scale(.9); opacity:0}}
+@keyframes iHeart{0%{transform:translateY(20px) scale(.2); opacity:0} 20%{transform:translateY(0) scale(1.15); opacity:1} 100%{transform:translateY(-110px) rotate(var(--r)) scale(.8); opacity:0}}
 @media (prefers-reduced-motion:reduce){ *,*::before,*::after{animation:none!important; transition:none!important} }
 </style>
 </head>
 <body>
+<!-- Zizo's sky: it moves on its own behind every screen and never catches a tap -->
+<div class="world" aria-hidden="true">
+  <svg class="w-sun" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="86" fill="var(--sun-glow)" opacity=".55"/>
+    <g class="rays" fill="var(--sun)">
+      <rect x="94" y="4" width="12" height="28" rx="6"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(30 100 100)"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(60 100 100)"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(90 100 100)"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(120 100 100)"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(150 100 100)"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(180 100 100)"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(210 100 100)"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(240 100 100)"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(270 100 100)"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(300 100 100)"/>
+      <rect x="94" y="4" width="12" height="28" rx="6" transform="rotate(330 100 100)"/>
+    </g>
+    <circle class="core" cx="100" cy="100" r="50" fill="var(--sun)"/>
+  </svg>
+  <svg class="w-cloud" style="--top:11%;--dur:80s;--delay:-16s;--s:.95;--o:.95" viewBox="0 0 150 70"><g fill="var(--white)"><circle cx="40" cy="42" r="24"/><circle cx="74" cy="30" r="28"/><circle cx="108" cy="42" r="22"/><rect x="18" y="40" width="112" height="28" rx="14"/></g></svg>
+  <svg class="w-cloud" style="--top:30%;--dur:118s;--delay:-72s;--s:.6;--o:.8" viewBox="0 0 150 70"><g fill="var(--white)"><circle cx="40" cy="42" r="24"/><circle cx="74" cy="30" r="28"/><circle cx="108" cy="42" r="22"/><rect x="18" y="40" width="112" height="28" rx="14"/></g></svg>
+  <svg class="w-cloud" style="--top:54%;--dur:98s;--delay:-40s;--s:.78;--o:.7" viewBox="0 0 150 70"><g fill="var(--white)"><circle cx="40" cy="42" r="24"/><circle cx="74" cy="30" r="28"/><circle cx="108" cy="42" r="22"/><rect x="18" y="40" width="112" height="28" rx="14"/></g></svg>
+  <span class="w-bird"><svg viewBox="0 0 34 16"><path d="M2 9 Q9 1 17 9 Q25 1 32 9"/></svg></span>
+  <div id="wBubs"></div>
+  <svg class="w-hills" viewBox="0 0 400 150" preserveAspectRatio="none">
+    <path d="M0 74C60 36 118 42 170 72S282 40 332 60S392 72 400 58V150H0Z" fill="var(--grass)"/>
+    <path d="M0 106C70 78 132 82 202 102S330 72 400 96V150H0Z" fill="var(--grass-dark)"/>
+  </svg>
+  <svg class="w-flower" style="--x:4%;--b:52px;--fd:-.4s" viewBox="0 0 30 60"><path d="M15 60Q12 40 15 22" stroke="var(--stem)" stroke-width="3" fill="none"/><ellipse cx="9" cy="42" rx="6" ry="3" fill="var(--stem)" transform="rotate(-30 9 42)"/><g fill="var(--pink)"><circle cx="15" cy="9" r="5"/><circle cx="22" cy="15" r="5"/><circle cx="19" cy="23" r="5"/><circle cx="11" cy="23" r="5"/><circle cx="8" cy="15" r="5"/></g><circle cx="15" cy="16" r="4.5" fill="var(--sun)"/></svg>
+  <svg class="w-flower" style="--x:20%;--b:64px;--fd:-1.6s" viewBox="0 0 30 60"><path d="M15 60Q18 40 15 22" stroke="var(--stem)" stroke-width="3" fill="none"/><ellipse cx="21" cy="44" rx="6" ry="3" fill="var(--stem)" transform="rotate(30 21 44)"/><g fill="var(--white)"><circle cx="15" cy="9" r="5"/><circle cx="22" cy="15" r="5"/><circle cx="19" cy="23" r="5"/><circle cx="11" cy="23" r="5"/><circle cx="8" cy="15" r="5"/></g><circle cx="15" cy="16" r="4.5" fill="var(--sun)"/></svg>
+  <svg class="w-flower" style="--x:76%;--b:66px;--fd:-.9s" viewBox="0 0 30 60"><path d="M15 60Q12 40 15 22" stroke="var(--stem)" stroke-width="3" fill="none"/><ellipse cx="9" cy="42" rx="6" ry="3" fill="var(--stem)" transform="rotate(-30 9 42)"/><g fill="var(--purple)"><circle cx="15" cy="9" r="5"/><circle cx="22" cy="15" r="5"/><circle cx="19" cy="23" r="5"/><circle cx="11" cy="23" r="5"/><circle cx="8" cy="15" r="5"/></g><circle cx="15" cy="16" r="4.5" fill="var(--sun)"/></svg>
+  <svg class="w-flower" style="--x:91%;--b:56px;--fd:-2.2s" viewBox="0 0 30 60"><path d="M15 60Q18 40 15 22" stroke="var(--stem)" stroke-width="3" fill="none"/><ellipse cx="21" cy="44" rx="6" ry="3" fill="var(--stem)" transform="rotate(30 21 44)"/><g fill="var(--orange)"><circle cx="15" cy="9" r="5"/><circle cx="22" cy="15" r="5"/><circle cx="19" cy="23" r="5"/><circle cx="11" cy="23" r="5"/><circle cx="8" cy="15" r="5"/></g><circle cx="15" cy="16" r="4.5" fill="var(--sun)"/></svg>
+</div>
 <div class="app">
   <header>
     <div class="host">
@@ -799,9 +1041,18 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
     </button>
   </nav>
   <div id="fx" aria-hidden="true"></div>
+  <canvas id="fxc" aria-hidden="true"></canvas>
   <div id="cheer" class="cheer" hidden aria-hidden="true"><div class="cheer-in"><svg class="cheer-z" viewBox="0 -6 120 128"></svg><p class="cheer-b"></p></div></div>
   <div class="intro" id="intro" hidden aria-hidden="true"></div>
   <div class="welcome" id="welcome" role="dialog" aria-modal="true" aria-label="أهلاً">
+    <div class="wl-sky" aria-hidden="true">
+      <svg class="w-cloud" style="--top:7%;--dur:70s;--delay:-30s;--s:.85;--o:.9" viewBox="0 0 150 70"><g fill="var(--white)"><circle cx="40" cy="42" r="24"/><circle cx="74" cy="30" r="28"/><circle cx="108" cy="42" r="22"/><rect x="18" y="40" width="112" height="28" rx="14"/></g></svg>
+      <svg class="w-cloud" style="--top:38%;--dur:95s;--delay:-12s;--s:.6;--o:.75" viewBox="0 0 150 70"><g fill="var(--white)"><circle cx="40" cy="42" r="24"/><circle cx="74" cy="30" r="28"/><circle cx="108" cy="42" r="22"/><rect x="18" y="40" width="112" height="28" rx="14"/></g></svg>
+      <span class="wl-balloon" style="--c:var(--orange);left:5%;--d:-2s">ا</span>
+      <span class="wl-balloon" style="--c:var(--blue);left:27%;--d:-9s">ب</span>
+      <span class="wl-balloon" style="--c:var(--green);left:63%;--d:-5s">ت</span>
+      <span class="wl-balloon" style="--c:var(--pink);left:84%;--d:-12s">س</span>
+    </div>
     <div class="wl-inner">
       <h1 class="wl-title" dir="ltr" lang="en"><span>Zizo</span> World</h1>
       <p class="wl-ar">عالم زيزو</p>
@@ -1636,6 +1887,7 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
   }
   function zizo(text, mood){
     bub.textContent = text;
+    mTalk(text);
     if (mood && !reduce) replay(zEl, mood, ['happy', 'sad']);
   }
   // A right answer: Zizo jumps in with a new happy look, from a different side each time, saying the praise
@@ -1741,6 +1993,7 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
 
   function burst(){
     if (reduce) return;
+    if (mConfetti()) return; // the motion layer throws confetti from where the child tapped
     var fx = $('fx'), cols = ['var(--sun)','var(--orange)','var(--pink)','var(--green)','var(--blue)'];
     for (var k=0;k<10;k++){
       var s = document.createElement('span'); s.className = 'spark'; s.innerHTML = STAR;
@@ -1787,8 +2040,9 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
     stars++;
     saveStars();
     renderStars();
-    replay($('starPill'), 'pop');
     burst();
+    // a star flies from the answer up to the star pill, which pops when it lands
+    mFlyStar(function(){ replay($('starPill'), 'pop'); });
   }
 
   /* ---------- Zizo's shop ---------- */
@@ -2077,7 +2331,7 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
     outfit[p.slot] = p.id; saveOutfit();
     renderZizo(); renderStars();
     if (!$('v-rewards').hidden) renderRewards();
-    burst();
+    burst(); mRain();
     zizo('شكراً يا ' + hero() + '! هدية رائعة', 'happy');
     say('شُكْراً! هَدِيَّةٌ رائِعَة');
   }
@@ -2627,7 +2881,7 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
     renderDots();
     zizo(sub, 'happy');
     say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + heroS());
-    burst();
+    burst(); mRain();
     stage = i; // keep for the buttons below
   }
   $('stageNext').addEventListener('click', function(){ if (stage !== null && stage + 1 < STAGES.length) startStage(stage + 1); });
@@ -2869,6 +3123,7 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
         b.setAttribute('aria-label', num ? 'الرقم ' + N[o].n : 'حرف ال' + L[o].n);
       }
       b.dataset.o = o;
+      if (b.querySelector('.vis')) b.classList.add('pic'); // a picture answer: a white balloon
       b.addEventListener('click', function(){ choose(o, b); });
       ch.appendChild(b);
     });
@@ -2878,7 +3133,7 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
     if (locked) return;
     if (o === target){
       locked = true;
-      b.classList.add('right');
+      b.classList.add('right'); mRight(b);
       noteAnswer(mode, target, true);
       var pr = praise();
       zizo(pr, 'happy'); cheer(pr); addStar();
@@ -2914,7 +3169,7 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
       say(gx('أَحْسَنْتَ يا ', 'أَحْسَنْتِ يا ') + heroS());
     }
     renderDots();
-    burst();
+    burst(); mRain();
   }
   $('again').addEventListener('click', newGame);
   $('toRewards').addEventListener('click', function(){ show('rewards'); });
@@ -3091,8 +3346,16 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
     ctx.clearRect(0, 0, S, S);
     ctx.drawImage(guideLayer(), 0, 0, S, S);
     ctx.lineCap = 'round'; ctx.lineJoin = 'round';
-    ctx.lineWidth = inkWidth(); ctx.strokeStyle = tok(traceDone ? '--green' : '--orange');
+    ctx.lineWidth = inkWidth(); ctx.strokeStyle = traceDone ? tok('--green') : rainbowInk();
     strokePaths(ctx);
+  }
+  // The child draws in rainbow colours: one gradient across the board, made once for each board size
+  var inkGrad = null, inkGradS = 0;
+  function rainbowInk(){
+    if (inkGrad && inkGradS === S) return inkGrad;
+    inkGrad = ctx.createLinearGradient(0, 0, S, S); inkGradS = S;
+    ['--orange', '--pink', '--purple', '--blue', '--teal', '--green'].forEach(function(n, k, a){ inkGrad.addColorStop(k / (a.length - 1), tok(n)); });
+    return inkGrad;
   }
 
   // Did the child trace the letter? Both the letter and the child's lines are drawn onto a small
@@ -3216,7 +3479,7 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
     cvRect = cv.getBoundingClientRect();
     drawing = true; strokes.push([pt(e)]); requestDraw();
   });
-  cv.addEventListener('pointermove', function(e){ if (!drawing) return; strokes[strokes.length-1].push(pt(e)); requestDraw(); });
+  cv.addEventListener('pointermove', function(e){ if (!drawing) return; strokes[strokes.length-1].push(pt(e)); requestDraw(); mTrail(e.clientX, e.clientY); });
   ['pointerup','pointercancel'].forEach(function(t){ cv.addEventListener(t, function(){ drawing = false; }); });
   function setTrace(i, speak){
     clearTimeout(traceTimer);
@@ -3275,6 +3538,7 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
     }
     traceDone = true; drawAll();
     noteTraced(tKind, tIdx);
+    mFrom(cv); mRing(cv);
     var pr = praise(); addStar(); zizo(pr, 'happy'); cheer(pr);
     sayThenTimer(pr, function(){ whenNoPrize(function(){ setTrace(tIdx + 1, true); }); }, function(t){ clearTimeout(traceTimer); traceTimer = t; }, 500);
   });
@@ -3644,9 +3908,9 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
          '<h1 class="i-title" dir="ltr" lang="en">' + 'Zizo World'.split('').map(function(ch, k){
            return '<span class="ch"' + (k < 4 ? ' style="color:var(--orange);' : ' style="') + '--d:' + (1.0 + k * 0.07).toFixed(2) + 's">' + (ch === ' ' ? '&nbsp;' : ch) + '</span>';
          }).join('') + '</h1>' +
-         '<div class="i-zizo"><div class="i-jump">' + INTRO_POSES.map(function(ps, k){
+         '<div class="i-zizo"><span class="i-shadow"></span><div class="i-jump">' + INTRO_POSES.map(function(ps, k){
            return '<svg class="i-pose' + (k ? '' : ' on') + '" data-p="' + ps + '" viewBox="0 -8 120 132">' + zizoMarkup(outfit, ps || undefined) + '</svg>';
-         }).join('') + '</div></div><p class="i-ar">عالم زيزو</p></div>' +
+         }).join('') + '</div>' + introFx() + '</div><p class="i-ar">عالم زيزو</p></div>' +
          '<p class="i-skip">اضغط للمتابعة</p>' + introSparks();
     introEl.innerHTML = h;
     var z = introEl.querySelector('.i-jump');
@@ -3667,6 +3931,23 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
   var INTRO_POSES = ['', 'joy', 'wink', 'laugh', 'love'];
   function pose(z, ps){
     Array.prototype.forEach.call(z.children, function(c){ c.classList.toggle('on', c.getAttribute('data-p') === ps); });
+  }
+  // What flies off Zizo during his dance, made with the rest of the opening and set off by its beats:
+  // water drops from his trunk, music notes for the trumpet, and hearts at the end
+  var HEART = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="var(--pink)" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.2 5.2 3 1.6-1.8 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg>';
+  function introFx(){
+    var h = '';
+    for (var k = 0; k < 12; k++){
+      h += '<span class="i-drop" style="--dx:' + Math.round(18 + k * 9 + Math.random() * 8) + 'px;--up:' + -Math.round(50 + Math.random() * 40) + 'px;--dn:' +
+           Math.round(40 + Math.random() * 30) + 'px;--d:' + (k * 0.04).toFixed(2) + 's"></span>';
+    }
+    [['♪', '--purple', -20, 0], ['♫', '--blue', 12, 0.25], ['♪', '--pink', 34, 0.5]].forEach(function(n){
+      h += '<span class="i-note" style="color:var(' + n[1] + ');--sx:' + n[2] + 'px;--d:' + n[3] + 's">' + n[0] + '</span>';
+    });
+    [[16, 0, -14], [33, 0.15, 10], [50, 0.3, -6], [67, 0.1, 14], [84, 0.25, -10]].forEach(function(p){
+      h += '<span class="i-heart" style="left:' + p[0] + '%;--d:' + p[1] + 's;--r:' + p[2] + 'deg">' + HEART + '</span>';
+    });
+    return h;
   }
   // The stars of the burst, made with the rest of the opening and only set off later
   function introSparks(){
@@ -3704,12 +3985,18 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
   }
   function introRun(z, at){
     mark('zizo-intro-run');
+    // zz carries the beat classes (see "Zizo's happy dance" in the styles)
+    var zz = z.parentNode;
     at(150, function(){ sfx('introPops'); });
-    at(1450, function(){ pose(z, 'joy'); sfx('trumpet'); introEl.classList.add('burst'); });
+    // the trumpet: a big happy jump, music notes
+    at(1450, function(){ pose(z, 'joy'); sfx('trumpet'); introEl.classList.add('burst'); zz.classList.add('joy'); });
     at(1800, function(){ introGreeted = true; greet(); });
-    at(2450, function(){ pose(z, 'wink'); });
-    at(2700, function(){ pose(z, 'laugh'); z.classList.add('dance'); sfx('giggle'); });
-    at(3500, function(){ pose(z, 'love'); });
+    // he lands and sprays water from his trunk
+    at(2150, function(){ zz.classList.add('spray'); });
+    at(2450, function(){ pose(z, 'wink'); zz.classList.add('wink'); });
+    // a dance: hop left, hop right, a twirl in the air
+    at(2700, function(){ pose(z, 'laugh'); zz.classList.add('dance'); sfx('giggle'); });
+    at(3500, function(){ pose(z, 'love'); zz.classList.add('love'); });
     at(4300, finishIntro);
   }
   function finishIntro(){
@@ -3729,6 +4016,209 @@ body.intro-on #heroIn, body.intro-on #heroZizo, body.intro-on .zizo{animation-pl
   $('heroZizo').addEventListener('click', function(){ zizoTap($('heroZizo')); });
   $('bigZizo').addEventListener('click', function(){ zizoTap($('bigZizo')); });
   if (window.__zizoTest) window.__zizoTest.introDone = function(){ return introDone; };
+
+  /* ---------- motion layer: confetti, flying stars, a living sky, a talkative Zizo ---------- */
+  // None of this changes what the app does; it only moves things, and stays still for children whose
+  // phones ask for less motion. Positions on screen are read inside a requestAnimationFrame callback,
+  // where the layout is being worked out anyway, never in the middle of a tap.
+
+  // Zizo's words pop into his bubble one by one while he bobs. The bubble's text stays exactly what was
+  // given (the words are only wrapped), so anything that reads it back still matches.
+  var mTalkT = null;
+  function mTalk(text){
+    if (reduce || !bub) return;
+    var words = String(text).split(' ');
+    bub.textContent = '';
+    words.forEach(function(w, i){
+      var s = document.createElement('span');
+      s.className = 'w'; s.style.setProperty('--i', Math.min(i, 24)); s.textContent = w;
+      bub.appendChild(s);
+      if (i < words.length - 1) bub.appendChild(document.createTextNode(' '));
+    });
+    replay(bub, 'm-pop');
+    zEl.classList.add('talking');
+    clearTimeout(mTalkT);
+    mTalkT = setTimeout(function(){ zEl.classList.remove('talking'); }, Math.min(4200, 400 + words.length * 230));
+  }
+
+  // Where the child last touched (or an element to start from): confetti and flying stars start there.
+  // mPoint() may read the layout, so it is only called inside requestAnimationFrame.
+  var mTap = null;
+  function mFrom(el){ mTap = { el: el, t: Date.now() }; }
+  function mCentre(el){ var r = el.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2, w: r.width, h: r.height }; }
+  function mPoint(){
+    if (mTap && Date.now() - mTap.t < 5000) return mTap.el ? mCentre(mTap.el) : mTap;
+    return { x: window.innerWidth / 2, y: window.innerHeight * 0.42 };
+  }
+
+  // One canvas over everything for confetti, stars and rings. It only runs while something is flying.
+  var fxc = $('fxc'), fxx = fxc && fxc.getContext ? fxc.getContext('2d') : null, FXP = [], fxRaf = 0, fxLast = 0, fxW = 0, fxH = 0, fxCols = null;
+  function fxSize(){
+    if (!fxx) return;
+    var d = Math.min(1.5, window.devicePixelRatio || 1);
+    fxW = window.innerWidth; fxH = window.innerHeight;
+    fxc.width = Math.round(fxW * d); fxc.height = Math.round(fxH * d);
+    fxx.setTransform(d, 0, 0, d, 0, 0);
+  }
+  fxSize(); window.addEventListener('resize', fxSize);
+  function fxColors(){ return fxCols || (fxCols = ['--sun', '--orange', '--pink', '--green', '--blue', '--purple', '--teal'].map(tok)); }
+  function fxAdd(p){
+    if (reduce || !fxx || FXP.length > 260) return;
+    p.vr = p.vr || 0; p.rot = p.rot || 0; p.g = p.g == null ? 0.18 : p.g; p.drag = p.drag || 0.985; p.max = p.life;
+    FXP.push(p);
+    if (!fxRaf){ fxLast = 0; fxRaf = requestAnimationFrame(fxLoop); }
+  }
+  function fxStarPath(r){
+    fxx.beginPath();
+    for (var k = 0; k < 10; k++){ var a = -Math.PI / 2 + k * Math.PI / 5, rr = k % 2 ? r * 0.45 : r; fxx.lineTo(Math.cos(a) * rr, Math.sin(a) * rr); }
+    fxx.closePath();
+  }
+  function fxLoop(ts){
+    var dt = fxLast ? Math.min(3, (ts - fxLast) / 16.67) : 1; fxLast = ts;
+    fxx.clearRect(0, 0, fxW, fxH);
+    for (var i = FXP.length - 1; i >= 0; i--){
+      var p = FXP[i];
+      p.life -= dt;
+      if (p.life <= 0){ FXP.splice(i, 1); continue; }
+      var dr = Math.pow(p.drag, dt);
+      p.vx *= dr; p.vy = p.vy * dr + p.g * dt;
+      p.x += p.vx * dt; p.y += p.vy * dt; p.rot += p.vr * dt;
+      fxx.save();
+      fxx.globalAlpha = Math.min(1, p.life / Math.min(20, p.max));
+      fxx.translate(p.x, p.y); fxx.rotate(p.rot);
+      fxx.fillStyle = p.c; fxx.strokeStyle = p.c;
+      if (p.t === 'conf'){ fxx.scale(1, Math.cos(p.rot * 3)); fxx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2); }
+      else if (p.t === 'star'){ fxStarPath(p.s); fxx.fill(); }
+      else if (p.t === 'ring'){ var k = 1 - p.life / p.max; fxx.lineWidth = 5 * (1 - k) + 0.5; fxx.beginPath(); fxx.arc(0, 0, p.s + k * p.grow, 0, Math.PI * 2); fxx.stroke(); }
+      else { fxx.beginPath(); fxx.arc(0, 0, p.s, 0, Math.PI * 2); fxx.fill(); }
+      fxx.restore();
+    }
+    fxRaf = FXP.length ? requestAnimationFrame(fxLoop) : 0;
+    if (!fxRaf) fxx.clearRect(0, 0, fxW, fxH);
+  }
+  // A handful of confetti and stars from where the child tapped (used by burst)
+  function mConfetti(){
+    if (!fxx) return false;
+    requestAnimationFrame(function(){
+      var p = mPoint(), c = fxColors();
+      for (var i = 0; i < 26; i++){
+        var a = Math.random() * Math.PI * 2, v = 2.8 + Math.random() * 5;
+        fxAdd({ t: i % 3 ? 'conf' : 'star', x: p.x, y: p.y, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 2.2, s: 7 + Math.random() * 5, c: pick(c), life: 45 + Math.random() * 30, vr: (Math.random() - 0.5) * 0.5, rot: Math.random() * 6, g: 0.2, drag: 0.96 });
+      }
+    });
+    return true;
+  }
+  // Confetti raining down the whole screen: the end of a game, a stage, a present for Zizo
+  function mRain(){
+    var c = fxColors();
+    for (var i = 0; i < 80; i++){
+      fxAdd({ t: i % 4 ? 'conf' : 'star', x: Math.random() * fxW, y: -10 - Math.random() * fxH * 0.6, vx: (Math.random() - 0.5) * 3, vy: 2 + Math.random() * 2.5, s: 8 + Math.random() * 5, c: pick(c), life: 140 + Math.random() * 60, vr: (Math.random() - 0.5) * 0.4, rot: Math.random() * 6, g: 0.04, drag: 0.995 });
+    }
+  }
+  // Two rings spreading out from a right answer
+  function mRing(el){
+    if (reduce || !fxx || !el) return;
+    requestAnimationFrame(function(){
+      var p = mCentre(el), s = Math.min(p.w, p.h);
+      if (!s) return;
+      fxAdd({ t: 'ring', x: p.x, y: p.y, vx: 0, vy: 0, g: 0, s: s * 0.35, grow: 60, c: tok('--sun'), life: 26 });
+      fxAdd({ t: 'ring', x: p.x, y: p.y, vx: 0, vy: 0, g: 0, s: s * 0.2, grow: 95, c: tok('--white'), life: 34 });
+    });
+  }
+  // A right answer's balloon: rings now, and a pop with a little sound when it bursts
+  function mRight(b){
+    mRing(b);
+    if (reduce) return;
+    setTimeout(function(){
+      if (!b.isConnected) return;
+      requestAnimationFrame(function(){
+        var p = mCentre(b); if (!p.w) return;
+        mPopAt(p.x, p.y, tok('--green')); sfx('pop');
+      });
+    }, 680);
+  }
+  // A small pop: a ring and a few drops (bubbles in the sky, things counted)
+  function mPopAt(x, y, col){
+    fxAdd({ t: 'ring', x: x, y: y, vx: 0, vy: 0, g: 0, s: 8, grow: 40, c: col, life: 22 });
+    for (var i = 0; i < 9; i++){ var a = i / 9 * Math.PI * 2; fxAdd({ t: 'dot', x: x, y: y, vx: Math.cos(a) * 3.6, vy: Math.sin(a) * 3.6, s: 2.5 + Math.random() * 2, c: col, life: 26, g: 0.08, drag: 0.93 }); }
+  }
+  // Sparkles trailing the finger while drawing
+  var trailAt = 0;
+  function mTrail(x, y){
+    var now = Date.now(); if (now - trailAt < 45) return; trailAt = now;
+    var c = fxColors();
+    for (var i = 0; i < 2; i++) fxAdd({ t: 'star', x: x, y: y, vx: (Math.random() - 0.5) * 3, vy: -0.6 - Math.random() * 1.6, s: 3 + Math.random() * 3.5, c: pick(c), life: 28, vr: 0.15, g: 0.06, drag: 0.97 });
+  }
+  // A star flies in an arc from the answer to the star pill; done() runs when it lands
+  function mFlyStar(done){
+    if (reduce || !document.body.animate){ done(); return; }
+    requestAnimationFrame(function(){ mFlyStarNow(done); });
+  }
+  function mFlyStarNow(done){
+    var ico = $('starPill').querySelector('svg'), from = mPoint(), r = ico.getBoundingClientRect();
+    if (!r.width){ done(); return; }
+    var tx = r.left + r.width / 2, ty = r.top + r.height / 2;
+    var cx = (from.x + tx) / 2 + (Math.random() * 120 - 60), cy = Math.min(from.y, ty) - 120;
+    var s = document.createElement('div');
+    s.className = 'm-flystar'; s.innerHTML = STAR;
+    document.body.appendChild(s);
+    var kf = [];
+    for (var i = 0; i <= 20; i++){
+      var t = i / 20, u = 1 - t;
+      var bx = u * u * from.x + 2 * u * t * cx + t * t * tx, by = u * u * from.y + 2 * u * t * cy + t * t * ty;
+      var sc = t < 0.25 ? 0.5 + t * 4.4 : 1.6 - (t - 0.25) * 1.2;
+      kf.push({ transform: 'translate(' + (bx - 18).toFixed(1) + 'px,' + (by - 18).toFixed(1) + 'px) scale(' + sc.toFixed(2) + ') rotate(' + Math.round(t * 540) + 'deg)', offset: t });
+    }
+    var landed = false;
+    var fin = function(){
+      if (landed) return; landed = true;
+      s.remove(); done();
+      if (sfxOn) try { tone(1568, 0, 0.12, { type: 'triangle', vol: 0.12 }); tone(2093, 0.06, 0.16, { type: 'triangle', vol: 0.08 }); } catch(e){}
+    };
+    try { var a = s.animate(kf, { duration: 900, easing: 'cubic-bezier(.4,0,.6,1)', fill: 'forwards' }); a.onfinish = fin; a.oncancel = fin; }
+    catch(e){ fin(); }
+  }
+
+  // The sky's letter bubbles: plain elements that CSS moves on the graphics chip (a riser going up
+  // holding a swayer going side to side), so they cost the page nothing. A tap on the sky pops the
+  // bubble under the finger; it comes back at the bottom on its next trip up.
+  (function(){
+    var box = $('wBubs'), n = window.innerWidth > 700 ? 12 : 8, h = '';
+    if (!box) return;
+    for (var k = 0; k < n; k++){
+      var size = 30 + Math.round(Math.random() * 34), dur = 16 + Math.random() * 14;
+      h += '<span class="w-bub" style="--x:' + Math.round(3 + k * (90 / n) + Math.random() * 4) + '%;--s:' + size + 'px;--dur:' + dur.toFixed(1) + 's;--d:' +
+           (-Math.random() * dur).toFixed(1) + 's;' + colorVars(Math.floor(Math.random() * COLORS.length)) + '"><i>' + pick(L).c + '</i></span>';
+    }
+    box.innerHTML = h;
+    box.addEventListener('animationiteration', function(e){ if (e.target.classList.contains('w-bub')) e.target.classList.remove('pop'); });
+  })();
+  function wbPop(x, y){
+    if (!document.elementsFromPoint) return;
+    var els = document.elementsFromPoint(x, y), hit = null;
+    for (var i = 0; i < els.length && !hit; i++) hit = els[i].closest ? els[i].closest('.w-bub') : null;
+    if (!hit || hit.classList.contains('pop')) return;
+    hit.classList.add('pop'); mPopAt(x, y, tok('--white')); sfx('pop');
+  }
+
+  // Each new question flips in, and each story page turns like a page in a book (from the right)
+  if (window.MutationObserver && !reduce && document.body.animate){
+    new MutationObserver(function(){
+      try { $('prompt').animate([{ transform: 'perspective(700px) rotateX(-80deg)', opacity: 0 }, { transform: 'none', opacity: 1 }], { duration: 550, easing: 'cubic-bezier(.3,1.3,.5,1)' }); } catch(e){}
+    }).observe($('prompt'), { childList: true });
+    new MutationObserver(function(){
+      try { $('sCard').animate([{ transform: 'perspective(900px) rotateY(-70deg)', transformOrigin: 'right center', opacity: 0 }, { transform: 'none', transformOrigin: 'right center', opacity: 1 }], { duration: 520, easing: 'cubic-bezier(.3,1.2,.5,1)' }); } catch(e){}
+    }).observe($('sCard'), { childList: true });
+  }
+
+  // Every touch: remember where it was; a counted picture pops; a tap on the open sky pops a bubble
+  document.addEventListener('pointerdown', function(e){
+    mTap = { x: e.clientX, y: e.clientY, t: Date.now() };
+    if (reduce || !e.target.closest) return;
+    var t = e.target;
+    if (t.closest('.obj')) mPopAt(e.clientX, e.clientY, tok('--sun'));
+    else if (!t.closest('button, a, input, label, canvas, .card, .bubble, .tabs, .modal, .welcome, .intro, .parents, .rest, .zizo')) wbPop(e.clientX, e.clientY);
+  }, true);
 
   renderStars();
   renderZizo();
